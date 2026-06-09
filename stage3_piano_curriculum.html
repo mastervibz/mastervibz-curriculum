@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stage 3 Piano Curriculum — Musicality: Technique and Expression</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #1a1814; --ink-mid: #4a4540; --ink-soft: #8a8480;
+    --parchment: #faf8f4; --cream: #f2ede4; --line: #e4ddd4;
+    --teal: #0f6e56; --teal-light: #e1f5ee;
+    --purple: #534ab7; --purple-light: #eeedfe;
+    --coral: #993c1d; --coral-light: #faece7;
+    --gray-light: #f1efe8;
+    --amber: #854f0b; --amber-light: #faeeda;
+    --blue: #185fa5; --blue-light: #e6f1fb;
+    --green: #3b6d11; --green-light: #eaf3de;
+    --rose: #8b2252; --rose-light: #faeaf1;
+    --stage-color: #0f6e56;
+  }
+  body { font-family:'Outfit',sans-serif; background:var(--parchment); color:var(--ink); line-height:1.6; min-height:100vh; }
+
+  /* HEADER */
+  .header { background:var(--ink); color:var(--parchment); padding:3rem 2rem 2.5rem; position:relative; overflow:hidden; }
+  .header::before { content:''; position:absolute; top:-60px; right:-60px; width:240px; height:240px; border:1px solid rgba(255,255,255,0.07); border-radius:50%; }
+  .header::after { content:''; position:absolute; bottom:-80px; left:60px; width:180px; height:180px; border:1px solid rgba(255,255,255,0.05); border-radius:50%; }
+  .header-inner { max-width:940px; margin:0 auto; position:relative; z-index:1; }
+  .header-eyebrow { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:0.75rem; }
+  .stage-badge { display:inline-block; font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; background:rgba(15,110,86,0.25); border:1px solid rgba(15,110,86,0.5); color:#7ed4ba; padding:3px 10px; border-radius:20px; margin-bottom:1rem; }
+  .header h1 { font-family:'DM Serif Display',serif; font-size:clamp(2rem,5vw,3rem); font-weight:400; line-height:1.15; margin-bottom:0.75rem; }
+  .header h1 em { font-style:italic; color:rgba(255,255,255,0.5); }
+  .header-sub { font-size:15px; color:rgba(255,255,255,0.42); font-weight:300; max-width:580px; line-height:1.65; }
+  .header-meta { display:flex; gap:2rem; flex-wrap:wrap; margin-top:2rem; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,0.1); }
+  .meta-item { display:flex; flex-direction:column; gap:2px; }
+  .meta-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.28); }
+  .meta-value { font-size:14px; color:rgba(255,255,255,0.62); font-weight:400; }
+
+  /* STAGE BAR */
+  .stage-bar { background:#111; border-bottom:1px solid rgba(255,255,255,0.06); padding:0.6rem 2rem; }
+  .stage-bar-inner { max-width:940px; margin:0 auto; display:flex; gap:1.5rem; align-items:center; }
+  .stage-link { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.22); text-decoration:none; padding:2px 0; border-bottom:1px solid transparent; transition:color 0.2s; }
+  .stage-link:hover { color:rgba(255,255,255,0.5); }
+  .stage-link.current { color:#7ed4ba; border-bottom-color:var(--teal); }
+
+  /* PHASE NAV */
+  .phase-nav { background:var(--ink); border-top:1px solid rgba(255,255,255,0.07); padding:0; }
+  .phase-nav-inner { max-width:940px; margin:0 auto; display:flex; flex-wrap:wrap; }
+  .phase-btn { background:none; border:none; color:rgba(255,255,255,0.28); font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.09em; text-transform:uppercase; padding:0.8rem 1.4rem; cursor:pointer; border-bottom:2px solid transparent; transition:color 0.2s,border-color 0.2s; white-space:nowrap; }
+  .phase-btn:hover { color:rgba(255,255,255,0.6); }
+  .phase-btn.active { color:#fff; border-bottom-color:var(--teal); }
+
+  /* WEEK NAV */
+  .week-nav { background:#222; border-top:1px solid rgba(255,255,255,0.05); padding:0 2rem; position:sticky; top:0; z-index:100; }
+  .week-nav-inner { max-width:940px; margin:0 auto; display:flex; overflow-x:auto; scrollbar-width:none; }
+  .week-nav-inner::-webkit-scrollbar { display:none; }
+  .week-btn { background:none; border:none; color:rgba(255,255,255,0.28); font-family:'DM Mono',monospace; font-size:10.5px; letter-spacing:0.07em; padding:0.7rem 0.85rem; cursor:pointer; white-space:nowrap; border-bottom:2px solid transparent; transition:color 0.15s,border-color 0.15s; text-transform:uppercase; }
+  .week-btn:hover { color:rgba(255,255,255,0.6); }
+  .week-btn.active { color:#fff; border-bottom-color:var(--teal); }
+  .week-btn.pb.active { border-bottom-color:var(--coral); }
+  .week-btn.pc.active { border-bottom-color:var(--purple); }
+  .week-btn.pd.active { border-bottom-color:var(--amber); }
+  .week-divider { width:1px; background:rgba(255,255,255,0.08); margin:6px 3px; flex-shrink:0; }
+
+  /* LAYOUT */
+  .main { max-width:940px; margin:0 auto; padding:2.5rem 2rem 4rem; }
+  .week-section { display:none; }
+  .week-section.active { display:block; }
+
+  /* WEEK HEADER */
+  .week-header { display:flex; align-items:baseline; gap:1.5rem; margin-bottom:2rem; padding-bottom:1.25rem; border-bottom:1px solid var(--line); flex-wrap:wrap; }
+  .week-number { font-family:'DM Serif Display',serif; font-size:4rem; line-height:1; color:var(--line); font-weight:400; flex-shrink:0; }
+  .week-title-block { flex:1; min-width:220px; }
+  .week-title { font-family:'DM Serif Display',serif; font-size:1.55rem; font-weight:400; margin-bottom:0.3rem; }
+  .week-focus { font-size:13px; color:var(--ink-soft); font-weight:300; line-height:1.5; }
+  .week-phase-badge { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; padding:3px 10px; border-radius:20px; border:1px solid; margin-left:auto; align-self:flex-start; margin-top:4px; white-space:nowrap; }
+  .pa { background:var(--teal-light); color:var(--teal); border-color:#9fe1cb; }
+  .pb { background:var(--coral-light); color:var(--coral); border-color:#f0997b; }
+  .pc { background:var(--purple-light); color:var(--purple); border-color:#afa9ec; }
+  .pd { background:var(--amber-light); color:var(--amber); border-color:#f5be6b; }
+
+  /* CARDS */
+  .sessions-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin-bottom:1.4rem; }
+  .sessions-grid.single { grid-template-columns:1fr; }
+  .sessions-grid.triple { grid-template-columns:1fr 1fr 1fr; }
+  @media(max-width:640px){ .sessions-grid,.sessions-grid.triple { grid-template-columns:1fr; } }
+  .session-card { background:#fff; border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  .session-header { padding:0.8rem 1.1rem; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:0.7rem; flex-wrap:wrap; }
+  .session-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-soft); }
+  .session-name { font-size:13px; font-weight:500; color:var(--ink); flex:1; }
+  .sdot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+  .dn { background:var(--coral); } .dr { background:var(--teal); } .db { background:var(--purple); }
+  .session-body { padding:1rem 1.1rem; }
+  .block-list { list-style:none; display:flex; flex-direction:column; gap:0.65rem; }
+  .block-item { display:flex; gap:0.7rem; align-items:flex-start; }
+  .bp { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.07em; text-transform:uppercase; padding:2px 7px; border-radius:4px; white-space:nowrap; flex-shrink:0; margin-top:2px; }
+  .body  { background:var(--teal-light); color:var(--teal); }
+  .ear   { background:var(--purple-light); color:var(--purple); }
+  .keys  { background:var(--coral-light); color:var(--coral); }
+  .snd   { background:var(--gray-light); color:var(--ink-mid); }
+  .rep   { background:var(--amber-light); color:var(--amber); }
+  .crd   { background:var(--blue-light); color:var(--blue); }
+  .thy   { background:var(--green-light); color:var(--green); }
+  .art   { background:var(--rose-light); color:var(--rose); }
+  .bt { font-size:13px; color:var(--ink-mid); line-height:1.55; flex:1; }
+  .btime { font-family:'DM Mono',monospace; font-size:10px; color:var(--ink-soft); flex-shrink:0; padding-top:2px; }
+
+  /* CALLOUTS */
+  .tnote { background:var(--cream); border-left:3px solid var(--teal); border-radius:0 8px 8px 0; padding:1rem 1.25rem; margin-bottom:1.25rem; }
+  .tnote-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); margin-bottom:0.4rem; }
+  .tnote p { font-size:13.5px; color:var(--ink-mid); line-height:1.65; }
+  .tnote p+p { margin-top:0.6rem; }
+
+  .principle { background:var(--blue-light); border:1px solid #b5d4f4; border-radius:10px; padding:1rem 1.25rem; margin-bottom:1.25rem; }
+  .principle-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--blue); margin-bottom:0.4rem; }
+  .principle p { font-size:13px; color:var(--ink-mid); line-height:1.6; }
+
+  .watchfor { background:#fff; border:1px solid var(--line); border-radius:10px; padding:1.1rem 1.25rem; margin-bottom:1.25rem; }
+  .watchfor-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--coral); margin-bottom:0.6rem; }
+  .wlist { list-style:none; display:flex; flex-direction:column; gap:0.5rem; }
+  .wi { font-size:13px; color:var(--ink-mid); padding-left:1rem; position:relative; line-height:1.5; }
+  .wi::before { content:'—'; position:absolute; left:0; color:var(--ink-soft); }
+
+  .repblock { background:var(--amber-light); border:1px solid #fac775; border-radius:10px; padding:1rem 1.25rem; margin-bottom:1.25rem; }
+  .repblock-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--amber); margin-bottom:0.5rem; }
+  .rlist { display:flex; flex-direction:column; gap:0.4rem; }
+  .ri { font-size:13px; color:var(--ink-mid); }
+  .ri strong { color:var(--ink); font-weight:500; }
+
+  .theorybox { background:var(--green-light); border:1px solid #c0dd97; border-radius:10px; padding:1rem 1.25rem; margin-bottom:1.25rem; }
+  .theorybox-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--green); margin-bottom:0.5rem; }
+  .theorybox p { font-size:13px; color:var(--ink-mid); line-height:1.6; }
+
+  .artbox { background:var(--rose-light); border:1px solid #e8b0cc; border-radius:10px; padding:1rem 1.25rem; margin-bottom:1.25rem; }
+  .artbox-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--rose); margin-bottom:0.5rem; }
+  .artbox p { font-size:13px; color:var(--ink-mid); line-height:1.6; }
+
+  .slabel { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft); margin:1.75rem 0 0.75rem; }
+
+  /* GATEWAY */
+  .gateway { background:var(--ink); color:var(--parchment); border-radius:12px; padding:2rem; margin-top:2rem; }
+  .gateway-title { font-family:'DM Serif Display',serif; font-size:1.4rem; font-weight:400; margin-bottom:0.5rem; }
+  .gateway-sub { font-size:13px; color:rgba(255,255,255,0.38); margin-bottom:1.5rem; line-height:1.55; }
+  .gchecks { display:flex; flex-direction:column; gap:0.9rem; }
+  .gcheck { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1rem 1.25rem; display:flex; gap:1rem; align-items:flex-start; }
+  .gnum { font-family:'DM Mono',monospace; font-size:11px; color:#7ed4ba; flex-shrink:0; padding-top:1px; letter-spacing:0.05em; }
+  .gtitle { font-size:14px; font-weight:500; margin-bottom:0.25rem; }
+  .gdesc { font-size:12.5px; color:rgba(255,255,255,0.42); line-height:1.55; }
+
+  /* MILESTONE */
+  .milestone { background:var(--ink); color:var(--parchment); border-radius:12px; padding:1.75rem 2rem; margin-top:1.5rem; }
+  .milestone-title { font-family:'DM Serif Display',serif; font-size:1.3rem; font-weight:400; margin-bottom:0.4rem; }
+  .milestone-sub { font-size:13px; color:rgba(255,255,255,0.38); margin-bottom:1.4rem; line-height:1.55; }
+  .mchecks { display:flex; flex-direction:column; gap:0.85rem; }
+  .mcheck { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.09); border-radius:8px; padding:0.9rem 1.1rem; display:flex; gap:1rem; align-items:flex-start; }
+  .mnum { font-family:'DM Mono',monospace; font-size:11px; color:#7ed4ba; flex-shrink:0; }
+  .mtitle { font-size:13.5px; font-weight:500; margin-bottom:0.2rem; }
+  .mdesc { font-size:12px; color:rgba(255,255,255,0.42); line-height:1.5; }
+
+  /* PRACTICE BAR */
+  .pbar { display:grid; grid-template-columns:repeat(6,1fr); gap:8px; margin-bottom:1rem; }
+  .pcell { background:#fff; border:1px solid var(--line); border-radius:8px; padding:0.65rem 0.4rem; text-align:center; }
+  .pmins { font-family:'DM Serif Display',serif; font-size:1.35rem; color:var(--ink); display:block; }
+  .pcat { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.07em; text-transform:uppercase; color:var(--ink-soft); margin-top:2px; display:block; }
+
+  /* REPERTOIRE TABLE */
+  .reptable { width:100%; border-collapse:collapse; font-size:13px; margin-bottom:1.25rem; }
+  .reptable th { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-soft); padding:0.5rem 0.75rem; text-align:left; border-bottom:1px solid var(--line); }
+  .reptable td { padding:0.55rem 0.75rem; border-bottom:1px solid var(--line); color:var(--ink-mid); vertical-align:top; }
+  .reptable td:first-child { color:var(--ink); font-weight:500; }
+  .reptable tr:last-child td { border-bottom:none; }
+
+  /* TECHNIQUE DIAGRAM */
+  .tech-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem; margin-bottom:1.4rem; }
+  @media(max-width:640px){ .tech-grid { grid-template-columns:1fr; } }
+  .tech-card { background:#fff; border:1px solid var(--line); border-radius:10px; padding:1rem 1.1rem; }
+  .tech-name { font-size:13px; font-weight:600; color:var(--ink); margin-bottom:0.3rem; }
+  .tech-body { font-size:12.5px; color:var(--ink-mid); line-height:1.55; }
+  .tech-pill { display:inline-block; font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.07em; text-transform:uppercase; padding:2px 6px; border-radius:4px; margin-bottom:0.5rem; }
+
+  .footer { text-align:center; padding:2rem; font-family:'DM Mono',monospace; font-size:11px; color:var(--ink-soft); letter-spacing:0.08em; border-top:1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">Piano from Beginner to Mastery</div>
+    <div class="stage-badge">Stage 3 of 6</div>
+    <h1>Musicality — <em>Technique and Expression</em></h1>
+    <p class="header-sub">Where competent pianists either stall or accelerate. Scales as vocabulary, not exercise. Dynamics as physics. Pedalling by ear. Phrasing as musical argument. And the first repertoire with genuine artistic weight. Twenty-four weeks. Four phases.</p>
+    <div class="header-meta">
+      <div class="meta-item"><span class="meta-label">Duration</span><span class="meta-value">24 weeks</span></div>
+      <div class="meta-item"><span class="meta-label">Sessions</span><span class="meta-value">48 lessons</span></div>
+      <div class="meta-item"><span class="meta-label">Lesson length</span><span class="meta-value">45–60 min</span></div>
+      <div class="meta-item"><span class="meta-label">Daily practice</span><span class="meta-value">30–45 min</span></div>
+      <div class="meta-item"><span class="meta-label">Prerequisite</span><span class="meta-value">Stage 2 gateway passed</span></div>
+      <div class="meta-item"><span class="meta-label">Gateway</span><span class="meta-value">End of week 24</span></div>
+    </div>
+  </div>
+</div>
+
+<nav class="stage-bar">
+  <div class="stage-bar-inner">
+    <span style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.18);">Stages:</span>
+    <a class="stage-link" href="stage1_piano_curriculum.html">1 — Foundation</a>
+    <a class="stage-link" href="stage2_piano_curriculum.html">2 — Coordination</a>
+    <a class="stage-link current">3 — Musicality</a>
+    <span class="stage-link" style="cursor:default;opacity:0.35">4 — Fluency</span>
+    <span class="stage-link" style="cursor:default;opacity:0.35">5 — Depth</span>
+    <span class="stage-link" style="cursor:default;opacity:0.35">6 — Artistry</span>
+  </div>
+</nav>
+
+<div class="phase-nav">
+  <div class="phase-nav-inner">
+    <button class="phase-btn active" onclick="showPhase('a',this)">Phase A — Wks 1–6: Scales as vocabulary</button>
+    <button class="phase-btn" onclick="showPhase('b',this)">Phase B — Wks 7–12: Dynamics and pedal</button>
+    <button class="phase-btn" onclick="showPhase('c',this)">Phase C — Wks 13–18: Phrasing and harmony</button>
+    <button class="phase-btn" onclick="showPhase('d',this)">Phase D — Wks 19–24: Repertoire and gateway</button>
+  </div>
+</div>
+
+<nav class="week-nav">
+  <div class="week-nav-inner">
+    <button class="week-btn active" onclick="sw(1,this)">W1</button>
+    <button class="week-btn" onclick="sw(2,this)">W2</button>
+    <button class="week-btn" onclick="sw(3,this)">W3</button>
+    <button class="week-btn" onclick="sw(4,this)">W4</button>
+    <button class="week-btn" onclick="sw(5,this)">W5</button>
+    <button class="week-btn" onclick="sw(6,this)">W6</button>
+    <div class="week-divider"></div>
+    <button class="week-btn pb" onclick="sw(7,this)">W7</button>
+    <button class="week-btn pb" onclick="sw(8,this)">W8</button>
+    <button class="week-btn pb" onclick="sw(9,this)">W9</button>
+    <button class="week-btn pb" onclick="sw(10,this)">W10</button>
+    <button class="week-btn pb" onclick="sw(11,this)">W11</button>
+    <button class="week-btn pb" onclick="sw(12,this)">W12</button>
+    <div class="week-divider"></div>
+    <button class="week-btn pc" onclick="sw(13,this)">W13</button>
+    <button class="week-btn pc" onclick="sw(14,this)">W14</button>
+    <button class="week-btn pc" onclick="sw(15,this)">W15</button>
+    <button class="week-btn pc" onclick="sw(16,this)">W16</button>
+    <button class="week-btn pc" onclick="sw(17,this)">W17</button>
+    <button class="week-btn pc" onclick="sw(18,this)">W18</button>
+    <div class="week-divider"></div>
+    <button class="week-btn pd" onclick="sw(19,this)">W19</button>
+    <button class="week-btn pd" onclick="sw(20,this)">W20</button>
+    <button class="week-btn pd" onclick="sw(21,this)">W21</button>
+    <button class="week-btn pd" onclick="sw(22,this)">W22</button>
+    <button class="week-btn pd" onclick="sw(23,this)">W23</button>
+    <button class="week-btn pd" onclick="sw(24,this)">W24 + Gateway</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- ═══ PHASE A: WEEKS 1–6 — Scales as vocabulary ═══ -->
+
+<section class="week-section active" id="week-1">
+  <div class="week-header">
+    <div class="week-number">01</div>
+    <div class="week-title-block">
+      <div class="week-title">The scale is not an exercise — it is the language</div>
+      <div class="week-focus">All twelve major scales introduced as a unified system. The circle of fifths as a map, not a memorisation task. Scales found inside real repertoire.</div>
+    </div>
+    <span class="week-phase-badge pa">Phase A</span>
+  </div>
+
+  <div class="tnote">
+    <div class="tnote-label">The central problem with how scales are taught</div>
+    <p>In most piano methods, scales are taught as a separate subject — drilled in isolation, graded on speed, and assessed by an examiner. The result: students who can play scales fast in a test and fail to recognise them inside a Beethoven sonata. This method teaches scales the opposite way. Every scale is introduced because it appears in the student's repertoire. The scale is the vocabulary; the piece is the sentence. The student who understands this never practices scales as an obligation again.</p>
+    <p>Phase A covers all twelve major scales and their relative minors across six weeks — two keys per week. Each key is introduced through a piece of music written in that key, not through a scale exercise. The scale follows the music, not the other way around.</p>
+  </div>
+
+  <div class="slabel">Session 1 — The circle of fifths as a keyboard map</div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">First 20 min</span>
+        <span class="session-name">The pattern that connects all keys</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp thy">Theory</span><span class="bt">Draw the circle of fifths from the keyboard — not from a textbook diagram. Start at C (no sharps). Move up a fifth to G (one sharp, F#). Up a fifth to D (two sharps, F# and C#). Continue through A, E, B. "Each step adds one sharp on the note a semitone below the new key note." Derive it rather than memorise it.</span><span class="btime">10 min</span></li>
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">Play each key's tonic chord (I chord) as the student names the key. Student hums the root note. "The key has a centre of gravity — everything pulls toward that note. You can feel it." Cycle through all twelve tonics.</span><span class="btime">7 min</span></li>
+          <li class="block-item"><span class="bp thy">Theory</span><span class="bt">Flat side derivation: from C, move down a fifth to F (one flat, Bb). Down to Bb (two flats). Continue through Eb, Ab, Db, Gb. The two sides of the circle meet at the enharmonic keys (B = Cb, F# = Gb). Student sees — and hears — that they are the same keys with different names.</span><span class="btime">3 min</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Next 25 min</span>
+        <span class="session-name">E major and A major — scales from repertoire</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">Open a simple piece in E major. Before playing: "Find every scale fragment in this piece — mark with a bracket." Student locates two or three ascending or descending runs that are E major scale segments. "Now play the full E major scale. You already know most of it from the piece."</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp body">Body</span><span class="bt">E major scale fingering — the black key challenge. RH: thumb starts on E but crosses under to A (a black key in the scale). The thumb must curve inward to reach the black key cleanly. Practice the thumb-under moment at ♩=40 until invisible.</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">Interval content: E major has four sharps (F#, C#, G#, D#). Student plays scale and hears where the black keys fall in relation to the white — the resulting interval pattern is what defines "major." "All major scales feel the same to the ear even though the keys are different." Verify this by playing C major and E major and confirming the same emotional quality.</span><span class="btime">9 min</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="slabel">Session 2 — A major and the tetrachord method</div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">First 20 min</span>
+        <span class="session-name">The tetrachord — understanding scale structure</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp thy">Theory</span><span class="bt">Every major scale is two identical four-note groups (tetrachords) separated by a whole step. C major: C–D–E–F (whole-whole-half) + G–A–B–C (whole-whole-half). Play both tetrachords separately, then joined. "The second tetrachord of one key becomes the first tetrachord of the next key up a fifth." This is why the circle of fifths works — it is a chain of overlapping tetrachords.</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp keys">Keys</span><span class="bt">Build A major from tetrachords: A–B–C#–D (first tetrachord) + E–F#–G#–A (second). Student constructs the scale from the rule — not from memory. The tetrachord method allows any key to be constructed on demand without prior memorisation. Test: "What are the notes in B major?" Student derives it from tetrachords at the keyboard.</span><span class="btime">7 min</span></li>
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">A major scale HT: new fingering challenges (both hands have thumb crossings onto black keys). Slow tempo. Listen for the identical tone quality across all eight notes — no accent on any black key despite the different physical approach.</span><span class="btime">5 min</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Next 25 min</span>
+        <span class="session-name">Scale integration into repertoire</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">Piece in A major: student identifies all scale passages and plays them as scale fragments (with scale fingering) before placing them back in the piece. The technique transfers because the physical pattern is recognised. "Your hand already knows where to go — you practiced this in the scale."</span><span class="btime">12 min</span></li>
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">Key colour comparison: teacher plays four bars in C major, then four bars in A major, then four in E major. "Same type (major), different colour. Which feels brightest? Which has the most sparkle?" A major and E major (with their many sharps) tend to sound brighter on the piano due to open-string sympathetic resonance. Student describes what they hear — no right answer.</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp thy">Theory</span><span class="bt">Relative minor relationship: A minor is the relative minor of C major (same key signature). E minor is the relative minor of G major. The pattern: the relative minor starts on the sixth degree of the major scale. Apply to A and E major this week — student derives the relative minor for each.</span><span class="btime">5 min</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="watchfor">
+    <div class="watchfor-label">Watch for — Week 1</div>
+    <ul class="wlist">
+      <li class="wi">Scales practiced at a single fixed tempo regardless of accuracy — the target tempo is always the fastest tempo at which every note is even and every crossing invisible; that tempo starts lower than the student expects</li>
+      <li class="wi">Tetrachord method understood intellectually but not applied at the keyboard — test by calling an unfamiliar key (B major, F# major) and asking the student to build it live; hesitation reveals that the rule is known but not internalised</li>
+      <li class="wi">Scale passages in repertoire not recognised as scales — mark them explicitly in pencil until the student spontaneously identifies them without prompting</li>
+    </ul>
+  </div>
+
+  <div class="repblock">
+    <div class="repblock-label">Home practice — Week 1 (30 min/day)</div>
+    <div class="rlist">
+      <div class="ri"><strong>8 min</strong> — E major and A major scales HT, both directions, with dynamic arc. Slow enough for complete evenness at every crossing.</div>
+      <div class="ri"><strong>10 min</strong> — Repertoire pieces in E and A major. Mark scale passages in pencil before playing.</div>
+      <div class="ri"><strong>7 min</strong> — Sight-reading (daily — carried from Stage 2). Level advances: Stage 2 complexity with one additional element (a new key or a new rhythm pattern).</div>
+      <div class="ri"><strong>5 min</strong> — Circle of fifths: draw it from memory. Derive two unfamiliar keys using the tetrachord method.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WEEK 2 -->
+<section class="week-section" id="week-2">
+  <div class="week-header">
+    <div class="week-number">02</div>
+    <div class="week-title-block">
+      <div class="week-title">B major, F-sharp major, and the black-key scale challenge</div>
+      <div class="week-focus">Scales dominated by black keys require a fundamentally different physical approach — the thumb rule reverses. Fingering is derived from physics, not memorised from a chart.</div>
+    </div>
+    <span class="week-phase-badge pa">Phase A</span>
+  </div>
+
+  <div class="tnote">
+    <div class="tnote-label">Why black-key scales are different</div>
+    <p>In C major, the thumb plays white keys and crosses under to white keys. In B major (five sharps) and F# major (six sharps), almost every note is on a black key — the thumb must avoid black keys where possible (the thumb is too short to play black keys comfortably at speed). The fingering for black-key dominated scales is derived from one principle: place the long fingers (2, 3, 4) on the black keys and the short fingers (1, 5) on the white keys wherever possible. This is a physical logic, not a memorisation task.</p>
+  </div>
+
+  <div class="slabel">Session 3 — B major: the black-key rule</div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">First 20 min</span>
+        <span class="session-name">Deriving B major fingering from physics</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp body">Body</span><span class="bt">B major notes: B–C#–D#–E–F#–G#–A#–B. Five black keys. RH fingering: 1–2–3–1–2–3–4–5. The thumb starts on B (white), crosses under to E (white). The three long fingers cover the black keys in each group. Derive this at the keyboard by placing the hand and asking: "Where does the thumb fit most naturally?"</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp body">Body</span><span class="bt">LH fingering: 4–3–2–1–4–3–2–1. The LH fourth finger starts on B. The long fingers cover black keys. The crossing pattern is different from any previous scale. Practice the crossing in each hand separately — very slowly — before combining.</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">Black key tone quality: the finger approaches a black key from the side (not straight down as on a white key). The arm adjusts its angle slightly inward. The tone should be identical to a white key tone — same arm weight, same resonance. Test by comparing C major and B major played at the same dynamic.</span><span class="btime">4 min</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Next 25 min</span>
+        <span class="session-name">F# major and repertoire integration</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp thy">Theory</span><span class="bt">F# major (six sharps: F#–C#–G#–D#–A#–E#–B#) or its enharmonic equivalent Gb major (six flats). On the piano they are identical — different notation. "Why would a composer write in Gb instead of F#? Because the music came from Db major (five flats) and Gb is its dominant. The notation serves the harmonic logic." This is theory serving music, not theory for its own sake.</span><span class="btime">5 min</span></li>
+          <li class="block-item"><span class="bp keys">Keys</span><span class="bt">F# major scale: same black-key principle as B major. RH: 2–3–4–1–2–3–1–2. The thumb never plays a black key (F# and C# are both black — the thumb skips them via crossings). Derive the fingering collaboratively with the student at the keyboard before playing.</span><span class="btime">10 min</span></li>
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">Short piece in B major or F# major. The harmonic richness of these keys on the piano (resonant black keys and sympathetic overtones) is immediately audible. "Does this key have a different character from C major? Describe it." Building key-colour awareness is long-term musicianship work — it starts here.</span><span class="btime">10 min</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="watchfor">
+    <div class="watchfor-label">Watch for — Week 2</div>
+    <ul class="wlist">
+      <li class="wi">Thumb colliding with adjacent black keys during the crossing — the arm must angle inward slightly to allow the thumb to pass beneath the hand without hitting the neighbouring black key</li>
+      <li class="wi">Student memorising B major fingering from a chart rather than deriving it — test by covering the chart and asking them to re-derive it at the keyboard; if they cannot, the principle has not been learned</li>
+    </ul>
+  </div>
+
+  <div class="repblock">
+    <div class="repblock-label">Home practice — Week 2 (30 min/day)</div>
+    <div class="rlist">
+      <div class="ri"><strong>8 min</strong> — B major and F# major scales HS (each hand separately), slow. Focus on arm angle and black-key tone quality.</div>
+      <div class="ri"><strong>10 min</strong> — Repertoire in B or F# major with scale passages marked. <strong>7 min</strong> — Sight-reading. <strong>5 min</strong> — Circle of fifths from memory, derive two new keys.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WEEK 3 -->
+<section class="week-section" id="week-3">
+  <div class="week-header">
+    <div class="week-number">03</div>
+    <div class="week-title-block">
+      <div class="week-title">Db, Ab, and Eb major — the flat-key landscape</div>
+      <div class="week-focus">The flat keys complete the circle. Each key's unique fingering is derived. The three minor forms are consolidated: natural, harmonic, melodic.</div>
+    </div>
+    <span class="week-phase-badge pa">Phase A</span>
+  </div>
+
+  <div class="slabel">Sessions 5–6 — Flat key scales and the melodic minor</div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">First 20 min</span>
+        <span class="session-name">Db, Ab, Eb — three flat keys</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp thy">Theory</span><span class="bt">Db major (5 flats), Ab major (4 flats), Eb major (3 flats) are introduced together because they share a similar fingering logic (long fingers on black keys). Student derives the notes of each from the flat circle and confirms at the keyboard. "Derive before you play — always."</span><span class="btime">6 min</span></li>
+          <li class="block-item"><span class="bp body">Body</span><span class="bt">Db major RH: 2–3–1–2–3–4–1–2. This is the most "pianistic" of all scales — both tetrachords are fingered identically, and the hand position feels remarkably natural with the long fingers on the black keys. Students often find Db major easier than C major once the key is understood. Make this observation explicit — it reframes the student's relationship to "hard" keys.</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">Ab and Eb major scales: derive fingering, practice HS slowly, then HT. Listen for the characteristic warmth of the flat keys — the many flats create a softer, rounder overtone set. Compare to the brightness of E major (many sharps). The same type (major) but genuinely different colours.</span><span class="btime">6 min</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Next 25 min</span>
+        <span class="session-name">The melodic minor — ascending and descending</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">Three minor forms compared by ear: natural (flat 6 and 7), harmonic (flat 6, raised 7 — creates the augmented second), melodic (raised 6 and 7 ascending, natural descending). Teacher plays all three from A minor. "Which sounds most vocal? Which most dramatic? Which most balanced?" The melodic minor ascending sounds almost major — the ear notices this.</span><span class="btime">7 min</span></li>
+          <li class="block-item"><span class="bp thy">Theory</span><span class="bt">Why the melodic minor exists: the augmented second in harmonic minor (between flat-6 and raised-7) is awkward to sing. Composers raised the 6th as well ascending to smooth the vocal line. Descending, the leading tone pull is less important, so the scale reverts to natural minor. The theory explains a musical necessity — it is not an arbitrary rule.</span><span class="btime">5 min</span></li>
+          <li class="block-item"><span class="bp keys">Keys</span><span class="bt">Play A melodic minor HT: ascending (A–B–C–D–E–F#–G#–A), descending (A–G–F–E–D–C–B–A). The fingering changes between ascending and descending. Practice the turnaround at the top — where the hand must switch from raised to natural 6th and 7th — as an isolated exercise before combining directions.</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">Find the melodic minor in a piece: teacher pre-selects a piece containing a melodic minor scale run. Student identifies it by ear and confirms with the score. "Schubert uses this constantly. Once you hear it, you hear it everywhere."</span><span class="btime">5 min</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="watchfor">
+    <div class="watchfor-label">Watch for — Week 3</div>
+    <ul class="wlist">
+      <li class="wi">Melodic minor descending forgotten — students consistently play the raised 6th and 7th both ways; mark the descending version with a different colour pencil before playing</li>
+      <li class="wi">Flat-key scales treated as harder than sharp-key scales — challenge this perception; Db major is physically more natural than C major once the black-key principle is understood</li>
+    </ul>
+  </div>
+
+  <div class="repblock">
+    <div class="repblock-label">Home practice — Week 3 (30 min/day)</div>
+    <div class="rlist">
+      <div class="ri"><strong>10 min</strong> — Three flat-key scales HT with dynamic arc. Rotate: one per day, all three by end of week.</div>
+      <div class="ri"><strong>8 min</strong> — A melodic minor: ascending and descending in one continuous motion. Mark the turnaround point.</div>
+      <div class="ri"><strong>7 min</strong> — Sight-reading. <strong>5 min</strong> — Repertoire in a flat key.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WEEK 4 -->
+<section class="week-section" id="week-4">
+  <div class="week-header">
+    <div class="week-number">04</div>
+    <div class="week-title-block">
+      <div class="week-title">Chromatic scale, arpeggios, and broken chords</div>
+      <div class="week-focus">The chromatic scale as the master hand-position exercise. Arpeggios extend the reach of the hand. Broken chord patterns as accompaniment vocabulary.</div>
+    </div>
+    <span class="week-phase-badge pa">Phase A</span>
+  </div>
+
+  <div class="tnote">
+    <div class="tnote-label">Why arpeggios matter more than students expect</div>
+    <p>An arpeggio is a broken chord played across a wider range than the five-finger position allows. The arm must travel laterally while the hand maintains its shape — this is the physical skill that unlocks the full keyboard range. Almost every piece of intermediate and advanced piano literature contains arpeggio figures. The student who has not practiced arpeggios will compensate with awkward position changes that produce bumps and hesitations. Introduce them here, before the repertoire demands them.</p>
+  </div>
+
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Sessions 7–8</span>
+        <span class="session-name">Chromatic scale + C major arpeggio</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp body">Body</span><span class="bt">Chromatic scale RH: 1–3–1–3–1–2–3–1–3–1–3–1–2. The thumb plays every white key; fingers 2 and 3 alternate on black keys. The arm stays level — no lifting or dropping as it passes the black key clusters. The chromatic scale is the best exercise for pure lateral arm movement and thumb flexibility.</span><span class="btime">7 min</span></li>
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">Chromatic scale evenness test: play at a steady ♩=60. Every note — white or black — must be identical in weight and duration. Teacher closes eyes and listens for any accent. The white-key thumb notes are the common failure point (they are often louder). Consciously lighten the thumb approach.</span><span class="btime">6 min</span></li>
+          <li class="block-item"><span class="bp body">Body</span><span class="bt">C major arpeggio — the lateral travel: RH plays C–E–G–C (one octave), thumb crosses under to the next C position. The wrist must stay level as the arm travels — no scooping motion. Practice the crossing moment alone: play C–E–G, freeze, slide the arm to the new position, arrive on high C cleanly. This freeze-and-arrive method isolates the hardest moment.</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">Two-octave C major arpeggio, RH: C–E–G–C–E–G–C. All six notes must flow as a single continuous gesture. Listen for: evenness (no accent at the crossing), tone quality (same arm weight throughout), connection (no gap between the first and second octave groups).</span><span class="btime">7 min</span></li>
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">Find the arpeggio in a piece: teacher pre-selects a piece with a prominent arpeggio figure (a Clementi sonatina, a simple Alberti bass expanded to broken octave arpeggios). Student identifies and applies arpeggio technique — "You just played this in your scale practice. The piece is just asking for the same thing."</span><span class="btime">7 min</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Broken chords</span>
+        <span class="session-name">Five patterns from the triad</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp thy">Theory</span><span class="bt">Broken chord patterns from C major triad (C–E–G): (1) root–third–fifth ascending, (2) root–fifth–third descending, (3) Alberti bass (root–fifth–third–fifth), (4) waltz bass (root–fifth–fifth), (5) rolling broken octave. Student plays each pattern on C major, then transfers to G major. These five patterns cover 80% of LH accompaniment writing in the classical and romantic repertoire.</span><span class="btime">12 min</span></li>
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">Identify which pattern appears in each of three teacher-selected pieces. Student labels the LH accompaniment pattern before playing. "Once you can name what your left hand is doing, you can learn it four times faster — because you recognise it rather than decode it note by note."</span><span class="btime">8 min</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="watchfor">
+    <div class="watchfor-label">Watch for — Week 4</div>
+    <ul class="wlist">
+      <li class="wi">Arpeggio wrist scooping — the wrist dips as the arm travels, causing an accent or gap at the crossing; the arm must drive the travel, not the wrist</li>
+      <li class="wi">Chromatic scale with accented white notes — the thumb plays slightly louder by default; the fix is to play a chromatic scale of only the black notes first (fingers 2 and 3), find that weight, then maintain it when the white-key thumb joins</li>
+      <li class="wi">Broken chord patterns learned by rote rather than by pattern name — always ask the student to name the pattern before and after playing; pattern-name awareness is the accelerator</li>
+    </ul>
+  </div>
+
+  <div class="repblock">
+    <div class="repblock-label">Home practice — Week 4 (35 min/day)</div>
+    <div class="rlist">
+      <div class="ri"><strong>5 min</strong> — Chromatic scale RH, then LH, then HT. Listen for equal weight on all twelve notes.</div>
+      <div class="ri"><strong>8 min</strong> — C major arpeggio two octaves, both hands separately. Freeze-and-arrive method at the crossing.</div>
+      <div class="ri"><strong>10 min</strong> — Repertoire piece containing arpeggio figure. <strong>7 min</strong> — Sight-reading. <strong>5 min</strong> — Scale rotation (two keys per day).</div>
+    </div>
+  </div>
+</section>
+
+<!-- WEEK 5 -->
+<section class="week-section" id="week-5">
+  <div class="week-header">
+    <div class="week-number">05</div>
+    <div class="week-title-block">
+      <div class="week-title">Scales at tempo — evenness, not speed</div>
+      <div class="week-focus">All twelve major scales and three minor forms are now known. The work shifts from learning to refining. The pyramid method builds tempo without sacrificing evenness.</div>
+    </div>
+    <span class="week-phase-badge pa">Phase A</span>
+  </div>
+
+  <div class="principle">
+    <div class="principle-label">The Pyramid Method</div>
+    <p>Start at a tempo where every note is even and every crossing inaudible. This is the base. Increase by ♩=4 each day that the base criterion is met. If any unevenness appears at the new tempo, drop back to the previous tempo for two days before trying again. The pyramid builds slowly and solidly — and does not collapse. A scale that can be played evenly at ♩=80 is more musically useful than one that can be rattled at ♩=120 with audible bumps at every crossing.</p>
+  </div>
+
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Sessions 9–10</span>
+        <span class="session-name">Scale audit and tempo targets</span>
+        <span class="session-dot db"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">Full scale audit: teacher calls keys at random. Student plays HT, both directions, with dynamic arc. Teacher records the current even-tempo for each key. The target tempo for Stage 3 gateway is ♩=80 for all keys. Most students will be at ♩=52–60 at the start of this week. The gap is the work.</span><span class="btime">15 min</span></li>
+          <li class="block-item"><span class="bp thy">Theory</span><span class="bt">Arpeggios audit: C, G, D, F, Bb, Eb major arpeggios, two octaves, both hands. Many students will have gaps here — arpeggios were introduced only in week 4. Identify which are secure and which need more time. Assign specific arpeggios as home practice targets.</span><span class="btime">10 min</span></li>
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">The listening standard: teacher plays a scale with one hidden accent at the crossing, one without. Student identifies which has the accent. "Your ear is the judge — not a metronome, not me. If your ear can hear the bump, the bump is there. If your ear cannot hear it, neither can the audience." Ear-based quality control is the lifelong standard.</span><span class="btime">10 min</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Rhythmic variation</span>
+        <span class="session-name">Dotted rhythm scale practice</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp body">Body</span><span class="bt">Dotted rhythm scale practice: play scales with a long-short dotted rhythm (long on odd notes, short on even notes), then reverse (short on odd, long on even). This uneven rhythm forces each finger to exert control independently — it is the fastest way to even out a scale because it isolates the weak finger transitions.</span><span class="btime">10 min</span></li>
+          <li class="block-item"><span class="bp body">Body</span><span class="bt">Staccato scales: same scale, each note detached. The arm-weight approach applies — the staccato is a quick drop-and-release, not a finger jab. Staccato scales reveal hand tension that legato scales disguise (a tense hand cannot rebound cleanly).</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">Dynamic variety: play one scale pp (very soft, slow arm approach), one mf (medium), one ff (fast, heavy arm). Then play one with a genuine crescendo from pp to ff across the full two octaves ascending, and a full diminuendo descending. "Now it's a piece, not an exercise."</span><span class="btime">7 min</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="repblock">
+    <div class="repblock-label">Home practice — Week 5 (35 min/day)</div>
+    <div class="rlist">
+      <div class="ri"><strong>10 min</strong> — Scale practice using pyramid method. Two keys per day, dotted rhythm variation on the weaker key.</div>
+      <div class="ri"><strong>8 min</strong> — Arpeggios: target the two weakest keys from the audit. Freeze-and-arrive at every crossing.</div>
+      <div class="ri"><strong>10 min</strong> — Repertoire (current pieces). <strong>7 min</strong> — Sight-reading.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WEEK 6 -->
+<section class="week-section" id="week-6">
+  <div class="week-header">
+    <div class="week-number">06</div>
+    <div class="week-title-block">
+      <div class="week-title">Phase A consolidation — scales as a complete system</div>
+      <div class="week-focus">All twelve major scales, three minor forms, chromatic scale, and arpeggios are integrated. Phase A milestone check. Preview of Phase B dynamics work.</div>
+    </div>
+    <span class="week-phase-badge pa">Phase A</span>
+  </div>
+
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Session 11</span>
+        <span class="session-name">Complete scale and arpeggio recital</span>
+        <span class="session-dot db"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">Student plays all twelve major scales in circle-of-fifths order (C–G–D–A–E–B–F#–Db–Ab–Eb–Bb–F), HT, with dynamic arc. No pauses for corrections between scales — continuous, as if performing. Teacher records tempo and any crossing accents for each key. This is the Phase A baseline record.</span><span class="btime">15 min</span></li>
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">Three minor forms from A minor and D minor: natural, harmonic, melodic in sequence. The melodic minor descending must be confirmed specifically — it is the most commonly forgotten element at this stage.</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">Chromatic scale HT, two octaves. Arpeggio in four keys (C, G, Eb, Ab). Teacher confirms: can the student identify the arpeggio pattern in a piece of music by sight and apply the correct technique without instruction?</span><span class="btime">7 min</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Session 12</span>
+        <span class="session-name">Milestone check + Phase B introduction</span>
+        <span class="session-dot db"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">Three repertoire pieces from weeks 1–5: performed in sequence with full musical intention. Teacher evaluates: are scale passages played with the same quality as individual scale practice? Or does the technique regress when placed inside a piece? The gap between isolated-scale quality and in-piece quality is the diagnostic.</span><span class="btime">12 min</span></li>
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">Phase B preview — dynamics as physics: teacher plays the same 4-bar phrase at pp, mp, mf, ff. "What changed in my body to produce each dynamic level?" Student observes the teacher's arm position, velocity, and weight. "The key travels the same distance every time. The speed of the travel is the only variable." This sets up the whole of Phase B.</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp art">Art</span><span class="bt">First artistic question of Stage 3: teacher plays a short piece twice — once with no dynamic variation (flat), once with full dynamic shaping. "Which version did you prefer? Why?" Student answers honestly. "That preference is your musicianship. Phase B is about learning to produce what you already know sounds better."</span><span class="btime">10 min</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="milestone">
+    <div class="milestone-title">Phase A Milestone</div>
+    <div class="milestone-sub">Scales are the vocabulary of pianistic technique. This milestone confirms the vocabulary is present before the language work begins.</div>
+    <div class="mchecks">
+      <div class="mcheck"><div class="mnum">M1</div><div><div class="mtitle">All twelve major scales HT, both directions</div><div class="mdesc">At ♩=72 minimum. No audible crossing accent. Dynamic arc present. Student can start any scale immediately on request — no hesitation, no looking at the hand.</div></div></div>
+      <div class="mcheck"><div class="mnum">M2</div><div><div class="mtitle">Three minor forms from any minor key</div><div class="mdesc">Natural, harmonic, and melodic from A minor and D minor. Melodic minor descending verified specifically.</div></div></div>
+      <div class="mcheck"><div class="mnum">M3</div><div><div class="mtitle">Arpeggios — four major keys, two octaves</div><div class="mdesc">C, G, F, and Eb major. No wrist scooping at the crossing. Continuous flow across both octaves.</div></div></div>
+      <div class="mcheck"><div class="mnum">M4</div><div><div class="mtitle">Scale passages recognised in repertoire</div><div class="mdesc">Student can identify and name scale fragments in a new piece without prompting, and applies correct scale technique to those passages.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PHASE B: WEEKS 7–12 — Dynamics and Pedal ═══ -->
+
+<section class="week-section" id="week-7">
+  <div class="week-header">
+    <div class="week-number">07</div>
+    <div class="week-title-block">
+      <div class="week-title">Dynamics as physics — the arm is the volume knob</div>
+      <div class="week-focus">The complete dynamic spectrum from ppp to fff. Tone production understood as a physical science. Gradual dynamic change (crescendo/diminuendo) as a controlled arc.</div>
+    </div>
+    <span class="week-phase-badge pb">Phase B</span>
+  </div>
+
+  <div class="tnote">
+    <div class="tnote-label">Teacher's framing for Phase B</div>
+    <p>Most students think of dynamics as "playing louder or softer." This is incomplete. Dynamics are the result of a physical process: the speed at which the key travels downward, controlled by the velocity and weight of the arm. A pressed key and a dropped key can produce the same pitch at the same volume — but the pressed key produces a harder, less resonant tone, and the dropped key produces a rounder, more singing tone. The arm is not just the volume knob — it is the tone shaper. Phase B builds this understanding from the ground up, then applies it to the full dynamic range and to the sustain and una corda pedals.</p>
+  </div>
+
+  <div class="slabel">Session 13 — The seven dynamic levels</div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">First 25 min</span>
+        <span class="session-name">ppp through fff — arm physics</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">Seven levels on middle C: ppp (barely moving, almost no arm weight), pp, p, mp, mf, f, ff. Student plays each level 10 times until it can be reproduced consistently. Teacher gives feedback: "That was mp, not p. What do you need to change in the arm?" The student identifies the physical adjustment — not the teacher.</span><span class="btime">10 min</span></li>
+          <li class="block-item"><span class="bp body">Body</span><span class="bt">The upper arm as the primary controller: the upper arm weight is the heaviest element and provides the most dynamic range. Raising the elbow slightly increases the weight component; keeping it close to the body reduces it. This is a micro-adjustment — not a dramatic movement. "Think of a painter's brush — the wrist and fingers shape the detail, the arm moves the brush."</span><span class="btime">7 min</span></li>
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">Blind dynamic test: teacher plays a note at a randomly chosen level. Student names the dynamic. Repeat 10 times. Accuracy target: 8/10 to within one level. This test confirms that the ear is calibrated to match the physical production — the foundational skill for dynamic control.</span><span class="btime">8 min</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Next 20 min</span>
+        <span class="session-name">Crescendo and diminuendo as controlled arcs</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">Crescendo exercise: play C major scale from pp to ff across one octave (8 notes = 8 levels). Each note must be measurably louder than the previous. The arm progressively increases its approach velocity — a smooth, linear increase, not a sudden jump. Teacher listens: is the ff arrived at exactly on the top C, or does it arrive early?</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">Diminuendo: same scale descending, ff to pp. The challenge: reducing the arm velocity progressively while maintaining tone quality and evenness. The ppp must still be a musical sound — not a hesitant near-silence, but a deliberately soft tone with full arm control.</span><span class="btime">7 min</span></li>
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">Apply to a piece: mark every crescendo and diminuendo in pencil. Play the piece with exaggerated dynamics (double the written range). Then play with the written range. The exaggeration calibrates the ear and the arm to a wider range — returning to the written range feels natural and controlled.</span><span class="btime">5 min</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="watchfor">
+    <div class="watchfor-label">Watch for — Week 7</div>
+    <ul class="wlist">
+      <li class="wi">Crescendo that peaks too early — the loud point is reached by note 5 instead of note 8; remind the student to "save" the ff for the last note by planning the arc before starting</li>
+      <li class="wi">ppp produced by hesitation rather than control — a hesitant soft note sounds timid; a controlled soft note sounds intimate. The difference is that controlled ppp has a deliberate arm approach, just a very slow one</li>
+      <li class="wi">Dynamic markings ignored during repertoire practice because the student is focused on notes — make dynamics the primary focus of at least one complete play-through per session</li>
+    </ul>
+  </div>
+
+  <div class="repblock">
+    <div class="repblock-label">Home practice — Week 7 (35 min/day)</div>
+    <div class="rlist">
+      <div class="ri"><strong>5 min</strong> — Seven-level exercise on middle C, then on five different notes across the keyboard. Consistency between registers.</div>
+      <div class="ri"><strong>5 min</strong> — Crescendo and diminuendo scale (C major, both directions as one continuous arc).</div>
+      <div class="ri"><strong>12 min</strong> — Repertoire: one piece with dynamics as the primary focus (notes secondary). Exaggerate first, then calibrate.</div>
+      <div class="ri"><strong>8 min</strong> — Scales (pyramid method). <strong>5 min</strong> — Sight-reading.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WEEK 8 -->
+<section class="week-section" id="week-8">
+  <div class="week-header">
+    <div class="week-number">08</div>
+    <div class="week-title-block">
+      <div class="week-title">Sudden dynamic contrast and the subito effect</div>
+      <div class="week-focus">Sudden dynamic changes (subito piano, subito forte) as a compositional device. The psychological effect of dynamic surprise. Beethoven's use of sforzando.</div>
+    </div>
+    <span class="week-phase-badge pb">Phase B</span>
+  </div>
+
+  <div class="artbox">
+    <div class="artbox-label">The artistic principle</div>
+    <p>Gradual dynamic change creates expectation. Sudden dynamic change creates surprise — and surprise is one of the most powerful tools a composer has. A subito piano (suddenly soft) after a long forte can feel like the floor dropping away. A subito forte after a long silence can feel like a thunderclap. These effects only work if the gradual dynamics have been established first — the surprise requires context. This week teaches students to use dynamic contrast as a compositional argument, not just as notation compliance.</p>
+  </div>
+
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Sessions 15–16</span>
+        <span class="session-name">Subito, sforzando, and dynamic architecture</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">Teacher plays a simple phrase with a subito piano: four bars forte, then suddenly one bar piano. "What did you feel at the moment of change?" Student describes the psychological effect. "Now I'm going to play the same passage without the subito — just a gradual diminuendo. What's the difference?" The contrast reveals why composers use subito.</span><span class="btime">6 min</span></li>
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">Subito piano technique: the arm must genuinely reset its weight and velocity between one note and the next. There is no transition — it is a physical interruption of one dynamic state and the immediate adoption of another. Practice: play ff, release arm completely (hand floats off keys), replace at pp weight. The reset happens in the air between notes.</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp thy">Theory</span><span class="bt">Sforzando (sfz or fz): a sudden accent on a single note, usually within a soft context. The arm delivers a fast, heavy drop on that note only — then immediately returns to the surrounding dynamic. Beethoven uses sfz constantly (Sonata Op. 13, Op. 2 No. 1, the Bagatelles). Student plays the sfz note in isolation, then places it back in context.</span><span class="btime">7 min</span></li>
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">Piece with marked subito and sfz dynamics (a Beethoven bagatelle, a Haydn sonatina movement). Student maps the dynamic architecture before playing: "Where are the surprise moments? What is the emotional effect of each?" The dynamic map is an interpretive decision, not just a reading exercise.</span><span class="btime">14 min</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Balance</span>
+        <span class="session-name">Dynamic balance between the hands</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">The balance problem: in any piece where one hand has melody and the other has accompaniment, the melody must be consistently louder. But the two hands are connected to the same brain and tend to equalise dynamics without the student noticing. Test: teacher closes eyes, student plays. Teacher identifies which hand is louder in each bar. The result is often surprising to the student.</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp body">Body</span><span class="bt">The arm isolation technique: practice each hand alone, first RH at the target dynamic, then LH at 60% of that level. Then combine. The LH must feel physically restrained — not suppressed, but consciously lighter. "The accompaniment is the frame. The melody is the painting. The frame must not overpower what it surrounds."</span><span class="btime">7 min</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="repblock">
+    <div class="repblock-label">Home practice — Week 8 (35 min/day)</div>
+    <div class="rlist">
+      <div class="ri"><strong>5 min</strong> — Subito exercise: play any five-note group forte, then immediately piano on the next five notes, alternating. The reset must be instantaneous.</div>
+      <div class="ri"><strong>12 min</strong> — Beethoven bagatelle or equivalent: dynamic map analysis first, then full performance with all dynamic contrasts exaggerated.</div>
+      <div class="ri"><strong>8 min</strong> — Balance exercise: one piece played three ways — (1) both hands equal, (2) RH dominant, (3) LH dominant. Listen to the difference. Confirm (2) is the target for melody-plus-accompaniment texture.</div>
+      <div class="ri"><strong>5 min</strong> — Scales. <strong>5 min</strong> — Sight-reading.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WEEK 9 -->
+<section class="week-section" id="week-9">
+  <div class="week-header">
+    <div class="week-number">09</div>
+    <div class="week-title-block">
+      <div class="week-title">The sustain pedal — listening, not pressing</div>
+      <div class="week-focus">Pedalling taught entirely by ear. Harmonic pedalling, syncopated pedalling, and the half-pedal technique introduced in sequence. The pedal serves the music — never the technique.</div>
+    </div>
+    <span class="week-phase-badge pb">Phase B</span>
+  </div>
+
+  <div class="tnote">
+    <div class="tnote-label">Why pedalling must be taught by ear</div>
+    <p>The sustain pedal is the most misunderstood element of piano technique. Most beginners learn one rule: "change the pedal when the harmony changes." This is true as far as it goes — but it produces mechanical, unmusical pedalling because the student is following a rule rather than listening. The correct approach is to teach the student to listen for blur (the sound of overlapping harmonies) and to change the pedal the moment blur appears. This is an ear skill, not a theory skill. The rule follows the ear — not the other way around.</p>
+  </div>
+
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Sessions 17–18</span>
+        <span class="session-name">Three pedalling techniques</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">Direct pedalling (press pedal before the note): creates a slightly blurred, warm effect. Good for slow, sustained passages where a halo of sound is desired. Teacher demonstrates on a slow melody — student listens for the warmth added by the direct pedal.</span><span class="btime">5 min</span></li>
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">Syncopated pedalling (press pedal just after the note): the cleanest technique for harmonic clarity. Press immediately after the note sounds, hold through the harmony, release and re-press immediately after the new chord. The key is the timing: the pedal change happens after the new chord, not before. This is the technique most professional pianists use in the majority of repertoire.</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">Half-pedalling: the pedal is depressed only halfway, clearing some overtones while retaining the bass resonance. This is used in passages where full pedal would create too much blur but no pedal would sound too dry. Student experiments: full pedal → half pedal → no pedal on the same passage. Choose by ear which is most musical.</span><span class="btime">7 min</span></li>
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">Apply syncopated pedalling to a lyrical piece. The test: close the eyes and listen. Is there any mud (overlapping harmonies that don't belong together)? If yes, pedal is changing too slowly. Is the sound too dry and detached? Pedal is changing too fast or too completely. The ear navigates between these two failure states.</span><span class="btime">15 min</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Una corda</span>
+        <span class="session-name">The soft pedal — a different tone, not just softer</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">Compare: pp without una corda vs. pp with una corda. "Are they the same volume?" (Usually very close.) "Does the tone feel different?" The una corda shifts the hammer slightly so fewer strings are struck — the tone changes colour, not just volume. It is a timbre change, not a volume change. This distinction completely changes how a student uses it.</span><span class="btime">7 min</span></li>
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">A piece marked "una corda": student identifies the character of the passage. "Is the composer asking for soft here, or for a different colour of sound?" In Beethoven's "Moonlight" Sonata, the una corda marking is about colour — the movement is already quiet, but the pedal creates an ethereal, veiled timbre. Student plays both with and without una corda and chooses based on the character they've identified.</span><span class="btime">8 min</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="watchfor">
+    <div class="watchfor-label">Watch for — Week 9</div>
+    <ul class="wlist">
+      <li class="wi">Pedal pressed too slowly after the new chord (muddy syncopated pedal) — the re-press must happen within a quarter of a beat of the new chord; too slow = blur carries over</li>
+      <li class="wi">Pedal lifted completely between every note (no resonance) — over-correcting for muddiness; the solution is faster, more frequent pedal changes, not abandoning the pedal entirely</li>
+      <li class="wi">Heel leaving the floor when pressing pedal — the heel stays on the floor at all times; the ball of the foot operates the pedal; a raised heel is a sign of physical tension in the leg</li>
+    </ul>
+  </div>
+
+  <div class="repblock">
+    <div class="repblock-label">Home practice — Week 9 (35 min/day)</div>
+    <div class="rlist">
+      <div class="ri"><strong>10 min</strong> — Syncopated pedalling exercise: I–IV–V–I progression in C major, slow. Listen for any blur at the chord change. Adjust pedal timing until no blur is audible.</div>
+      <div class="ri"><strong>12 min</strong> — Lyrical piece with full pedalling. Close eyes for one play-through — listening only. Note any muddy moments and adjust.</div>
+      <div class="ri"><strong>8 min</strong> — Scales with pedal (legato scale, syncopated pedal change at each bar). <strong>5 min</strong> — Sight-reading.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WEEKS 10–12 condensed -->
+<section class="week-section" id="week-10">
+  <div class="week-header">
+    <div class="week-number">10</div>
+    <div class="week-title-block">
+      <div class="week-title">Pedalling in context — three repertoire pieces, three pedal styles</div>
+      <div class="week-focus">The pedalling decisions learned in weeks 7–9 are applied to three pieces of contrasting character: a lyrical Romantic piece, a Classical movement, and a simple impressionistic texture.</div>
+    </div>
+    <span class="week-phase-badge pb">Phase B</span>
+  </div>
+
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Sessions 19–20</span>
+        <span class="session-name">Pedal as a compositional choice</span>
+        <span class="session-dot db"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">Romantic piece (e.g., a Schumann or Burgmüller character piece): rich syncopated pedalling, frequent changes, harmonic warmth. The pedal is generous here — it creates the characteristic Romantic halo.</span><span class="btime">12 min</span></li>
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">Classical piece (e.g., a Haydn or Clementi sonatina movement): cleaner pedal, often no pedal on fast passages, pedal used for sustained chords only. Classical clarity requires restraint — the pedal is a punctuation mark, not a wash of colour.</span><span class="btime">12 min</span></li>
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">Comparison performance: play the same four bars of one piece with Romantic pedalling, then with Classical pedalling. "Which serves this music better?" Student decides and justifies. The justification — however simple — is the beginning of analytical musicianship.</span><span class="btime">11 min</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Impressionistic texture</span>
+        <span class="session-name">Extended pedal and deliberate blur</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">Impressionistic pieces (late 19th/early 20th century — Satie's Gymnopédies, simplified Debussy) use extended pedal intentionally. The blur IS the sound. Teacher plays a Gymnopédie with correct extended pedal, then with frequent pedal changes (too clean). "Which is more atmospheric?" Student hears that the rule "no mud" has stylistic exceptions — ear-based judgment always overrides the rule.</span><span class="btime">10 min</span></li>
+          <li class="block-item"><span class="bp art">Art</span><span class="bt">Student creates a pedal marking for a new piece — using symbols (Ped. and *, or the modern dashed-line notation) to indicate where pedal is pressed and released. This written exercise forces deliberate pedal thinking rather than habitual or accidental pedalling.</span><span class="btime">5 min</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="repblock">
+    <div class="repblock-label">Home practice — Week 10 (35 min/day)</div>
+    <div class="rlist">
+      <div class="ri"><strong>15 min</strong> — Three pieces with their distinct pedal styles. Play each piece first without pedal (to hear the harmonic structure clearly), then add the appropriate pedal style.</div>
+      <div class="ri"><strong>10 min</strong> — Scales and arpeggios (pyramid method — maintain gains). <strong>10 min</strong> — Sight-reading and one piece of new repertoire (form analysis before learning).</div>
+    </div>
+  </div>
+</section>
+
+<section class="week-section" id="week-11">
+  <div class="week-header">
+    <div class="week-number">11</div>
+    <div class="week-title-block">
+      <div class="week-title">Touch variety — legato, staccato, portato, and tenuto</div>
+      <div class="week-focus">The four primary touch types as a complete vocabulary. Touch as the primary carrier of character before dynamics are considered. The portato as the most underused and most musical touch.</div>
+    </div>
+    <span class="week-phase-badge pb">Phase B</span>
+  </div>
+
+  <div class="tech-grid">
+    <div class="tech-card"><span class="tech-pill" style="background:var(--teal-light);color:var(--teal)">Legato</span><div class="tech-name">Connected</div><div class="tech-body">Finger holds key until the next finger contacts. Arm weight transfers smoothly. The default touch — all other touches are departures from this baseline.</div></div>
+    <div class="tech-card"><span class="tech-pill" style="background:var(--coral-light);color:var(--coral)">Staccato</span><div class="tech-name">Detached</div><div class="tech-body">Weight drops and immediately releases. The note sounds for approximately half its written value. Character: light, playful, precise. Never produced by finger tension.</div></div>
+    <div class="tech-card"><span class="tech-pill" style="background:var(--purple-light);color:var(--purple)">Portato</span><div class="tech-name">Weighted-detached</div><div class="tech-body">Between legato and staccato. The note is released before its full written value but after being given full arm weight. Character: singing but breathing. The most expressive touch in slow, lyrical music.</div></div>
+  </div>
+  <div class="tech-grid" style="grid-template-columns:1fr 1fr; margin-top:0;">
+    <div class="tech-card"><span class="tech-pill" style="background:var(--amber-light);color:var(--amber)">Tenuto</span><div class="tech-name">Held-full-value</div><div class="tech-body">The note is held for its complete written value with a slight added weight — more than legato, less than accent. Creates a sense of emphasis without a dynamic spike.</div></div>
+    <div class="tech-card"><span class="tech-pill" style="background:var(--rose-light);color:var(--rose)">Non legato</span><div class="tech-name">Separated</div><div class="tech-body">Each note is given its full value but released cleanly before the next. Slightly longer than staccato, slightly shorter than legato. Used in Baroque music and early Classical style.</div></div>
+  </div>
+
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Sessions 21–22</span>
+        <span class="session-name">Touch as character — not just technique</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">Teacher plays the same four-bar melody five times with five different touches (legato, staccato, portato, tenuto, non legato). Student describes the character of each: "The staccato version sounded like it was asking a question. The portato version sounded like it was telling a secret." These associations are the student's own — not the teacher's.</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">Portato in depth: the most musically valuable touch for lyrical playing. The weight drops fully onto the key (more arm weight than legato) then releases about two-thirds of the way through the note's value. Play a slow melody portato. "Each note breathes — it has weight and it has release."</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">Annotate a piece: student goes through the score and assigns a touch type to every phrase (or every note, if the piece warrants it). This annotation is a genuine interpretive decision — teacher may discuss but does not prescribe. Play the annotated version. Compare to the unannotated default.</span><span class="btime">14 min</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Mixed touch</span>
+        <span class="session-name">Touch contrast within a single phrase</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">Mixed touch exercise: play a scale where even notes are legato and odd notes are staccato, then alternate the pattern. This builds independent finger touch control — each finger can produce a different touch from its neighbours. This is a significant technical advance and may take several weeks to become fluent.</span><span class="btime">10 min</span></li>
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">Listen to a recording (teacher's choice) of a pianist known for exceptional touch variety (Radu Lupu, Murray Perahia, Maria João Pires). "How many different touches can you identify?" Student listens and counts. "These pianists are not playing 'correctly' — they are speaking in a fully developed physical language. That language is what we are building."</span><span class="btime">10 min</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="repblock">
+    <div class="repblock-label">Home practice — Week 11 (35 min/day)</div>
+    <div class="rlist">
+      <div class="ri"><strong>5 min</strong> — Mixed-touch scale: legato-staccato alternating, both hands separately.</div>
+      <div class="ri"><strong>12 min</strong> — Annotated repertoire piece: play the full annotated version twice, then experiment with changing one touch annotation and comparing the result.</div>
+      <div class="ri"><strong>8 min</strong> — Listen to 5 minutes of recording: notate touch types observed. <strong>5 min</strong> — Scales. <strong>5 min</strong> — Sight-reading.</div>
+    </div>
+  </div>
+</section>
+
+<section class="week-section" id="week-12">
+  <div class="week-header">
+    <div class="week-number">12</div>
+    <div class="week-title-block">
+      <div class="week-title">Phase B consolidation — dynamics, pedal, and touch integrated</div>
+      <div class="week-focus">All three Phase B skills operate simultaneously in performance. A second milestone check confirms readiness for the phrasing and harmony work of Phase C.</div>
+    </div>
+    <span class="week-phase-badge pb">Phase B</span>
+  </div>
+
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Session 23</span>
+        <span class="session-name">Integration performance</span>
+        <span class="session-dot db"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">Student performs three pieces: one Classical (restrained dynamics, clean pedal, non-legato passages), one Romantic (rich dynamics, generous pedal, portato melody), one of student's choice. For each: teacher evaluates whether the dynamic/pedal/touch choices are appropriate to the style, consistent throughout, and serving the musical character the student stated before playing.</span><span class="btime">20 min</span></li>
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">Blind balance test: student plays any piece; teacher closes eyes and raises a hand whenever the LH overpowers the RH. Student must not stop — they adjust the balance while continuing. This real-time feedback trains in-performance self-correction.</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">Pedal audit: teacher listens to the same piece with eyes closed and raises a hand at any moment of muddiness. Student notes the bar. After the piece: "What was happening harmonically at that moment?" The connection between harmonic understanding and pedal decision-making is made explicit.</span><span class="btime">7 min</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Session 24</span>
+        <span class="session-name">Milestone check + Phase C preview</span>
+        <span class="session-dot db"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">Dynamic accuracy test: teacher plays a note at a random level; student names the dynamic to within one level (8/10 accuracy target). Then student plays a requested dynamic level on demand (5/5 accuracy target). Dynamic control must be physically reliable, not just generally approximate.</span><span class="btime">7 min</span></li>
+          <li class="block-item"><span class="bp art">Art</span><span class="bt">Phase C preview — phrasing as argument: teacher plays a melody with no phrasing (each note equal in weight and duration) vs. the same melody with a clear phrase shape (leaning toward the high point, releasing at the cadence). "What is the difference between the two performances?" Student answers — and the answer is the definition of phrasing. "Phase C is learning to make that happen deliberately, in every piece, always."</span><span class="btime">15 min</span></li>
+          <li class="block-item"><span class="bp thy">Theory</span><span class="bt">Harmonic preview: "Why does the phrase lean toward that high note? Because that note is harmonically charged — it is dissonant or it is the dominant. The harmony creates the shape. Next phase, we learn to use harmony to plan the phrase before we play it."</span><span class="btime">8 min</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="milestone">
+    <div class="milestone-title">Phase B Milestone</div>
+    <div class="milestone-sub">Dynamics, pedal and touch are the expressive tools. This milestone confirms they are genuinely available — not just understood but physically reliable.</div>
+    <div class="mchecks">
+      <div class="mcheck"><div class="mnum">M1</div><div><div class="mtitle">Dynamic control — seven levels reliably produced</div><div class="mdesc">Student names any dynamic level; teacher plays it. Accuracy to within one level, 8/10. Student plays any requested level on demand, 5/5.</div></div></div>
+      <div class="mcheck"><div class="mnum">M2</div><div><div class="mtitle">Pedalling — no mud, no dryness</div><div class="mdesc">Teacher closes eyes during a lyrical piece. Zero moments of harmonic blur. No moments where the sound is drier than the music requires. Pedal is responsive to the harmony, not to a memorised rule.</div></div></div>
+      <div class="mcheck"><div class="mnum">M3</div><div><div class="mtitle">Touch variety — four types in performance</div><div class="mdesc">Student correctly applies legato, staccato, portato, and tenuto in appropriate musical contexts within a single piece, without the score requiring explicit markings for each.</div></div></div>
+      <div class="mcheck"><div class="mnum">M4</div><div><div class="mtitle">Balance — melody consistently dominant</div><div class="mdesc">In any melody-plus-accompaniment texture, the melodic voice is consistently louder than the accompaniment. Teacher's closed-eyes test produces zero LH-dominance moments.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PHASE C: WEEKS 13–18 — Phrasing and Harmony ═══ -->
+
+<section class="week-section" id="week-13">
+  <div class="week-header">
+    <div class="week-number">13</div>
+    <div class="week-title-block">
+      <div class="week-title">Phrasing — musical argument and the phrase as sentence</div>
+      <div class="week-focus">The phrase has a subject, a verb, and an object. Phrase analysis before performance. The concept of the musical "high point" and how to find it in any phrase.</div>
+    </div>
+    <span class="week-phase-badge pc">Phase C</span>
+  </div>
+
+  <div class="tnote">
+    <div class="tnote-label">Teacher's framing for Phase C</div>
+    <p>Phase C is where the student transitions from a technically equipped player to a musically thinking one. The central concept is the phrase as an argument: every phrase goes somewhere and comes from somewhere. It has a direction, a destination (the high point or harmonic goal), and a release (the cadence or point of arrival). A student who can identify these three elements in any phrase before playing it will always produce a more musical performance than one who plays note-by-note and hopes the shape emerges. It does not emerge — it must be planned.</p>
+  </div>
+
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Sessions 25–26</span>
+        <span class="session-name">Finding the high point — melodic and harmonic</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">Melodic high point: teacher plays a 4-bar phrase. "Where is the most important note in that phrase?" Student identifies it — usually the highest or longest note, or the note approached by the largest leap. "This is the destination. Everything before it is the journey toward it. Everything after it is the departure from it."</span><span class="btime">6 min</span></li>
+          <li class="block-item"><span class="bp thy">Theory</span><span class="bt">Harmonic high point: in many phrases, the melodic high point coincides with the harmonically most tense moment (a dissonance, an applied chord, a secondary dominant). Play the phrase on just the bass notes and the structural harmonies — "the skeleton." Listen to the tension and release in the skeleton. Then add the melody and notice how it rides the harmonic arc.</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp art">Art</span><span class="bt">Three phrase shapes: (1) arch — rises to high point then falls; (2) plateau — reaches high point early, sustains, then falls; (3) climax at the end — continuous rise with release only at the cadence. Student identifies which shape each phrase in a piece has. Then plans the dynamic/touch approach accordingly before playing.</span><span class="btime">7 min</span></li>
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">Performance with planned phrase shapes: every phrase annotated with its shape, its high point marked with a circle, its release marked with a downward arrow. Play the piece following the annotations. Compare to an unannotated play-through. "The planning is not the performance — but without the planning, the performance is an accident."</span><span class="btime">14 min</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Agogic accent</span>
+        <span class="session-name">Time as a dynamic — rubato</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp art">Art</span><span class="bt">Agogic accent: a note given slightly more time (not more weight) than its neighbours gains emphasis. Play two versions: one with a dynamic accent on the high point, one with the same note given an extra 10% of time. Compare — "which sounds more natural? Which sounds more forced?" The agogic accent is subtler and often more musical than a dynamic accent.</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp art">Art</span><span class="bt">Rubato: "robbing time." Speeding up slightly in a phrase and compensating by slightly slowing elsewhere — so the overall pulse is maintained but the phrase breathes. Teacher demonstrates a phrase in strict time vs. with tasteful rubato. "Which breathes more? Which sounds more like a person is playing it?" Introduce the concept now; mastery comes over years of listening and practice.</span><span class="btime">7 min</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="watchfor">
+    <div class="watchfor-label">Watch for — Week 13</div>
+    <ul class="wlist">
+      <li class="wi">Phrase "high point" treated as a volume peak only — the high point should be reached by an increase in weight AND time; a note that is simply louder without being slightly longer feels mechanical</li>
+      <li class="wi">Rubato becoming a tempo distortion (consistently slowing regardless of the phrase shape) — rubato must always even out; time "stolen" from one note is "returned" within the same phrase</li>
+      <li class="wi">Student planning phrases analytically but not physically producing the planned shape — the plan must translate into physical sensation; ask the student to conduct the phrase with their free hand first, then play</li>
+    </ul>
+  </div>
+
+  <div class="repblock">
+    <div class="repblock-label">Home practice — Week 13 (40 min/day)</div>
+    <div class="rlist">
+      <div class="ri"><strong>5 min</strong> — Phrase analysis: annotate all phrases in current repertoire piece (shape, high point, release). Before any playing.</div>
+      <div class="ri"><strong>15 min</strong> — Play annotated piece: first mechanically (following annotations exactly), then with rubato added. Compare the two recordings.</div>
+      <div class="ri"><strong>10 min</strong> — Scales and arpeggios. <strong>10 min</strong> — Sight-reading (now including harmonic analysis during the 60-second scan).</div>
+    </div>
+  </div>
+</section>
+
+<!-- WEEKS 14–18 condensed -->
+<section class="week-section" id="week-14">
+  <div class="week-header">
+    <div class="week-number">14</div>
+    <div class="week-title-block">
+      <div class="week-title">Harmonic rhythm and chord function — I, IV, V, ii, vi</div>
+      <div class="week-focus">The five primary chords of tonal harmony introduced by ear and confirmed by theory. Harmonic rhythm as a phrasing tool. The deceptive cadence as a compositional surprise.</div>
+    </div>
+    <span class="week-phase-badge pc">Phase C</span>
+  </div>
+
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Sessions 27–28</span>
+        <span class="session-name">Five chords, five functions</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp thy">Theory</span><span class="bt">In C major: I (C–E–G, home), IV (F–A–C, departure), V (G–B–D, tension), ii (D–F–A, pre-dominant), vi (A–C–E, deceptive resolution). Teacher plays each and asks the student to describe the emotional function: "Home. Leaving. Wanting to return. Preparing to go. Arriving in the wrong place." These descriptions ARE the functions — the Roman numerals are just labels for what the ear already knows.</span><span class="btime">10 min</span></li>
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">Chord recognition by ear: teacher plays any of the five chords in C major (or G, or F major). Student identifies by ear: "That felt like home — that's I. That felt like it wanted to go somewhere — that's V." 10 progressions, accuracy target 7/10. This is ear-based harmonic analysis — the foundation of all musical intelligence.</span><span class="btime">10 min</span></li>
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">Harmonic analysis of a piece: student identifies I, IV, and V in the LH of a sonatina. Marks them above the staff. "Now look at the RH: where does it lean in toward the harmony? Where does it move away? The melody is in conversation with the harmony — now you can hear both sides of the conversation."</span><span class="btime">10 min</span></li>
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">The deceptive cadence (V → vi instead of V → I): teacher establishes a strong V and the student expects a resolution to I. Teacher plays vi instead. "What happened? Did it feel finished?" Student describes the effect — surprise, incompleteness, poignancy. "Composers use this when they want the music to dodge the obvious ending. Now you can hear it whenever it happens — and play it with the appropriate expression."</span><span class="btime">5 min</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Harmonic rhythm</span>
+        <span class="session-name">How fast the harmony moves shapes the music</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp thy">Theory</span><span class="bt">Harmonic rhythm: the rate at which chords change. A fast harmonic rhythm (chords every beat) creates urgency and motion. A slow harmonic rhythm (one chord per bar or longer) creates spaciousness and repose. Teacher plays the same melody over two different harmonic rhythms. Student identifies which feels urgent, which relaxed. "A composer controls tension partly through how often the harmony moves."</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">Student maps the harmonic rhythm of a piece: "bars 1–4: one chord per bar (slow — spacious). bars 5–8: one chord per beat (fast — urgent). bar 9: one chord for two bars (very slow — arrival and rest)." Play the piece shaping each section according to its harmonic rhythm. The structure becomes physical, not just analytical.</span><span class="btime">7 min</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="repblock">
+    <div class="repblock-label">Home practice — Week 14 (40 min/day)</div>
+    <div class="rlist">
+      <div class="ri"><strong>5 min</strong> — Chord recognition: play I, IV, V, ii, vi in C, G, and F major from memory. Sing the root note of each before playing.</div>
+      <div class="ri"><strong>15 min</strong> — Harmonically analysed piece: mark harmonic rhythm above the staff and shape the performance accordingly.</div>
+      <div class="ri"><strong>10 min</strong> — Scales and arpeggios. <strong>10 min</strong> — Sight-reading with harmonic scan in the 60-second preview.</div>
+    </div>
+  </div>
+</section>
+
+<section class="week-section" id="week-15">
+  <div class="week-header">
+    <div class="week-number">15</div>
+    <div class="week-title-block">
+      <div class="week-title">Secondary dominants and modulation — the music leaves home</div>
+      <div class="week-focus">Why music moves to related keys. The secondary dominant as a temporary tension tool. Modulation by ear: hearing the key change before seeing it.</div>
+    </div>
+    <span class="week-phase-badge pc">Phase C</span>
+  </div>
+
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Sessions 29–30</span>
+        <span class="session-name">The secondary dominant and temporary tonicisation</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">Teacher plays 8 bars firmly in C major, then suddenly introduces a D7 chord (the secondary dominant of G). "Did you feel the music pulling toward G?" The D7 chord creates a temporary attraction to G major — it is a V of V (V/V). Student identifies the moment of pull before any theory is named.</span><span class="btime">6 min</span></li>
+          <li class="block-item"><span class="bp thy">Theory</span><span class="bt">Secondary dominant: any chord that acts as a V chord to a chord other than the tonic. In C major: D7 is V/V (leads to G). A7 is V/ii (leads to D minor). E7 is V/vi (leads to A minor). These are the most common chromatic chords in Classical and Romantic repertoire. Student identifies them by their characteristic sharp note (a note not in the home key) that creates the chromatic pull.</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">Find a secondary dominant in a piece: teacher marks it in the score. Student plays the passage and describes the effect: "It felt like a detour — the music went somewhere else briefly and then came back." Then: "Is the detour expressed in your playing? Or did you play through it as if it were an ordinary chord?" The secondary dominant must be physically shaped — slightly more weight, slight hesitation or lean — to communicate its harmonic significance.</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">Modulation by ear: teacher plays a 16-bar piece that modulates from C major to G major. Student identifies the exact bar where the key changes (by the sensation that a new note has become the new "home"). This is the ear-based skill that underpins all analytical harmony — finding the modulation point before seeing it notated.</span><span class="btime">8 min</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Performance integration</span>
+        <span class="session-name">Shaping the harmonic journey in performance</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp art">Art</span><span class="bt">A piece with a clear modulation (a Haydn minuet, a simple Schubert dance): student marks the modulation point, the secondary dominants, and the moment of return to the home key. "These are the three most important moments in the piece harmonically. How will you signal each one in your performance?" Student decides on specific performance choices (a slight lean, a small dynamic change, a moment of rubato) and plays.</span><span class="btime">15 min</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="repblock">
+    <div class="repblock-label">Home practice — Week 15 (40 min/day)</div>
+    <div class="rlist">
+      <div class="ri"><strong>5 min</strong> — Secondary dominant identification: play V/V and V/IV in C, G, and F major from memory. Sing the chromatic note in each.</div>
+      <div class="ri"><strong>15 min</strong> — Modulation piece: mark the harmonic journey (departure, secondary dominant, modulation point, return). Performance with all harmonic events physically shaped.</div>
+      <div class="ri"><strong>10 min</strong> — Scales and arpeggios. <strong>10 min</strong> — Sight-reading with full harmonic scan.</div>
+    </div>
+  </div>
+</section>
+
+<section class="week-section" id="week-16">
+  <div class="week-header">
+    <div class="week-number">16</div>
+    <div class="week-title-block">
+      <div class="week-title">Musical form — understanding the architecture of pieces</div>
+      <div class="week-focus">Binary, ternary, rondo, and sonata-allegro form identified by ear. Form as a performance guide. The recapitulation as an emotional return.</div>
+    </div>
+    <span class="week-phase-badge pc">Phase C</span>
+  </div>
+
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Sessions 31–32</span>
+        <span class="session-name">Form as emotional architecture</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp thy">Theory</span><span class="bt">Binary form (AB): two contrasting sections, each typically repeated. The first section may modulate to the dominant; the second returns to the tonic. Most Baroque dances. Binary form creates a single outward-and-return gesture at the macro level.</span><span class="btime">4 min</span></li>
+          <li class="block-item"><span class="bp thy">Theory</span><span class="bt">Ternary form (ABA'): a section, a contrasting section, a return. The return (A') is usually modified — the composer has been somewhere and come back changed. The A' is never played identically to A — the journey has happened and the music should reflect it. This is a profound artistic instruction: the recapitulation is not a repetition, it is a return.</span><span class="btime">5 min</span></li>
+          <li class="block-item"><span class="bp thy">Theory</span><span class="bt">Rondo form (ABACADA): a recurring main theme alternates with contrasting episodes. Each return of A can be slightly different in character — more settled, more triumphant, or more resigned depending on the work. The student identifies the rondo structure in a piece before playing any note.</span><span class="btime">5 min</span></li>
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">Three pieces in different forms: a Baroque minuet (binary), a Classical scherzo (ternary), a simple rondo. Student identifies the form of each before playing, marks the structural divisions in pencil, and plays each with the formal architecture guiding the performance — especially the A' return, which must sound different from the first A.</span><span class="btime">21 min</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Sonata form preview</span>
+        <span class="session-name">Exposition, development, recapitulation</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">Teacher plays a simple sonatina first movement (Clementi Op. 36 No. 1): student identifies the three sections by ear — "where does the music feel like it's setting something up? Where does it feel like it's exploring and questioning? Where does it feel like everything comes home?" These are the Exposition, Development, and Recapitulation identified by emotional listening rather than theoretical labels.</span><span class="btime">10 min</span></li>
+          <li class="block-item"><span class="bp art">Art</span><span class="bt">The Development as exploration: "In the Development, the composer takes the themes you heard in the Exposition and puts them through experiences — different keys, different moods, sometimes fragmented or inverted. When you play the Development, you should feel like you are in unfamiliar territory. Let the music sound uncertain, exploratory, not yet at home." This is an artistic instruction that changes how the student physically approaches those bars.</span><span class="btime">5 min</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="repblock">
+    <div class="repblock-label">Home practice — Week 16 (40 min/day)</div>
+    <div class="rlist">
+      <div class="ri"><strong>15 min</strong> — Three pieces in different forms: annotated and performed with formal awareness. The A' return must sound different from A — record and compare.</div>
+      <div class="ri"><strong>10 min</strong> — Sonatina first movement (student's own preparation): identify the three sections, mark them, and note the key of the second theme in the exposition.</div>
+      <div class="ri"><strong>8 min</strong> — Scales and arpeggios. <strong>7 min</strong> — Sight-reading.</div>
+    </div>
+  </div>
+</section>
+
+<section class="week-section" id="week-17">
+  <div class="week-header">
+    <div class="week-number">17</div>
+    <div class="week-title-block">
+      <div class="week-title">Ornamentation — trills, mordents, turns, and grace notes</div>
+      <div class="week-focus">Ornaments as musical speech — not decorations but inflections. Historical context: ornaments mean different things in different eras. The trill as a sustained ornament requiring specific technique.</div>
+    </div>
+    <span class="week-phase-badge pc">Phase C</span>
+  </div>
+
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Sessions 33–34</span>
+        <span class="session-name">Four ornaments — physical and musical</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">Grace note (acciaccatura and appoggiatura): the acciaccatura is a "crushed" note (very fast, before the beat). The appoggiatura is leaned-into (on the beat, taking some of the main note's value). Teacher plays both on a simple melody — student identifies which sounds like a gentle knock and which sounds like a lean. The physical production is different: acciaccatura = light quick wrist snap; appoggiatura = arm weight on the ornament, release to the main note.</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">Mordent (upper and lower): a rapid alternation of the main note with its neighbour above (upper mordent) or below (lower mordent). The speed of the mordent is related to the tempo — faster tempo, faster mordent. Start slowly: main note → neighbour → main note, all even. Then increase speed until the alternation becomes a single musical gesture rather than three separate notes.</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">Trill: a rapid sustained alternation between a note and its upper neighbour. The trill must begin from the upper note in Baroque music (convention) and from the main note in Classical/Romantic music. The physical production: the forearm rotation is the engine — the two fingers alternate as the forearm rocks slightly. This is not a finger exercise; it is an arm exercise that uses the fingers as the contact points.</span><span class="btime">10 min</span></li>
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">Piece with two or more ornaments: identify each, determine the historical style (Baroque or Classical), decide the starting note, and practice the ornament in isolation (100 repetitions, very slow, then speed up) before placing back in the piece.</span><span class="btime">14 min</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Historical context</span>
+        <span class="session-name">Ornaments belong to their era</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp thy">Theory</span><span class="bt">Baroque ornament tables (C.P.E. Bach, J.S. Bach's own Clavierbüchlein für Wilhelm Friedemann): ornaments were not decorative additions — they were the primary means of sustaining sound on the harpsichord (which could not vary volume) and of expressing affective meaning. The trill on a long note kept it alive. The mordent emphasised a stressed syllable. Understanding this changes how the student plays ornaments — from "decoration" to "speech."</span><span class="btime">7 min</span></li>
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">Listen: a Bach minuet played without ornaments vs. with. "Which sounds like a person speaking? Which sounds like a text being read?" The ornamented version has a conversational quality — the ornaments are the intonation and emphasis of a spoken language. Once the student hears this, they never again plays ornaments as afterthoughts.</span><span class="btime">8 min</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="repblock">
+    <div class="repblock-label">Home practice — Week 17 (40 min/day)</div>
+    <div class="rlist">
+      <div class="ri"><strong>5 min</strong> — Trill exercise on C–D, each hand separately. Forearm rotation drill: 50 repetitions slow, 50 at trill speed.</div>
+      <div class="ri"><strong>15 min</strong> — Ornamented piece: ornaments practiced in isolation (100×) then placed back. Full piece with all ornaments included.</div>
+      <div class="ri"><strong>10 min</strong> — Scales and arpeggios. <strong>10 min</strong> — Sight-reading.</div>
+    </div>
+  </div>
+</section>
+
+<section class="week-section" id="week-18">
+  <div class="week-header">
+    <div class="week-number">18</div>
+    <div class="week-title-block">
+      <div class="week-title">Phase C consolidation — analysis into performance</div>
+      <div class="week-focus">All Phase C skills — phrasing, harmony, form, ornamentation — are integrated into a complete performance. The student performs with analysis, not despite it. Third milestone check.</div>
+    </div>
+    <span class="week-phase-badge pc">Phase C</span>
+  </div>
+
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Session 35</span>
+        <span class="session-name">The fully analysed performance</span>
+        <span class="session-dot db"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">Student presents one piece with a complete written analysis: form (sections labeled), harmonic skeleton (I, IV, V, secondary dominants, modulation points), phrase shapes (high points circled, releases marked), dynamic map, touch annotations, ornament decisions with historical justification, and pedal plan. Teacher reads the analysis, then listens to the performance. "Does the performance match the analysis? If not, which is right?"</span><span class="btime">20 min</span></li>
+          <li class="block-item"><span class="bp art">Art</span><span class="bt">The central artistic question of Stage 3: "Is the analysis serving the music, or is the music serving the analysis?" A performance that is technically correct but analytically robotic has failed. The analysis is a preparation tool — it should disappear into the music in performance. Teacher evaluates whether the student's performance sounds like music or like a demonstration of theory knowledge.</span><span class="btime">10 min</span></li>
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">Student records their own performance and listens back. Three questions: (1) Can I hear the phrase shapes? (2) Can I hear the harmonic tension and release? (3) Do the ornaments sound like speech or like exercises? These three questions are the self-assessment standard for Stage 3 and beyond.</span><span class="btime">10 min</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Session 36</span>
+        <span class="session-name">Milestone check + Phase D preview</span>
+        <span class="session-dot db"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp thy">Theory</span><span class="bt">Harmonic dictation: teacher plays 8-bar passage. Student identifies key, marks the harmonic rhythm, names I/IV/V at minimum, and identifies any secondary dominant or deceptive cadence. Written exercise — 10 minutes. This is the formal theory component of the Phase C milestone.</span><span class="btime">10 min</span></li>
+          <li class="block-item"><span class="bp art">Art</span><span class="bt">Phase D preview: "You now have the vocabulary (scales), the tools (dynamics, pedal, touch), and the language (phrasing and harmony). Phase D is where you speak — in full sentences, in a real repertoire that asks everything of you. The pieces in Phase D are genuinely demanding. They will require everything you have built in Phases A, B, and C simultaneously." Teacher plays the opening of the first Phase D piece. Student listens.</span><span class="btime">12 min</span></li>
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">Gateway preview: "The Stage 3 gateway asks one question: does your playing have intention? Not perfection — intention. A note played by accident and a note played with full musical purpose sound different, even when they are the same note. The gateway is listening for purpose." This framing is the most important preparation for the gateway.</span><span class="btime">8 min</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="milestone">
+    <div class="milestone-title">Phase C Milestone</div>
+    <div class="milestone-sub">Phrasing and harmony are the language of musical intelligence. This milestone confirms the student speaks it.</div>
+    <div class="mchecks">
+      <div class="mcheck"><div class="mnum">M1</div><div><div class="mtitle">Phrase analysis and performance</div><div class="mdesc">Student identifies the high point, shape, and release of every phrase in a new piece within 5 minutes of seeing it. The performed phrases match the analysis.</div></div></div>
+      <div class="mcheck"><div class="mnum">M2</div><div><div class="mtitle">Harmonic ear</div><div class="mdesc">Student identifies I, IV, V, ii, vi by ear in any of the six major keys with 75% accuracy. Identifies modulation point in an 8–16 bar passage by listening.</div></div></div>
+      <div class="mcheck"><div class="mnum">M3</div><div><div class="mtitle">Form recognition</div><div class="mdesc">Student identifies binary, ternary, and rondo forms from a new piece by listening. Plays the A' return differently from the first A — with deliberate interpretive justification.</div></div></div>
+      <div class="mcheck"><div class="mnum">M4</div><div><div class="mtitle">Ornamentation — historically appropriate</div><div class="mdesc">Student performs trills, mordents, and grace notes with correct physical technique and historically appropriate starting notes. Ornaments sound like inflection, not decoration.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PHASE D: WEEKS 19–24 — Repertoire and Gateway ═══ -->
+
+<section class="week-section" id="week-19">
+  <div class="week-header">
+    <div class="week-number">19</div>
+    <div class="week-title-block">
+      <div class="week-title">The gateway repertoire — choosing and beginning</div>
+      <div class="week-focus">Two substantial pieces chosen for the gateway: one Classical, one Romantic. Structural analysis complete before any notes are learned. The learning strategy from Stage 2 Phase C applied at a new level of complexity.</div>
+    </div>
+    <span class="week-phase-badge pd">Phase D</span>
+  </div>
+
+  <div class="tnote">
+    <div class="tnote-label">Teacher's framing for Phase D</div>
+    <p>Phase D is where Stage 3 earns its name: Musicality. The first three phases built the toolkit. Phase D uses that toolkit on repertoire that is genuinely demanding — pieces that have survived because they say something worth saying. The student's job in Phase D is not to "get the notes right." The notes are assumed to be learnable. The job is to have something to say about the music, and to develop the technical and interpretive means to say it. The gateway question — "does your playing have intention?" — is answered here, over six weeks, before it is formally asked in session 48.</p>
+  </div>
+
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Sessions 37–38</span>
+        <span class="session-name">Piece selection and structural immersion</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">Classical piece (e.g., Beethoven Bagatelle Op. 33 No. 1, Haydn Sonata Hob. XVI:35 first movement, Clementi Sonatina Op. 36 No. 3). Structural analysis session: form, key, modulation points, harmonic skeleton, phrase shapes, dynamic map, ornament list. All in writing before any note is played at the piano. The analysis takes the full first session.</span><span class="btime">35 min</span></li>
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">Listen to a recording of the piece (two different performers if possible). Student describes: "What did each performer do differently? Which choice do you prefer at each moment? Why?" This comparative listening develops critical musical judgment — the student is not just receiving performances but evaluating them against their own emerging aesthetic.</span><span class="btime">10 min</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Romantic piece</span>
+        <span class="session-name">Character before notes</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp art">Art</span><span class="bt">Romantic piece (e.g., a Schumann "Album for the Young" piece — "The Wild Horseman," "Melody," "The Happy Farmer"; or simpler Chopin Waltzes). Before analysis: "What is this piece about? What does the title (if any) suggest? What is the character?" Student answers in writing — two or three sentences. This character description is the interpretive compass for the entire learning process.</span><span class="btime">10 min</span></li>
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">Structural analysis of the Romantic piece. The analysis looks different from the Classical piece: the Romantic harmonic language is richer (more secondary dominants, chromatic chords, unexpected modulations). Mark every moment that surprises the ear and plan the specific performance gesture that will communicate that surprise.</span><span class="btime">15 min</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="repblock">
+    <div class="repblock-label">Home practice — Week 19 (45 min/day)</div>
+    <div class="rlist">
+      <div class="ri"><strong>10 min</strong> — Classical piece: section A only. HS each, inner singing, then HT slow. Form analysis is the guide — stop at every section boundary and confirm the harmonic arrival before continuing.</div>
+      <div class="ri"><strong>10 min</strong> — Romantic piece: same method. Character description is read aloud before each practice session — the words set the physical and emotional intention.</div>
+      <div class="ri"><strong>10 min</strong> — Scales and arpeggios (maintain Stage 3 targets). <strong>10 min</strong> — Sight-reading (now at early intermediate level — music with multiple position changes, all key signatures, complex rhythms). <strong>5 min</strong> — Listen to one recording with score.</div>
+    </div>
+  </div>
+</section>
+
+<section class="week-section" id="week-20">
+  <div class="week-header">
+    <div class="week-number">20</div>
+    <div class="week-title-block">
+      <div class="week-title">Learning the pieces — section by section, layer by layer</div>
+      <div class="week-focus">The structural learning method applied to substantially more complex music. Difficult passages isolated and solved at micro-tempo. The interpretive layer added only after the technical layer is secure.</div>
+    </div>
+    <span class="week-phase-badge pd">Phase D</span>
+  </div>
+
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Sessions 39–40</span>
+        <span class="session-name">Technical layer first, interpretive layer second</span>
+        <span class="session-dot db"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp crd">Coord</span><span class="bt">Technical layer: learn each section at 50% of target tempo. HS first (both hands fully secure). Inner singing. Then HT. A passage is technically ready only when it can be played at the practice tempo with zero errors across five consecutive repetitions. Five consecutive correct repetitions — not five total. Consecutive.</span><span class="btime">15 min</span></li>
+          <li class="block-item"><span class="bp art">Art</span><span class="bt">Interpretive layer: once a section is technically secure, add the full interpretive plan (from the week 19 analysis). "Now you can afford to feel — you don't need to think about the notes." The interpretive layer is not added until the technical layer is completely stable. This sequencing is crucial: attempting interpretation before technical security produces neither good technique nor good interpretation.</span><span class="btime">12 min</span></li>
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">Tempo spiral: the sequence is (1) very slow technical, (2) interpretive at technical tempo, (3) slight tempo increase, (4) re-add interpretation at new tempo, (5) repeat. Each cycle: technical accuracy first, interpretation second, then tempo increase. The tempo spiral is how a piece is built toward performance tempo without sacrificing either technical security or musical expression.</span><span class="btime">8 min</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Problem solving</span>
+        <span class="session-name">The hardest bars — specific solutions</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp crd">Coord</span><span class="bt">For each genuinely difficult passage: (1) identify the exact technical challenge (not "it's hard" but "the LH arpeggio arrives late because the arm is not pre-rotating before the jump"); (2) isolate the problem to the minimum number of notes; (3) solve at micro-tempo (♩=30 if necessary); (4) expand outward one bar at a time. Specific diagnosis produces specific solutions — vague practice produces vague improvement.</span><span class="btime">12 min</span></li>
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">The recording test: record the problem passage at practice tempo. Listen back. "Does it sound like a problem passage, or does it sound like music?" If it still sounds like a problem, the tempo is still too fast for the technical foundation to hold. Reduce and rebuild.</span><span class="btime">8 min</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="repblock">
+    <div class="repblock-label">Home practice — Week 20 (45 min/day)</div>
+    <div class="rlist">
+      <div class="ri"><strong>15 min</strong> — Classical piece: section-by-section through the technical layer. Problem bars isolated. Five consecutive correct repetitions rule.</div>
+      <div class="ri"><strong>15 min</strong> — Romantic piece: same method. Character statement read before each session.</div>
+      <div class="ri"><strong>10 min</strong> — Scales and arpeggios. <strong>5 min</strong> — Sight-reading.</div>
+    </div>
+  </div>
+</section>
+
+<section class="week-section" id="week-21">
+  <div class="week-header">
+    <div class="week-number">21</div>
+    <div class="week-title-block">
+      <div class="week-title">Both pieces joined — the full programme begins</div>
+      <div class="week-focus">All sections of both pieces joined. First full performances. The programme has an order, a contrast, and a logic. Performance psychology introduced.</div>
+    </div>
+    <span class="week-phase-badge pd">Phase D</span>
+  </div>
+
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Sessions 41–42</span>
+        <span class="session-name">First full performances and programme order</span>
+        <span class="session-dot db"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">First full performance of each piece: no stopping, no correcting. Teacher listens only. Written notes on: (1) technical security under performance conditions; (2) interpretive intention landing or not; (3) specific bars that collapsed under performance pressure (these become the targeted repair work for weeks 22–23).</span><span class="btime">20 min</span></li>
+          <li class="block-item"><span class="bp art">Art</span><span class="bt">Programme order: Classical then Romantic, or Romantic then Classical? "Which order creates a better musical journey? Which piece do you want to leave ringing in the listener's ears?" Student decides and justifies. This is a genuine artistic decision — there is no right answer, but there must be a reasoned answer.</span><span class="btime">6 min</span></li>
+          <li class="block-item"><span class="bp art">Art</span><span class="bt">Performance psychology: "Before you begin to play, you have already communicated something to the audience — through how you sit, how you breathe, whether you appear settled or anxious. The two seconds before the first note are part of the performance." Practice: student sits at the piano, takes a breath, finds complete stillness, then begins. Repeat until the stillness feels natural rather than performed.</span><span class="btime">9 min</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Memorisation</span>
+        <span class="session-name">Structural memory under pressure</span>
+        <span class="session-dot dn"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp thy">Theory</span><span class="bt">Test structural memory: teacher asks the student to start the piece from the beginning of the development section, then from the recapitulation, then from a random bar in the middle. If the student cannot start from any point, the memory is sequential (muscle memory only) rather than structural. Structural memory is the only reliable memory in performance — muscle memory fails under pressure.</span><span class="btime">10 min</span></li>
+          <li class="block-item"><span class="bp crd">Coord</span><span class="bt">Reinforce structural memory: play the harmonic skeleton only (just the bass notes on the strong beats, or just the chord changes) while singing the melody. Then add the full texture. This confirms that the harmonic structure is known independently of the physical pattern — the deepest and most reliable form of musical memory.</span><span class="btime">10 min</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="repblock">
+    <div class="repblock-label">Home practice — Week 21 (45 min/day)</div>
+    <div class="rlist">
+      <div class="ri"><strong>10 min</strong> — Classical piece: full performance simulation once per day. Record. Listen back critically using the three self-assessment questions from week 18.</div>
+      <div class="ri"><strong>10 min</strong> — Romantic piece: same. <strong>10 min</strong> — Targeted repair on the bars that collapsed in the first full performance. Micro-tempo isolation. Five consecutive correct repetitions.</div>
+      <div class="ri"><strong>10 min</strong> — Scales and arpeggios. <strong>5 min</strong> — Sight-reading.</div>
+    </div>
+  </div>
+</section>
+
+<section class="week-section" id="week-22">
+  <div class="week-header">
+    <div class="week-number">22</div>
+    <div class="week-title-block">
+      <div class="week-title">Refinement — every detail intentional</div>
+      <div class="week-focus">The nuance work. Voice-leading in complex textures. Micro-timing in phrase shaping. The difference between playing correctly and playing beautifully.</div>
+    </div>
+    <span class="week-phase-badge pd">Phase D</span>
+  </div>
+
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Sessions 43–44</span>
+        <span class="session-name">Detail and voice-leading</span>
+        <span class="session-dot db"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">Voice-leading in complex textures: in passages with three or four simultaneous voices, each voice must have its own dynamic level and its own musical direction. Teacher isolates one inner voice (e.g., the middle voice in a three-voice texture) and plays it alone. "This voice has its own phrase shape — can you hear it? Now play all three voices and make this one audible without making it dominant." This is the craft that separates an ordinary performance from a great one.</span><span class="btime">12 min</span></li>
+          <li class="block-item"><span class="bp art">Art</span><span class="bt">Micro-timing: at key moments in the phrase — the high point, the secondary dominant resolution, the moment of return — add an almost imperceptible delay (not rubato — more like a breath). The note is not late; it is weighted. This is an advanced expressive technique and will feel unnatural at first. The ear will confirm whether it works: does the moment feel more significant?</span><span class="btime">10 min</span></li>
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">The detail audit: play the piece very slowly (50% of performance tempo) and listen to every detail of every note. "Is this note the right dynamic relative to its neighbours? Is the touch appropriate? Is the pedal serving this moment?" Slow-motion listening reveals details that full-speed playing disguises. Every detected imperfection is a specific target for the next practice session.</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">Full performance of both pieces with all refinements. Teacher observes: has any detail been added that feels forced or mechanical? Refinement must serve naturalness — not demonstrate technique. "If the audience hears your craft, you have over-refined. If they only hear the music, the craft has done its job."</span><span class="btime">10 min</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Resilience</span>
+        <span class="session-name">Performing under distraction — advanced training</span>
+        <span class="session-dot db"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp art">Art</span><span class="bt">Performance simulation with multiple distractions: teacher brings in a "small audience" (one or two other people — family member, another student, the school receptionist). Student performs both pieces. The presence of a real audience changes everything — breathing patterns, inner tempo, awareness of errors. This exposure is the most valuable rehearsal of Stage 3.</span><span class="btime">20 min</span></li>
+          <li class="block-item"><span class="bp art">Art</span><span class="bt">Post-performance debrief: teacher asks the "audience" member what they noticed — what was beautiful, what drew their attention, what they will remember. The student listens without defending. Audience perception and performer intention are often different — the gap is the information. "What did you intend that they did not receive? What did they receive that you did not consciously intend?"</span><span class="btime">10 min</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="repblock">
+    <div class="repblock-label">Home practice — Week 22 (45 min/day)</div>
+    <div class="rlist">
+      <div class="ri"><strong>15 min</strong> — Each piece once at performance tempo (full simulation) and once in slow motion (detail audit). Two very different experiences from the same music.</div>
+      <div class="ri"><strong>10 min</strong> — Voice-leading isolation: practice any three-voice passage with each voice alone, then two voices, then all three. Confirm the inner voices are audible in the full texture.</div>
+      <div class="ri"><strong>10 min</strong> — Scales and arpeggios. <strong>10 min</strong> — Sight-reading.</div>
+    </div>
+  </div>
+</section>
+
+<section class="week-section" id="week-23">
+  <div class="week-header">
+    <div class="week-number">23</div>
+    <div class="week-title-block">
+      <div class="week-title">Mock gateway — the full assessment rehearsed</div>
+      <div class="week-focus">All five gateway components are tested in sequence. One week of targeted repair based on mock results. The student enters week 24 knowing exactly what is expected.</div>
+    </div>
+    <span class="week-phase-badge pd">Phase D</span>
+  </div>
+
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Session 45 — Mock gateway</span>
+        <span class="session-name">All components in sequence</span>
+        <span class="session-dot db"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">Component 1 — Scales: four keys at random, HT both directions at ♩=80 minimum. No crossing accents. Dynamic arc. Teacher records any failures for targeted repair.</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp ear">Ear</span><span class="bt">Component 2 — Ear training: major/minor identification, chord function (I/IV/V/ii/vi), modulation point in an 8-bar passage, one harmonic dictation (4 bars). Written answers. Teacher scores.</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp keys">Keys</span><span class="bt">Component 3 — Sight-reading: fresh piece at early intermediate level. 60-second scan (including harmonic analysis), then one continuous play-through. Teacher evaluates: eyes ahead, pattern recognition, harmonic awareness, pulse maintenance.</span><span class="btime">10 min</span></li>
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">Component 4 — Programme: both pieces in programme order. Full performance, no stopping. Teacher listens as an audience member. Written feedback: one musical strength per piece, one specific technical target per piece, overall assessment of intention.</span><span class="btime">14 min</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Session 46 — Targeted repair</span>
+        <span class="session-name">One week of precision preparation</span>
+        <span class="session-dot dr"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp crd">Coord</span><span class="bt">Address the single most significant gap from the mock gateway. The correction must be specific: not "practice more" but "the LH in bars 14–16 collapses under tempo because the arm pre-rotation has not been trained. Practice those three bars at ♩=40, five consecutive correct repetitions, twice per day."</span><span class="btime">20 min</span></li>
+          <li class="block-item"><span class="bp art">Art</span><span class="bt">Final artistic statement: student writes one sentence for each piece — "This piece is about ____" — and reads it aloud before playing. Then plays. "Does the performance match the sentence?" Teacher evaluates alignment between stated intention and performed result. This alignment is the gateway's decisive criterion.</span><span class="btime">15 min</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="repblock">
+    <div class="repblock-label">Home practice — Week 23 (45 min/day)</div>
+    <div class="rlist">
+      <div class="ri"><strong>10 min</strong> — Targeted repair from mock gateway (specific bars, specific technique).</div>
+      <div class="ri"><strong>15 min</strong> — Programme performance simulation daily. Record and review against the three self-assessment questions.</div>
+      <div class="ri"><strong>10 min</strong> — Scales and arpeggios at target tempo. <strong>10 min</strong> — Sight-reading.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WEEK 24 + GATEWAY -->
+<section class="week-section" id="week-24">
+  <div class="week-header">
+    <div class="week-number">24</div>
+    <div class="week-title-block">
+      <div class="week-title">Final session and the Stage 3 Gateway</div>
+      <div class="week-focus">Session 47 is the final polish. Session 48 is the gateway — the most demanding assessment yet, and the most musical. The decisive criterion: does your playing have intention?</div>
+    </div>
+    <span class="week-phase-badge pd">Phase D</span>
+  </div>
+
+  <div class="slabel">Session 47 — Final polish</div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Full session</span>
+        <span class="session-name">The last preparation</span>
+        <span class="session-dot dr"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item"><span class="bp snd">Sound</span><span class="bt">Scale final check: all twelve major scales at ♩=80, called at random. HT, with dynamic arc. Then three minor forms from any key the teacher names. This is confirmation — not a new challenge. The student should feel that the scales are completely owned.</span><span class="btime">8 min</span></li>
+          <li class="block-item"><span class="bp rep">Repertoire</span><span class="bt">Both pieces twice: first time for the technical layer (teacher monitors specific bars from the mock gateway repair), second time purely as music. Teacher and student listen together to the second performance. "What do you want to communicate in tomorrow's gateway that you haven't fully communicated yet?" Student answers. "Then let tomorrow's performance be the answer."</span><span class="btime">22 min</span></li>
+          <li class="block-item"><span class="bp art">Art</span><span class="bt">Final framing: "The gateway is not a test of whether you are good enough. You have been good enough since you passed Stage 2. The gateway is a listening — I am going to listen to you play, and I am going to ask one question: are you saying something? The answer is almost certainly yes. Play as if you know it."</span><span class="btime">10 min</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="slabel">Session 48 — The Stage 3 Gateway</div>
+
+  <div class="gateway">
+    <div class="gateway-title">Stage 3 Gateway Assessment</div>
+    <div class="gateway-sub">Five components. The decisive criterion throughout is not accuracy but intention — the sense that every note and every gesture is the result of a musical decision. A student whose playing has consistent intention passes Stage 3 even if individual components show technical imperfection.</div>
+    <div class="gchecks">
+      <div class="gcheck">
+        <div class="gnum">01</div>
+        <div>
+          <div class="gtitle">Scales — all twelve major, three minor forms</div>
+          <div class="gdesc">Teacher calls four major keys and one minor key at random. HT, both directions, ♩=80 minimum. No audible thumb-crossing accent in any key. Dynamic arc present. Minor key: student states the form (natural, harmonic, or melodic) before playing and plays it correctly. Pass criterion: 4 of 5 keys meeting all three standards (evenness, dynamic, correctness).</div>
+        </div>
+      </div>
+      <div class="gcheck">
+        <div class="gnum">02</div>
+        <div>
+          <div class="gtitle">Harmonic ear — function, modulation, dictation</div>
+          <div class="gdesc">Teacher plays an 8-bar passage. Student identifies: key, chord functions at marked moments (6 chords labeled — I/IV/V/ii/vi), any secondary dominant, and the modulation point if one occurs. Written answers, 5 minutes. Pass criterion: 5 of 7 chord functions correctly identified; modulation point identified if present.</div>
+        </div>
+      </div>
+      <div class="gcheck">
+        <div class="gnum">03</div>
+        <div>
+          <div class="gtitle">Sight-reading — early intermediate level</div>
+          <div class="gdesc">Fresh piece at early intermediate level (two pages, multiple position changes, key signature up to three sharps or flats, compound time or complex rhythmic patterns). 60-second scan with harmonic analysis visible. One continuous play-through. Pass criterion: pulse maintained throughout; eyes visibly ahead of playing position; harmonic structure (I/IV/V changes) reflected in the phrasing even on first reading; no stopping.</div>
+        </div>
+      </div>
+      <div class="gcheck">
+        <div class="gnum">04</div>
+        <div>
+          <div class="gtitle">Technical command — dynamics, pedal, touch, ornamentation</div>
+          <div class="gdesc">During the programme performance, teacher evaluates: (a) dynamic range genuinely spanning at least four levels; (b) pedal changes responsive to harmonic rhythm — zero moments of mud; (c) at least two distinct touch types used appropriately within a single piece; (d) any ornaments performed with correct historical style and physical technique. These are not separately tested — they are evaluated within the performance.</div>
+        </div>
+      </div>
+      <div class="gcheck">
+        <div class="gnum">05</div>
+        <div>
+          <div class="gtitle">Programme performance — intention</div>
+          <div class="gdesc">Both pieces performed in programme order. Before beginning: student states one sentence for each piece describing what they intend to communicate. Teacher listens to whether the stated intention is received in the performance. The pass criterion is the most demanding in the curriculum so far: at least one moment in each piece where the teacher thinks "I did not expect that — but it was right." A surprise that is musically correct. That is the sign of an interpreting musician, not a reproducing one.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pbar" style="margin-top:2rem;">
+    <div class="pcell"><span class="pmins">55</span><span class="pcat">Repertoire</span></div>
+    <div class="pcell"><span class="pmins">38</span><span class="pcat">Scales/Arps</span></div>
+    <div class="pcell"><span class="pmins">30</span><span class="pcat">Harmony</span></div>
+    <div class="pcell"><span class="pmins">28</span><span class="pcat">Technique</span></div>
+    <div class="pcell"><span class="pmins">22</span><span class="pcat">Sight-reading</span></div>
+    <div class="pcell"><span class="pmins">15</span><span class="pcat">Ear training</span></div>
+  </div>
+  <p style="font-size:12px;color:var(--ink-soft);margin-bottom:1.5rem;font-family:'DM Mono',monospace;letter-spacing:0.04em;">Approximate Stage 3 lesson time distribution (total hours) across all 48 sessions</p>
+
+  <div class="tnote">
+    <div class="tnote-label">After the gateway — what changes in Stage 4</div>
+    <p>Stage 4 is Fluency: Advanced Technique and Theory. The student who passes the Stage 3 gateway has something to say and a growing ability to say it. Stage 4 asks: how fast can you say it? How complex can the sentence become? The advanced techniques of Stage 4 — octave playing, complex polyrhythm, advanced pedalling, sight-reading at near-performance level — do not replace the musicality of Stage 3. They extend it into territory where the music demands more of the body and the mind simultaneously. The student who arrives at Stage 4 should feel that Stage 3 gave them a language. Stage 4 will give them fluency in that language.</p>
+  </div>
+
+  <div class="slabel">Recommended Stage 3 Repertoire — by phase</div>
+  <table class="reptable">
+    <thead>
+      <tr><th>Phase</th><th>Style / Period</th><th>Specific Works</th><th>Primary Focus</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>A (Wks 1–6)</td><td>Scale-rich repertoire</td><td>Czerny Op. 299 Nos. 1–4, Burgmüller Op. 100 (selected), Heller Op. 47 studies</td><td>Scale technique in context; arpeggio fluency</td></tr>
+      <tr><td>A (Wks 1–6)</td><td>Baroque</td><td>Bach Two-Part Inventions (Nos. 1, 4, 8), Handel Suites (Air movements)</td><td>Non-legato touch, ornament realisation, two-voice independence</td></tr>
+      <tr><td>B (Wks 7–12)</td><td>Classical</td><td>Beethoven Bagatelles Op. 119 Nos. 1–3, Haydn Sonata Hob. XVI:35, Clementi Op. 36 No. 6</td><td>Dynamic architecture, subito effects, Classical pedalling</td></tr>
+      <tr><td>B (Wks 7–12)</td><td>Early Romantic</td><td>Schumann Album for the Young (selected), Mendelssohn Songs Without Words (simpler), Schubert Ländler</td><td>Portato touch, rich pedalling, Romantic phrase shaping</td></tr>
+      <tr><td>C (Wks 13–18)</td><td>Harmonic complexity</td><td>Chopin Mazurkas Op. 67, Schubert Impromptus Op. 90 No. 2 (simplified sections), Brahms Waltzes Op. 39</td><td>Secondary dominants, modulation, harmonic rhythm in performance</td></tr>
+      <tr><td>C (Wks 13–18)</td><td>Form studies</td><td>Haydn Sonata Hob. XVI:37 (all movements), Mozart K. 545 Sonata (first movement)</td><td>Sonata form, Classical ornament realisation, voice-leading</td></tr>
+      <tr><td>D (Wks 19–24)</td><td>Gateway repertoire</td><td>Beethoven Op. 33 Bagatelles, Schumann "Kinderszenen" (selected), Chopin Waltz Op. 64 No. 2, Bach Prelude in C BWV 846</td><td>Complete performance integration; intention-driven interpretation</td></tr>
+    </tbody>
+  </table>
+</section>
+
+</main>
+
+<footer class="footer">
+  Stage 3 of 6 — Piano from Beginner to Mastery · LUBENO Consult Curriculum Framework
+</footer>
+
+<script>
+const phaseMap = { a:[1,2,3,4,5,6], b:[7,8,9,10,11,12], c:[13,14,15,16,17,18], d:[19,20,21,22,23,24] };
+function sw(n, btn) {
+  document.querySelectorAll('.week-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.week-btn').forEach(b => b.classList.remove('active'));
+  const sec = document.getElementById('week-' + n);
+  if (sec) sec.classList.add('active');
+  if (btn) btn.classList.add('active');
+  document.querySelector('.main').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+function showPhase(p, btn) {
+  document.querySelectorAll('.phase-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const firstW = phaseMap[p][0];
+  const wb = document.querySelector(`.week-btn[onclick="sw(${firstW},this)"]`);
+  sw(firstW, wb);
+}
+</script>
+</body>
+</html>

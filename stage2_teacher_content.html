@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stage 2 Teacher Content — LUBENO Piano Curriculum</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #1c1917; --ink-mid: #44403c; --ink-soft: #78716c;
+  --paper: #fdfaf5; --cream: #f5f0e8; --warm-line: #e8e0d0; --staff-line: #c8bfb0;
+  --teal: #0d6e56; --teal-light: #e0f4ee;
+  --purple: #4f46a0; --purple-light: #eeecfc;
+  --coral: #9b3a1a; --coral-light: #faeae5;
+  --amber: #7c4a0a; --amber-light: #faebd4;
+  --blue: #1d4e8a; --blue-light: #e5eef8;
+  --indigo: #3730a3; --indigo-light: #e0e7ff;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.07);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+}
+body { font-family: 'Lato', sans-serif; background: var(--paper); color: var(--ink); line-height: 1.65; }
+
+.header { background: var(--ink); color: var(--paper); padding: 3.5rem 2rem 3rem; position: relative; overflow: hidden; }
+.header::before { content: '𝄞 𝄢'; position: absolute; right: 3rem; top: 50%; transform: translateY(-50%); font-size: 7rem; opacity: 0.04; pointer-events: none; }
+.header-inner { max-width: 1000px; margin: 0 auto; position: relative; }
+.header-eyebrow { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 1rem; }
+.header h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 400; line-height: 1.2; margin-bottom: 0.6rem; }
+.header h1 em { font-style: italic; color: rgba(255,255,255,0.5); }
+.header-sub { font-size: 14px; color: rgba(255,255,255,0.45); font-weight: 300; max-width: 600px; line-height: 1.6; margin-bottom: 2rem; }
+.header-pills { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.header-pill { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.55); }
+
+.phase-badge { display: inline-block; font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; margin-bottom: 0.5rem; }
+.phase-a { background: var(--teal-light); color: var(--teal); }
+.phase-b { background: var(--indigo-light); color: var(--indigo); }
+.phase-c { background: var(--amber-light); color: var(--amber); }
+
+.tab-nav { background: #fff; border-bottom: 1px solid var(--warm-line); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.tab-nav-inner { max-width: 1000px; margin: 0 auto; padding: 0 2rem; display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; }
+.tab-nav-inner::-webkit-scrollbar { display: none; }
+.tab-btn { background: none; border: none; border-bottom: 3px solid transparent; color: var(--ink-soft); font-family: 'Lato', sans-serif; font-size: 12.5px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 1rem 1.1rem 0.85rem; cursor: pointer; white-space: nowrap; transition: color 0.2s, border-color 0.2s; }
+.tab-btn:hover { color: var(--ink); }
+.tab-btn.active { color: var(--teal); border-bottom-color: var(--teal); }
+
+.main { max-width: 1000px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+.section-head { margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--warm-line); }
+.section-head h2 { font-family: 'Playfair Display', serif; font-size: 1.75rem; font-weight: 400; margin-bottom: 0.3rem; }
+.section-head .desc { font-size: 13.5px; color: var(--ink-soft); font-weight: 300; }
+
+.week-card { background: #fff; border: 1px solid var(--warm-line); border-radius: 12px; margin-bottom: 1.5rem; overflow: hidden; box-shadow: var(--shadow-sm); }
+.week-card-header { padding: 1rem 1.25rem 0.75rem; border-bottom: 1px solid var(--warm-line); display: flex; align-items: flex-start; gap: 1rem; cursor: pointer; user-select: none; }
+.week-card-header:hover { background: var(--cream); }
+.week-num { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 2px; }
+.week-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 400; flex: 1; }
+.week-meta { font-size: 12px; color: var(--ink-soft); margin-top: 3px; }
+.week-toggle { font-size: 14px; color: var(--ink-soft); transition: transform 0.2s; padding-top: 4px; }
+.week-toggle.open { transform: rotate(180deg); }
+.week-body { padding: 1.25rem; display: none; }
+.week-body.open { display: block; }
+
+.session-block { margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--warm-line); }
+.session-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.session-title { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem; }
+.session-num { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--ink-soft); background: var(--cream); padding: 2px 7px; border-radius: 4px; }
+
+.activity { display: flex; gap: 0.75rem; margin-bottom: 0.6rem; font-size: 13px; color: var(--ink-mid); line-height: 1.55; }
+.activity-pillar { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+.p-body { background: var(--teal-light); color: var(--teal); }
+.p-ear { background: var(--purple-light); color: var(--purple); }
+.p-keys { background: var(--coral-light); color: var(--coral); }
+.p-sound { background: #f1efe8; color: var(--ink-mid); }
+.p-coord { background: var(--indigo-light); color: var(--indigo); }
+.p-theory { background: var(--amber-light); color: var(--amber); }
+.p-rep { background: var(--blue-light); color: var(--blue); }
+
+.activity-time { font-family: 'DM Mono', monospace; font-size: 9px; color: var(--ink-soft); white-space: nowrap; flex-shrink: 0; margin-top: 3px; }
+
+.focus-box { background: var(--teal-light); border-left: 3px solid var(--teal); border-radius: 0 8px 8px 0; padding: 0.8rem 1rem; font-size: 12.5px; color: var(--ink-mid); line-height: 1.55; margin: 0.75rem 0; }
+.focus-box strong { color: var(--teal); font-weight: 700; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; display: block; margin-bottom: 3px; font-family: 'DM Mono', monospace; }
+
+.watch-box { background: var(--amber-light); border-left: 3px solid var(--amber); border-radius: 0 8px 8px 0; padding: 0.8rem 1rem; font-size: 12.5px; color: var(--amber); line-height: 1.55; margin: 0.75rem 0; }
+.watch-box strong { color: var(--amber); font-weight: 700; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; display: block; margin-bottom: 3px; font-family: 'DM Mono', monospace; }
+.watch-box ul { padding-left: 1.2rem; margin: 0; }
+.watch-box li { margin-bottom: 0.3rem; }
+
+.practice-box { background: var(--blue-light); border-left: 3px solid var(--blue); border-radius: 0 8px 8px 0; padding: 0.8rem 1rem; font-size: 12.5px; color: var(--blue); line-height: 1.55; margin: 0.75rem 0; }
+.practice-box strong { color: var(--blue); font-weight: 700; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; display: block; margin-bottom: 3px; font-family: 'DM Mono', monospace; }
+.practice-box ul { padding-left: 1.2rem; margin: 0; }
+.practice-box li { margin-bottom: 0.3rem; }
+
+.dialogue { background: var(--purple-light); border-left: 3px solid var(--purple); border-radius: 0 8px 8px 0; padding: 0.9rem 1.1rem; margin: 1rem 0; font-size: 13.5px; color: var(--ink-mid); font-style: italic; line-height: 1.6; }
+.dialogue::before { content: '"'; font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--purple); line-height: 0; vertical-align: -0.5rem; margin-right: 4px; }
+
+.milestone-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+@media (max-width: 640px) { .milestone-grid { grid-template-columns: 1fr; } }
+.milestone-card { background: #fff; border: 1px solid var(--warm-line); border-radius: 10px; padding: 1rem; }
+.milestone-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 0.4rem; }
+.milestone-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 0.4rem; }
+.milestone-card p { font-size: 12px; color: var(--ink-mid); line-height: 1.55; }
+
+.scale-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 0.75rem 0; }
+.scale-table th { background: var(--ink); color: var(--paper); padding: 8px 12px; text-align: left; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; }
+.scale-table td { padding: 8px 12px; border-bottom: 1px solid var(--warm-line); color: var(--ink-mid); }
+.scale-table tr:last-child td { border-bottom: none; }
+.scale-table tr:nth-child(even) td { background: var(--cream); }
+
+.gateway-section { background: var(--ink); color: var(--paper); border-radius: 12px; padding: 1.75rem; margin-bottom: 1.5rem; }
+.gateway-section h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 400; margin-bottom: 0.5rem; }
+.gateway-section p { font-size: 13.5px; color: rgba(255,255,255,0.6); line-height: 1.65; }
+
+.gateway-component { background: #fff; border: 1px solid var(--warm-line); border-radius: 10px; overflow: hidden; margin-bottom: 1rem; box-shadow: var(--shadow-sm); }
+.gc-head { padding: 1rem 1.2rem 0.75rem; border-bottom: 1px solid var(--warm-line); display: flex; gap: 0.75rem; align-items: flex-start; }
+.gc-num { font-family: 'DM Mono', monospace; font-size: 1.1rem; color: var(--ink-soft); min-width: 28px; }
+.gc-head h4 { font-size: 15px; font-weight: 700; flex: 1; }
+.gc-body { padding: 1rem 1.2rem; }
+.gc-criteria { font-size: 13px; color: var(--ink-mid); line-height: 1.6; margin-bottom: 0.75rem; }
+.pass-box { background: var(--teal-light); border: 1px solid #9addc6; border-radius: 7px; padding: 0.6rem 0.85rem; font-size: 12.5px; color: var(--teal); margin-top: 0.75rem; line-height: 1.5; }
+.pass-box strong { font-weight: 700; display: block; margin-bottom: 2px; font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+.repertoire-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 640px) { .repertoire-grid { grid-template-columns: 1fr; } }
+.rep-card { background: #fff; border: 1px solid var(--warm-line); border-radius: 10px; padding: 1rem; box-shadow: var(--shadow-sm); }
+.rep-phase { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 3px; }
+.rep-type { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+.rep-examples { font-size: 12px; color: var(--teal); font-weight: 600; margin-bottom: 6px; }
+.rep-focus { font-size: 12px; color: var(--ink-soft); line-height: 1.5; }
+
+.cheat-sheet { background: #fff; border: 1px solid var(--warm-line); border-radius: 12px; overflow: hidden; margin-bottom: 1.5rem; box-shadow: var(--shadow-sm); }
+.cs-head { background: var(--ink); color: var(--paper); padding: 1rem 1.3rem; display: flex; align-items: center; gap: 0.75rem; }
+.cs-head h3 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 400; }
+.cs-body { padding: 1.25rem; }
+.cs-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+@media (max-width: 600px) { .cs-cols { grid-template-columns: 1fr; } }
+.cs-col h4 { font-size: 11px; font-family: 'DM Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 0.6rem; }
+.cs-list { list-style: none; }
+.cs-list li { font-size: 13px; color: var(--ink-mid); padding: 0.35rem 0; border-bottom: 1px solid var(--warm-line); display: flex; align-items: baseline; gap: 0.5rem; line-height: 1.5; }
+.cs-list li:last-child { border-bottom: none; }
+.cs-list li::before { content: '→'; color: var(--ink-soft); font-size: 11px; flex-shrink: 0; }
+
+.footer { text-align: center; padding: 2rem; font-family: 'DM Mono', monospace; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); border-top: 1px solid var(--warm-line); margin-top: 3rem; }
+
+@media print { .tab-nav { display: none; } .tab-panel { display: block !important; } .week-body { display: block !important; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">LUBENO Consult · Stage 2 of 6</div>
+    <h1>Teacher Content Package<br><em>Coordination &amp; Reading — 20 Weeks</em></h1>
+    <p class="header-sub">Session plans, exercises, repertoire notes, scale programme, sight-reading discipline, and full gateway materials for Stage 2. Three phases: Hand Independence (A), Fluent Reading (B), Full Integration (C). 40 sessions. One decisive skill: two independent hands that sound like one voice.</p>
+    <div class="header-pills">
+      <span class="header-pill">Piano · Post-Foundation</span>
+      <span class="header-pill">20 Weeks · 40 Sessions</span>
+      <span class="header-pill">3 Phases</span>
+      <span class="header-pill">4 Pillars + Coordination</span>
+      <span class="header-pill">Gateway: Session 40</span>
+    </div>
+  </div>
+</div>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="switchTab('overview',this)">Overview</button>
+    <button class="tab-btn" onclick="switchTab('phase-a',this)">Phase A — Wks 1–7</button>
+    <button class="tab-btn" onclick="switchTab('phase-b',this)">Phase B — Wks 8–14</button>
+    <button class="tab-btn" onclick="switchTab('phase-c',this)">Phase C — Wks 15–20</button>
+    <button class="tab-btn" onclick="switchTab('scales',this)">Scales</button>
+    <button class="tab-btn" onclick="switchTab('repertoire',this)">Repertoire</button>
+    <button class="tab-btn" onclick="switchTab('gateway',this)">Gateway</button>
+    <button class="tab-btn" onclick="switchTab('cheatsheets',this)">Cheat Sheets</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- ══ TAB 1: OVERVIEW ══ -->
+<div class="tab-panel active" id="tab-overview">
+  <div class="section-head">
+    <h2>Stage 2 at a Glance</h2>
+    <p class="desc">The central challenge of the piano that no other instrument shares: two independent hands, two staves, and the art of making them sound like one voice. This overview gives every teacher the framing, structure, and non-negotiable principles for Stage 2.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-bottom:2rem;">
+    <div style="background:var(--teal-light);border-radius:10px;padding:1.25rem;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);margin-bottom:8px;">Phase A · Weeks 1–7</div>
+      <div style="font-size:15px;font-weight:700;color:var(--teal);margin-bottom:6px;">Hand Independence</div>
+      <div style="font-size:12px;color:var(--ink-mid);line-height:1.55;">Inner-singing method · Position shifts · Thumb crossings · Rhythmic independence · 3/4 time · LH as equal voice</div>
+    </div>
+    <div style="background:var(--indigo-light);border-radius:10px;padding:1.25rem;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--indigo);margin-bottom:8px;">Phase B · Weeks 8–14</div>
+      <div style="font-size:15px;font-weight:700;color:var(--indigo);margin-bottom:6px;">Fluent Reading</div>
+      <div style="font-size:12px;color:var(--ink-mid);line-height:1.55;">Triads and inversions · I–V–IV progressions · Key signatures 1–2 sharps/flats · Sight-reading as daily discipline · Minor keys introduced</div>
+    </div>
+    <div style="background:var(--amber-light);border-radius:10px;padding:1.25rem;">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;">Phase C · Weeks 15–20</div>
+      <div style="font-size:15px;font-weight:700;color:var(--amber);margin-bottom:6px;">Full Integration</div>
+      <div style="font-size:12px;color:var(--ink-mid);line-height:1.55;">Sonatina movements · Programme performance · Structural analysis · Mock gateway · Gateway assessment</div>
+    </div>
+  </div>
+
+  <div style="background:#fff;border:1px solid var(--warm-line);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm);">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;margin-bottom:1rem;">The Central Problem of Stage 2</h3>
+    <p style="font-size:13.5px;color:var(--ink-mid);line-height:1.7;margin-bottom:1rem;">Hand independence is not a mechanical problem — it is an <strong>attention problem</strong>. When both hands play simultaneously, the brain defaults to treating them as one unit and synchronises them. The result: rhythmic lockstep, the left hand copying the right hand's dynamics, and the inability to differentiate two musical lines.</p>
+    <p style="font-size:13.5px;color:var(--ink-mid);line-height:1.7;margin-bottom:1rem;">The <strong>inner-singing method</strong> is the most effective solution: the student plays one hand while singing the other. The voice bridges the two hemispheres of brain activity required. Once the student can do this fluently, HT coordination follows naturally — because the musical content of each hand has been internalised separately before being combined.</p>
+    <div class="focus-box"><strong>Non-negotiable rule</strong>If the singing stops, the hands stop. The voice is load-bearing — not decorative. This rule applies from Session 1 to Session 40. Never relax it.</div>
+  </div>
+
+  <div style="background:#fff;border:1px solid var(--warm-line);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm);">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;margin-bottom:1rem;">The Sight-Reading Discipline — Begin Week 5, Keep Forever</h3>
+    <p style="font-size:13.5px;color:var(--ink-mid);line-height:1.7;margin-bottom:0.75rem;">From Week 5 onwards, every lesson begins with <strong>10 minutes of sight-reading</strong> on material one full level below the student's current repertoire. The rules are iron-clad:</p>
+    <ul style="padding-left:1.5rem;font-size:13px;color:var(--ink-mid);line-height:1.8;">
+      <li>Play through once — no stopping, no correction, no repeat</li>
+      <li>Material must be <em>below</em> current level — easy enough to practice reading, not struggling with notes</li>
+      <li>After: one observation only ("What was the hardest moment?") — then move on. Never drill the sight-reading piece</li>
+      <li>The skill being practiced is <strong>continuity</strong>, not accuracy</li>
+    </ul>
+    <div class="dialogue">Sight-reading used as a performance opportunity — slowing at hard passages, correcting errors — must be stopped immediately. Reset: one play-through, continuous, no going back.</div>
+  </div>
+
+  <div style="background:#fff;border:1px solid var(--warm-line);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm);">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;margin-bottom:1rem;">The Standard Preparation Process for Every New HT Piece</h3>
+    <p style="font-size:13px;color:var(--ink-soft);margin-bottom:0.75rem;">This process is never skipped, never shortened, never done out of order. A student who skips any step is practicing the wrong thing.</p>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:0.5rem;">
+      <div style="text-align:center;background:var(--teal-light);border-radius:8px;padding:0.75rem 0.5rem;">
+        <div style="font-size:18px;margin-bottom:4px;">1</div>
+        <div style="font-size:10px;color:var(--teal);font-weight:700;line-height:1.4;">Teacher plays — student listens with eyes closed</div>
+      </div>
+      <div style="text-align:center;background:var(--teal-light);border-radius:8px;padding:0.75rem 0.5rem;">
+        <div style="font-size:18px;margin-bottom:4px;">2</div>
+        <div style="font-size:10px;color:var(--teal);font-weight:700;line-height:1.4;">RH alone — student sings along</div>
+      </div>
+      <div style="text-align:center;background:var(--teal-light);border-radius:8px;padding:0.75rem 0.5rem;">
+        <div style="font-size:18px;margin-bottom:4px;">3</div>
+        <div style="font-size:10px;color:var(--teal);font-weight:700;line-height:1.4;">LH alone — student sings along</div>
+      </div>
+      <div style="text-align:center;background:var(--teal-light);border-radius:8px;padding:0.75rem 0.5rem;">
+        <div style="font-size:18px;margin-bottom:4px;">4</div>
+        <div style="font-size:10px;color:var(--teal);font-weight:700;line-height:1.4;">RH plays, LH sung aloud (then swap)</div>
+      </div>
+      <div style="text-align:center;background:var(--teal-light);border-radius:8px;padding:0.75rem 0.5rem;">
+        <div style="font-size:18px;margin-bottom:4px;">5</div>
+        <div style="font-size:10px;color:var(--teal);font-weight:700;line-height:1.4;">HT — singing continues under the breath</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#fff;border:1px solid var(--warm-line);border-radius:12px;padding:1.5rem;box-shadow:var(--shadow-sm);">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;margin-bottom:1rem;">Weekly Time Distribution (per 35-min session)</h3>
+    <table class="scale-table">
+      <thead><tr><th>Element</th><th>Phase A (Wks 1–7)</th><th>Phase B (Wks 8–14)</th><th>Phase C (Wks 15–20)</th></tr></thead>
+      <tbody>
+        <tr><td>Sight-reading</td><td>—</td><td>10 min</td><td>10 min</td></tr>
+        <tr><td>Scale work</td><td>5 min</td><td>5 min</td><td>5 min</td></tr>
+        <tr><td>Technical exercise / coordination drill</td><td>15 min</td><td>10 min</td><td>5 min</td></tr>
+        <tr><td>Repertoire / new piece work</td><td>15 min</td><td>10 min</td><td>15 min</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══ TAB 2: PHASE A ══ -->
+<div class="tab-panel" id="tab-phase-a">
+  <div class="section-head">
+    <h2>Phase A — Hand Independence</h2>
+    <p class="desc">Weeks 1–7 · Sessions 1–14 · The inner-singing method is the foundation. Every new skill is built on it. No HT playing without inner-singing preparation. Week 7 is a full consolidation and milestone check — no new material.</p>
+  </div>
+
+  <!-- WEEK 1 -->
+  <div class="week-card">
+    <div class="week-card-header" onclick="toggleWeek(this)">
+      <div style="flex:1">
+        <div class="week-num">Week 1 · Sessions 1–2</div>
+        <div class="week-title">The Inner-Singing Method</div>
+        <div class="week-meta">Core technique for all HT coordination · Rhythmic independence: different values HT</div>
+        <span class="phase-badge phase-a">Phase A</span>
+      </div>
+      <span class="week-toggle">▾</span>
+    </div>
+    <div class="week-body">
+      <div class="session-block">
+        <div class="session-title"><span class="session-num">Session 1</span> The singing-while-playing drill</div>
+        <div class="activity"><span class="activity-pillar p-coord">Coord</span><span>Take a Stage 1 piece with both hands. Student plays RH while speaking/singing the LH note names aloud. Slow tempo — the voice must genuinely name each note, not mumble. 8 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-coord">Coord</span><span>Reverse: LH plays, student sings the RH note names. Same slow tempo. Notice which direction is harder — this reveals which hand the student "leads" mentally. 8 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-ear">Ear</span><span>Play both hands together. Student notices HT is easier than expected — because both lines were fully internalised. Teacher confirms: "This is always how we prepare a new piece." 4 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-ear">Ear</span><span>Teacher plays new HT piece in full. Student listens with eyes closed: "Which hand has the melody? Does the LH have a pattern or move freely?" Listening analysis before any playing. 5 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-rep">Repertoire</span><span>Student reads and plays RH alone singing along, then LH alone singing along, then RH while singing LH. Full inner-singing process. 7 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-sound">Sound</span><span>HT attempt. One rule: if the singing stops, the hands stop. The voice is load-bearing. First HT run at whatever tempo allows continuous voice. 3 min.</span></div>
+        <div class="focus-box"><strong>Teacher framing</strong>The inner-singing method works because the voice bridges the two hemispheres of brain activity required for hand independence. A student who can sing one hand while playing the other has already solved the coordination problem. The hands just need time to confirm what the brain already knows.</div>
+      </div>
+      <div class="session-block">
+        <div class="session-title"><span class="session-num">Session 2</span> Rhythmic independence: different values HT</div>
+        <div class="activity"><span class="activity-pillar p-coord">Coord</span><span>LH holds a whole note (C, four counts) while RH plays C–D–E–F in quarter notes. The LH must not "pulse" with the RH — it holds, genuinely still. Student taps foot for pulse. 8 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-coord">Coord</span><span>Reverse: RH holds whole note while LH plays a four-quarter pattern. Does the sustained hand keep ringing? Does it resist the urge to accent with the other hand? 7 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-ear">Ear</span><span>Teacher plays both versions — one where both hands accent together (wrong) and one where they're independent. Student identifies by ear. "Your ear is better at this than your hands — let the ear lead the correction." 5 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-keys">Keys</span><span>Introduce dotted half note (3 counts). Clap-and-count: "ta-a-a." Then play on single note. Teacher counts aloud — student holds for exactly three beats. 5 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-rep">Repertoire</span><span>New piece featuring dotted half notes in one hand vs. quarter notes in the other. Full inner-singing preparation before any HT attempt. This is week's home practice target. 10 min.</span></div>
+      </div>
+      <div class="watch-box"><strong>Watch for — Week 1</strong><ul>
+        <li>Student mouthing note names silently rather than singing audibly — the voice must be heard; silent mouthing bypasses the auditory feedback loop</li>
+        <li>Hands rushing to HT before each hand is individually secure — enforce the full process</li>
+        <li>LH thumping on long held notes — the sustained hand tends to accent sympathetically; ask it to "simply ring, as if forgotten"</li>
+      </ul></div>
+      <div class="practice-box"><strong>Home practice — Week 1 (20 min/day)</strong><ul>
+        <li>8 min — Dotted-half piece: full inner-singing preparation before any HT. Log which direction (RH play/LH sing vs. LH play/RH sing) is harder — report to teacher next session</li>
+        <li>7 min — Long-note independence: LH whole note + RH quarters, then reverse. Foot taps pulse throughout</li>
+        <li>5 min — Stage 1 piece review: play any Stage 1 piece to consolidate tone quality and legato. "Don't forget where you came from."</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- WEEK 2 -->
+  <div class="week-card">
+    <div class="week-card-header" onclick="toggleWeek(this)">
+      <div style="flex:1">
+        <div class="week-num">Week 2 · Sessions 3–4</div>
+        <div class="week-title">Position Shifts and Thumb Crossings</div>
+        <div class="week-meta">C major scale begins · G position introduced · First position-shift HT piece</div>
+        <span class="phase-badge phase-a">Phase A</span>
+      </div>
+      <span class="week-toggle">▾</span>
+    </div>
+    <div class="week-body">
+      <div class="session-block">
+        <div class="session-title"><span class="session-num">Session 3</span> Thumb crossing: the C major scale begins</div>
+        <div class="activity"><span class="activity-pillar p-body">Body</span><span>Demonstrate on fallboard (off keys): fingers 1–2–3 tap, then thumb slides under to arrive at finger 4's note position before that finger lifts. The thumb is already in place — it does not swing up to meet the key. 5 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-body">Body</span><span>RH only: C–D–E, thumb crosses to F. Stop. Reset. Repeat 8 times. The crossing must be invisible — no wrist lurch, no shoulder dip. "A sleeping cat walks across your hand and feels nothing." 8 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-ear">Ear</span><span>Listen test: teacher plays C–D–E–F with visible wrist rock vs. smooth thumb crossing. Student identifies difference by ear — the rocky version produces an accent on F. The ear hears what the eye misses. 7 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-sound">Sound</span><span>One-octave C major scale RH: C–D–E–F–G–A–B–C. Sing it as do-re-mi first. Every note the same tone quality — no accent on the thumb crossing. Played with crescendo ascending, diminuendo descending. 15 min.</span></div>
+      </div>
+      <div class="session-block">
+        <div class="session-title"><span class="session-num">Session 4</span> LH position shifts and the G position</div>
+        <div class="activity"><span class="activity-pillar p-keys">Keys</span><span>G position: RH thumb on G, five fingers spanning G–A–B–C–D. LH fifth finger on G below, spanning G–A–B–C–D. This is the first position shift from C. Same weight, same tone quality. 6 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-body">Body</span><span>Lateral arm movement drill: C position five-note scale slowly, then without lifting the wrist, slide the whole arm one position to the right to G position. "The hand is a passenger. The arm drives." 8 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-rep">Repertoire</span><span>Short piece: C position for 4 bars, then G position for 4 bars. The shift must be smooth — no pause, no re-positioning fidget. 6 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-coord">Coord</span><span>HT piece where RH shifts position mid-piece while LH stays in C. Full inner-singing preparation. Challenge: the singing must account for the RH's new note set after the shift. 10 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-ear">Ear</span><span>Harmonic listening: when both hands are in C position, hum a note that fits (C, E, or G). When RH shifts to G, which LH notes still fit? Earliest harmonic awareness — not theory, just ear. 5 min.</span></div>
+      </div>
+      <div class="watch-box"><strong>Watch for — Week 2</strong><ul>
+        <li>Wrist lurching inward during finger-3 over-crossing on descending scale — correct by slowing to half tempo and watching the wrist</li>
+        <li>Position shifts done with a visible pause or "look-down" — the hand should know where it's going before the phrase ends; practice the arrival separately, eyes closed</li>
+        <li>Accent on the note after the thumb crossing — the thumb note is never louder than its neighbours</li>
+      </ul></div>
+      <div class="practice-box"><strong>Home practice — Week 2 (20 min/day)</strong><ul>
+        <li>5 min — C major scale RH, ascending and descending, with dynamic arc. Eyes closed — listen for evenness at the crossing point</li>
+        <li>8 min — HT piece with position change: full process (HS each, cross-singing, then HT)</li>
+        <li>7 min — G position five-finger exercise: LH and RH separately, then together in unison. Identical tone quality in both hands</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- WEEK 3 -->
+  <div class="week-card">
+    <div class="week-card-header" onclick="toggleWeek(this)">
+      <div style="flex:1">
+        <div class="week-num">Week 3 · Sessions 5–6</div>
+        <div class="week-title">Ties, Rests, and 3/4 Time</div>
+        <div class="week-meta">Silent pulse maintained through rests · Ties vs. slurs by ear · Waltz feel — ONE-two-three as physical sensation</div>
+        <span class="phase-badge phase-a">Phase A</span>
+      </div>
+      <span class="week-toggle">▾</span>
+    </div>
+    <div class="week-body">
+      <div class="session-block">
+        <div class="session-title"><span class="session-num">Session 5</span> Ties, rests, and the silent pulse</div>
+        <div class="activity"><span class="activity-pillar p-ear">Ear</span><span>Teacher claps 4-beat rhythm with rest on beat 3: clap–clap–(silence)–clap. Student echoes. Then student taps foot on beat 3 during the rest. "The pulse never stops — only the sound does." 5 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-keys">Keys</span><span>Quarter rest on piano: play C–D–(rest)–E–F. The rest hand lifts — but foot pulse continues. Student feels a physical impulse on beat 3 even with no sound. 8 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-rep">Repertoire</span><span>Piece with quarter and half rests in both hands at different moments. Coordination challenge: RH rests while LH plays, and vice versa. Inner-singing covers the resting hand's silence. 7 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-keys">Keys</span><span>Tie: play C (quarter), tie to C (half note). Finger stays depressed — the key never comes back up. Teacher places a hand over the student's to feel: no bounce on the barline. Three counts total, one press. 5 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-ear">Ear</span><span>Tie vs. slur listening: teacher plays — one tied (one long sound), one slurred (two connected notes). Student identifies. Tie = one sound; slur = two. Ear must distinguish before notation explains. 5 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-rep">Repertoire</span><span>Piece featuring ties across barlines. Student circles the second note of each tie in pencil: "This note is silent — I already pressed it." 5 min.</span></div>
+      </div>
+      <div class="session-block">
+        <div class="session-title"><span class="session-num">Session 6</span> 3/4 time: the waltz feel</div>
+        <div class="activity"><span class="activity-pillar p-ear">Ear</span><span>Play a waltz recording (Strauss or similar). Student sways or steps to feel ONE-two-three, ONE-two-three. ONE is heavy; 2 and 3 are light. Body owns the feel before notation is shown. 4 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-keys">Keys</span><span>3/4 exercise: LH plays one note on beat 1, RH plays two notes on beats 2 and 3. ONE has more weight — by intention, not force. "Beat 1 is where you land; beats 2 and 3 are where you float." 6 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-rep">Repertoire</span><span>First 3/4 piece: a simple waltz. Mark bar lines in pencil. Count aloud for first four bars before playing. Body sways slightly. Metric feel must be physical, not just numerical. 5 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-coord">Coord</span><span>Classic waltz pattern: LH bass note on beat 1, then chord on beats 2 and 3. First time LH has a repeating accompaniment pattern — not a melody. Inner-singing: play LH, sing RH melody. 10 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-sound">Sound</span><span>Balance: RH melody must be louder than LH. But LH beat 1 (bass note) slightly fuller than beats 2–3. Three dynamic levels in the LH alone. This is the characteristic waltz sound. 6 min.</span></div>
+      </div>
+      <div class="watch-box"><strong>Watch for — Week 3</strong><ul>
+        <li>All three beats in 3/4 played with equal weight — the waltz lilt requires heavier beat 1; ask student to "land" on 1 and "float" on 2 and 3</li>
+        <li>Re-attacking tied notes — mark the tied note in pencil every time; the eye must be reminded before the hand can be retrained</li>
+        <li>LH accompaniment drowning the RH melody — reduce LH weight by 30% consciously</li>
+      </ul></div>
+      <div class="practice-box"><strong>Home practice — Week 3 (20 min/day)</strong><ul>
+        <li>5 min — Waltz LH pattern alone (bass note + two chord notes) in 3/4. Count aloud. Foot taps beat 1 only</li>
+        <li>10 min — Waltz piece HT: inner-singing preparation first, then full piece. If melody singing stops, hands stop</li>
+        <li>5 min — Rest and tie exercise: clap a 4-bar rhythm (teacher provides), then play on single note with tied notes marked</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- WEEK 4 -->
+  <div class="week-card">
+    <div class="week-card-header" onclick="toggleWeek(this)">
+      <div style="flex:1">
+        <div class="week-num">Week 4 · Sessions 7–8</div>
+        <div class="week-title">The LH as an Equal Voice</div>
+        <div class="week-meta">Bass lines with direction · Two-note chords · Oom-pah pattern · Balance between voices</div>
+        <span class="phase-badge phase-a">Phase A</span>
+      </div>
+      <span class="week-toggle">▾</span>
+    </div>
+    <div class="week-body">
+      <div class="session-block">
+        <div class="session-title"><span class="session-num">Session 7</span> LH melodic bass lines and two-note chords</div>
+        <div class="activity"><span class="activity-pillar p-ear">Ear</span><span>Teacher plays same piece with two LH approaches: flat/mechanical vs. shaped bass line (crescendo toward peak, slight weight on strong beats). "If someone only heard your LH, would it be musical on its own?" 4 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-rep">Repertoire</span><span>Piece where LH has a moving bass line. Student prepares LH alone first with its own dynamic shape. Then HT: RH holds a long note while LH bass line moves beneath. Attention fully on LH. 16 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-body">Body</span><span>Two-note chord technique: both notes must drop simultaneously with arm weight. No rolling. Drop test: raise hand 2cm and let fall as unit. Both notes sound at exactly the same instant. 5 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-ear">Ear</span><span>Name two-note intervals: C+E (a third, warm and close), C+G (a fifth, open and hollow). Student plays each and identifies by aural character. No theory labels — just ear. 5 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-rep">Repertoire</span><span>Piece with two-note LH chords on beats 1 and 3. Chord must be even — not louder on bottom or top. Check: teacher covers ears — "I should not be able to guess which note is on top." 5 min.</span></div>
+      </div>
+      <div class="session-block">
+        <div class="session-title"><span class="session-num">Session 8</span> Combining bass notes and chords — the oom-pah pattern</div>
+        <div class="activity"><span class="activity-pillar p-theory">Theory</span><span>Oom-pah: LH plays a single bass note (oom) on beat 1, then a two-note chord (pah) on beat 2. Most common LH accompaniment pattern in beginner-intermediate repertoire. Requires a position shift within the LH. 8 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-body">Body</span><span>LH shift: 5th finger on bass note, then thumb and 3rd finger on chord. The shift must be seamless — arm weight transfers without audible gap. Practice LH alone until the pattern is automatic. 8 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-coord">Coord</span><span>HT with oom-pah: LH has two different physical tasks per bar — the first genuinely complex coordination moment. Inner-singing: play LH oom-pah, sing RH melody. Confirm melody is singing freely before HT. 7 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-sound">Sound</span><span>Balance check: RH melody is dominant. The oom (bass) is audible but subordinate. The pah (chord) is the softest element. Three dynamic levels in one bar — all from arm weight variation, never tension. 7 min.</span></div>
+      </div>
+      <div class="focus-box"><strong>Teacher framing for this week</strong>Most beginner methods treat the left hand as subordinate. This method does not. From week 4, the student learns to give the LH its own musical identity — a bass line that has direction, weight, and character. This pays off enormously in Stage 3 when they encounter music that genuinely requires two independent musical voices.</div>
+      <div class="watch-box"><strong>Watch for — Week 4</strong><ul>
+        <li>Uneven two-note chords — students consistently play the bottom note louder; ask them to deliberately play the top note louder for one bar, then find the even middle point</li>
+        <li>The oom-pah pattern making the LH rigid — the shift must stay relaxed; stiffness in the LH wrist is the main cause of unevenness</li>
+        <li>LH oom-pah overpowering the RH melody — address it directly and early; this is the defining imbalance of intermediate playing</li>
+      </ul></div>
+      <div class="practice-box"><strong>Home practice — Week 4 (20–25 min/day)</strong><ul>
+        <li>5 min — LH oom-pah pattern alone: one chord pattern, four bars, until automatic. No looking at the hand</li>
+        <li>10 min — HT piece with oom-pah: inner-singing preparation mandatory. Attention on RH melody dominance</li>
+        <li>5 min — C major scale, both hands in contrary motion (RH up, LH down from middle C simultaneously)</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- WEEK 5 -->
+  <div class="week-card">
+    <div class="week-card-header" onclick="toggleWeek(this)">
+      <div style="flex:1">
+        <div class="week-num">Week 5 · Sessions 9–10</div>
+        <div class="week-title">Eighth Notes, Dotted Rhythms, Sight-Reading Begins</div>
+        <div class="week-meta">Two eighth notes = one beat · Dotted quarter + eighth · Sight-reading introduced as daily discipline</div>
+        <span class="phase-badge phase-a">Phase A</span>
+      </div>
+      <span class="week-toggle">▾</span>
+    </div>
+    <div class="week-body">
+      <div class="session-block">
+        <div class="session-title"><span class="session-num">Session 9</span> Eighth notes and the subdivided pulse</div>
+        <div class="activity"><span class="activity-pillar p-keys">Keys</span><span><strong>First sight-reading session (10 min):</strong> Teacher selects a simple fresh piece (Stage 1 level). Student scans silently 30 sec: "What's the time signature? Where are the rests? Any position change?" Then: one continuous play-through. No stopping. After: "What was the hardest moment?" One observation only — move on.</span></div>
+        <div class="activity"><span class="activity-pillar p-ear">Ear</span><span>Clap eighth notes: "ta-ta ta-ta ta-ta ta-ta." Then student taps foot on the quarter beat while clapping eighths — two levels of pulse simultaneously in the body. 5 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-keys">Keys</span><span>Play pairs of eighth notes on single pitches: C–C D–D E–E F–F. Each pair is one beat. The two notes must be exactly equal — not one short, one long. 8 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-rep">Repertoire</span><span>Piece with eighth notes in RH against quarter notes in LH: first true polyrhythmic challenge — 2:1 in each hand simultaneously. Inner-singing: play LH quarters while saying "ta-ta" for each RH eighth pair. 7 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-sound">Sound</span><span>Articulation of eighth notes: pairs slightly lighter than quarters — they move faster and need less arm weight per note. "Eighths are more like brushing, quarters more like pressing." 5 min.</span></div>
+      </div>
+      <div class="session-block">
+        <div class="session-title"><span class="session-num">Session 10</span> Dotted quarter + eighth rhythm</div>
+        <div class="activity"><span class="activity-pillar p-keys">Keys</span><span>Sight-reading (10 min daily discipline): new piece, same level as last session. Scan, then play through. One chance. Teacher logs fluency, note accuracy, pulse maintenance.</span></div>
+        <div class="activity"><span class="activity-pillar p-ear">Ear</span><span>Clap dotted quarter + eighth: "ta-a-ta ta-a-ta." Listen to familiar songs: "Greensleeves," "I've Been Working on the Railroad." Student identifies the dotted feel by ear before reading it. 6 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-keys">Keys</span><span>Play dotted quarter + eighth on single pitches. The short note arrives exactly on the half-beat subdivision. Teacher counts "1-and-2-and" — the short note falls on "and." Precision here prevents a lifetime of sloppy dotted rhythms. 8 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-rep">Repertoire</span><span>A well-known march or song in dotted rhythm. Sing it first — the body already knows the rhythm. Playing follows the singing. 7 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-ear">Ear</span><span>Common error demonstration: teacher plays the dotted rhythm "swung" (too uneven, jazz feel) vs. precise (classical notation). Student identifies which matches the written score. 4 min.</span></div>
+      </div>
+      <div class="watch-box"><strong>Watch for — Week 5</strong><ul>
+        <li>Sight-reading used as a performance opportunity — student slows at hard passages, corrects errors, repeats bars; stop immediately and reset: one play-through, continuous, no going back</li>
+        <li>Dotted rhythms played as equal eighths (swung) — the short note must arrive precisely on the half-beat; counting "1-and" with the teacher is the fix</li>
+        <li>Eighth note pairs rushing — a physical cue (slight lean back on eighth-note bars) can help</li>
+      </ul></div>
+      <div class="practice-box"><strong>Home practice — Week 5 (25 min/day)</strong><ul>
+        <li>10 min — Sight-reading at home: one new simple piece daily. One play-through only. Circle any note they couldn't read in time and check it after</li>
+        <li>10 min — Dotted rhythm repertoire piece: full preparation process, then HT at a tempo that keeps the dotted rhythm precise</li>
+        <li>5 min — Eighth-note exercise: C–D–E–F–G in eighth notes, RH alone, then LH alone, then HT in unison</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- WEEK 6 -->
+  <div class="week-card">
+    <div class="week-card-header" onclick="toggleWeek(this)">
+      <div style="flex:1">
+        <div class="week-num">Week 6 · Sessions 11–12</div>
+        <div class="week-title">C Major Scale HT and G Major Introduced</div>
+        <div class="week-meta">Asymmetric thumb crossings HT · Scale as melody with shape · G major + F-sharp · Sight-reading progresses to include eighth notes</div>
+        <span class="phase-badge phase-a">Phase A</span>
+      </div>
+      <span class="week-toggle">▾</span>
+    </div>
+    <div class="week-body">
+      <div class="session-block">
+        <div class="session-title"><span class="session-num">Session 11</span> C major scale HT: the asymmetric crossing</div>
+        <div class="activity"><span class="activity-pillar p-body">Body</span><span>Map the crossings: RH thumb crosses under after E (onto F). LH thumb crosses under after G (onto A) ascending. These happen at different points — the hands are not mirror images. Student marks the crossing notes on the score. 6 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-coord">Coord</span><span>Slow HT at ♩=40: one note per beat, teacher counts. At the crossing points, each hand moves independently — do not let one hand dictate the other's rhythm. Stop and identify the exact beat where each crossing occurs. 10 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-sound">Sound</span><span>Evenness test: teacher closes eyes, student plays. Teacher must not be able to identify any crossing point by sound. Accents at crossing = not ready for tempo increase. Silence = move up by ♩=5. 9 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-ear">Ear</span><span>Scale as melody: play C major with full musical arc — crescendo ascending, diminuendo descending. Sing the scale while playing. "A scale is eight notes of music, not eight notes of exercise." 5 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-rep">Repertoire</span><span>Find the scale pattern in a real piece: teacher highlights a scale run in a method book piece. Student identifies: "This is the same pattern we just practiced." 5 min.</span></div>
+      </div>
+      <div class="session-block">
+        <div class="session-title"><span class="session-num">Session 12</span> G major scale and the F-sharp</div>
+        <div class="activity"><span class="activity-pillar p-keys">Keys</span><span>Sight-reading (10 min): piece now includes eighth notes — level advanced. Student scans (30 sec), identifies rhythm patterns before playing. One continuous play-through.</span></div>
+        <div class="activity"><span class="activity-pillar p-theory">Theory</span><span>Why G major has one sharp: teacher plays the G major scale using all white keys. "Does that sound right?" Student hears the wrong note (F natural feels a step too low). Then F-sharp: "Now it sounds like a proper scale." The ear discovers the sharps — the rule follows the sound. 6 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-keys">Keys</span><span>G major scale RH: G–A–B–C–D–E–F#–G. The F# is a black key — thumb crosses under after B (not after E as in C major). New crossing point, new muscle memory. Practice the B–F# segment specifically. 10 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-rep">Repertoire</span><span>Short piece in G major (one sharp key signature). Student identifies the key before playing. "Every time you see one sharp, the home note is G and F is always sharp." 9 min.</span></div>
+      </div>
+      <div class="watch-box"><strong>Watch for — Week 6</strong><ul>
+        <li>C major scale HT rushed before evenness is achieved — always test with teacher's closed eyes; crossing accents mean the tempo target is not reached</li>
+        <li>F-sharp forgotten mid-piece — circle every F in the piece before playing and say "sharp" as each one is approached</li>
+        <li>Sight-reading quality plateauing — if not improving week-on-week, the material is too hard; drop the level further</li>
+      </ul></div>
+      <div class="practice-box"><strong>Home practice — Week 6 (25 min/day)</strong><ul>
+        <li>5 min — C major scale HT daily at ♩=50. Raise tempo by 5 only when teacher cannot hear the crossing</li>
+        <li>5 min — G major scale RH, paying attention to the new crossing point (after B). Sing the scale while playing</li>
+        <li>10 min — G major piece: inner-singing process, then HT. Mark every F# before starting</li>
+        <li>5 min — Sight-reading: one new simple piece, one play-through only</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- WEEK 7 -->
+  <div class="week-card">
+    <div class="week-card-header" onclick="toggleWeek(this)">
+      <div style="flex:1">
+        <div class="week-num">Week 7 · Sessions 13–14</div>
+        <div class="week-title">Phase A Consolidation — Milestone Check</div>
+        <div class="week-meta">No new material · Three-piece programme performed · All Phase A skills integrated and tested · Phase B preview</div>
+        <span class="phase-badge phase-a">Phase A</span>
+      </div>
+      <span class="week-toggle">▾</span>
+    </div>
+    <div class="week-body">
+      <div class="session-block">
+        <div class="session-title"><span class="session-num">Session 13</span> Integration performance + milestone check</div>
+        <div class="activity"><span class="activity-pillar p-rep">Repertoire</span><span>Student performs three pieces from Phase A in sequence: one 4/4 piece, one 3/4 piece, one piece in G major. No stopping. Teacher takes written notes — no corrections during performance. 15 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-keys">Keys</span><span>Scale check: C major and G major, HT, both directions. Teacher listens with eyes closed for any crossing accent. Pass/continue feedback on each scale. 8 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-coord">Coord</span><span>Inner-singing drill on demand: teacher opens to any piece the student has learned and asks them to play the LH while singing the RH. No preparation — immediate response. Tests whether the skill is genuinely owned. 7 min.</span></div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--warm-line);border-radius:10px;padding:1rem;margin:1rem 0;">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:0.75rem;">Phase A Milestone Check — not a formal gateway, a diagnostic snapshot</div>
+        <div class="milestone-grid">
+          <div class="milestone-card"><div class="milestone-label">M1 — HT Coordination</div><h4>Inner singing on demand</h4><p>Student plays a full piece HT with different rhythmic values in each hand. The hands sound genuinely independent. Inner-singing demonstrated on demand without preparation.</p></div>
+          <div class="milestone-card"><div class="milestone-label">M2 — Scales</div><h4>C major and G major HT</h4><p>Both scales, both directions, at ♩=60 minimum. No audible accent at any thumb crossing. Played with a dynamic arc — not flat.</p></div>
+          <div class="milestone-card"><div class="milestone-label">M3 — Rhythmic Reading</div><h4>Quarter, half, dotted, eighth, whole</h4><p>Student correctly identifies and performs all note values on sight. Ties and rests handled correctly. Dotted rhythms precise — not swung.</p></div>
+          <div class="milestone-card"><div class="milestone-label">M4 — Sight-Reading</div><h4>Continuous single play-through</h4><p>Student sight-reads a fresh Stage 1 level piece in one continuous play-through with no stops. Pulse maintained throughout.</p></div>
+        </div>
+      </div>
+      <div class="session-block">
+        <div class="session-title"><span class="session-num">Session 14</span> Targeted repair and Phase B preview</div>
+        <div class="activity"><span class="activity-pillar p-coord">Coord</span><span>Based on milestone check: address the single most significant gap with targeted exercises. Not a broad review — one specific skill, worked deeply for 15 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-theory">Theory</span><span>Phase B preview: introduce the concept of three-note chords (triads). Teacher plays C–E–G together. "You've played C and E, you've played C and G — now all three." Let the student hear how the triad sounds before naming it. 10 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-rep">Repertoire</span><span>Assign Phase B opening piece (triads in LH, melody in RH) for first reading at home. No instruction yet — just exploration. "What do you notice? What's hard? What feels natural?" Report back next session. 5 min.</span></div>
+      </div>
+      <div class="practice-box"><strong>Home practice — Week 7 (25 min/day)</strong><ul>
+        <li>10 min — Three-piece programme: perform all three pieces in sequence with full intention. No stopping. Record yourself if possible</li>
+        <li>10 min — Targeted repair from milestone check: whatever the weakest area, focus here entirely</li>
+        <li>5 min — Explore Phase B opening piece freely. No process, no method — just listening to what the hands find naturally</li>
+      </ul></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TAB 3: PHASE B ══ -->
+<div class="tab-panel" id="tab-phase-b">
+  <div class="section-head">
+    <h2>Phase B — Fluent Reading</h2>
+    <p class="desc">Weeks 8–14 · Sessions 15–28 · Harmony begins. Triads and inversions become physical and aural vocabulary. Key signatures up to two sharps and two flats are internalised. By end of Week 14 the student reads a new simple piece continuously at first sight.</p>
+  </div>
+
+  <!-- WEEK 8 -->
+  <div class="week-card">
+    <div class="week-card-header" onclick="toggleWeek(this)">
+      <div style="flex:1">
+        <div class="week-num">Week 8 · Sessions 15–16</div>
+        <div class="week-title">Triads — The Harmonic Vocabulary Begins</div>
+        <div class="week-meta">C, G, F major triads · Sound before theory · Even chord drop technique · LH triads + RH melody balance</div>
+        <span class="phase-badge phase-b">Phase B</span>
+      </div>
+      <span class="week-toggle">▾</span>
+    </div>
+    <div class="week-body">
+      <div class="session-block">
+        <div class="session-title"><span class="session-num">Session 15</span> The major triad: sound before theory</div>
+        <div class="activity"><span class="activity-pillar p-ear">Ear</span><span>Teacher plays three chords: C major (C–E–G), a minor-sounding chord, a dissonant cluster. Student arranges from "most settled" to "least settled." The major triad is the most stable sound in Western harmony — the ear knows this before the theory says it. 4 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-theory">Theory</span><span>Major triad structure: root, third above, fifth above. Not as an interval formula — as physical finger placement. RH: thumb–3rd–5th on C–E–G. Play C, G, and F major triads in this position. 8 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-sound">Sound</span><span>Triad evenness: all three notes must arrive simultaneously. Drop test: raise hand 2cm and let fall as a unit. No leading finger, no lagging finger. "The chord is one sound, not three sounds close together." 8 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-coord">Coord</span><span>First piece using LH triads: C major triad on beat 1 of every bar, RH plays a simple melody. Inner-singing: play LH triads, sing RH melody. LH triad is a single sustained event; RH melody is the changing element. 10 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-ear">Ear</span><span>Harmonic listening: as the RH melody moves over the C major LH triad, which melody notes sound "inside" the chord (consonant) and which sound "outside" (adding tension)? No labels — just aural identification. 5 min.</span></div>
+      </div>
+      <div class="watch-box"><strong>Watch for — Week 8</strong><ul>
+        <li>Uneven triad — one finger (usually the 5th) arriving late; the drop technique is the fix, not individual finger targeting</li>
+        <li>LH triad too loud against RH melody — chord is harmonic support; aim for 60% of the RH volume</li>
+        <li>Student not yet fluent in Phase A skills — if inner-singing is still unreliable, slow the Phase B pace and continue Phase A repairs alongside</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- WEEK 9 -->
+  <div class="week-card">
+    <div class="week-card-header" onclick="toggleWeek(this)">
+      <div style="flex:1">
+        <div class="week-num">Week 9 · Sessions 17–18</div>
+        <div class="week-title">Triad Inversions and I–V Progression by Ear</div>
+        <div class="week-meta">Root, first and second inversion by feel · Voice-leading for smooth chord movement · I–V as tension and resolution · Harmonic rhythm</div>
+        <span class="phase-badge phase-b">Phase B</span>
+      </div>
+      <span class="week-toggle">▾</span>
+    </div>
+    <div class="week-body">
+      <div class="session-block">
+        <div class="session-title"><span class="session-num">Session 17</span> Inversions as different weights of the same chord</div>
+        <div class="activity"><span class="activity-pillar p-ear">Ear</span><span>Compare: moving from C major root to G major root (big jump) vs. C major root to G major first inversion (smooth voice-leading, small movement). "Inversions exist to make chord changes graceful." 6 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-theory">Theory</span><span>Root position: C–E–G. First inversion: E–G–C. Second inversion: G–C–E. Play all three, listen to how the sound shifts from settled to floating. Identify each by its "feel" — not by calculation. 8 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-rep">Repertoire</span><span>Piece using smooth inversion changes: C major root → G major first inversion → C major. The LH barely moves — yet the harmony changes. Student listens for the harmonic shift while the fingers do minimal work. 6 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-ear">Ear</span><span>I–V progression: teacher plays four bars of C major, then one bar of G major, then returns to C. "What did that G bar feel like?" Students describe: unstable, pulling, wanting to return. "That pulling feeling is what makes music move." 6 min.</span></div>
+        <div class="activity"><span class="activity-pillar p-rep">Repertoire</span><span>Folk melody harmonised with I and V chords only. Student matches LH chords by ear: "Does this bar feel like home (I) or away (V)?" Before reading the harmony, hear it. 9 min.</span></div>
+      </div>
+      <div class="focus-box"><strong>Teacher framing</strong>Inversions are taught by ear first — teacher plays root, first inversion, second inversion, student arranges from "most settled" to "most unstable." Root is most stable; second inversion is least. The student already knows this — the ear knows. Theory labels follow the aural recognition, never precede it.</div>
+      <div class="watch-box"><strong>Watch for — Week 9</strong><ul>
+        <li>Inversions learned as patterns rather than sounds — test by playing an inversion and asking the student to name it by ear without looking; if they can only identify visually, the ear hasn't caught up</li>
+        <li>Harmonic rhythm ignored — student changes chords wherever convenient rather than on the correct beat; mark harmonic change points explicitly</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- WEEKS 10-14 SUMMARY -->
+  <div style="background:#fff;border:1px solid var(--warm-line);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm);">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:400;margin-bottom:1rem;">Weeks 10–14 — Phase B Progression Summary</h3>
+    <p style="font-size:13px;color:var(--ink-soft);margin-bottom:1rem;">Full session-by-session detail mirrors the Phase A depth above. Key milestones per week:</p>
+    <table class="scale-table">
+      <thead><tr><th>Week</th><th>Core Content</th><th>Scale Added</th><th>Key Concepts</th></tr></thead>
+      <tbody>
+        <tr><td><strong>10</strong></td><td>I–IV–V chord progression · Three-chord harmony in C and G</td><td>F major (one flat: Bb)</td><td>IV chord adds colour; progression creates complete harmonic phrase</td></tr>
+        <tr><td><strong>11</strong></td><td>Minor keys introduced · A natural and harmonic minor</td><td>A natural minor · A harmonic minor</td><td>Raised 7th in harmonic minor — the leading note effect heard by ear first</td></tr>
+        <tr><td><strong>12</strong></td><td>D major and key signature reading fluency</td><td>D major (two sharps: F#, C#)</td><td>Key identification from key signature before playing — internalised, not calculated</td></tr>
+        <tr><td><strong>13</strong></td><td>Bb major and reading in flat keys</td><td>Bb major (two flats: Bb, Eb)</td><td>Flats feel different from sharps — physical and aural distinction</td></tr>
+        <tr><td><strong>14</strong></td><td>Phase B consolidation · Sight-reading at Phase B level · All six scales reviewed</td><td>Review all: C, G, D, F, Bb, Am</td><td>Student reads a fresh simple HT piece at first sight — continuously</td></tr>
+      </tbody>
+    </table>
+    <div class="focus-box" style="margin-top:1rem;"><strong>Phase B sight-reading standard (by Week 14)</strong>The student opens a new simple piece (two-page, simple HT, key signature up to two sharps or flats), scans for 60 seconds, then plays one continuous read-through. Pulse maintained throughout. Eyes move ahead of the playing hand. Patterns recognised — not decoded note-by-note. Imperfect accuracy is acceptable. Musical continuity is not negotiable.</div>
+  </div>
+</div>
+
+<!-- ══ TAB 4: PHASE C ══ -->
+<div class="tab-panel" id="tab-phase-c">
+  <div class="section-head">
+    <h2>Phase C — Full Integration</h2>
+    <p class="desc">Weeks 15–20 · Sessions 29–40 · All Phase A and B skills deployed in service of real musical goals. Sonatina movements. Programme performance. Structural understanding. Mock gateway in Week 19. Stage 2 Gateway in Session 40.</p>
+  </div>
+
+  <div style="background:#fff;border:1px solid var(--warm-line);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm);">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;margin-bottom:1rem;">Phase C Programme</h3>
+    <p style="font-size:13.5px;color:var(--ink-mid);line-height:1.7;margin-bottom:1rem;">Two gateway-quality pieces are selected by Week 15 — one sonatina movement and one character piece. These are the student's Stage 2 programme. Every session in Phase C serves these two pieces directly. The student performs both in sequence in Session 40.</p>
+    <table class="scale-table">
+      <thead><tr><th>Week</th><th>Focus</th><th>Sessions</th></tr></thead>
+      <tbody>
+        <tr><td><strong>15</strong></td><td>Gateway pieces selected · Structural analysis: the student maps the form (A-B-A, theme-variation, binary) before playing through</td><td>29–30</td></tr>
+        <tr><td><strong>16</strong></td><td>Hands-together security at performance tempo · Sight-reading continues daily · All 6 scales maintained</td><td>31–32</td></tr>
+        <tr><td><strong>17</strong></td><td>Musical character: each piece given a distinct programme or image · Dynamic nuance · Phrase shaping beyond the basic arc</td><td>33–34</td></tr>
+        <tr><td><strong>18</strong></td><td>Resilience: student can start from any section without returning to bar 1 · Harmonic awareness of chord changes in both pieces</td><td>35–36</td></tr>
+        <tr><td><strong>19</strong></td><td>Mock gateway: all four gateway components assessed in full · One specific target identified for final week</td><td>37–38</td></tr>
+        <tr><td><strong>20</strong></td><td>Session 39: final polish · Session 40: Stage 2 Gateway</td><td>39–40</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="background:#fff;border:1px solid var(--warm-line);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm);">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;margin-bottom:1rem;">Session 39 — Final Polish</h3>
+    <div class="activity" style="font-size:13px;color:var(--ink-mid);line-height:1.55;"><span class="activity-pillar p-rep" style="font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;padding:2px 7px;border-radius:4px;background:var(--blue-light);color:var(--blue);margin-right:8px;white-space:nowrap;">Repertoire</span><span>Both pieces played twice: first time for technical listening (teacher monitors balance, crossing evenness, rhythmic precision), second time for musical listening (teacher receives the performance as an audience member). The second time is always the freer, more musical performance. 20 min.</span></div>
+    <div class="activity" style="margin-top:0.75rem;font-size:13px;color:var(--ink-mid);line-height:1.55;"><span class="activity-pillar p-keys" style="font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;padding:2px 7px;border-radius:4px;background:var(--coral-light);color:var(--coral);margin-right:8px;white-space:nowrap;">Keys</span><span>Final sight-reading: one fresh piece, scanned and played. Teacher notes: is this student reading music or decoding notation? The distinction is the heart of the Stage 2 gateway. 10 min.</span></div>
+    <div class="activity" style="margin-top:0.75rem;font-size:13px;color:var(--ink-mid);line-height:1.55;"><span class="activity-pillar p-coord" style="font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;padding:2px 7px;border-radius:4px;background:var(--indigo-light);color:var(--indigo);margin-right:8px;white-space:nowrap;">Coord</span><span>Scale final check: four scales at random, HT, with musical shape. Student chooses the dynamic arc. Teacher listens for evenness and continuity only. 5 min.</span></div>
+    <div class="dialogue">Play the way you would play for someone who loves music — not the way you'd play for someone who's waiting for mistakes.</div>
+  </div>
+</div>
+
+<!-- ══ TAB 5: SCALES ══ -->
+<div class="tab-panel" id="tab-scales">
+  <div class="section-head">
+    <h2>Scale Programme — Stage 2</h2>
+    <p class="desc">Six major keys and A minor are introduced across the 20 weeks. Each scale is introduced by ear — the student identifies why the sharp or flat is needed before being told the rule. All scales are learned HT with a dynamic arc. By the gateway, the student plays four at random without preparation.</p>
+  </div>
+
+  <div style="background:var(--ink);color:var(--paper);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;margin-bottom:0.5rem;">The Scale Standard — Stage 2</h3>
+    <p style="font-size:13.5px;color:rgba(255,255,255,0.6);line-height:1.65;">A scale is passed when: the teacher closes their eyes and cannot identify any thumb crossing by sound; the scale is played with a deliberate dynamic arc (not flat); the key signature is recalled correctly before playing; both directions are played HT at ♩=60 minimum. Any accent at a crossing point means the scale is not yet passed — regardless of speed.</p>
+  </div>
+
+  <table class="scale-table" style="margin-bottom:1.5rem;">
+    <thead><tr><th>Scale</th><th>Key Sig</th><th>Week Introduced</th><th>RH Crossing</th><th>LH Crossing</th><th>Gateway?</th></tr></thead>
+    <tbody>
+      <tr><td><strong>C major</strong></td><td>No sharps/flats</td><td>Week 2–3 (HS) / Week 6 (HT)</td><td>After E (→F)</td><td>After G (→A)</td><td>✓ Yes</td></tr>
+      <tr><td><strong>G major</strong></td><td>F#</td><td>Week 6</td><td>After B (→C)</td><td>After G (→A)</td><td>✓ Yes</td></tr>
+      <tr><td><strong>D major</strong></td><td>F#, C#</td><td>Week 12</td><td>After F# (→G)</td><td>After F# (→G)</td><td>✓ Yes</td></tr>
+      <tr><td><strong>F major</strong></td><td>Bb</td><td>Week 10</td><td>After E (→F), 4th finger on Bb</td><td>After A (→Bb)</td><td>✓ Yes</td></tr>
+      <tr><td><strong>Bb major</strong></td><td>Bb, Eb</td><td>Week 13</td><td>4th finger on Bb · After Eb</td><td>After Bb (→C)</td><td>— Optional</td></tr>
+      <tr><td><strong>A natural minor</strong></td><td>No sharps/flats</td><td>Week 11</td><td>After E (→F)</td><td>After A (→B)</td><td>✓ Yes</td></tr>
+      <tr><td><strong>A harmonic minor</strong></td><td>G# raised 7th</td><td>Week 11</td><td>After E (→F) · G# black key</td><td>After A (→B) · G# black key</td><td>— Optional</td></tr>
+    </tbody>
+  </table>
+
+  <div style="background:#fff;border:1px solid var(--warm-line);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm);">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;margin-bottom:1rem;">How to Introduce Every New Scale</h3>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.75rem;">
+      <div style="background:var(--teal-light);border-radius:8px;padding:0.75rem;text-align:center;">
+        <div style="font-size:18px;margin-bottom:4px;">1</div>
+        <div style="font-size:11px;color:var(--teal);font-weight:700;line-height:1.4;">Play using all white keys — "Does that sound right?"</div>
+      </div>
+      <div style="background:var(--teal-light);border-radius:8px;padding:0.75rem;text-align:center;">
+        <div style="font-size:18px;margin-bottom:4px;">2</div>
+        <div style="font-size:11px;color:var(--teal);font-weight:700;line-height:1.4;">Student hears the wrong note — ear discovers the problem</div>
+      </div>
+      <div style="background:var(--teal-light);border-radius:8px;padding:0.75rem;text-align:center;">
+        <div style="font-size:18px;margin-bottom:4px;">3</div>
+        <div style="font-size:11px;color:var(--teal);font-weight:700;line-height:1.4;">Play corrected note — "Now it sounds like a proper scale"</div>
+      </div>
+      <div style="background:var(--teal-light);border-radius:8px;padding:0.75rem;text-align:center;">
+        <div style="font-size:18px;margin-bottom:4px;">4</div>
+        <div style="font-size:11px;color:var(--teal);font-weight:700;line-height:1.4;">Rule is named after the ear has confirmed it — never before</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#fff;border:1px solid var(--warm-line);border-radius:12px;padding:1.5rem;box-shadow:var(--shadow-sm);">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;margin-bottom:1rem;">Scales as Musical Vocabulary — Not as Exercises</h3>
+    <p style="font-size:13.5px;color:var(--ink-mid);line-height:1.7;margin-bottom:0.75rem;">Scales are taught badly in most piano methods — as mechanical drills divorced from music. This method treats scales as musical vocabulary: patterns that appear in actual pieces and that the hand must own in order to play fluently.</p>
+    <p style="font-size:13.5px;color:var(--ink-mid);line-height:1.7;">Each scale is always played with a dynamic arc — crescendo ascending, diminuendo descending — and the student is expected to sing along. The teacher regularly points to scale passages in repertoire: "This is the same pattern. Your hands already know it."</p>
+  </div>
+</div>
+
+<!-- ══ TAB 6: REPERTOIRE ══ -->
+<div class="tab-panel" id="tab-repertoire">
+  <div class="section-head">
+    <h2>Recommended Stage 2 Repertoire</h2>
+    <p class="desc">Organised by phase. Pieces serve specific technical and musical goals — they are not interchangeable. Gateway candidates are marked ★. All pieces should be prepared using the full inner-singing process before any HT attempt.</p>
+  </div>
+
+  <div class="repertoire-grid" style="margin-bottom:1.5rem;">
+    <div class="rep-card">
+      <div class="rep-phase">Phase A · Weeks 1–7</div>
+      <div class="rep-type">Simple HT folk songs</div>
+      <div class="rep-examples">"Ode to Joy" (simple arr.) · "Lightly Row" · "Au Clair de la Lune"</div>
+      <div class="rep-focus">Inner singing, rhythmic independence, position shifts. Each piece must have genuinely different rhythmic values between the hands.</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-phase">Phase A · Weeks 3–7</div>
+      <div class="rep-type">3/4 waltz studies</div>
+      <div class="rep-examples">Simple Bartók "For Children" pieces · Köhler studies · Diabelli sonatinas (early)</div>
+      <div class="rep-focus">Waltz LH pattern, oom-pah balance, metric feel. The LH must be genuinely subordinate — not a percussion accompaniment.</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-phase">Phase B · Weeks 8–14</div>
+      <div class="rep-type">Triad-based pieces</div>
+      <div class="rep-examples">Czerny op. 599 nos. 1–8 · Burgmüller "Arabesque" · "Progress"</div>
+      <div class="rep-focus">Triad inversions, harmonic rhythm, key signatures. Student identifies chord names and inversions before playing.</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-phase">Phase B · Weeks 11–14</div>
+      <div class="rep-type">Minor pieces</div>
+      <div class="rep-examples">Bartók "Minor Seconds, Major Sevenths" · Türk sonatinas · Gurlitt op. 117 (minor selections)</div>
+      <div class="rep-focus">Minor scale, harmonic minor, character distinction. Student describes the emotional character before playing.</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-phase">Phase C · Weeks 15–20 ★</div>
+      <div class="rep-type">Sonatina movements — Gateway candidate</div>
+      <div class="rep-examples">Clementi op. 36 no. 1 (1st mvt) · Kuhlau op. 55 no. 1 (1st mvt) · Diabelli op. 151</div>
+      <div class="rep-focus">Structural learning, form analysis (binary, ternary), performance consistency. Student maps the structure before learning it bar by bar.</div>
+    </div>
+    <div class="rep-card">
+      <div class="rep-phase">Phase C · Weeks 15–20 ★</div>
+      <div class="rep-type">Character pieces — Gateway candidate</div>
+      <div class="rep-examples">Schumann "Album for the Young" (simpler selections) · Gurlitt op. 117 · Türk "Character Pieces"</div>
+      <div class="rep-focus">Musical expression, dynamic nuance, resilience. Student must be able to start from any section — not only from bar 1. The piece has a stated programme or character.</div>
+    </div>
+  </div>
+
+  <div style="background:var(--cream);border:1px solid var(--warm-line);border-radius:12px;padding:1.5rem;">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:400;margin-bottom:0.75rem;">Nigerian repertoire adaptation</h3>
+    <p style="font-size:13px;color:var(--ink-mid);line-height:1.7;">Where Western method book pieces are unavailable or unfamiliar, these substitutions work well at Stage 2 level. The pedagogical goal (inner singing, position shifts, triad harmony) does not change — only the melodic material.</p>
+    <ul style="padding-left:1.5rem;font-size:13px;color:var(--ink-mid);line-height:1.9;margin-top:0.5rem;">
+      <li>Phase A folk songs → "Kini Ife" or "Siyahamba" arranged for simple HT in C position</li>
+      <li>Phase B triad pieces → Highlife chord patterns (I–IV–V) in simple 4/4 HT arrangement</li>
+      <li>Phase C character piece → Original composition by student based on a personal experience or image — teacher provides the harmonic framework, student invents the melody</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══ TAB 7: GATEWAY ══ -->
+<div class="tab-panel" id="tab-gateway">
+  <div class="section-head">
+    <h2>Stage 2 Gateway Assessment</h2>
+    <p class="desc">Session 40 · Four components. The central criterion: can the student play HT and read at sight? Partial passes move specific pillars forward into Stage 3 while targeted work continues on weak areas. The gateway is a diagnostic conversation, not an examination.</p>
+  </div>
+
+  <div class="gateway-section">
+    <h3>The Stage 2 Gateway Question</h3>
+    <p>Does this student make musical decisions, or do they only play notes? A student who passes the Stage 2 gateway has earned the right to be treated as a musician. That shift in relationship — from teacher-guiding to artist-consulting — is the first thing that changes in Stage 3.</p>
+  </div>
+
+  <div class="gateway-component">
+    <div class="gc-head">
+      <span class="gc-num">01</span>
+      <h4>HT Coordination — Inner Singing on Demand</h4>
+    </div>
+    <div class="gc-body">
+      <p class="gc-criteria">Teacher names any piece from Stage 2. Student plays one hand while singing the other, without preparation. Then plays both hands together. No warm-up. No specific piece chosen in advance.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin:0.75rem 0;">
+        <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.75rem;font-size:12.5px;color:var(--ink-mid);">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Required</div>
+          <div>□ Inner singing is genuinely audible and continuous</div>
+          <div>□ HT playing reflects independent voices</div>
+          <div>□ Melody audibly louder than accompaniment</div>
+          <div>□ Rhythmic values in each hand distinctly different where score requires</div>
+        </div>
+        <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.75rem;font-size:12.5px;color:var(--ink-mid);">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Distinction</div>
+          <div>□ Inner singing continues seamlessly through position changes</div>
+          <div>□ HT can be demonstrated on any piece, not just prepared ones</div>
+          <div>□ The two voices have genuinely different characters</div>
+        </div>
+      </div>
+      <div class="pass-box"><strong>Pass criterion</strong>Inner singing is audible and continuous. HT playing reflects independent voices — melody louder than accompaniment; rhythmic independence genuine where required by the score.</div>
+    </div>
+  </div>
+
+  <div class="gateway-component">
+    <div class="gc-head">
+      <span class="gc-num">02</span>
+      <h4>Sight-Reading — Reading Music, Not Decoding Notation</h4>
+    </div>
+    <div class="gc-body">
+      <p class="gc-criteria">Teacher presents a fresh piece at Stage 2 level (two-page, simple HT, key signature of up to two sharps or flats). Student scans for 60 seconds, then plays one continuous read-through. No second attempt.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin:0.75rem 0;">
+        <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.75rem;font-size:12.5px;color:var(--ink-mid);">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Required</div>
+          <div>□ Pulse maintained throughout — no stops</div>
+          <div>□ Eyes move ahead of the playing hand</div>
+          <div>□ Patterns recognised, not decoded note-by-note</div>
+          <div>□ Key signature applied correctly</div>
+        </div>
+        <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.75rem;font-size:12.5px;color:var(--ink-mid);">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Important note</div>
+          <div>Imperfect note accuracy is acceptable. Musical continuity is not negotiable. A student who plays every note correctly but stops twice has not passed. A student with some wrong notes but continuous pulse has passed.</div>
+        </div>
+      </div>
+      <div class="pass-box"><strong>Pass criterion</strong>Pulse maintained throughout. No stopping or restarting. Eyes ahead. Patterns recognised. Musical continuity is the only non-negotiable criterion.</div>
+    </div>
+  </div>
+
+  <div class="gateway-component">
+    <div class="gc-head">
+      <span class="gc-num">03</span>
+      <h4>Scales and Key Signatures</h4>
+    </div>
+    <div class="gc-body">
+      <p class="gc-criteria">Teacher calls four scales at random from the six major keys and A minor learned in Stage 2. HT, both directions. Key signature recalled correctly before playing — not looked up.</p>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:0.75rem 0;">
+        <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.5rem;text-align:center;font-size:11px;">Scale 1<div style="border-top:1px solid var(--warm-line);margin-top:6px;padding-top:6px;font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-soft);">□ Pass</div></div>
+        <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.5rem;text-align:center;font-size:11px;">Scale 2<div style="border-top:1px solid var(--warm-line);margin-top:6px;padding-top:6px;font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-soft);">□ Pass</div></div>
+        <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.5rem;text-align:center;font-size:11px;">Scale 3<div style="border-top:1px solid var(--warm-line);margin-top:6px;padding-top:6px;font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-soft);">□ Pass</div></div>
+        <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.5rem;text-align:center;font-size:11px;">Scale 4<div style="border-top:1px solid var(--warm-line);margin-top:6px;padding-top:6px;font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-soft);">□ Pass</div></div>
+      </div>
+      <div class="pass-box"><strong>Pass criterion</strong>3 of 4 scales passing: no audible accent at any thumb crossing; each scale played with a dynamic arc; key signatures correctly recalled before playing.</div>
+    </div>
+  </div>
+
+  <div class="gateway-component">
+    <div class="gc-head">
+      <span class="gc-num">04</span>
+      <h4>Programme Performance — Musical and Structural Ownership</h4>
+    </div>
+    <div class="gc-body">
+      <p class="gc-criteria">Student performs both Stage 2 pieces in programme sequence with a deliberate pause between them. One complete performance, no stopping. Teacher listens for four qualities.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin:0.75rem 0;">
+        <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.75rem;font-size:12.5px;color:var(--ink-mid);">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Four listening criteria</div>
+          <div>□ Balance: RH melody dominant throughout</div>
+          <div>□ Musical intention: each piece has a distinct character</div>
+          <div>□ Harmonic awareness: chord changes are shaped, not just noted</div>
+          <div>□ Structural security: student can start from any section</div>
+        </div>
+        <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.75rem;font-size:12.5px;color:var(--ink-mid);">
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">The decisive question</div>
+          <div style="font-style:italic;color:var(--teal);line-height:1.6;">"Does this student make musical decisions, or do they only play notes?"</div>
+          <div style="margin-top:8px;">At least one clear musical decision must be evident in each piece — a dynamic choice, a phrasing decision, a deliberate colour change.</div>
+        </div>
+      </div>
+      <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.75rem;font-size:12.5px;color:var(--ink-mid);margin-bottom:0.75rem;">
+        <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Pieces performed</div>
+        <div>Piece 1: ___________________________________________________</div>
+        <div style="margin-top:8px;">Piece 2: ___________________________________________________</div>
+      </div>
+      <div class="pass-box"><strong>Pass criterion</strong>The performance makes the teacher want to hear the student again. At least one clear, non-accidental musical decision is evident in each piece. Structural security demonstrated: student starts from a section named by teacher without returning to bar 1.</div>
+    </div>
+  </div>
+
+  <div style="background:var(--cream);border:2px solid var(--warm-line);border-radius:12px;padding:1.5rem;margin-top:1.5rem;">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem;margin-bottom:1rem;">
+      <div style="border:1.5px solid var(--warm-line);border-radius:8px;padding:0.75rem;text-align:center;background:#fff;">
+        <span style="font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:4px;">Components Passed</span>
+        <span style="font-family:'Playfair Display',serif;font-size:1.5rem;">__ / 4</span>
+      </div>
+      <div style="border:1.5px solid var(--teal);border-radius:8px;padding:0.75rem;text-align:center;background:var(--teal-light);">
+        <span style="font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:4px;">Decision</span>
+        <span style="font-size:0.9rem;color:var(--teal);">□ Pass to Stage 3<br>□ Targeted hold</span>
+      </div>
+      <div style="border:1.5px solid var(--warm-line);border-radius:8px;padding:0.75rem;text-align:center;background:#fff;">
+        <span style="font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:4px;">Stage 3 Focus</span>
+        <span style="font-size:0.85rem;color:var(--ink-soft);font-family:'Lato',sans-serif;font-weight:400;">________________</span>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--ink-soft);font-style:italic;text-align:center;">A student who does not pass one component may begin Stage 3 work in the passing areas while continuing Stage 2 targeted work. Progress is always pillar-by-pillar — never held entirely.</p>
+  </div>
+</div>
+
+<!-- ══ TAB 8: CHEAT SHEETS ══ -->
+<div class="tab-panel" id="tab-cheatsheets">
+  <div class="section-head">
+    <h2>Teacher Quick Reference — Stage 2</h2>
+    <p class="desc">Print these and keep them on the music stand. The most common teaching moments in Stage 2, and exactly what to say.</p>
+  </div>
+
+  <div class="cheat-sheet">
+    <div class="cs-head"><span class="cs-icon" style="font-size:1.3rem;">🎯</span><h3>Session Opening — Every Session</h3></div>
+    <div class="cs-body">
+      <div class="cs-cols">
+        <div class="cs-col"><h4>Always begin with</h4>
+          <ul class="cs-list">
+            <li>One beautiful note (S-02 from Stage 1 — still applies): calibrate the ear before anything else</li>
+            <li>Posture reset: bench, shoulders, wrist, hand shape — 60 seconds</li>
+            <li>Scale of the week: one scale, HT, with dynamic arc, eyes closed listening test</li>
+            <li>From Week 5: sight-reading (10 min, one play-through, no correction, no repeat)</li>
+          </ul>
+        </div>
+        <div class="cs-col"><h4>Never begin with</h4>
+          <ul class="cs-list">
+            <li>Running through last session's piece from bar 1 without intention</li>
+            <li>Scales mechanically with no dynamic shape — "exercise mode" is musical death</li>
+            <li>Correcting anything before the student has played something</li>
+            <li>Sight-reading on material at or above the student's current level</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cheat-sheet">
+    <div class="cs-head"><span class="cs-icon" style="font-size:1.3rem;">⚠️</span><h3>Common Stage 2 Error Patterns — What to Say</h3></div>
+    <div class="cs-body">
+      <div class="cs-cols">
+        <div class="cs-col"><h4>Coordination errors</h4>
+          <ul class="cs-list">
+            <li><strong>Both hands rushing to HT:</strong> "Stop. RH sings the LH first. Aloud — I must hear you."</li>
+            <li><strong>LH louder than RH melody:</strong> "Play the LH at 40% of what you just played. Now add RH. Which voice do you hear?"</li>
+            <li><strong>Rhythmic lockstep (hands move as one):</strong> "Slow to half tempo. Play LH only, tap RH rhythm on your knee. They are two different people."</li>
+            <li><strong>Sustained hand pulsing with moving hand:</strong> "The held hand is asleep. Only the moving hand is awake. Play again."</li>
+          </ul>
+        </div>
+        <div class="cs-col"><h4>Reading and scale errors</h4>
+          <ul class="cs-list">
+            <li><strong>Sight-reading with corrections:</strong> "One chance only. Start again from bar 1. No matter what happens — keep going."</li>
+            <li><strong>Key signature forgotten mid-piece:</strong> "Before you play: name every accidental in this key. Now circle every one in the piece. Then play."</li>
+            <li><strong>Thumb crossing audible:</strong> "Eyes closed. Tell me which note I can hear as different. That is the one you're tensing for."</li>
+            <li><strong>Triad uneven:</strong> "Drop your hand from 3cm above the keys. Don't aim any finger — let gravity decide. Land. Listen."</li>
+            <li><strong>Inversion identified visually not aurally:</strong> "I'll play it with the fallboard down. You tell me: settled, floating, or neutral?"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cheat-sheet">
+    <div class="cs-head"><span class="cs-icon" style="font-size:1.3rem;">📋</span><h3>Phase Gate — What Must Be True Before Phase B (Week 8)</h3></div>
+    <div class="cs-body">
+      <ul class="cs-list" style="columns:2;gap:1.5rem;">
+        <li>Inner-singing can be demonstrated on demand on any Phase A piece without preparation</li>
+        <li>C major scale HT with no audible crossing accent at ♩=60</li>
+        <li>G major scale RH with F# consistently applied</li>
+        <li>Waltz 3/4 feel genuinely physical — beat 1 heavier than 2 and 3 without being told</li>
+        <li>Dotted rhythms precise — short note arrives exactly on the half-beat</li>
+        <li>Oom-pah pattern automatic in LH — no looking at hand, no hesitation at shift</li>
+        <li>Sight-reading: one complete play-through of a Stage 1 piece with no stops</li>
+        <li>Ties and rests handled correctly — no re-attack, no rushed silence</li>
+      </ul>
+      <div class="focus-box" style="margin-top:1rem;"><strong>If not all met by end of Week 7</strong>Extend Phase A for two additional sessions — target the weakest milestone specifically. Phase B triads build directly on the inner-singing foundation. A student who is not fluent at inner-singing will not achieve genuine harmonic hearing in Phase B.</div>
+    </div>
+  </div>
+
+  <div class="cheat-sheet">
+    <div class="cs-head"><span class="cs-icon" style="font-size:1.3rem;">🎭</span><h3>Musical Language — Phrases That Work in Stage 2</h3></div>
+    <div class="cs-body">
+      <div class="cs-cols">
+        <div class="cs-col"><h4>For coordination</h4>
+          <ul class="cs-list">
+            <li>"If the singing stops, the hands stop. Always."</li>
+            <li>"The hand is a passenger. The arm drives."</li>
+            <li>"A sleeping cat walks across your wrist and feels nothing."</li>
+            <li>"These are two different people having a conversation — not one person talking to themselves."</li>
+            <li>"The held note is asleep. Let it ring and forget about it."</li>
+          </ul>
+        </div>
+        <div class="cs-col"><h4>For harmony and reading</h4>
+          <ul class="cs-list">
+            <li>"Does that sound like home, or away?"</li>
+            <li>"That pulling feeling is what makes music move. The V chord is the engine."</li>
+            <li>"Is this student reading music or decoding notation? That is the sight-reading question."</li>
+            <li>"A scale is eight notes of music, not eight notes of exercise."</li>
+            <li>"The chord is one sound. Not three sounds close together."</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cheat-sheet">
+    <div class="cs-head"><span class="cs-icon" style="font-size:1.3rem;">📝</span><h3>What Changes in Stage 3</h3></div>
+    <div class="cs-body">
+      <p style="font-size:13.5px;color:var(--ink-mid);line-height:1.7;">Stage 3 is where the student stops being a learner and starts being a musician. The coordination and reading tools are now in place. Stage 3 uses them in service of real musical goals: scales as vocabulary rather than exercises, harmonic understanding that enables interpretation, and repertoire that has genuine artistic weight.</p>
+      <p style="font-size:13.5px;color:var(--ink-mid);line-height:1.7;margin-top:0.75rem;">The student who passes the Stage 2 gateway has earned the right to be treated as a musician. That shift in relationship — from teacher-guiding to artist-consulting — is the first thing that changes.</p>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer class="footer">
+  Stage 2 Teacher Content Package · LUBENO Consult Piano Curriculum · Coordination &amp; Reading · 20 Weeks · 3 Phases · 40 Sessions
+</footer>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleWeek(header) {
+  const body = header.nextElementSibling;
+  const toggle = header.querySelector('.week-toggle');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  toggle.classList.toggle('open', !isOpen);
+}
+</script>
+</body>
+</html>

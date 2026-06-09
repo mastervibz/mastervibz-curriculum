@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUBENO Teacher Faculty — MasterVibz Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1a1814;--ink-mid:#4a4540;--ink-soft:#8a8480;
+  --parchment:#faf8f4;--cream:#f2ede4;--line:#e4ddd4;
+  --teal:#0f6e56;--purple:#534ab7;--coral:#993c1d;
+  --blue:#185fa5;--amber:#854f0b;--green:#3b6d11;
+}
+html,body{height:100%;overflow:hidden}
+body{font-family:'Outfit',sans-serif;background:var(--parchment);color:var(--ink);display:flex;flex-direction:column}
+
+.topbar{background:var(--ink);color:var(--parchment);flex-shrink:0;display:flex;align-items:stretch;padding:0;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,0.35)}
+.topbar-brand{padding:0 1.5rem;display:flex;flex-direction:column;justify-content:center;border-right:1px solid rgba(255,255,255,0.08);min-width:0}
+.brand-eye{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:2px}
+.brand-title{font-family:'DM Serif Display',serif;font-size:1.05rem;font-weight:400;white-space:nowrap}
+.brand-title em{font-style:italic;color:rgba(255,255,255,0.45)}
+.brand-badge{margin-top:2px;display:inline-block;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.07);border-radius:4px;padding:1px 6px}
+
+.stage-tabs{display:flex;flex:1;overflow-x:auto;scrollbar-width:none}
+.stage-tabs::-webkit-scrollbar{display:none}
+
+.stab{display:flex;align-items:center;gap:0.75rem;padding:0 1.4rem;cursor:pointer;border:none;background:transparent;color:rgba(255,255,255,0.32);border-bottom:3px solid transparent;transition:color 0.18s,border-color 0.18s,background 0.18s;white-space:nowrap;min-height:58px;font-family:'Outfit',sans-serif}
+.stab:hover{color:rgba(255,255,255,0.7);background:rgba(255,255,255,0.04)}
+.stab.active{color:#fff;border-bottom-color:var(--tab-color)}
+.stab-num{font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:0.1em;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid currentColor;opacity:0.7;flex-shrink:0;transition:opacity 0.18s,background 0.18s}
+.stab.active .stab-num{opacity:1;background:var(--tab-color);border-color:var(--tab-color);color:#fff}
+.stab-info{text-align:left}
+.stab-label{font-size:11.5px;font-weight:500;display:block;line-height:1.3}
+.stab-sub{font-size:10px;opacity:0.5;display:block;font-weight:300}
+.stab.active .stab-sub{opacity:0.65}
+
+.stab[data-stage="1"]{--tab-color:var(--teal)}
+.stab[data-stage="2"]{--tab-color:var(--purple)}
+.stab[data-stage="3"]{--tab-color:var(--coral)}
+.stab[data-stage="4"]{--tab-color:var(--blue)}
+.stab[data-stage="5"]{--tab-color:var(--amber)}
+.stab[data-stage="6"]{--tab-color:var(--green)}
+
+.content{flex:1;position:relative;overflow:hidden}
+.stage-panel{position:absolute;inset:0;width:100%;height:100%;border:none;opacity:0;pointer-events:none;transition:opacity 0.2s}
+.stage-panel.active{opacity:1;pointer-events:auto}
+
+.loading-screen{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem;background:var(--parchment);z-index:10;transition:opacity 0.3s}
+.loading-screen.hidden{opacity:0;pointer-events:none}
+.loading-ring{width:36px;height:36px;border:3px solid var(--line);border-top-color:var(--ink-soft);border-radius:50%;animation:spin 0.8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft)}
+
+.curriculum-link{padding:0 1.25rem;display:flex;align-items:center;border-left:1px solid rgba(255,255,255,0.08)}
+.curriculum-link a{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);text-decoration:none;white-space:nowrap;transition:color 0.18s}
+.curriculum-link a:hover{color:rgba(255,255,255,0.7)}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-brand">
+    <div class="brand-eye">LUBENO Consult</div>
+    <div class="brand-title">Teacher Faculty <em>— Content Packages</em></div>
+    <span class="brand-badge">Staff Only</span>
+  </div>
+  <div class="stage-tabs">
+    <button class="stab active" data-stage="1" onclick="switchStage('1',this)">
+      <span class="stab-num">1</span>
+      <span class="stab-info"><span class="stab-label">Foundation</span><span class="stab-sub">8 wks · 16 sessions</span></span>
+    </button>
+    <button class="stab" data-stage="2" onclick="switchStage('2',this)">
+      <span class="stab-num">2</span>
+      <span class="stab-info"><span class="stab-label">Coordination</span><span class="stab-sub">20 wks · 40 sessions</span></span>
+    </button>
+    <button class="stab" data-stage="3" onclick="switchStage('3',this)">
+      <span class="stab-num">3</span>
+      <span class="stab-info"><span class="stab-label">Musicality</span><span class="stab-sub">24 wks · 48 sessions</span></span>
+    </button>
+    <button class="stab" data-stage="4" onclick="switchStage('4',this)">
+      <span class="stab-num">4</span>
+      <span class="stab-info"><span class="stab-label">Fluency</span><span class="stab-sub">28 wks · 56 sessions</span></span>
+    </button>
+    <button class="stab" data-stage="5" onclick="switchStage('5',this)">
+      <span class="stab-num">5</span>
+      <span class="stab-info"><span class="stab-label">Depth</span><span class="stab-sub">32 wks · 64 sessions</span></span>
+    </button>
+    <button class="stab" data-stage="6" onclick="switchStage('6',this)">
+      <span class="stab-num">6</span>
+      <span class="stab-info"><span class="stab-label">Artistry &amp; Legacy</span><span class="stab-sub">36 wks · 72 sessions</span></span>
+    </button>
+  </div>
+  <div class="curriculum-link">
+    <a href="index.html">← Student Curriculum</a>
+  </div>
+</div>
+
+<div class="content">
+  <div class="loading-screen" id="loading">
+    <div class="loading-ring"></div>
+    <div class="loading-text">Loading teacher content…</div>
+  </div>
+  <iframe id="panel-1" class="stage-panel active" src="stage1_teacher_content.html" title="Stage 1 — Foundation Teacher Content"></iframe>
+  <iframe id="panel-2" class="stage-panel" src="" title="Stage 2 — Coordination Teacher Content"></iframe>
+  <iframe id="panel-3" class="stage-panel" src="" title="Stage 3 — Musicality Teacher Content"></iframe>
+  <iframe id="panel-4" class="stage-panel" src="" title="Stage 4 — Fluency Teacher Content"></iframe>
+  <iframe id="panel-5" class="stage-panel" src="" title="Stage 5 — Depth Teacher Content"></iframe>
+  <iframe id="panel-6" class="stage-panel" src="" title="Stage 6 — Artistry Teacher Content"></iframe>
+</div>
+
+<script>
+const SRCS = {
+  '1':'stage1_teacher_content.html',
+  '2':'stage2_teacher_content.html',
+  '3':'stage3_teacher_content.html',
+  '4':'stage4_teacher_content.html',
+  '5':'stage5_teacher_content.html',
+  '6':'stage6_teacher_content.html'
+};
+
+let active = '1';
+
+function switchStage(id, btn) {
+  if (id === active) return;
+  const loading = document.getElementById('loading');
+  const prevPanel = document.getElementById('panel-' + active);
+  const nextPanel = document.getElementById('panel-' + id);
+  const prevBtn = document.querySelector('.stab.active');
+
+  // Load src lazily
+  if (!nextPanel.src || nextPanel.src === window.location.href) {
+    loading.classList.remove('hidden');
+    nextPanel.src = SRCS[id];
+    nextPanel.onload = () => loading.classList.add('hidden');
+  }
+
+  prevPanel.classList.remove('active');
+  nextPanel.classList.add('active');
+  prevBtn && prevBtn.classList.remove('active');
+  btn.classList.add('active');
+  active = id;
+}
+
+// Hide loading once stage 1 loads
+document.getElementById('panel-1').onload = function() {
+  document.getElementById('loading').classList.add('hidden');
+};
+</script>
+</body>
+</html>

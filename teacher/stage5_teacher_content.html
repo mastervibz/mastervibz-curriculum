@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stage 5 Teacher Content — LUBENO Piano Curriculum</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1c1917;--ink-mid:#44403c;--ink-soft:#78716c;
+  --paper:#fdfaf5;--cream:#f5f0e8;--warm-line:#e8e0d0;
+  --teal:#0d6e56;--teal-light:#e0f4ee;
+  --purple:#4f46a0;--purple-light:#eeecfc;
+  --coral:#9b3a1a;--coral-light:#faeae5;
+  --amber:#7c4a0a;--amber-light:#faebd4;
+  --blue:#1d4e8a;--blue-light:#e5eef8;
+  --indigo:#3730a3;--indigo-light:#e0e7ff;
+  --rose:#9f1239;--rose-light:#ffe4e6;
+  --green:#166534;--green-light:#dcfce7;
+  --gold:#92400e;--gold-light:#fef3c7;
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.07)
+}
+body{font-family:"Lato",sans-serif;background:var(--paper);color:var(--ink);line-height:1.65}
+.header{background:var(--ink);color:var(--paper);padding:3.5rem 2rem 3rem}
+.header-inner{max-width:1000px;margin:0 auto}
+.header-eyebrow{font-family:"DM Mono",monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:1rem}
+.header h1{font-family:"Playfair Display",serif;font-size:clamp(2rem,4.5vw,3.2rem);font-weight:400;line-height:1.2;margin-bottom:.6rem}
+.header h1 em{font-style:italic;color:rgba(255,255,255,0.5)}
+.header-sub{font-size:14px;color:rgba(255,255,255,0.45);font-weight:300;max-width:640px;line-height:1.6;margin-bottom:2rem}
+.header-pills{display:flex;gap:.6rem;flex-wrap:wrap}
+.header-pill{font-family:"DM Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:20px;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.55)}
+.tab-nav{background:#fff;border-bottom:1px solid var(--warm-line);position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
+.tab-nav-inner{max-width:1000px;margin:0 auto;padding:0 2rem;display:flex;overflow-x:auto;scrollbar-width:none}
+.tab-nav-inner::-webkit-scrollbar{display:none}
+.tab-btn{background:none;border:none;border-bottom:3px solid transparent;color:var(--ink-soft);font-family:"Lato",sans-serif;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:1rem .9rem .85rem;cursor:pointer;white-space:nowrap}
+.tab-btn.active{color:var(--teal);border-bottom-color:var(--teal)}
+.main{max-width:1000px;margin:0 auto;padding:2.5rem 2rem 5rem}
+.tab-panel{display:none}.tab-panel.active{display:block}
+.sh{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--warm-line)}
+.sh h2{font-family:"Playfair Display",serif;font-size:1.75rem;font-weight:400;margin-bottom:.3rem}
+.sh .desc{font-size:13.5px;color:var(--ink-soft);font-weight:300}
+.wk{background:#fff;border:1px solid var(--warm-line);border-radius:12px;margin-bottom:1.5rem;overflow:hidden;box-shadow:var(--shadow-sm)}
+.wkh{padding:1rem 1.25rem .75rem;border-bottom:1px solid var(--warm-line);display:flex;align-items:flex-start;gap:1rem;cursor:pointer;user-select:none}
+.wkh:hover{background:var(--cream)}
+.wkn{font-family:"DM Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:2px}
+.wkt{font-family:"Playfair Display",serif;font-size:1.1rem;font-weight:400;flex:1}
+.wkm{font-size:12px;color:var(--ink-soft);margin-top:3px}
+.wktg{font-size:14px;color:var(--ink-soft);transition:transform .2s;padding-top:4px}
+.wktg.open{transform:rotate(180deg)}
+.wkb{padding:1.25rem;display:none}.wkb.open{display:block}
+.sb{margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--warm-line)}
+.sb:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.st{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
+.sn{font-family:"DM Mono",monospace;font-size:10px;color:var(--ink-soft);background:var(--cream);padding:2px 7px;border-radius:4px}
+.ac{display:flex;gap:.75rem;margin-bottom:.6rem;font-size:13px;color:var(--ink-mid);line-height:1.55}
+.ap{font-family:"DM Mono",monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:4px;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.p-ear{background:var(--purple-light);color:var(--purple)}
+.p-keys{background:var(--coral-light);color:var(--coral)}
+.p-sound{background:#f1efe8;color:var(--ink-mid)}
+.p-theory{background:var(--amber-light);color:var(--amber)}
+.p-rep{background:var(--blue-light);color:var(--blue)}
+.p-art{background:var(--rose-light);color:var(--rose)}
+.p-adv{background:#dbeafe;color:#1e3a5f}
+.p-imp{background:var(--green-light);color:var(--green)}
+.pb{display:inline-block;font-family:"DM Mono",monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:4px;margin-bottom:.5rem}
+.pa{background:var(--teal-light);color:var(--teal)}
+.pb2{background:var(--purple-light);color:var(--purple)}
+.pc{background:var(--indigo-light);color:var(--indigo)}
+.pd{background:var(--rose-light);color:var(--rose)}
+.pe{background:var(--gold-light);color:var(--gold)}
+.fb{background:var(--teal-light);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:.8rem 1rem;font-size:12.5px;color:var(--ink-mid);line-height:1.55;margin:.75rem 0}
+.fb strong{color:var(--teal);font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:3px;font-family:"DM Mono",monospace}
+.wb{background:var(--amber-light);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:.8rem 1rem;font-size:12.5px;color:var(--amber);line-height:1.55;margin:.75rem 0}
+.wb strong{color:var(--amber);font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:3px;font-family:"DM Mono",monospace}
+.wb ul{padding-left:1.2rem;margin:0}.wb li{margin-bottom:.3rem}
+.pb3{background:var(--blue-light);border-left:3px solid var(--blue);border-radius:0 8px 8px 0;padding:.8rem 1rem;font-size:12.5px;color:var(--blue);line-height:1.55;margin:.75rem 0}
+.pb3 strong{color:var(--blue);font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:3px;font-family:"DM Mono",monospace}
+.pb3 ul{padding-left:1.2rem;margin:0}.pb3 li{margin-bottom:.3rem}
+.ab{background:var(--rose-light);border-left:3px solid var(--rose);border-radius:0 8px 8px 0;padding:.8rem 1rem;font-size:12.5px;color:var(--rose);line-height:1.55;margin:.75rem 0}
+.ab strong{color:var(--rose);font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:3px;font-family:"DM Mono",monospace}
+.gb{background:var(--green-light);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:.8rem 1rem;font-size:12.5px;color:var(--green);line-height:1.55;margin:.75rem 0}
+.gb strong{color:var(--green);font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:3px;font-family:"DM Mono",monospace}
+.dg{background:var(--purple-light);border-left:3px solid var(--purple);border-radius:0 8px 8px 0;padding:.9rem 1.1rem;margin:1rem 0;font-size:13.5px;color:var(--ink-mid);font-style:italic;line-height:1.6}
+.dg::before{content:open-quote;font-family:"Playfair Display",serif;font-size:2rem;color:var(--purple);line-height:0;vertical-align:-.5rem;margin-right:4px}
+.mg{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+@media(max-width:640px){.mg{grid-template-columns:1fr}}
+.mc{background:#fff;border:1px solid var(--warm-line);border-radius:10px;padding:1rem}
+.ml{font-family:"DM Mono",monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.4rem}
+.mc h4{font-size:13px;font-weight:700;margin-bottom:.4rem}
+.mc p{font-size:12px;color:var(--ink-mid);line-height:1.55}
+.tbl{width:100%;border-collapse:collapse;font-size:13px;margin:.75rem 0}
+.tbl th{background:var(--ink);color:var(--paper);padding:8px 12px;text-align:left;font-family:"DM Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+.tbl td{padding:8px 12px;border-bottom:1px solid var(--warm-line);color:var(--ink-mid)}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:nth-child(even) td{background:var(--cream)}
+.gs{background:var(--ink);color:var(--paper);border-radius:12px;padding:1.75rem;margin-bottom:1.5rem}
+.gs h3{font-family:"Playfair Display",serif;font-size:1.3rem;font-weight:400;margin-bottom:.5rem}
+.gs p{font-size:13.5px;color:rgba(255,255,255,0.6);line-height:1.65}
+.gc{background:#fff;border:1px solid var(--warm-line);border-radius:10px;overflow:hidden;margin-bottom:1rem;box-shadow:var(--shadow-sm)}
+.gch{padding:1rem 1.2rem .75rem;border-bottom:1px solid var(--warm-line);display:flex;gap:.75rem;align-items:flex-start}
+.gcn{font-family:"DM Mono",monospace;font-size:1.1rem;color:var(--ink-soft);min-width:28px}
+.gch h4{font-size:15px;font-weight:700;flex:1}
+.gcb{padding:1rem 1.2rem}
+.gcr{font-size:13px;color:var(--ink-mid);line-height:1.6;margin-bottom:.75rem}
+.pab{background:var(--teal-light);border:1px solid #9addc6;border-radius:7px;padding:.6rem .85rem;font-size:12.5px;color:var(--teal);margin-top:.75rem;line-height:1.5}
+.pab strong{font-weight:700;display:block;margin-bottom:2px;font-family:"DM Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase}
+.rg{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:640px){.rg{grid-template-columns:1fr}}
+.rc{background:#fff;border:1px solid var(--warm-line);border-radius:10px;padding:1rem;box-shadow:var(--shadow-sm)}
+.rph{font-family:"DM Mono",monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:3px}
+.rt{font-size:14px;font-weight:700;margin-bottom:4px}
+.rex{font-size:12px;color:var(--teal);font-weight:600;margin-bottom:6px}
+.rfc{font-size:12px;color:var(--ink-soft);line-height:1.5}
+.cs{background:#fff;border:1px solid var(--warm-line);border-radius:12px;overflow:hidden;margin-bottom:1.5rem;box-shadow:var(--shadow-sm)}
+.csh{background:var(--ink);color:var(--paper);padding:1rem 1.3rem;display:flex;align-items:center;gap:.75rem}
+.csh h3{font-family:"Playfair Display",serif;font-size:1rem;font-weight:400}
+.csb{padding:1.25rem}
+.cc{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+@media(max-width:600px){.cc{grid-template-columns:1fr}}
+.ccl h4{font-size:11px;font-family:"DM Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.6rem}
+.cl{list-style:none}
+.cl li{font-size:13px;color:var(--ink-mid);padding:.35rem 0;border-bottom:1px solid var(--warm-line);display:flex;align-items:baseline;gap:.5rem;line-height:1.5}
+.cl li:last-child{border-bottom:none}
+.cl li::before{content:"92";color:var(--ink-soft);font-size:11px;flex-shrink:0}
+.era-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:.75rem;margin:.75rem 0}
+@media(max-width:700px){.era-grid{grid-template-columns:1fr 1fr}}
+.era-card{border-radius:8px;padding:1rem}
+.ft{text-align:center;padding:2rem;font-family:"DM Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);border-top:1px solid var(--warm-line);margin-top:3rem}
+@media print{.tab-nav{display:none}.tab-panel{display:block !important}.wkb{display:block !important}}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">LUBENO Consult · Stage 5 of 6</div>
+    <h1>Teacher Content Package<br><em>Depth — Repertoire &amp; Stylistic Identity · 32 Weeks</em></h1>
+    <p class="header-sub">Where a skilled pianist becomes a musical person. Era mastery across all four periods. Improvisation from first principles. Arrangement, transcription, and original composition. Teaching as the deepest form of learning. The search for a personal voice. Five phases, 64 sessions.</p>
+    <div class="header-pills">
+      <span class="header-pill">Stage 5 · Post-Fluency</span>
+      <span class="header-pill">32 Weeks · 64 Sessions</span>
+      <span class="header-pill">5 Phases</span>
+      <span class="header-pill">60 min lessons</span>
+      <span class="header-pill">60–90 min daily practice</span>
+      <span class="header-pill">Gateway: Session 64</span>
+    </div>
+  </div>
+</div>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="switchTab('overview',this)">Overview</button>
+    <button class="tab-btn" onclick="switchTab('phase-a',this)">Phase A — Era</button>
+    <button class="tab-btn" onclick="switchTab('phase-b',this)">Phase B — Improv</button>
+    <button class="tab-btn" onclick="switchTab('phase-c',this)">Phase C — Arrange</button>
+    <button class="tab-btn" onclick="switchTab('phase-d',this)">Phase D — Teach</button>
+    <button class="tab-btn" onclick="switchTab('phase-e',this)">Phase E — Voice</button>
+    <button class="tab-btn" onclick="switchTab('gateway',this)">Gateway</button>
+    <button class="tab-btn" onclick="switchTab('repertoire',this)">Repertoire</button>
+    <button class="tab-btn" onclick="switchTab('cheatsheets',this)">Cheat Sheets</button>
+  </div>
+</nav>
+<main class="main">
+
+<!-- OVERVIEW -->
+<div class="tab-panel active" id="tab-overview">
+  <div class="sh"><h2>Stage 5 at a Glance</h2><p class="desc">Stage 5 is not about adding more skills — it is about developing a musical identity. Five phases converge on one gateway question: does this playing have a recognisable voice?</p></div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:2rem">
+    <div style="background:var(--teal-light);border-radius:10px;padding:1.25rem"><div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:8px">Phase A · Weeks 1–6</div><div style="font-size:15px;font-weight:700;color:var(--teal);margin-bottom:6px">Era Mastery</div><div style="font-size:12px;color:var(--ink-mid);line-height:1.55">Baroque non-legato · Classical slur-gap · Romantic four-composer voices · 20th-century composer-specific · Era identification by ear · Era-reset ritual as physical habit · Gateway programme selection</div></div>
+    <div style="background:var(--purple-light);border-radius:10px;padding:1.25rem"><div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);margin-bottom:8px">Phase B · Weeks 7–12</div><div style="font-size:15px;font-weight:700;color:var(--purple);margin-bottom:6px">Improvisation</div><div style="font-size:12px;color:var(--ink-mid);line-height:1.55">Pentatonic freedom (black keys) · Modal improvisation · 12-bar blues and ii–V–I · Walking bass · Jazz standards · Classical cadenzas and Baroque preludes · One rule: never stop</div></div>
+    <div style="background:var(--indigo-light);border-radius:10px;padding:1.25rem"><div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--indigo);margin-bottom:8px">Phase C · Weeks 13–19</div><div style="font-size:15px;font-weight:700;color:var(--indigo);margin-bottom:6px">Arrangement and Composition</div><div style="font-size:12px;color:var(--ink-mid);line-height:1.55">Romantic song arrangement · Liszt's method · Transcription (Bach-Busoni) · Original 16-bar composition under constraint · Folk and contemporary arrangement · Portfolio of four arrangements</div></div>
+    <div style="background:var(--rose-light);border-radius:10px;padding:1.25rem"><div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--rose);margin-bottom:8px">Phase D · Weeks 20–26</div><div style="font-size:15px;font-weight:700;color:var(--rose);margin-bottom:6px">Teaching as Deepening</div><div style="font-size:12px;color:var(--ink-mid);line-height:1.55">Teach Stages 1–4 concepts physically · Error diagnosed and corrected within 3 minutes · Observed real lesson · 16-week curriculum design · Teaching log synthesis · Personal voice inventory</div></div>
+  </div>
+  <div style="background:var(--gold-light);border:1px solid #d97706;border-radius:10px;padding:1.25rem;margin-bottom:1.5rem"><div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Phase E · Weeks 27–32</div><div style="font-size:15px;font-weight:700;color:var(--gold);margin-bottom:6px">Finding the Voice — the Gateway Convergence</div><div style="font-size:12px;color:var(--ink-mid);line-height:1.55">Listen to 10 personal recordings as a stranger · Three interpretive fingerprints identified · Extended original composition (32–48 bars) · Personal voice statement ~500 words · Real-audience performance · Mock gateway Week 31 · Gateway Session 64</div></div>
+
+  <div style="background:#fff;border:1px solid var(--warm-line);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm)">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;margin-bottom:1rem">The Stage 5 Gateway Programme</h3>
+    <p style="font-size:13.5px;color:var(--ink-mid);line-height:1.7;margin-bottom:.75rem">Unlike earlier stages, the Stage 5 gateway is a <strong>five-work recital programme</strong>: one substantial piece from each of the four major eras, plus an original composition by the student. Chosen for personal meaning, not technical safety.</p>
+    <div class="fb"><strong>The Stage 5 gateway question</strong>"Does your playing have a recognisable voice? Not perfect — not unprecedented — but consistent, personal, and unmistakably individual." A listener who heard only the performance should describe the performer's musical personality in two or three consistent terms.</div>
+  </div>
+
+  <div style="background:#fff;border:1px solid var(--warm-line);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm)">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;margin-bottom:1rem">The Four Era Performance Practices — Quick Reference</h3>
+    <div class="era-grid">
+      <div class="era-card" style="background:var(--amber-light)"><div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:6px">Baroque · c.1600–1750</div><div style="font-size:13px;font-weight:700;color:var(--amber);margin-bottom:8px">Bach, Handel, Scarlatti</div><div style="font-size:12px;color:var(--ink-mid);line-height:1.6">Non-legato default<br>Terraced dynamics<br>Ornaments from upper note<br>No sustain pedal<br>Dance character physically felt</div></div>
+      <div class="era-card" style="background:var(--blue-light)"><div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:6px">Classical · c.1750–1820</div><div style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:8px">Haydn, Mozart, early Beethoven</div><div style="font-size:12px;color:var(--ink-mid);line-height:1.6">Slur-gap articulation<br>Alberti bass at 40%<br>Clear phrase periods<br>Sparse pedal<br>Haydn's wit communicated</div></div>
+      <div class="era-card" style="background:var(--rose-light)"><div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--rose);margin-bottom:6px">Romantic · c.1820–1900</div><div style="font-size:13px;font-weight:700;color:var(--rose);margin-bottom:8px">Schubert, Chopin, Schumann, Brahms</div><div style="font-size:12px;color:var(--ink-mid);line-height:1.6">Singing legato default<br>Rich pedal for harmonic colour<br>Chopin: LH steady, RH free<br>Schubert: flat-VI lean<br>Brahms: three dynamic levels</div></div>
+      <div class="era-card" style="background:var(--green-light)"><div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:6px">20th Century · c.1900–2000</div><div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:8px">Debussy, Ravel, Bartók, Prokofiev</div><div style="font-size:12px;color:var(--ink-mid);line-height:1.6">No single practice — composer-specific<br>Debussy: blur IS the sound<br>Ravel: mechanical precision<br>Bartók: percussive, non-pedalled<br>Prokofiev: sardonic vs. lyrical</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE A -->
+<div class="tab-panel" id="tab-phase-a">
+  <div class="sh"><h2>Phase A — Era Mastery</h2><p class="desc">Weeks 1–6 · Sessions 1–12 · Four eras as four physical languages. By Week 6 the student identifies any piece's era by ear and adjusts their entire physical and musical approach accordingly — before playing a note.</p></div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Week 1 · Sessions 1–2</div><div class="wkt">Baroque — Non-Legato, Terraced Dynamics, Dance Character</div><div class="wkm">Era identification test · Physical calibration on middle C · Non-legato vs. legato · Baroque ornament vocabulary · Dance characters as body knowledge</div><span class="pb pa">Phase A</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Session 1</span> Era identification and Baroque physical approach</div>
+        <div class="ac"><span class="ap p-ear">Ear</span><span>Era identification test: teacher plays 10 short excerpts unseen. Student identifies era of each. Pass: 8/10. Where the student cannot identify reveals which era to prioritise in Phase A. 10 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>Physical calibration — four eras on middle C: (1) Baroque: fingertip, non-legato, no pedal; (2) Classical: warmer, phrase-shaped, tiny pedal; (3) Romantic: full arm weight, immediate pedal, singing legato; (4) 20th century: precisely as marked. The era-reset must become instantaneous — a complete physical and mental shift. 10 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>Non-legato Baroque articulation: play a Bach Menuet with every note non-legato — full value but released before the next. Compare to legato version. "The non-legato speaks. The legato sings. Bach speaks." 10 min.</span></div>
+        <div class="ac"><span class="ap p-theory">Theory</span><span>Terraced dynamics: forte and piano are structural step-changes, not gradual swells. "The Baroque crescendo is a step, not a slope." 8 min.</span></div>
+        <div class="ac"><span class="ap p-rep">Repertoire</span><span>Bach French Suite or Handel Suite: full Baroque approach — non-legato, terraced dynamics, no pedal. Compare to harpsichord recording. 12 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>Era-switch exercise: teacher calls an era mid-phrase — student adjusts within one bar. If it takes longer, the physical language is still conscious rather than habitual. 5 min.</span></div>
+      </div>
+      <div class="sb">
+        <div class="st"><span class="sn">Session 2</span> Baroque ornament vocabulary and dance characters</div>
+        <div class="ac"><span class="ap p-adv">Advanced</span><span>Complete ornament vocabulary from C.P.E. Bach's 1753 table: trill, mordent, turn, Schleifer (rising slide from a third below), Nachschlag (closing note after trill). Study five ornaments; each beginning from the upper note. Identify each in a Bach Invention. 15 min.</span></div>
+        <div class="ac"><span class="ap p-theory">Theory</span><span>Baroque dance characters: Allemande (moderate 4/4, dignified walk); Courante (flowing 3, running); Sarabande (slow 3/4, emphasis beat 2, solemn); Gigue (fast compound, jig). These are physical characters felt in the body — not tempo markings on a page. 8 min.</span></div>
+        <div class="ac"><span class="ap p-ear">Ear</span><span>Dance identification: teacher plays four pieces without showing the score. Student identifies the dance form by rhythmic character alone. 8 min.</span></div>
+        <div class="ac"><span class="ap p-rep">Repertoire</span><span>Perform one complete Baroque Suite movement with the correct dance character physically embodied. Teacher evaluates: "Does this feel like a dance or a piano study?" 12 min.</span></div>
+      </div>
+      <div class="fb"><strong>Central premise of Phase A</strong>A pianist who plays Bach like Chopin and Chopin like Debussy is not playing any of them well. Each era has a distinct performance practice — conventions about articulation, tempo, ornamentation, dynamics, and pedalling that the music was written to exploit. These conventions are not restrictions; they are the grammar of each era's musical language.</div>
+      <div class="pb3"><strong>Home practice — Week 1 (60 min/day)</strong><ul>
+        <li>15 min — Baroque piece: non-legato, terraced dynamics, no pedal. Play it once Romantic then immediately Baroque — feel the physical reset</li>
+        <li>10 min — Five Baroque ornaments from C.P.E. Bach table, 20 reps each</li>
+        <li>15 min — Stage 4 gateway piece maintenance (one full performance daily)</li>
+        <li>12 min — Sight-reading (maintain Grade 7 fluency)</li>
+        <li>8 min — Scales and arpeggios</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Week 2 · Sessions 3–4</div><div class="wkt">Classical — Clarity, Wit, and the Conversational Phrase</div><div class="wkm">Slur-gap articulation · Alberti bass at 40% · Haydn's wit · Mozart as hardest composer to play well · Beethoven: Classical form, Romantic content</div><span class="pb pa">Phase A</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 3–4</span> Mozart, Haydn, and Classical discipline</div>
+        <div class="ac"><span class="ap p-art">Art</span><span>Slur-gap articulation: slurs are short (2–4 notes), staccato dots crisp, adjacent slurs separated by a tiny gap. "The slur-gap version speaks. The legato version sings. Mozart speaks." 10 min.</span></div>
+        <div class="ac"><span class="ap p-theory">Theory</span><span>Alberti bass rule: LH should be 40% of the RH melody dynamic. Practice any Mozart Sonata with LH at pp throughout regardless of RH dynamic. The result is usually the correct balance. 8 min.</span></div>
+        <div class="ac"><span class="ap p-ear">Ear</span><span>Haydn's wit: identify every structural surprise before performing — deceptive cadences, sudden subito pianos, key ambiguities. "Haydn is a comedian — play the jokes." 8 min.</span></div>
+        <div class="ac"><span class="ap p-rep">Repertoire</span><span>Mozart K.331 or K.545: full Classical performance — slur-gap, 40% Alberti bass, minimal pedal, restrained dynamics. Compare to Mitsuko Uchida or Robert Levin recording. "What do they do that you did not? What do they omit that you added?" 14 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>Beethoven Op. 2: "Play it as if Mozart — until the moment it stops being Mozart. Then let it be Beethoven." Finding that exact transition point is the interpretive work of the week. 15 min.</span></div>
+      </div>
+      <div class="ab"><strong>Why Classical is harder than Romantic</strong>Classical music punishes generous gestures — every note is exposed. A blurred ornament in Schubert is forgivable; in Mozart it sounds crude. The performer's job is not to add expression but to reveal the expression already written.</div>
+    </div>
+  </div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Week 3 · Sessions 5–6</div><div class="wkt">Romantic — Four Composers, Four Distinct Voices</div><div class="wkm">Schubert's flat-VI · Chopin's LH-steady rubato · Schumann's literary characters · Brahms's three dynamic levels · Liszt as poet</div><span class="pb pa">Phase A</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 5–6</span> Four Romantic voices</div>
+        <div class="ac"><span class="ap p-art">Art</span><span>Schubert's flat-VI: the move from major to the key a minor third above (C→Eb) creates unexpected warmth. At every flat-VI arrival: slow fractionally, give the chord slightly more weight and pedal, let the new key settle. Never rush past it. 8 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>Chopin's rubato: the LH is the conductor and maintains tempo; the RH is the singer and deviates freely. Practice explicitly: LH strict time, RH completely free. The LH never adjusts. 8 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>Schumann's literary references: read the title before every practice session. "The Happy Farmer" has a completely different body from "Träumerei." 6 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>Brahms's three-level voice: primary melody (top), counter-melody of near-equal importance (inner), harmonic foundation (bass). All three heard in proportion — three simultaneous dynamic levels in one hand. 6 min.</span></div>
+        <div class="ac"><span class="ap p-rep">Repertoire</span><span>Play one excerpt from each of the four Romantic composers. For each: announce the composer and adjust the entire physical and emotional approach. Teacher evaluates: does each excerpt sound written by a different person? 12 min.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Week 4 · Sessions 7–8</div><div class="wkt">20th Century — Five Composers, Five Sonic Worlds</div><div class="wkm">Debussy: overtone pedalling · Ravel: mechanical precision · Bartók: percussion instrument · Prokofiev: sardonic and lyrical · No single performance practice</div><span class="pb pa">Phase A</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 7–8</span> Four 20th-century voices</div>
+        <div class="ac"><span class="ap p-sound">Sound</span><span>Debussy — overtone pedalling: press before the first note, change slowly with half-pedal releases, let adjacent harmonies blur intentionally. The blur IS the sound. 8 min.</span></div>
+        <div class="ac"><span class="ap p-sound">Sound</span><span>Ravel — mechanical precision with warmth: absolute rhythmic precision, very clean finger work, minimal pedal, every inner voice audible. "A Swiss watchmaker who happens to be French." 6 min.</span></div>
+        <div class="ac"><span class="ap p-sound">Sound</span><span>Bartók — the percussion instrument: dry, non-pedalled, sharp arm-weight attacks. No portato. The Mikrokosmos studies are the curriculum. 6 min.</span></div>
+        <div class="ac"><span class="ap p-sound">Sound</span><span>Prokofiev — sardonic wit and lyrical warmth: dry/mechanical in ironic passages; warm and singing in lyrical ones. "Prokofiev is funny — but his slow movements will break your heart. Play both extremes fully." 6 min.</span></div>
+        <div class="ac"><span class="ap p-rep">Repertoire</span><span>Play one excerpt from each composer. State the sonic intention before playing. Teacher evaluates: does the stated intention match the heard result? 14 min.</span></div>
+      </div>
+      <div class="fb"><strong>The 20th century has no single performance practice</strong>Every major 20th-century composer requires individual research. The physical approach must be derived from the specific sonic goal of each composer — not from a generic "modern" style.</div>
+    </div>
+  </div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Weeks 5–6 · Sessions 9–12</div><div class="wkt">Gateway Programme Selection and Phase A Audit</div><div class="wkm">Programme criteria · Analysis of all four gateway pieces · Programme note written · Era audit: reverse-engineering test · First improvisation commitment</div><span class="pb pa">Phase A</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 9–10</span> Programme selection and analysis</div>
+        <div class="ac"><span class="ap p-art">Art</span><span>Gateway programme criteria: (1) within current technical range; (2) one piece per era; (3) genuine personal connection — one sentence stating what the student loves about each; (4) the four pieces form an arc. Defend the arc in two or three sentences. Chosen for personal meaning, not technical safety. 12 min.</span></div>
+        <div class="ac"><span class="ap p-rep">Repertoire</span><span>Structural analysis of all four pieces in one session. At Stage 5, a complete analysis of a 3–4 minute piece takes approximately 10 minutes. 20 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>Programme note: one paragraph per piece as would appear in a concert programme — an invitation, not a technical description. This becomes the performance intention document for each piece. 15 min.</span></div>
+      </div>
+      <div class="sb">
+        <div class="st"><span class="sn">Session 11</span> Era performance audit</div>
+        <div class="ac"><span class="ap p-art">Art</span><span>Reverse-engineering test: teacher plays the opening 8 bars of each gateway piece deliberately in the wrong era style. Student identifies immediately and corrects with specific physical instructions. Confirms whether era knowledge is theoretical or physical. 12 min.</span></div>
+        <div class="ac"><span class="ap p-rep">Repertoire</span><span>Each gateway piece Section A performed with full era-appropriate style. One criterion per piece: Baroque (non-legato consistent?), Classical (40% Alberti?), Romantic (LH steady, RH free?), 20th century (sounds like specific composer?). Generic is not acceptable at Stage 5. 20 min.</span></div>
+        <div class="ac"><span class="ap p-ear">Ear</span><span>Stylistic ear test: 6 excerpts from unfamiliar pieces. Student identifies era and composer (or national school and period). Pass: 5/6 correct. 8 min.</span></div>
+      </div>
+      <div class="sb">
+        <div class="st"><span class="sn">Session 12</span> First improvisation</div>
+        <div class="ac"><span class="ap p-imp">Improvise</span><span>First improvisation: student improvises a 4-bar melody using only C, E, and G over a teacher-played I chord. No preparation, no correction afterward. Self-assessment: "What surprised you? What would you change?" 8 min.</span></div>
+        <div class="ac"><span class="ap p-imp">Improvise</span><span>The improvisation commitment: from this session forward, five minutes of improvisation in every lesson and every home practice session. No exceptions. "If you don't know what to play, play one note. Then the next note that seems right." 7 min.</span></div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--warm-line);border-radius:10px;padding:1rem;margin:1rem 0">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.75rem">Phase A Milestone — Era Mastery</div>
+        <div class="mg">
+          <div class="mc"><div class="ml">M1 — Baroque</div><h4>Non-legato, dance, ornaments</h4><p>Non-legato consistent. Terraced dynamics. Ornaments from upper note. No sustain pedal. Dance character physically felt.</p></div>
+          <div class="mc"><div class="ml">M2 — Classical</div><h4>Slur-gap, 40% Alberti, Haydn wit</h4><p>Slur-gap articulation. Alberti bass at 40%. Balanced phrase periods. Haydn surprises communicated. Mozart transparency.</p></div>
+          <div class="mc"><div class="ml">M3 — Romantic</div><h4>Four composers distinguishable</h4><p>Schubert, Chopin, Schumann, Brahms each audibly distinct. Chopin rubato: LH steady, RH free. Schubert flat-VI lean. Brahms three levels.</p></div>
+          <div class="mc"><div class="ml">M4 — 20th Century</div><h4>Composer-specific, 5/6 ear test</h4><p>Debussy overtone pedalling. Ravel precision. Bartók percussive. Prokofiev sardonic vs. lyrical. Stylistic ear test: 5/6 correct.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE B -->
+<div class="tab-panel" id="tab-phase-b">
+  <div class="sh"><h2>Phase B — Improvisation</h2><p class="desc">Weeks 7–12 · Sessions 13–24 · The direct voice. One rule: never stop. From black-key pentatonic through modal, blues, jazz harmony, and Classical-style improvisation. Five minutes every lesson and home practice session from Week 6 forward — no exceptions.</p></div>
+
+  <div class="gb"><strong>The one rule of improvisation training</strong>There are no wrong notes in the practice context — only notes that have not yet been followed by the right continuation. The teacher never says "that was wrong" during an improvisation. Only: "keep going."</div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Weeks 7–8 · Sessions 13–16</div><div class="wkt">Pentatonic Freedom and Blues</div><div class="wkm">Black keys — no wrong notes · Shape: question-answer, call-response · A minor pentatonic + blue note · 12-bar blues frame · Emotional authenticity test</div><span class="pb pb2">Phase B</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 13–14</span> Black keys and pentatonic shape</div>
+        <div class="ac"><span class="ap p-imp">Improvise</span><span>Black-key rule: play only F#, G#, A#, C#, D#. Any combination sounds beautiful — no dissonances possible. Teacher plays a steady bass in the low register. Student improvises in RH for 3 minutes continuously. If the student stops: "Keep going — there are no wrong notes here." 8 min.</span></div>
+        <div class="ac"><span class="ap p-imp">Improvise</span><span>Shape the melody: begin softly in the middle register, rise to the highest notes (climax), descend and soften back. "A piece of music is a shape in time. You already know what a good shape is — now make the shape yourself." 8 min.</span></div>
+        <div class="ac"><span class="ap p-imp">Improvise</span><span>Call and response: teacher plays a 2-bar phrase. Student responds with their own 2-bar phrase. Then reverse. "Every piece of music is a conversation. Improvisation makes the conversation explicit." 8 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>"Every composer was an improviser first. Bach improvised fugues at the organ. Chopin improvised Nocturnes before writing them down. The notation is a record of an improvisation — not the improvisation itself." 8 min.</span></div>
+      </div>
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 15–16</span> 12-bar blues and emotional depth</div>
+        <div class="ac"><span class="ap p-imp">Improvise</span><span>A minor pentatonic (A–C–D–E–G): improvise a 4-minute piece with three chapters: melancholic opening, building urgency, resolution or resignation. "This is not an exercise. This is a piece of music with your name on it." 8 min.</span></div>
+        <div class="ac"><span class="ap p-imp">Improvise</span><span>The blue note: add Eb to A minor pentatonic. "The blue note contains both the pain and the resolution in a single note." 8 min.</span></div>
+        <div class="ac"><span class="ap p-theory">Theory</span><span>12-bar blues in C: C7 (4 bars) → F7 (2) → C7 (2) → G7 (1) → F7 (1) → C7 (2). LH plays chord 3rds and 7ths; RH improvises blues pentatonic. Four cycles = a complete performed piece with a four-section arc. 10 min.</span></div>
+        <div class="ac"><span class="ap p-imp">Improvise</span><span>Emotional authenticity test: play the same 8-bar phrase three times — thinking about something happy, sad, then angry. Record all three. "Are they different? If yes, emotional state is a deliberate performance tool." 14 min.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Weeks 9–10 · Sessions 17–20</div><div class="wkt">Modal Improvisation and Jazz Harmony</div><div class="wkm">Dorian · Mixolydian · Phrygian · ii–V–I and walking bass · First jazz standard · Swing from listening not calculation</div><span class="pb pb2">Phase B</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 17–18</span> Three primary modes</div>
+        <div class="ac"><span class="ap p-imp">Improvise</span><span>D Dorian: improvise 5 minutes over sustained D bass. The raised sixth (B natural) gives Dorian its "melancholy but not defeated" quality. "This is the sound of medieval plainchant, Celtic folk, and John Coltrane." 8 min.</span></div>
+        <div class="ac"><span class="ap p-imp">Improvise</span><span>G Mixolydian: the flat seventh creates an open, powerful quality — a major scale refusing to commit to leading-tone resolution. "This is the sound of Celtic folk, rock and roll, and most pop music of the last 70 years." 8 min.</span></div>
+        <div class="ac"><span class="ap p-imp">Improvise</span><span>E Phrygian: the flat second (F immediately above E) creates a distinctly Spanish or ancient quality. "Play with a held E bass — this is the sound of flamenco and Gregorian chant." 8 min.</span></div>
+        <div class="ac"><span class="ap p-imp">Improvise</span><span>Mode-switching: improvise a continuous piece moving through three modes. The last note of one mode becomes the first note of the next — no gap, no reset, just a change of harmonic character. 8 min.</span></div>
+      </div>
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 19–20</span> ii–V–I and the jazz standard</div>
+        <div class="ac"><span class="ap p-theory">Theory</span><span>ii–V–I in C: Dm7 – G7 – Cmaj7. Voice the 3rd and 7th of each chord in the LH (the colour tones). RH improvises C major pentatonic over I, G blues pentatonic over V. Cycle eight times. 10 min.</span></div>
+        <div class="ac"><span class="ap p-imp">Improvise</span><span>Walking bass with melody: LH walks four-beat bass line; RH improvises. Practice LH alone for 8 minutes first. When combined, the walking bass must be completely automatic. 12 min.</span></div>
+        <div class="ac"><span class="ap p-rep">Repertoire</span><span>First jazz standard: "Autumn Leaves" or "All The Things You Are." Learn melody from lead sheet. Play melody once, then improvise over chord changes. 13 min.</span></div>
+        <div class="ac"><span class="ap p-sound">Sound</span><span>Swing rhythm: felt in the body, not calculated. Listen to Erroll Garner, Oscar Peterson, or Bill Evans for 5 minutes before playing. 10 min.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Weeks 11–12 · Sessions 21–24</div><div class="wkt">Classical-Style Improvisation and Phase B Consolidation</div><div class="wkm">Baroque prelude improvisation · Classical cadenza at fermata · Recording as bridge to composition · Three-style showcase</div><span class="pb pb2">Phase B</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 21–22</span> Style-based improvisation</div>
+        <div class="ac"><span class="ap p-imp">Improvise</span><span>Baroque prelude: choose a key and harmonic progression (I–ii7–V7–I). Arpeggiate each chord in continuous 16th-note pattern. The result sounds like a Bach Prelude. The notation is in the principle — the specific notes are improvised. 10 min.</span></div>
+        <div class="ac"><span class="ap p-imp">Improvise</span><span>Classical cadenza: at a teacher-marked fermata in a Haydn Sonata, improvise 16–24 bars using the piece's themes, modulating through related keys, arriving on V7 before resolving to I. 15 min.</span></div>
+        <div class="ac"><span class="ap p-imp">Improvise</span><span>Recording as composition: record a 3-minute free improvisation. Identify the best 30 seconds. Notate that passage from the recording. "Every composition is an improvisation that got written down." 10 min.</span></div>
+        <div class="ac"><span class="ap p-imp">Improvise</span><span>Classical-style showcase: improvise 3 minutes in the style of one Romantic composer. Teacher identifies the composer from the improvisation alone. If unsuccessful — specific practice targets assigned. 10 min.</span></div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--warm-line);border-radius:10px;padding:1rem;margin:1rem 0">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.75rem">Phase B Milestone — Improvisation Fluency</div>
+        <div class="mg">
+          <div class="mc"><div class="ml">M1 — Pentatonic and Blues</div><h4>3-min piece, clear arc, no stops</h4><p>Blues pentatonic fluent over 12-bar frame with walking bass. Emotional character consistent and communicative.</p></div>
+          <div class="mc"><div class="ml">M2 — Modal (3 modes)</div><h4>Dorian, Mixolydian, Phrygian distinct</h4><p>Characteristic chord of each mode used. Mode-switching in a continuous piece without gap.</p></div>
+          <div class="mc"><div class="ml">M3 — Jazz</div><h4>ii–V–I, walking bass, standard</h4><p>ii–V–I in four keys. One jazz standard known and improvised over. Swing feel present (confirmed by recording).</p></div>
+          <div class="mc"><div class="ml">M4 — Classical-style identifiable</div><h4>Romantic-style correctly identified</h4><p>3-minute Romantic-style improvisation correctly identified by teacher. Notated 30-second fragment produced and performed.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE C -->
+<div class="tab-panel" id="tab-phase-c">
+  <div class="sh"><h2>Phase C — Arrangement and Composition</h2><p class="desc">Weeks 13–19 · Sessions 25–38 · Arrangement is where creative identity becomes visible. Five elements must survive any arrangement: melody, harmonic language, rhythmic character, emotional character, and climax structure.</p></div>
+
+  <div style="background:#fff;border:1px solid var(--warm-line);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm)">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:400;margin-bottom:1rem">Phase C Overview — Weeks 13–19</h3>
+    <table class="tbl">
+      <thead><tr><th>Week</th><th>Core Content</th><th>Sessions</th></tr></thead>
+      <tbody>
+        <tr><td><strong>13</strong></td><td>Liszt's method · Five elements that must survive translation · Texture map · Reharmonisation · First arrangement draft</td><td>25–26</td></tr>
+        <tr><td><strong>14</strong></td><td>Song arrangement refined and performed · Orchestral reduction: four-layer hierarchy · Bill Evans as Classical-jazz integration model</td><td>27–28</td></tr>
+        <tr><td><strong>15</strong></td><td>Transcription vs. arrangement · Bach-Busoni as the transcription model · Copying a gateway piece passage by hand as deepest form of score study</td><td>29–30</td></tr>
+        <tr><td><strong>16</strong></td><td>Original composition: 16-bar miniature under a specific creative constraint · Composition notebook begins · Notation as communication</td><td>31–32</td></tr>
+        <tr><td><strong>17</strong></td><td>Folk and contemporary arrangement · Nigerian/West African melodic material · Four-arrangement portfolio taking shape</td><td>33–34</td></tr>
+        <tr><td><strong>18</strong></td><td>Portfolio completed and performed as a recital · "What does the portfolio reveal about your musical identity?"</td><td>35–36</td></tr>
+        <tr><td><strong>19</strong></td><td>Phase C milestone assessment · Teaching as deepening: Phase D preview</td><td>37–38</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Week 13 · Sessions 25–26</div><div class="wkt">Arrangement — The Five Elements and Liszt's Method</div><div class="wkm">Five elements that must survive · Texture map · Reharmonisation · First arrangement draft</div><span class="pb pc">Phase C</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 25–26</span> Arrangement fundamentals</div>
+        <div class="ac"><span class="ap p-art">Art</span><span>"A transcription reproduces in another medium — fidelity is the goal. An arrangement transforms — a new version that lives naturally in the new medium. Liszt was the greatest arranger of the 19th century. Phase C teaches you to do the same." 8 min.</span></div>
+        <div class="ac"><span class="ap p-theory">Theory</span><span>Five elements that must survive: (1) melody; (2) harmonic language; (3) rhythmic character; (4) emotional character; (5) climax structure. Any element lost makes the arrangement unrecognisable or unsatisfying. 10 min.</span></div>
+        <div class="ac"><span class="ap p-theory">Theory</span><span>Texture map: before writing a single note, map the texture of each section. "Intro: sparse two voices, melody in RH, sustained bass in LH. Bar 5: full texture, melody above, Alberti accompaniment." The texture map is the arrangement's skeleton. 8 min.</span></div>
+        <div class="ac"><span class="ap p-imp">Improvise</span><span>Reharmonisation: take a simple Schubert or Schumann melody and play it over three harmonic interpretations — (1) original chords; (2) jazz substitutions; (3) modal harmony. Each creates a different character from the same melody. 10 min.</span></div>
+        <div class="ac"><span class="ap p-rep">Repertoire</span><span>First arrangement draft: student writes a 4-bar draft using the texture map. Evaluated: "Do all five elements survive? Which is weakest?" 14 min.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Week 16 · Sessions 31–32</div><div class="wkt">Original Composition — the Student's Voice on the Page</div><div class="wkm">16-bar miniature under a creative constraint · Composition notebook · Notation as communication · What composing teaches the performer</div><span class="pb pc">Phase C</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 31–32</span> Original composition</div>
+        <div class="ac"><span class="ap p-art">Art</span><span>The creative constraint: "Compose a 16-bar piece for piano: (1) in a minor key; (2) containing exactly one moment of the major mode; (3) ending on a deceptive cadence." Constraints generate creativity rather than limiting it. 8 min.</span></div>
+        <div class="ac"><span class="ap p-imp">Improvise</span><span>The composition notebook process: improvise for 5 minutes. Immediately write the best 4-bar idea. Develop that idea into a 16-bar piece over the next week. 10 min.</span></div>
+        <div class="ac"><span class="ap p-theory">Theory</span><span>Notation as communication: the composition must be playable from score by another pianist without explanation. Teacher sight-reads the composition directly. Every unclear notation is a revision target. 12 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>"Every bar you compose forces a decision that, as a performer, you accept as given. When you decide 'I want the melody to peak here' — you have made the same decision the composer made when they wrote the piece you are performing. Composing makes you a better performer." 10 min.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#fff;border:1px solid var(--warm-line);border-radius:10px;padding:1rem;margin-bottom:1.5rem">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.75rem">Phase C Milestone — Creative Range</div>
+    <div class="mg">
+      <div class="mc"><div class="ml">M1 — Arrangement Portfolio</div><h4>Four arrangements, all five elements</h4><p>Portfolio completed and performed. All five essential elements present in each. Three creative decisions explained with musical reasoning.</p></div>
+      <div class="mc"><div class="ml">M2 — Improvisation on Demand</div><h4>Mode, character, harmonic event</h4><p>2-minute improvisation with specified mode, character, and harmonic event. Piece has shape and incorporates all three constraints.</p></div>
+      <div class="mc"><div class="ml">M3 — Original Composition</div><h4>Playable by another pianist</h4><p>16-bar composition playable from score without explanation. Clear idea, development, climax, and resolution.</p></div>
+      <div class="mc"><div class="ml">M4 — Gateway Programme Draft</div><h4>All four pieces draft-performance level</h4><p>First complete programme run with all four era performances audibly distinct.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE D -->
+<div class="tab-panel" id="tab-phase-d">
+  <div class="sh"><h2>Phase D — Teaching as Deepening</h2><p class="desc">Weeks 20–26 · Sessions 39–52 · Each week the student prepares to explain a specific concept from Stages 1–4 clearly and physically. The process forces return to foundations with fresh analytical eyes — and almost always reveals that some things are done automatically but cannot yet be fully explained.</p></div>
+
+  <div style="background:#fff;border:1px solid var(--warm-line);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm)">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:400;margin-bottom:1rem">Phase D Week-by-Week</h3>
+    <table class="tbl">
+      <thead><tr><th>Week</th><th>Teaching Focus</th><th>Pass Criterion</th><th>Sessions</th></tr></thead>
+      <tbody>
+        <tr><td><strong>20</strong></td><td>Stage 1: arm-weight drop, tone quality, hand position, diagnostic listening</td><td>Error diagnosed, physical correction made, improvement produced within 3 minutes</td><td>39–40</td></tr>
+        <tr><td><strong>21</strong></td><td>Stage 2: inner-singing method, thumb crossings, sight-reading error diagnosis by type</td><td>Inner singing demonstrated physically; three thumb-crossing errors explained and corrected</td><td>41–42</td></tr>
+        <tr><td><strong>22</strong></td><td>Stage 3: dynamics as physics, pedalling by ear, phrase high point and shape</td><td>Seven dynamic levels produced and named; "pedal when it blurs" rule derived without being told</td><td>43–44</td></tr>
+        <tr><td><strong>23</strong></td><td>Stage 4: four memory systems, 2:3 polyrhythm, harmonic analysis as performance tool</td><td>Each concept taught with a playable example; insight applied to own gateway playing immediately after</td><td>45–46</td></tr>
+        <tr><td><strong>24</strong></td><td>Lesson planning: diagnostic first lesson, practice routine design, 16-week Stage 2 curriculum</td><td>16-week curriculum written and presented; teaching log synthesis stated in one sentence</td><td>47–48</td></tr>
+        <tr><td><strong>25</strong></td><td>Observed real lesson: 30 minutes with a real Stage 1 or 2 student while the teacher observes</td><td>Post-lesson analysis identifies specific improvements; one insight applied to own performance immediately</td><td>49–50</td></tr>
+        <tr><td><strong>26</strong></td><td>Phase D milestone + Personal voice inventory + Phase E preview</td><td>All four teaching concepts demonstrated; personal voice inventory completed with five specific answers</td><td>51–52</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ab"><strong>Why teaching deepens performance</strong>Teaching Stage 1 forces the student to explain, physically, what arm weight is — and in explaining it they discover that they do it automatically but have never had to articulate why. That articulation deepens the control. Every teaching session sends the student back to their own practice with a more conscious command of a skill they thought they already owned.</div>
+
+  <div style="background:#fff;border:1px solid var(--warm-line);border-radius:10px;padding:1rem">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.75rem">Phase D Milestone — Teaching Depth</div>
+    <div class="mg">
+      <div class="mc"><div class="ml">M1 — Teaching Demonstration</div><h4>Four concepts, 3 min each</h4><p>Arm-weight drop, inner singing, phrase high point, analytical memory each taught effectively using physical demonstration. Measurable improvement produced within 3 minutes.</p></div>
+      <div class="mc"><div class="ml">M2 — Observed Real Lesson</div><h4>30 min, post-lesson analysis</h4><p>Post-lesson analysis identifies specific improvements. Teaching log synthesis: one sentence stating the most important insight from Phase D.</p></div>
+      <div class="mc"><div class="ml">M3 — Curriculum Design</div><h4>16-week Stage 2 curriculum</h4><p>With matched piece assignments, technical targets, and measurable milestones per week.</p></div>
+      <div class="mc"><div class="ml">M4 — Personal Voice Inventory</div><h4>Five-question statement written</h4><p>Era preference, improvisation affinity, arrangement identity, composer preference, and composition instinct all named specifically — not generically.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE E -->
+<div class="tab-panel" id="tab-phase-e">
+  <div class="sh"><h2>Phase E — Finding the Voice</h2><p class="desc">Weeks 27–32 · Sessions 53–64 · The most personal phase in the entire curriculum. The teacher's role shifts from instructor to collaborator. Six weeks converge on a clear, articulable personal voice statement and a complete gateway programme ready for performance.</p></div>
+
+  <div style="background:#fff;border:1px solid var(--warm-line);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm)">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:400;margin-bottom:1rem">Phase E Overview</h3>
+    <table class="tbl">
+      <thead><tr><th>Week</th><th>Focus</th><th>Sessions</th></tr></thead>
+      <tbody>
+        <tr><td><strong>27</strong></td><td>Listen to 10 personal recordings as a stranger · Three interpretive fingerprints identified and named · Fingerprints applied to the gateway programme</td><td>53–54</td></tr>
+        <tr><td><strong>28</strong></td><td>Extended original composition (32–48 bars) deliberately embodying all three fingerprints · Placed within the programme as the fifth piece</td><td>55–56</td></tr>
+        <tr><td><strong>29</strong></td><td>Personal voice statement (~500 words) written · Statement-to-performance test · Complete programme performed · Composition performed publicly for first time</td><td>57–58</td></tr>
+        <tr><td><strong>30</strong></td><td>Programme as a unified statement: transitions, arc · Real-audience performance (4–8 people) · Two final targets from audience feedback</td><td>59–60</td></tr>
+        <tr><td><strong>31</strong></td><td>Mock gateway: all six components in sequence · Precision repair · Voice statement final revision</td><td>61–62</td></tr>
+        <tr><td><strong>32</strong></td><td>Session 63: final polish · Session 64: Stage 5 Gateway</td><td>63–64</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Week 27 · Sessions 53–54</div><div class="wkt">Listening to Yourself as a Stranger</div><div class="wkm">Ten personal recordings heard without self-correction · Three interpretive fingerprints identified · Applied to the gateway programme</div><span class="pb pe">Phase E</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 53–54</span> Voice investigation</div>
+        <div class="ac"><span class="ap p-art">Art</span><span>The stranger test: student listens to 10 of their own recordings as if they were an unknown pianist. No self-correction, no defensive listening — only observation. "What does this pianist always do? What do they never do? What are their habits?" Three recurring patterns identified and named. These are the fingerprints. 20 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>Naming the fingerprints: each fingerprint gets a specific, musical name. Not "I play expressively" but "I give every harmonic arrival a slight lean into the resolution" or "I consistently slow the approach to the climax." Specificity is required — vagueness means the fingerprint has not yet been seen clearly. 10 min.</span></div>
+        <div class="ac"><span class="ap p-rep">Repertoire</span><span>Fingerprint test on the gateway programme: deliberately apply all three fingerprints to the opening 8 bars of each gateway piece. "Do the fingerprints improve the music, or do they impose on it? Which piece feels most natural with your fingerprints? That reveals where your voice lives." 20 min.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Week 29 · Sessions 57–58</div><div class="wkt">The Personal Voice Statement — Written and Performed</div><div class="wkm">~500 words · Read aloud before every practice · Statement-to-performance test · Complete programme for first time</div><span class="pb pe">Phase E</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 57–58</span> Personal voice statement</div>
+        <div class="ac"><span class="ap p-art">Art</span><span>The voice statement (~500 words): "Who am I as a musician? What music do I need to play? What are the three fingerprints? Where does my voice live most naturally in the repertoire I have learned? What do I want to say to an audience?" This statement is not a biography — it is a musical self-portrait. Read aloud and refine daily. 20 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>Statement-to-performance test: teacher reads the voice statement. Then listens to the student perform the complete programme. After: "Does the performance match the statement? Where did the stated identity arrive in the music? Where did it disappear?" The gap is the final preparation target. 30 min.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Week 32 · Session 63</div><div class="wkt">Final Polish — the Last Preparation</div><div class="wkm">Technical confirmation · Complete programme twice · Final framing</div><span class="pb pe">Phase E</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Session 63</span> Final polish</div>
+        <div class="ac"><span class="ap p-sound">Sound</span><span>Technique confirmation: all Stage 4 advanced techniques tested in context. "These are the tools you built in Stage 4. They serve you today; you do not serve them." 8 min.</span></div>
+        <div class="ac"><span class="ap p-rep">Repertoire</span><span>Complete programme twice: first time for technical monitoring; second time for personal voice only. Between the two: 5 minutes of silence. "In those five minutes: read your personal voice statement once more. Then begin again — not technically, but personally." 42 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>"The gateway tomorrow is an assessment of who you are musically. Bring yourself. That is the only thing you can give that no one else can. Stage 6 — Artistry and Legacy — waits on the other side." 10 min.</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GATEWAY -->
+<div class="tab-panel" id="tab-gateway">
+  <div class="sh"><h2>Stage 5 Gateway Assessment — Session 64</h2><p class="desc">Six components. The decisive question: does this playing have a recognisable voice? Not perfect — not unprecedented — but consistent, personal, and unmistakably individual.</p></div>
+
+  <div class="gs"><h3>The Stage 5 Gateway — What It Tests</h3><p>The Stage 5 gateway is an identity assessment. The student who passes has found their place within the tradition they have inherited — not a new musical language, but their own voice within the existing one.</p></div>
+
+  <div class="gc"><div class="gch"><span class="gcn">01</span><h4>Era Performance Mastery</h4></div>
+  <div class="gcb"><p class="gcr">Teacher plays opening 8 bars of each gateway piece in the wrong era style. Student diagnoses and corrects verbally and physically within 10 seconds per piece. Then: teacher calls an era at random; student plays any 4-bar passage in that style without preparation.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.75rem 0">
+    <div style="border:1px solid var(--warm-line);border-radius:6px;padding:.75rem;font-size:12.5px;color:var(--ink-mid)"><div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">Diagnosis test</div><div>&#9633; Baroque diagnosis and correction</div><div>&#9633; Classical diagnosis and correction</div><div>&#9633; Romantic diagnosis and correction</div><div>&#9633; 20th-century diagnosis and correction</div></div>
+    <div style="border:1px solid var(--warm-line);border-radius:6px;padding:.75rem;font-size:12.5px;color:var(--ink-mid)"><div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">Era switch test</div><div>Era called: _____ &#183; Switch made within one bar &#183; Maintained for 8 bars &#183; Audibly distinct from other eras</div></div>
+  </div>
+  <div class="pab"><strong>Pass criterion</strong>All four diagnoses accurate. Era switch made within one bar and maintained. Each era audibly distinct from the others.</div></div></div>
+
+  <div class="gc"><div class="gch"><span class="gcn">02</span><h4>Improvisation on Demand</h4></div>
+  <div class="gcb"><p class="gcr">Teacher specifies: a mode, a character (two words), and a harmonic event. Student improvises a 2–3 minute piece incorporating all three.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.75rem 0">
+    <div style="border:1px solid var(--warm-line);border-radius:6px;padding:.75rem;font-size:12.5px;color:var(--ink-mid)"><div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">Teacher specifies</div><div>Mode: _______________</div><div style="margin-top:4px">Character: _______________</div><div style="margin-top:4px">Harmonic event: _______________</div></div>
+    <div style="border:1px solid var(--warm-line);border-radius:6px;padding:.75rem;font-size:12.5px;color:var(--ink-mid)"><div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">Evaluation</div><div>&#9633; Modal character aurally identifiable</div><div>&#9633; Character matches mood</div><div>&#9633; Harmonic event present and given dramatic weight</div><div>&#9633; The improvisation has a shape — it is a piece, not a fragment</div><div>&#9633; No stops</div></div>
+  </div>
+  <div class="pab"><strong>Pass criterion</strong>All five criteria met. The improvisation is a complete piece — not a demonstration of constraints.</div></div></div>
+
+  <div class="gc"><div class="gch"><span class="gcn">03</span><h4>Arrangement and Teaching Demonstration</h4></div>
+  <div class="gcb"><p class="gcr">Part A: one arrangement performed, three creative decisions explained. Part B: teacher simulates a common error in a Stage 1–3 concept. Student diagnoses and corrects within 3 minutes.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.75rem 0">
+    <div style="border:1px solid var(--warm-line);border-radius:6px;padding:.75rem;font-size:12.5px;color:var(--ink-mid)"><div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">Part A — Arrangement</div><div>Arrangement: _______________</div><div style="margin-top:4px">&#9633; Complete, self-sufficient piano piece</div><div>&#9633; Three creative decisions explained with musical reasoning</div><div>&#9633; All five elements present</div></div>
+    <div style="border:1px solid var(--warm-line);border-radius:6px;padding:.75rem;font-size:12.5px;color:var(--ink-mid)"><div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">Part B — Teaching (3 min limit)</div><div>Error type: _______________</div><div style="margin-top:4px">&#9633; Error correctly diagnosed by name</div><div>&#9633; Correction made physically</div><div>&#9633; Measurable improvement produced</div></div>
+  </div>
+  <div class="pab"><strong>Pass criterion</strong>Arrangement complete and self-sufficient. Teaching error diagnosed, corrected physically, improvement produced — all within 3 minutes.</div></div></div>
+
+  <div class="gc"><div class="gch"><span class="gcn">04</span><h4>Original Composition — Performed and Discussed</h4></div>
+  <div class="gcb"><p class="gcr">Student performs the 32–48 bar composition. After: teacher asks three questions.</p>
+  <div style="background:var(--gold-light);border-radius:8px;padding:1rem;margin:.75rem 0;font-size:13px;color:var(--gold)"><div style="font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;font-weight:700">Three questions after the composition</div><div style="margin-bottom:4px">1. "What did you want to say?"</div><div style="margin-bottom:4px">2. "Did it say it?"</div><div>3. "What did you discover about your voice in writing it?"</div></div>
+  <div class="pab"><strong>Pass criterion</strong>Complete musical statement with clear idea, development, climax, and resolution. All three questions answered honestly and specifically. The teacher can identify the three personal fingerprints aurally.</div></div></div>
+
+  <div class="gc"><div class="gch"><span class="gcn">05</span><h4>Complete Gateway Programme — Era Depth and Personal Voice</h4></div>
+  <div class="gcb"><p class="gcr">Voice statement read aloud. Then the complete programme: four era pieces + original composition. No stopping.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.75rem 0">
+    <div style="border:1px solid var(--warm-line);border-radius:6px;padding:.75rem;font-size:12.5px;color:var(--ink-mid)"><div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">Five criteria</div><div>&#9633; Each era piece audibly distinct in performance practice</div><div style="margin-top:3px">&#9633; Stage 4 techniques invisible — background operations</div><div style="margin-top:3px">&#9633; Harmonic events communicated — chromatic chords given physical weight</div><div style="margin-top:3px">&#9633; Memory systems active — random starting point test mid-gateway</div><div style="margin-top:3px">&#9633; Composition placed with artistic logic within the programme arc</div></div>
+    <div style="border:1px solid var(--warm-line);border-radius:6px;padding:.75rem;font-size:12.5px;color:var(--ink-mid)"><div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">The decisive criterion</div><div style="font-style:italic;color:var(--gold);line-height:1.6">"A listener who heard only the performance could describe the performer's musical personality in two or three consistent terms. If these terms align with the voice statement — the voice has been found."</div></div>
+  </div>
+  <div class="pab"><strong>Pass criterion</strong>The voice statement and the performance match. A listener who does not know the student can describe their musical personality in consistent terms after hearing the programme.</div></div></div>
+
+  <div class="gc"><div class="gch"><span class="gcn">06</span><h4>The Stage 6 Question</h4></div>
+  <div class="gcb"><p class="gcr">After the programme: "Stage 6 is Artistry and Legacy. What do you want to contribute? Not technically — but artistically and humanly. What music do you want to bring into the world that is not yet there?"</p>
+  <div style="background:var(--gold-light);border-radius:8px;padding:1rem;margin:.75rem 0;font-size:13px;color:var(--gold);font-style:italic;line-height:1.6">"The answer to this question is the beginning of Stage 6."</div>
+  <div class="pab"><strong>Pass criterion</strong>The student can name a specific artistic contribution they want to make — not a performance aspiration, but an artistic or human one. That hunger is the compass for Stage 6.</div></div></div>
+
+  <div style="background:var(--cream);border:2px solid var(--warm-line);border-radius:12px;padding:1.5rem;margin-top:1.5rem">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;margin-bottom:1rem">
+      <div style="border:1.5px solid var(--warm-line);border-radius:8px;padding:.75rem;text-align:center;background:#fff"><span style="font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:4px">Components Passed</span><span style="font-family:'Playfair Display',serif;font-size:1.5rem">__ / 6</span></div>
+      <div style="border:1.5px solid var(--teal);border-radius:8px;padding:.75rem;text-align:center;background:var(--teal-light)"><span style="font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:4px">Decision</span><span style="font-size:.9rem;color:var(--teal)">&#9633; Pass to Stage 6<br>&#9633; Targeted hold</span></div>
+      <div style="border:1.5px solid var(--warm-line);border-radius:8px;padding:.75rem;text-align:center;background:#fff"><span style="font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:4px">Stage 6 Compass</span><span style="font-size:.85rem;color:var(--ink-soft)">________________</span></div>
+    </div>
+    <p style="font-size:12px;color:var(--ink-soft);font-style:italic;text-align:center">Stage 6 is Artistry and Legacy. The student who passes Stage 5 has found their voice. Stage 6 asks what to do with it — over a lifetime.</p>
+  </div>
+</div>
+
+<!-- REPERTOIRE -->
+<div class="tab-panel" id="tab-repertoire">
+  <div class="sh"><h2>Recommended Stage 5 Repertoire</h2><p class="desc">Organised by phase. The gateway programme is chosen by the student for personal meaning — one substantial work per era plus an original composition.</p></div>
+  <div class="rg" style="margin-bottom:1.5rem">
+    <div class="rc"><div class="rph">Phase A · Baroque</div><div class="rt">Non-legato, terraced dynamics, dance character</div><div class="rex">Bach French Suites · WTC Preludes · Handel Suites · Scarlatti Sonatas</div><div class="rfc">Non-legato, terraced dynamics, ornaments from upper note. Each Baroque Suite movement has a distinct dance character that must be embodied, not just counted.</div></div>
+    <div class="rc"><div class="rph">Phase A · Classical</div><div class="rt">Slur-gap, 40% Alberti, Haydn wit</div><div class="rex">Mozart K.331, K.545, K.570 · Haydn Hob. XVI:37 · Beethoven Op. 2, Op. 13</div><div class="rfc">Slur-gap articulation throughout. 40% Alberti bass. Haydn surprises performed as jokes. Beethoven: find the exact bar where Classical form becomes Romantic content.</div></div>
+    <div class="rc"><div class="rph">Phase A · Romantic</div><div class="rt">Four composers, four distinct voices</div><div class="rex">Schubert Op. 90 · Chopin Nocturnes · Schumann Kinderszenen · Brahms Op. 118 · Liszt Consolations</div><div class="rfc">Each composer is a different person with a different body. Schubert: flat-VI lean. Chopin: LH-steady rubato. Schumann: read the title before every practice. Brahms: three simultaneous dynamic levels.</div></div>
+    <div class="rc"><div class="rph">Phase A · 20th Century</div><div class="rt">Composer-specific approach</div><div class="rex">Debussy Arabesques · Ravel Sonatine · Bartók Mikrokosmos IV–VI · Prokofiev Visions Fugitives</div><div class="rfc">No generic "modern" approach. Debussy: blur IS the sound. Ravel: precision is warmth. Bartók: percussion instrument. Prokofiev: sardonic and lyrical in the same piece.</div></div>
+    <div class="rc"><div class="rph">Phase B · Improvisation models</div><div class="rt">Jazz standards and Classical improv vehicles</div><div class="rex">"Autumn Leaves" · "All the Things You Are" · Schubert Lieder for Classical cadenzas · Haydn Sonata fermatas</div><div class="rfc">Jazz standards: learn melody by ear, improvise over chord changes. Classical improv: cadenzas grown organically from the piece's material. Baroque preludes: arpeggiated I–ii7–V7–I in continuous 16th notes.</div></div>
+    <div class="rc"><div class="rph">Phase C · Arrangement models</div><div class="rt">Liszt, Bach-Busoni, and contemporary</div><div class="rex">Liszt Schubert transcriptions · Bach-Busoni Chaconne · Brahms arrangements of own songs</div><div class="rfc">Five elements must survive: melody, harmonic language, rhythmic character, emotional character, climax structure. Liszt's method: create something that lives naturally at the piano.</div></div>
+    <div class="rc" style="grid-column:1/-1"><div class="rph">Phases D–E · Gateway programme (student's choice)</div><div class="rt">One substantial work per era + original composition</div><div class="rex">Baroque: Bach WTC Prelude &amp; Fugue, French Suite · Classical: Beethoven Bagatelle, Haydn or Mozart Sonata movement · Romantic: Schubert Impromptu, Chopin Nocturne, Brahms Intermezzo · 20th C: Debussy Arabesque, Ravel Sonatine, Bartók Mikrokosmos V–VI · Composition: 32–48 bars by the student</div><div class="rfc">Chosen for personal meaning, not technical safety. Each piece must be one the student genuinely wants to perform. The programme's arc — how the five works relate — is itself an artistic decision the student makes and defends in the gateway.</div></div>
+  </div>
+</div>
+
+<!-- CHEAT SHEETS -->
+<div class="tab-panel" id="tab-cheatsheets">
+  <div class="sh"><h2>Teacher Quick Reference — Stage 5</h2><p class="desc">The teacher's role has shifted from instructor to collaborator. These cheat sheets reflect that shift.</p></div>
+
+  <div class="cs">
+    <div class="csh"><span style="font-size:1.3rem">🎯</span><h3>Session Opening — Every Session, Stage 5</h3></div>
+    <div class="csb">
+      <div class="cc">
+        <div class="ccl"><h4>Always begin with</h4>
+          <ul class="cl">
+            <li>Era-reset ritual: 30 seconds of silence, then first gateway piece — the era must be present from note one</li>
+            <li>5 minutes improvisation: no theme, no preparation — whatever comes. Teacher never corrects during these 5 minutes</li>
+            <li>Reading log check: is the daily sight-reading habit maintained at Grade 7?</li>
+            <li>One Stage 4 technical warm-up: octaves, double notes, trills, or polyrhythm — background now, not work</li>
+          </ul>
+        </div>
+        <div class="ccl"><h4>The teacher's role in Stage 5</h4>
+          <ul class="cl">
+            <li>Collaborator, not instructor — the student's emerging voice is reflected, questioned, deepened — not redirected</li>
+            <li>Ask "Is this you?" more than "Is this correct?" — correctness was Stage 4; identity is Stage 5</li>
+            <li>When the student's interpretation surprises you — say so. That surprise is data about where their voice is</li>
+            <li>Specific feedback only: never "play with more feeling" — always "what does this chord mean to you, and how will you communicate that?"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs">
+    <div class="csh"><span style="font-size:1.3rem">⚠️</span><h3>Common Stage 5 Challenges — What to Say</h3></div>
+    <div class="csb">
+      <div class="cc">
+        <div class="ccl"><h4>Era and style challenges</h4>
+          <ul class="cl">
+            <li><strong>Bach played like Chopin:</strong> "Play this with the lid closed — imagine you are playing a harpsichord. You cannot control the volume after the key goes down. Only the rhythm and articulation are yours." Then open the lid and maintain that restraint.</li>
+            <li><strong>Mozart too Romantic:</strong> "Every note you add — dynamics, pedal, rubato — ask: did Mozart write this? If not, remove it. Trust the notes."</li>
+            <li><strong>Debussy too clean:</strong> "Press the pedal before you play the first note. Now play. The blur is already there before the melody arrives. That blur is where Debussy lives."</li>
+            <li><strong>Chopin rubato with LH following:</strong> "LH only — four bars at strict tempo. Now RH only — same four bars, completely free. Now together, but LH does not know the RH exists."</li>
+          </ul>
+        </div>
+        <div class="ccl"><h4>Improvisation and voice challenges</h4>
+          <ul class="cl">
+            <li><strong>Student stops during improvisation:</strong> "Keep going. Whatever just happened — follow it. There are no wrong notes, only notes not yet continued."</li>
+            <li><strong>Improvisation has no shape:</strong> "Before you start: decide three things — where you will begin (register, dynamic), where the climax will be, and how it will end. Then play."</li>
+            <li><strong>Voice statement too generic:</strong> "You wrote 'I love expressive music.' So does everyone. Name a specific thing your hands always do that no one told them to."</li>
+            <li><strong>Fingerprints not audible in composition:</strong> "Play bars 12–16 of your composition and then bars 12–16 of your Romantic gateway piece. Point to where the same person made both."</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs">
+    <div class="csh"><span style="font-size:1.3rem">🎭</span><h3>Musical Language — Phrases That Work in Stage 5</h3></div>
+    <div class="csb">
+      <div class="cc">
+        <div class="ccl"><h4>For era mastery</h4>
+          <ul class="cl">
+            <li>"Bach speaks. Mozart speaks. Chopin sings. Debussy shimmers. Which one are you about to be?"</li>
+            <li>"Haydn is a comedian — play the jokes."</li>
+            <li>"The Baroque crescendo is a step, not a slope."</li>
+            <li>"Debussy: the blur IS the sound — it is not a mistake."</li>
+            <li>"Play it as if Mozart — until the moment it stops being Mozart."</li>
+          </ul>
+        </div>
+        <div class="ccl"><h4>For voice and identity</h4>
+          <ul class="cl">
+            <li>"What does this chord mean to you? Play it so I feel that."</li>
+            <li>"Every composition is an improvisation that got written down."</li>
+            <li>"The notation is a record of an improvisation — not the improvisation itself."</li>
+            <li>"Your fingerprints must be heard in the music — not just in the performance."</li>
+            <li>"Stage 6 begins with the question: now that you know who you are, what will you make of it?"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs">
+    <div class="csh"><span style="font-size:1.3rem">📝</span><h3>What Changes in Stage 6</h3></div>
+    <div class="csb">
+      <p style="font-size:13.5px;color:var(--ink-mid);line-height:1.7;margin-bottom:.75rem">Stage 6 is Artistry and Legacy. The student who passes Stage 5 has found their voice. Stage 6 asks what to do with it — over a lifetime. Not adding more skills or deepening more knowledge, but contributing: performing, composing, teaching, and contributing to the musical community in ways that outlast the individual performing career.</p>
+      <p style="font-size:13.5px;color:var(--ink-mid);line-height:1.7">The Stage 6 gateway certifies artistic maturity, not just technical accomplishment — a deliberate philosophical distinction in the LUBENO framework. The student who arrives at Stage 6 does not ask "What should I do next?" They ask "What must I do?" That imperative is the beginning of artistry.</p>
+    </div>
+  </div>
+</div>
+
+</main>
+<footer class="ft">Stage 5 Teacher Content Package · LUBENO Consult Piano Curriculum · Depth: Repertoire &amp; Stylistic Identity · 32 Weeks · 5 Phases · 64 Sessions</footer>
+
+<script>
+function switchTab(id,btn){
+  document.querySelectorAll(".tab-panel").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+  document.getElementById("tab-"+id).classList.add("active");
+  btn.classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function toggleWeek(header){
+  var body=header.nextElementSibling;
+  var toggle=header.querySelector(".wktg");
+  var isOpen=body.classList.contains("open");
+  body.classList.toggle("open",!isOpen);
+  toggle.classList.toggle("open",!isOpen);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stage 1 Piano Curriculum — 8-Week Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1814;
+    --ink-mid: #4a4540;
+    --ink-soft: #8a8480;
+    --parchment: #faf8f4;
+    --cream: #f2ede4;
+    --line: #e4ddd4;
+    --teal: #0f6e56;
+    --teal-light: #e1f5ee;
+    --purple: #534ab7;
+    --purple-light: #eeedfe;
+    --coral: #993c1d;
+    --coral-light: #faece7;
+    --gray-light: #f1efe8;
+    --amber: #854f0b;
+    --amber-light: #faeeda;
+    --accent: #0f6e56;
+  }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--parchment);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--ink);
+    color: var(--parchment);
+    padding: 3rem 2rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 240px; height: 240px;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 50%;
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: 60px;
+    width: 180px; height: 180px;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+  .header-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 0.75rem;
+  }
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 0.75rem;
+  }
+  .header h1 em { font-style: italic; color: rgba(255,255,255,0.6); }
+  .header-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 300;
+    max-width: 520px;
+  }
+  .header-meta {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .meta-item { display: flex; flex-direction: column; gap: 2px; }
+  .meta-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+  .meta-value { font-size: 14px; color: rgba(255,255,255,0.7); font-weight: 400; }
+
+  /* ── NAV ── */
+  .week-nav {
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .week-nav-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .week-nav-inner::-webkit-scrollbar { display: none; }
+  .week-btn {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.35);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    padding: 0.85rem 1rem;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    text-transform: uppercase;
+  }
+  .week-btn:hover { color: rgba(255,255,255,0.7); }
+  .week-btn.active { color: #fff; border-bottom-color: var(--teal); }
+
+  /* ── LAYOUT ── */
+  .main { max-width: 860px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+
+  /* ── WEEK SECTION ── */
+  .week-section { display: none; }
+  .week-section.active { display: block; }
+
+  .week-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .week-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 4rem;
+    line-height: 1;
+    color: var(--line);
+    font-weight: 400;
+    flex-shrink: 0;
+  }
+  .week-title-block {}
+  .week-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-bottom: 0.3rem;
+  }
+  .week-focus {
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-weight: 300;
+  }
+  .week-phase-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid;
+    margin-left: auto;
+    align-self: flex-start;
+    margin-top: 4px;
+  }
+  .phase-a { background: var(--teal-light); color: var(--teal); border-color: #9fe1cb; }
+  .phase-b { background: var(--purple-light); color: var(--purple); border-color: #afa9ec; }
+
+  /* ── SESSION GRID ── */
+  .sessions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+  @media (max-width: 600px) { .sessions-grid { grid-template-columns: 1fr; } }
+
+  .session-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .session-header {
+    padding: 0.85rem 1.1rem;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .session-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .session-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .session-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-left: auto;
+  }
+  .dot-new { background: var(--coral); }
+  .dot-review { background: var(--teal); }
+  .dot-explore { background: var(--purple); }
+
+  .session-body { padding: 1rem 1.1rem; }
+
+  .block-list { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+  .block-item {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+  .block-pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .pill-body { background: var(--teal-light); color: var(--teal); }
+  .pill-ear  { background: var(--purple-light); color: var(--purple); }
+  .pill-keys { background: var(--coral-light); color: var(--coral); }
+  .pill-sound { background: var(--gray-light); color: var(--ink-mid); }
+  .pill-rep  { background: var(--amber-light); color: var(--amber); }
+
+  .block-text { font-size: 13px; color: var(--ink-mid); line-height: 1.5; }
+  .block-time {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-soft);
+    margin-left: auto;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  /* ── TEACHER NOTES ── */
+  .teacher-note {
+    background: var(--cream);
+    border-left: 3px solid var(--teal);
+    border-radius: 0 8px 8px 0;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+  .teacher-note-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 0.4rem;
+  }
+  .teacher-note p {
+    font-size: 13.5px;
+    color: var(--ink-mid);
+    line-height: 1.65;
+  }
+
+  /* ── WATCH-FOR ── */
+  .watch-for {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+  .watch-for-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 0.6rem;
+  }
+  .watch-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .watch-item {
+    font-size: 13px;
+    color: var(--ink-mid);
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.5;
+  }
+  .watch-item::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--ink-soft);
+  }
+
+  /* ── REPERTOIRE ── */
+  .rep-block {
+    background: var(--amber-light);
+    border: 1px solid #fac775;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+  .rep-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 0.5rem;
+  }
+  .rep-list { display: flex; flex-direction: column; gap: 0.35rem; }
+  .rep-item { font-size: 13px; color: var(--ink-mid); }
+  .rep-item strong { color: var(--ink); font-weight: 500; }
+
+  /* ── PRACTICE SUMMARY ── */
+  .practice-bar {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 2rem;
+  }
+  .practice-cell {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 0.7rem 0.5rem;
+    text-align: center;
+  }
+  .practice-mins {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: var(--ink);
+    display: block;
+  }
+  .practice-cat {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-top: 2px;
+    display: block;
+  }
+
+  /* ── GATEWAY (week 8) ── */
+  .gateway-section {
+    background: var(--ink);
+    color: var(--parchment);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-top: 2rem;
+  }
+  .gateway-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+  }
+  .gateway-sub { font-size: 13px; color: rgba(255,255,255,0.45); margin-bottom: 1.5rem; }
+  .gateway-checks { display: flex; flex-direction: column; gap: 1rem; }
+  .gateway-check {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .check-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--teal);
+    flex-shrink: 0;
+    padding-top: 1px;
+    letter-spacing: 0.05em;
+  }
+  .check-title { font-size: 14px; font-weight: 500; margin-bottom: 0.25rem; }
+  .check-desc { font-size: 12.5px; color: rgba(255,255,255,0.5); line-height: 1.55; }
+
+  /* ── SECTION DIVIDER ── */
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 1.75rem 0 0.75rem;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    text-align: center;
+    padding: 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 0.08em;
+    border-top: 1px solid var(--line);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">Piano from Beginner to Mastery</div>
+    <h1>Stage 1 — <em>Foundation</em><br>Body and Sound</h1>
+    <p class="header-sub">A complete 8-week session-by-session curriculum. Two sessions per week. Four pillars running in parallel from day one.</p>
+    <div class="header-meta">
+      <div class="meta-item"><span class="meta-label">Duration</span><span class="meta-value">8 weeks</span></div>
+      <div class="meta-item"><span class="meta-label">Sessions</span><span class="meta-value">16 lessons</span></div>
+      <div class="meta-item"><span class="meta-label">Lesson length</span><span class="meta-value">30–45 min</span></div>
+      <div class="meta-item"><span class="meta-label">Daily practice</span><span class="meta-value">15–20 min</span></div>
+      <div class="meta-item"><span class="meta-label">Gateway</span><span class="meta-value">End of week 8</span></div>
+    </div>
+  </div>
+</div>
+
+<nav class="week-nav">
+  <div class="week-nav-inner">
+    <button class="week-btn active" onclick="showWeek(1,this)">W1</button>
+    <button class="week-btn" onclick="showWeek(2,this)">W2</button>
+    <button class="week-btn" onclick="showWeek(3,this)">W3</button>
+    <button class="week-btn" onclick="showWeek(4,this)">W4</button>
+    <button class="week-btn" onclick="showWeek(5,this)">W5</button>
+    <button class="week-btn" onclick="showWeek(6,this)">W6</button>
+    <button class="week-btn" onclick="showWeek(7,this)">W7</button>
+    <button class="week-btn" onclick="showWeek(8,this)">W8 + Gateway</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- ══════════════ WEEK 1 ══════════════ -->
+<section class="week-section active" id="week-1">
+  <div class="week-header">
+    <div class="week-number">01</div>
+    <div class="week-title-block">
+      <div class="week-title">First contact — body before notes</div>
+      <div class="week-focus">The student meets the instrument. No reading. No pieces. Pure sensation and listening.</div>
+    </div>
+    <span class="week-phase-badge phase-a">Phase A</span>
+  </div>
+
+  <div class="teacher-note">
+    <div class="teacher-note-label">Teacher's framing for this week</div>
+    <p>Resist every urge to start playing melodies. Week 1 is about calibration — of the body, the ear, and the relationship to sound. A student who arrives expecting to play songs needs to understand that learning to produce one beautiful tone is a genuine achievement. Frame it that way.</p>
+  </div>
+
+  <div class="section-label">Session 1 — The instrument and the body</div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">First 15 min</span>
+        <span class="session-name">Setup and anatomy</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-body">Body</span>
+            <span class="block-text">Set bench height: elbow level with keys, forearm roughly parallel to floor. Student sits on front half of bench, feet flat.</span>
+            <span class="block-time">5 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-body">Body</span>
+            <span class="block-text">Arm swing test: student lets arm hang from shoulder, swings loose from elbow. Teacher checks for locked joint. "Remember this feeling — this is the arm we bring to the piano."</span>
+            <span class="block-time">5 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-keys">Keys</span>
+            <span class="block-text">Explore the keyboard freely — no instruction. Student presses any key they wish. Teacher asks: "Which sounds higher? Lower? Which feels softer to press?"</span>
+            <span class="block-time">5 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Next 20 min</span>
+        <span class="session-name">The arm-weight drop</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-sound">Sound</span>
+            <span class="block-text">Teach the arm-weight drop: raise forearm, feel complete looseness, lower onto middle C using gravity only. Listen. Repeat 5× on each hand separately.</span>
+            <span class="block-time">8 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-ear">Ear</span>
+            <span class="block-text">Compare: one tone produced with weight drop vs. one poked hard with a finger. Ask: "Which rings longer? Which sounds rounder?" Student must listen before answering.</span>
+            <span class="block-time">5 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-sound">Sound</span>
+            <span class="block-text">Weight drop on three different notes (low, middle, high register). Same technique — different sound. "The piano changes; your body doesn't."</span>
+            <span class="block-time">7 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Session 2 — Listening and landmarks</div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">First 15 min</span>
+        <span class="session-name">Ear — high / low / contour</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-ear">Ear</span>
+            <span class="block-text">Teacher plays 5 short musical excerpts (varied register). Student points: left hand toward bass end, right toward treble. No wrong answers — just listening.</span>
+            <span class="block-time">5 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-ear">Ear</span>
+            <span class="block-text">Contour game: teacher plays a 3-note phrase. Student draws the contour in the air (hand goes up, down, or stays). Repeat with 8 different phrases.</span>
+            <span class="block-time">5 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-ear">Ear</span>
+            <span class="block-text">Pitch matching: teacher sings a note (middle register, comfortable for student). Student sings back. Do not correct pitch with piano — use voice to demonstrate. 6 notes total.</span>
+            <span class="block-time">5 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Next 20 min</span>
+        <span class="session-name">Black key landmarks + C position</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-keys">Keys</span>
+            <span class="block-text">Two-black and three-black clusters: student places both hands over the keyboard, eyes closed, and finds every two-black group by touch. Teacher counts aloud: 8 groups across full keyboard.</span>
+            <span class="block-time">6 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-keys">Keys</span>
+            <span class="block-text">Introduce C: "The white key immediately left of the two-black group." Find all C's across the keyboard, eyes open, then eyes closed.</span>
+            <span class="block-time">6 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-sound">Sound</span>
+            <span class="block-text">Play every C from low to high with arm-weight drop, right hand. Listen to how the same technique produces different sounds in different registers. "It's still you — the piano just resonates differently."</span>
+            <span class="block-time">8 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="watch-for">
+    <div class="watch-for-label">Watch for — Week 1</div>
+    <ul class="watch-list">
+      <li class="watch-item">Locked elbows during the arm-weight drop — arm must hang free from shoulder, not from the elbow</li>
+      <li class="watch-item">Pressing rather than dropping — if they tense the forearm before the key, the sound will be clipped; demonstrate the difference audibly</li>
+      <li class="watch-item">Student sitting too far back on the bench — this collapses the posture and forces forward lean</li>
+      <li class="watch-item">Pitch matching avoidance (especially adult learners) — normalise singing immediately; if embarrassment is present, sing together</li>
+    </ul>
+  </div>
+
+  <div class="rep-block">
+    <div class="rep-label">Home practice — Week 1 (15 min/day)</div>
+    <div class="rep-list">
+      <div class="rep-item"><strong>5 min</strong> — Arm-weight drops on middle C, 10× each hand. Focus on the ring of the tone, not the motion.</div>
+      <div class="rep-item"><strong>5 min</strong> — Find all C's across the keyboard from memory, eyes closed.</div>
+      <div class="rep-item"><strong>5 min</strong> — Listen to one piece of music (any genre) and draw the contour of the melody on paper as it plays.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ WEEK 2 ══════════════ -->
+<section class="week-section" id="week-2">
+  <div class="week-header">
+    <div class="week-number">02</div>
+    <div class="week-title-block">
+      <div class="week-title">Hand shape, note names, weight transfer</div>
+      <div class="week-focus">The five-finger position is introduced. All seven white note names learned. Weight begins to move.</div>
+    </div>
+    <span class="week-phase-badge phase-a">Phase A</span>
+  </div>
+
+  <div class="teacher-note">
+    <div class="teacher-note-label">Teacher's framing for this week</div>
+    <p>The five-finger position is not a cage — it's a launching pad. Be explicit about this. The student should understand that these five notes are a temporary home, not a permanent limit. Introduce it as "the place we return to while we're learning to move."</p>
+  </div>
+
+  <div class="section-label">Session 3 — Five-finger position and D, E</div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">First 15 min</span>
+        <span class="session-name">Hand shape + position</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-body">Body</span>
+            <span class="block-text">The curved finger: student holds an imaginary small orange. Fingers gently curved, thumb on its side. Place on keys — knuckles must not collapse inward when pressing. Check each finger individually.</span>
+            <span class="block-time">5 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-keys">Keys</span>
+            <span class="block-text">Right hand five-finger position: thumb on middle C, fingers on D, E, F, G. Name each finger's note aloud as it presses. "Thumb is C. Second finger is D. Third is E." Repeat 3×.</span>
+            <span class="block-time">5 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-keys">Keys</span>
+            <span class="block-text">Left hand five-finger position: fifth finger on the C below middle C, ascending to G. Same naming exercise. Both hands know their home positions by end of session.</span>
+            <span class="block-time">5 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Next 20 min</span>
+        <span class="session-name">Weight transfer — C to D to E</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-sound">Sound</span>
+            <span class="block-text">Weight transfer exercise: from C, roll the arm weight to D, then to E. No lifting between notes — the hand should feel like water moving. Listen for evenness. Each note should ring equally long.</span>
+            <span class="block-time">8 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-ear">Ear</span>
+            <span class="block-text">Sing C–D–E as you play. "Do–Re–Mi." The voice must lead — play only after the inner ear has the note ready. If the student can't sing the next note before playing, slow down.</span>
+            <span class="block-time">7 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-sound">Sound</span>
+            <span class="block-text">C–D–E–D–C, right hand only. Play it forward and backward. Teacher gives a tempo with finger tapping. No rushing — each note gets full weight and full ring.</span>
+            <span class="block-time">5 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Session 4 — All seven note names + singing leads playing</div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">First 15 min</span>
+        <span class="session-name">F, G, A, B — complete the alphabet</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-keys">Keys</span>
+            <span class="block-text">Three-black cluster anchors F and B. Teach F (white key left of three-black), G, A, B as a group. Student finds each note across three octaves. Teacher calls the name; student finds without hesitation.</span>
+            <span class="block-time">7 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-keys">Keys</span>
+            <span class="block-text">Musical alphabet quiz: teacher calls a note name, student plays it anywhere on the keyboard within 3 seconds. Run through all 7 names, then randomise. Speed is secondary to accuracy.</span>
+            <span class="block-time">5 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-ear">Ear</span>
+            <span class="block-text">Solfège in five-finger range: sing C–D–E–F–G ascending and descending. Teacher models, student echoes. Then student leads while playing, voice slightly ahead of the hand.</span>
+            <span class="block-time">3 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Next 20 min</span>
+        <span class="session-name">First five-note piece (by ear)</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-ear">Ear</span>
+            <span class="block-text">Teacher plays "Mary Had a Little Lamb" (C position, right hand). Student listens with eyes closed, then draws the contour. Teacher plays again — student sings along. No keyboard yet.</span>
+            <span class="block-time">5 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-rep">Repertoire</span>
+            <span class="block-text">Student finds the piece by ear. Teacher says only: "It starts on E." Student experiments. Teacher confirms each correct note with a nod. Piece should be found within 10–12 attempts. This is discovery, not instruction.</span>
+            <span class="block-time">10 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-sound">Sound</span>
+            <span class="block-text">Once found: play it with weight transfer, singing along. "Every note you play should already be in your voice before your finger moves."</span>
+            <span class="block-time">5 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="watch-for">
+    <div class="watch-for-label">Watch for — Week 2</div>
+    <ul class="watch-list">
+      <li class="watch-item">Collapsed knuckles — particularly on the third and fourth fingers; gently lift the knuckle arch with a finger if needed</li>
+      <li class="watch-item">Thumb playing flat (nail side down) — correct immediately; the thumb plays on its outer edge to allow free wrist movement</li>
+      <li class="watch-item">Playing before singing — if the hand moves before the voice, stop and restart from singing first</li>
+      <li class="watch-item">Rushing during weight transfer — each note needs a full, settled moment; think "pour" not "skip"</li>
+    </ul>
+  </div>
+
+  <div class="rep-block">
+    <div class="rep-label">Home practice — Week 2 (15 min/day)</div>
+    <div class="rep-list">
+      <div class="rep-item"><strong>5 min</strong> — Weight transfer C–D–E–D–C, both hands separately, singing along. Voice leads.</div>
+      <div class="rep-item"><strong>5 min</strong> — Play "Mary Had a Little Lamb" by ear, singing simultaneously. If the singing stops, the hands stop.</div>
+      <div class="rep-item"><strong>5 min</strong> — Note name flash: write all 7 note names on paper, shuffle, point to each and play the note on the keyboard without hesitation.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ WEEK 3 ══════════════ -->
+<section class="week-section" id="week-3">
+  <div class="week-header">
+    <div class="week-number">03</div>
+    <div class="week-title-block">
+      <div class="week-title">Legato, dynamics, and the grand staff</div>
+      <div class="week-focus">Connected touch is taught as a physical sensation. Reading begins — five notes only.</div>
+    </div>
+    <span class="week-phase-badge phase-a">Phase A</span>
+  </div>
+
+  <div class="teacher-note">
+    <div class="teacher-note-label">Teacher's framing for this week</div>
+    <p>Legato is the default articulation of the piano. Before staccato, before accent, before any other touch — the student must own connected sound. This week the physical sensation of legato should become habitual: finger-to-finger transfer, no gap, no blur. Notation is introduced only as a label for something the student already knows by ear.</p>
+  </div>
+
+  <div class="section-label">Session 5 — True legato and piano / forte</div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">First 20 min</span>
+        <span class="session-name">Legato — no gap, no blur</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-sound">Sound</span>
+            <span class="block-text">Define legato physically: "The outgoing note releases the instant the incoming finger makes contact — not before, not after." Demonstrate on C–D–E with teacher playing one hand, student placing their hand on top to feel the motion.</span>
+            <span class="block-time">6 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-sound">Sound</span>
+            <span class="block-text">Legato C–D–E–F–G ascending and descending, right hand. Pause after each note to confirm legato connection. Teacher listens for: no audible gap between notes, no double-sounding from a blurred change.</span>
+            <span class="block-time">8 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-ear">Ear</span>
+            <span class="block-text">Sing the five-note scale while playing. Test: if the student closes their eyes and hears gaps, there are gaps. The ear is the judge — not the teacher, not the eye.</span>
+            <span class="block-time">6 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Next 15 min</span>
+        <span class="session-name">Piano and forte — weight controls volume</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-sound">Sound</span>
+            <span class="block-text">Same technique (arm weight), different speed. Slow arm drop = soft sound. Faster drop = louder sound. Demonstrate 3 levels on middle C — no change in tension, only speed of approach.</span>
+            <span class="block-time">5 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-ear">Ear</span>
+            <span class="block-text">Character game: teacher asks "play C–D–E as if it's a lullaby" vs. "play it as if it's a fanfare." Student chooses the dynamic — teacher listens. No right answer — musical instinct is what's being built.</span>
+            <span class="block-time">5 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-rep">Repertoire</span>
+            <span class="block-text">Apply to "Mary Had a Little Lamb": play it once softly, once loudly. Then play it making a dynamic shape — what does the student think feels most musical? Commit to it.</span>
+            <span class="block-time">5 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Session 6 — The grand staff introduced</div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">First 15 min</span>
+        <span class="session-name">Staff = keyboard picture</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-keys">Keys</span>
+            <span class="block-text">Show the grand staff as a vertical picture of the keyboard: "Higher on the staff = higher on the keyboard." Middle C on a ledger line between treble and bass. Student traces the connection: note on page → key on keyboard.</span>
+            <span class="block-time">5 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-keys">Keys</span>
+            <span class="block-text">Introduce treble clef: C, D, E, F, G — learn their positions on the staff (spaces and lines). Use landmark notes only: middle C (ledger line below), E (first line), G (second line). Point, name, play.</span>
+            <span class="block-time">5 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-keys">Keys</span>
+            <span class="block-text">Bass clef landmarks: middle C (ledger line above), B (third line from top), G (second line from bottom). Student points to each on the page, names it, finds it on the keyboard.</span>
+            <span class="block-time">5 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Next 20 min</span>
+        <span class="session-name">First written piece</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-ear">Ear</span>
+            <span class="block-text">Before opening the music: teacher plays the first piece from the method book. Student listens and sings along. They must know what it sounds like before reading it.</span>
+            <span class="block-time">3 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-keys">Keys</span>
+            <span class="block-text">Open the music. Student reads each note aloud (naming it) before playing. First pass is a reading exercise, not a performance. Teacher may prompt: "What note is that?" not "Play it."</span>
+            <span class="block-time">10 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-rep">Repertoire</span>
+            <span class="block-text">Second pass: play with legato and a single chosen dynamic. Sing along. The transition from reading to playing should feel like recognising an old friend, not decoding a new puzzle.</span>
+            <span class="block-time">7 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="watch-for">
+    <div class="watch-for-label">Watch for — Week 3</div>
+    <ul class="watch-list">
+      <li class="watch-item">Reading without hearing — student plays written notes correctly but produces no musical shape; address with singing before every phrase</li>
+      <li class="watch-item">Legato gaps on the 4th and 5th fingers — these weaker fingers release early; teacher should listen closely and ask "did you hear a space there?"</li>
+      <li class="watch-item">Forcing louder dynamics by pressing harder — remind that louder = faster arm approach, same relaxed weight</li>
+    </ul>
+  </div>
+
+  <div class="rep-block">
+    <div class="rep-label">Home practice — Week 3 (15 min/day)</div>
+    <div class="rep-list">
+      <div class="rep-item"><strong>5 min</strong> — Legato C–G–C (both hands separately), singing. Judge quality by ear: "Would I want to listen to this?"</div>
+      <div class="rep-item"><strong>5 min</strong> — First written piece: read notes aloud, then play with legato and a dynamic choice.</div>
+      <div class="rep-item"><strong>5 min</strong> — Staff reading: teacher writes 5 random notes on manuscript paper for student to name and play at home.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ WEEK 4 ══════════════ -->
+<section class="week-section" id="week-4">
+  <div class="week-header">
+    <div class="week-number">04</div>
+    <div class="week-title-block">
+      <div class="week-title">Rhythm, pulse, and two-hand coordination begins</div>
+      <div class="week-focus">Basic note values introduced. Alternating-hand pieces. The physical sense of pulse is established.</div>
+    </div>
+    <span class="week-phase-badge phase-a">Phase A</span>
+  </div>
+
+  <div class="teacher-note">
+    <div class="teacher-note-label">Teacher's framing for this week</div>
+    <p>Rhythm is not taught from notation in this method — it is felt first, then named. Begin this week by having the student walk a steady pulse while clapping a pattern. The body must own the beat before the page does. Two-hand coordination is introduced through alternating (not simultaneous) playing — hands do not yet play together.</p>
+  </div>
+
+  <div class="section-label">Session 7 — Pulse, quarter, and half notes</div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">First 15 min</span>
+        <span class="session-name">Pulse as a physical reality</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-ear">Ear</span>
+            <span class="block-text">Walk the room to a steady clap from the teacher. Then reverse: student claps while teacher walks. The pulse belongs to everyone — it is not inside the music, it is the music.</span>
+            <span class="block-time">4 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-ear">Ear</span>
+            <span class="block-text">At the keyboard: tap the pulse on the fallboard (closed key cover) while teacher plays a piece. Student must maintain pulse even when the music pauses — "the pulse never stops, even in silence."</span>
+            <span class="block-time">4 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-keys">Keys</span>
+            <span class="block-text">Introduce quarter note = one pulse. Half note = two pulses. Student claps: one clap for quarter, hold for half. Then play on middle C: quarter, quarter, half. Listen for the held note ringing for two full counts.</span>
+            <span class="block-time">7 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Next 20 min</span>
+        <span class="session-name">First rhythmic piece</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-rep">Repertoire</span>
+            <span class="block-text">Introduce a simple 4-bar piece using C, D, E in quarter and half notes, right hand. Student sings the rhythm ("ta ta ta-a") before touching the keyboard. This naming of rhythm is not solfège — it's rhythmic syllables.</span>
+            <span class="block-time">8 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-sound">Sound</span>
+            <span class="block-text">Play the piece: right hand, legato, steady pulse. Teacher taps the pulse throughout. If the student loses the pulse, stop and re-establish it — do not "catch up" by speeding.</span>
+            <span class="block-time">7 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-body">Body</span>
+            <span class="block-text">Body internalization: student taps foot (or nods head) to the pulse while playing. "The pulse lives in your body, not in your hands."</span>
+            <span class="block-time">5 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Session 8 — Alternating hands, left hand on the staff</div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">First 15 min</span>
+        <span class="session-name">Left hand reading — bass clef C position</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-keys">Keys</span>
+            <span class="block-text">Review bass clef landmarks: middle C (ledger line above staff), B, A, G, F in the bass clef C position (LH 5th finger on C below middle C). Read and play each note.</span>
+            <span class="block-time">7 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-sound">Sound</span>
+            <span class="block-text">Left hand five-note scale, C to G, legato, with singing. Note that the left hand tends to produce heavier tone — the student should calibrate to match the right hand's quality, not just match the notes.</span>
+            <span class="block-time">8 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Next 20 min</span>
+        <span class="session-name">Alternating hand piece</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-rep">Repertoire</span>
+            <span class="block-text">Introduce an alternating-hand piece: right hand plays bars 1–2, left hand plays bars 3–4, repeating. No simultaneous notes yet. The handoff itself must be smooth — no pulse interruption at the change.</span>
+            <span class="block-time">10 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-ear">Ear</span>
+            <span class="block-text">Sing the entire piece through both hands — the melody does not stop when the hand changes. The student's voice creates continuity that the hands then follow.</span>
+            <span class="block-time">5 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-sound">Sound</span>
+            <span class="block-text">Dynamic assignment: right hand = piano, left hand = forte. Then reverse. Notice how character changes. "The notes are the same — only the weight changes. But it's a completely different piece."</span>
+            <span class="block-time">5 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="watch-for">
+    <div class="watch-for-label">Watch for — Week 4</div>
+    <ul class="watch-list">
+      <li class="watch-item">Rushing at the hand changeover — the incoming hand often arrives early; make the student freeze at the bar line and breathe before the change</li>
+      <li class="watch-item">Ignoring held note duration — a half note must be allowed to ring for two full counts; students often lift early</li>
+      <li class="watch-item">Left hand sounding thumpy or uncontrolled — the LH naturally drops with more weight; require parity of tone quality between hands</li>
+    </ul>
+  </div>
+
+  <div class="rep-block">
+    <div class="rep-label">Home practice — Week 4 (15 min/day)</div>
+    <div class="rep-list">
+      <div class="rep-item"><strong>5 min</strong> — Rhythmic piece: right hand alone, singing rhythm syllables. Foot taps the pulse throughout.</div>
+      <div class="rep-item"><strong>5 min</strong> — Alternating-hand piece: read aloud first (name every note), then play with legato and a dynamic shape.</div>
+      <div class="rep-item"><strong>5 min</strong> — Staff reading: identify 8 random notes written by teacher, name them, play them, sing them.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ WEEK 5 ══════════════ -->
+<section class="week-section" id="week-5">
+  <div class="week-header">
+    <div class="week-number">05</div>
+    <div class="week-title-block">
+      <div class="week-title">Staccato, phrasing, and intervals by ear</div>
+      <div class="week-focus">A second touch introduced. Musical sentences begin. Ear training moves from pitch to interval recognition.</div>
+    </div>
+    <span class="week-phase-badge phase-b">Phase B</span>
+  </div>
+
+  <div class="teacher-note">
+    <div class="teacher-note-label">Teacher's framing for this week</div>
+    <p>Phase B begins. The student now has a foundation — body position, weight drop, legato, basic reading, and a feel for pulse. The work becomes more musical. Staccato is introduced not as a technical skill but as a character choice: some musical ideas need to breathe between notes. Intervals by ear are the ear-training leap that pays off enormously in Stage 2.</p>
+  </div>
+
+  <div class="section-label">Session 9 — Staccato touch and musical character</div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">First 15 min</span>
+        <span class="session-name">Staccato — released weight</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-sound">Sound</span>
+            <span class="block-text">Staccato is arm weight quickly released — not a jab. "Drop and bounce." The hand drops onto the key with arm weight and immediately rebounds. The sound is clean, not scratchy. Demonstrate on middle C, student imitates.</span>
+            <span class="block-time">5 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-sound">Sound</span>
+            <span class="block-text">C–D–E staccato, right hand. Compare to legato: teacher plays each — "which sounds like raindrops? Which sounds like a river?" Student assigns character, then plays their own version.</span>
+            <span class="block-time">5 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-rep">Repertoire</span>
+            <span class="block-text">Mixed articulation exercise: play C quarter legato, D quarter legato, E half staccato. Listen — the half-note staccato should still feel like it had space to breathe, not like it was cut off by tension.</span>
+            <span class="block-time">5 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Next 20 min</span>
+        <span class="session-name">Musical phrases — question and answer</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-ear">Ear</span>
+            <span class="block-text">Teacher plays two 2-bar phrases: first ends on a note that feels unfinished (an "away" note), second ends on C (home). Student identifies: "which felt like a question? which like an answer?" This is the foundation of phrase understanding.</span>
+            <span class="block-time">6 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-rep">Repertoire</span>
+            <span class="block-text">Introduce a piece with clear question-answer phrasing. Student labels the phrases before playing. Play the "question" phrase with a slight lean forward; the "answer" phrase with settling back and slowing slightly at the end.</span>
+            <span class="block-time">8 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-ear">Ear</span>
+            <span class="block-text">Sing only — not play. Sing the piece with the student, shaping the phrase in the voice: lean into the question, resolve the answer. Then play it the same way.</span>
+            <span class="block-time">6 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Session 10 — Steps and skips by ear</div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">First 15 min</span>
+        <span class="session-name">Intervals — step vs. skip</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-ear">Ear</span>
+            <span class="block-text">Teacher plays pairs of notes without showing the keyboard. Student answers: "step" (adjacent note) or "skip" (one note apart). 10 examples. Start wide (easy skips) then narrow to close calls.</span>
+            <span class="block-time">6 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-ear">Ear</span>
+            <span class="block-text">Add direction: "step up, skip down, step up." Teacher plays, student describes. This trains the ear-to-spatial-thinking connection that is the prerequisite for sight-reading.</span>
+            <span class="block-time">5 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-keys">Keys</span>
+            <span class="block-text">On the staff: point to a note, move up a step (next line or space), identify the new note. Then a skip. Student names each landing note. Staff geography and ear training merge.</span>
+            <span class="block-time">4 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Next 20 min</span>
+        <span class="session-name">Piece with steps and skips — reading</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-rep">Repertoire</span>
+            <span class="block-text">New piece using both steps and skips (e.g. a piece spanning the full C position including skips from C to E, or from D to G). Student analyses before playing: label each interval movement above the staff.</span>
+            <span class="block-time">8 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-ear">Ear</span>
+            <span class="block-text">Sing the piece using interval names: "step up, step up, skip down, step up." Then play it. The analysis should make the playing effortless by comparison.</span>
+            <span class="block-time">7 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-sound">Sound</span>
+            <span class="block-text">Apply staccato to the skips, legato to the steps — as a musical experiment. "What story does this tell?" The student answers and commits to a performance.</span>
+            <span class="block-time">5 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="watch-for">
+    <div class="watch-for-label">Watch for — Week 5</div>
+    <ul class="watch-list">
+      <li class="watch-item">Staccato produced by jabbing with the finger — remind: "drop and bounce," not "poke." The arm initiates, not the finger.</li>
+      <li class="watch-item">Phrases played as an even series of notes with no shape — stop and ask "where is the arrival point of this phrase?" Phrase shaping requires a destination.</li>
+      <li class="watch-item">Skips misread on the staff — students commonly read a skip as a step when tired; reinforce: "a skip always lands on the same type — line to line, space to space."</li>
+    </ul>
+  </div>
+
+  <div class="rep-block">
+    <div class="rep-label">Home practice — Week 5 (15–20 min/day)</div>
+    <div class="rep-list">
+      <div class="rep-item"><strong>5 min</strong> — Staccato exercise: C–G staccato, both hands separately, listening for "clean bounce" tone.</div>
+      <div class="rep-item"><strong>7 min</strong> — New piece: read intervals aloud (step/skip + direction) before playing. Then play with a clear phrase shape.</div>
+      <div class="rep-item"><strong>5 min</strong> — Listen to a short melody (teacher chooses or student picks). Transcribe as "step up, step down, skip up" etc. in writing.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ WEEK 6 ══════════════ -->
+<section class="week-section" id="week-6">
+  <div class="week-header">
+    <div class="week-number">06</div>
+    <div class="week-title-block">
+      <div class="week-title">Simultaneous hands, sustain pedal introduced</div>
+      <div class="week-focus">Hands play together for the first time. The sustain pedal is learned by ear, never by rule.</div>
+    </div>
+    <span class="week-phase-badge phase-b">Phase B</span>
+  </div>
+
+  <div class="teacher-note">
+    <div class="teacher-note-label">Teacher's framing for this week</div>
+    <p>Playing both hands together for the first time is the most psychologically significant event of Stage 1. Expect regression in tone quality, posture, and rhythm — coordination demand spikes, and previously automatic skills require conscious attention again. This is normal. Do not rush through it. The pedal is introduced as a listening experiment, not a technique rule.</p>
+  </div>
+
+  <div class="section-label">Session 11 — Hands together, first pieces</div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">First 20 min</span>
+        <span class="session-name">Layered preparation for HT</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-body">Body</span>
+            <span class="block-text">Inner singing exercise: student plays the right hand while singing the left hand's notes aloud. Then swap: play the left hand while singing the right. This is the most effective pre-HT coordination drill known.</span>
+            <span class="block-time">7 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-rep">Repertoire</span>
+            <span class="block-text">Choose a simple HT piece where one hand holds a single repeated note while the other plays a melody. This minimises coordination demand — one hand has a fixed task, one has creative space.</span>
+            <span class="block-time">8 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-sound">Sound</span>
+            <span class="block-text">Play HT at half the intended tempo. Teacher counts aloud. Stop at any point where hands lose synchrony — do not "correct on the fly." Reset, breathe, and restart the phrase.</span>
+            <span class="block-time">5 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Next 15 min</span>
+        <span class="session-name">Sustain pedal by ear</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-ear">Ear</span>
+            <span class="block-text">Teacher plays a simple phrase with and without pedal. Student listens: "which sounds like a room, which sounds like outdoors?" The pedal creates resonance — it is a sound tool, not a "smoother."</span>
+            <span class="block-time">4 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-sound">Sound</span>
+            <span class="block-text">Student tries: play a C major chord slowly (C–E–G one at a time) without pedal. Then with pedal. Listen to the accumulation of sound. Press the pedal before the first note — release only when changing harmony.</span>
+            <span class="block-time">6 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-ear">Ear</span>
+            <span class="block-text">Muddy pedal experiment: play C then D with held pedal. "Does that sound beautiful or blurred?" The student's own ear gives the rule: change the pedal when the sound blurs. No other rule is needed yet.</span>
+            <span class="block-time">5 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Session 12 — First complete HT piece with expression</div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Full session</span>
+        <span class="session-name">Build and perform a complete piece</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-rep">Repertoire</span>
+            <span class="block-text">Work on a complete HT piece (2 pages, both hands). Process: LH alone → RH alone → sing LH while playing RH → hands together at slow tempo → add a single expressive choice (one dynamic shape).</span>
+            <span class="block-time">15 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-ear">Ear</span>
+            <span class="block-text">Perform for the teacher: one full run-through with both hands. No stopping. Teacher listens only — does not correct mid-performance. This is the student's first experience of performing intention over correction.</span>
+            <span class="block-time">8 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-sound">Sound</span>
+            <span class="block-text">Feedback: teacher names one thing that worked musically and one specific technical target for home practice. Positive specificity + single correction. Not a list.</span>
+            <span class="block-time">7 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="watch-for">
+    <div class="watch-for-label">Watch for — Week 6</div>
+    <ul class="watch-list">
+      <li class="watch-item">Posture collapsing when hands play together — HT demand diverts attention from physical awareness; periodically check shoulders and wrist alignment</li>
+      <li class="watch-item">Pedal held through harmonic changes causing blur — trust the ear rule entirely; no need for theory yet</li>
+      <li class="watch-item">Student becoming self-critical during performance — teach resilience: "if something goes wrong, keep going. Stopping is the only real mistake in a performance."</li>
+    </ul>
+  </div>
+
+  <div class="rep-block">
+    <div class="rep-label">Home practice — Week 6 (20 min/day)</div>
+    <div class="rep-list">
+      <div class="rep-item"><strong>5 min</strong> — Singing exercise: RH plays while LH notes are sung. Then swap.</div>
+      <div class="rep-item"><strong>10 min</strong> — HT piece: slow tempo practice. One phrase at a time. Stop and reset if hands lose sync — do not correct on the fly.</div>
+      <div class="rep-item"><strong>5 min</strong> — Pedal experiment: student chooses any piece from weeks 1–4 and experiments with adding pedal. Judged by their own ear.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ WEEK 7 ══════════════ -->
+<section class="week-section" id="week-7">
+  <div class="week-header">
+    <div class="week-number">07</div>
+    <div class="week-title-block">
+      <div class="week-title">Consolidation, repertoire review, and interpretation</div>
+      <div class="week-focus">Everything learned is deepened. Three pieces in the repertoire. Each is interpreted, not just played.</div>
+    </div>
+    <span class="week-phase-badge phase-b">Phase B</span>
+  </div>
+
+  <div class="teacher-note">
+    <div class="teacher-note-label">Teacher's framing for this week</div>
+    <p>Week 7 is intentionally not a week of new material. It is a deepening week. The student now has enough under their fingers to focus entirely on what they are saying musically. Introduce the concept of a "programme" — three pieces that the student can perform with intention. This is the preparation for the gateway, but more importantly, it is their first experience of owning a repertoire.</p>
+  </div>
+
+  <div class="section-label">Session 13 — Interpretation and performing intention</div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">First 20 min</span>
+        <span class="session-name">Interpreting three pieces</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-rep">Repertoire</span>
+            <span class="block-text">Student selects their three best pieces from weeks 1–6. For each: what is this piece about? Give it a title (if it doesn't have one), a story, or a mood. The interpretation is the student's — teacher does not prescribe.</span>
+            <span class="block-time">5 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-ear">Ear</span>
+            <span class="block-text">For each piece: sing it first with the chosen character in the voice. Then play it. Does the playing match the singing? If not, what needs to change: dynamic, tempo, articulation?</span>
+            <span class="block-time">10 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-sound">Sound</span>
+            <span class="block-text">Perform all three pieces in sequence for the teacher. One breath between pieces. Teacher listens for: does each piece sound different? Does the student's playing reflect their stated intention?</span>
+            <span class="block-time">5 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Next 15 min</span>
+        <span class="session-name">Technical refinement — targeted</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-body">Body</span>
+            <span class="block-text">Full posture check: bench height, hand shape, wrist level, shoulder release. After 7 weeks, habits have formed — good and bad. Address the single most impactful correction per student.</span>
+            <span class="block-time">5 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-sound">Sound</span>
+            <span class="block-text">Tone refinement: play any piece very slowly, listening to every individual note. "Would I want to hear that note if it were the only note in the room?" Each note is an event, not a step on a path.</span>
+            <span class="block-time">5 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-ear">Ear</span>
+            <span class="block-text">Interval dictation: teacher plays 5 two-note intervals, student writes "step up," "skip down" etc. in a notebook. Grade: 4/5 is pass. These notes go home for review.</span>
+            <span class="block-time">5 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Session 14 — Gateway preparation</div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Full session</span>
+        <span class="session-name">Mock gateway run</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-sound">Sound</span>
+            <span class="block-text">Gateway check 1 — tone: student plays a single note with arm weight. Teacher listens without comment, then asks "what did you hear?" Self-assessment before external feedback.</span>
+            <span class="block-time">5 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-ear">Ear</span>
+            <span class="block-text">Gateway check 2 — ear: 5 interval pairs (step/skip), 3 note-naming exercises on the staff, 1 pitch-matching exercise (sing back a note).</span>
+            <span class="block-time">7 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-keys">Keys</span>
+            <span class="block-text">Gateway check 3 — geography: teacher names 5 notes rapidly, student finds each in any octave within 2 seconds. Teacher points to 3 notes on staff, student names and plays.</span>
+            <span class="block-time">5 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-rep">Repertoire</span>
+            <span class="block-text">Gateway check 4 — performance: student plays their best piece from the repertoire. Teacher gives written feedback: one musical strength, one technical target, pass/hold decision for week 8.</span>
+            <span class="block-time">13 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="watch-for">
+    <div class="watch-for-label">Watch for — Week 7</div>
+    <ul class="watch-list">
+      <li class="watch-item">Student playing pieces mechanically by week 7 — if the interpretation has been "learned" as a habit, the playing becomes routine; ask them to change one thing (dynamic, tempo) and play it again</li>
+      <li class="watch-item">Performance anxiety in the mock gateway — normalise it; frame the gateway as a conversation, not a test</li>
+      <li class="watch-item">Gaps in any of the four pillars now need targeted home practice before week 8; assign specific exercises, not just "practice more"</li>
+    </ul>
+  </div>
+
+  <div class="rep-block">
+    <div class="rep-label">Home practice — Week 7 (20 min/day)</div>
+    <div class="rep-list">
+      <div class="rep-item"><strong>10 min</strong> — Three repertoire pieces in sequence, each with full intention. No stopping to correct — perform.</div>
+      <div class="rep-item"><strong>5 min</strong> — Arm-weight drop: return to the very first exercise. Has the tone quality grown? Compare to week 1 in memory.</div>
+      <div class="rep-item"><strong>5 min</strong> — Interval ear training: listen to any melody and transcribe as steps/skips. Self-check by playing it back.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ WEEK 8 ══════════════ -->
+<section class="week-section" id="week-8">
+  <div class="week-header">
+    <div class="week-number">08</div>
+    <div class="week-title-block">
+      <div class="week-title">Final polish and the Stage 1 Gateway</div>
+      <div class="week-focus">The last session is a celebration and formal assessment. The gateway is a diagnostic conversation, not an exam.</div>
+    </div>
+    <span class="week-phase-badge phase-b">Phase B</span>
+  </div>
+
+  <div class="teacher-note">
+    <div class="teacher-note-label">Teacher's framing for this week</div>
+    <p>Session 15 is the final polish session. Session 16 is the gateway. Frame the gateway to the student as this: "I'm going to listen to you the way someone who loves music listens — for what moves me, not for what's wrong." A student who produces one moment of genuine musical intention in the gateway has passed its spirit, whatever the technical results show.</p>
+  </div>
+
+  <div class="section-label">Session 15 — Polish and readiness</div>
+  <div class="sessions-grid">
+    <div class="session-card">
+      <div class="session-header">
+        <span class="session-label">Full session</span>
+        <span class="session-name">Refinement across all four pillars</span>
+        <span class="session-dot dot-new"></span>
+      </div>
+      <div class="session-body">
+        <ul class="block-list">
+          <li class="block-item">
+            <span class="block-pill pill-body">Body</span>
+            <span class="block-text">Full slow-motion posture check. Student demonstrates the arm-weight drop at three dynamic levels. Teacher verifies: same relaxed technique, only speed varies. No tension visible in shoulder, forearm, or wrist.</span>
+            <span class="block-time">6 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-ear">Ear</span>
+            <span class="block-text">Ear review: pitch matching (5 notes), interval identification (5 pairs), contour of a new 4-note melody heard once. This is not the gateway — it is preparation. No pressure.</span>
+            <span class="block-time">7 min</span>
+          </li>
+          <li class="block-item">
+            <span class="block-pill pill-rep">Repertoire</span>
+            <span class="block-text">Play the gateway piece twice: once for technical focus (listen for every legato connection, every dynamic), once for musical intention (forget the technique, tell the story). Teacher compares the two: usually, the second is better.</span>
+            <span class="block-time">12 min</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-label">Session 16 — The Stage 1 Gateway</div>
+
+  <div class="gateway-section">
+    <div class="gateway-title">Stage 1 Gateway Assessment</div>
+    <div class="gateway-sub">Four components. Diagnostic, not punitive. A student who does not pass one pillar may begin Stage 2 work in the passing pillars while continuing Stage 1 targeted work in the weak one.</div>
+    <div class="gateway-checks">
+      <div class="gateway-check">
+        <div class="check-number">01</div>
+        <div>
+          <div class="check-title">Tone quality</div>
+          <div class="check-desc">Student plays a single note in the middle octave, as beautifully as possible. Teacher listens for arm-weight initiation, resonance, and absence of tension. Student is then asked: "What did you hear in that tone?" Self-awareness is part of the pass criterion. Pass: a tone you would want to hear more of, produced with visible physical relaxation.</div>
+        </div>
+      </div>
+      <div class="gateway-check">
+        <div class="check-number">02</div>
+        <div>
+          <div class="check-title">Ear — interval and pitch</div>
+          <div class="check-desc">Teacher plays 5 two-note intervals; student names each as step or skip with direction (e.g. "skip up"). Teacher sings a 3-note melody; student sings it back, then finds it on the keyboard. Pass: 4/5 intervals correct; melody sung back accurately and located on keyboard without hesitation.</div>
+        </div>
+      </div>
+      <div class="gateway-check">
+        <div class="check-number">03</div>
+        <div>
+          <div class="check-title">Keyboard geography and staff reading</div>
+          <div class="check-desc">Teacher calls 5 note names; student finds each anywhere on the keyboard within 2 seconds. Teacher points to 5 notes on the grand staff (3 treble, 2 bass); student names each and plays it. Pass: 5/5 keyboard locations correct; 4/5 staff notes correctly named and played.</div>
+        </div>
+      </div>
+      <div class="gateway-check">
+        <div class="check-number">04</div>
+        <div>
+          <div class="check-title">Repertoire — musical intention</div>
+          <div class="check-desc">Student performs their chosen piece from the stage 1 repertoire. One complete performance, no stopping. Teacher listens for: legato connection, pulse stability, at least one clear dynamic shape, and — most critically — whether the playing reflects a musical intention. Pass: the performance makes the teacher want to hear the next piece.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="practice-bar" style="margin-top: 1.75rem;">
+    <div class="practice-cell"><span class="practice-mins">30</span><span class="practice-cat">Body</span></div>
+    <div class="practice-cell"><span class="practice-mins">24</span><span class="practice-cat">Ear</span></div>
+    <div class="practice-cell"><span class="practice-mins">16</span><span class="practice-cat">Keys</span></div>
+    <div class="practice-cell"><span class="practice-mins">20</span><span class="practice-cat">Sound</span></div>
+    <div class="practice-cell"><span class="practice-mins">10</span><span class="practice-cat">Repertoire</span></div>
+  </div>
+  <p style="font-size: 12px; color: var(--ink-soft); margin-bottom: 1.5rem; font-family: 'DM Mono', monospace; letter-spacing: 0.04em;">Approximate stage 1 lesson time distribution (total hours) across all sessions</p>
+
+  <div class="teacher-note">
+    <div class="teacher-note-label">After the gateway — what next</div>
+    <p>A student who passes all four components moves fully to Stage 2: Coordination and Reading. A student with a strong pillar gap (e.g. ear training consistently weak) continues targeted ear work from Stage 1 while beginning the non-ear components of Stage 2. The goal is never to hold a student back across the board for one weakness. Progress is pillar-by-pillar, always moving forward where the foundation is solid.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  Stage 1 of 6 — Piano from Beginner to Mastery · LUBENO Consult Curriculum Framework
+</footer>
+
+<script>
+function showWeek(n, btn) {
+  document.querySelectorAll('.week-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.week-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('week-' + n).classList.add('active');
+  btn.classList.add('active');
+  document.querySelector('.main').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+</body>
+</html>

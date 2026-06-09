@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stage 6 Teacher Content — LUBENO Piano Curriculum</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1c1917;--ink-mid:#44403c;--ink-soft:#78716c;
+  --paper:#fdfaf5;--cream:#f5f0e8;--warm-line:#e8e0d0;
+  --teal:#0d6e56;--teal-light:#e0f4ee;
+  --purple:#4f46a0;--purple-light:#eeecfc;
+  --amber:#7c4a0a;--amber-light:#faebd4;
+  --blue:#1d4e8a;--blue-light:#e5eef8;
+  --rose:#9f1239;--rose-light:#ffe4e6;
+  --green:#166534;--green-light:#dcfce7;
+  --gold:#92400e;--gold-light:#fef3c7;
+  --slate:#334155;--slate-light:#f1f5f9;
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.07);--shadow-md:0 4px 12px rgba(0,0,0,0.08)
+}
+body{font-family:"Lato",sans-serif;background:var(--paper);color:var(--ink);line-height:1.65}
+.header{background:var(--ink);color:var(--paper);padding:3.5rem 2rem 3rem;position:relative;overflow:hidden}
+.header::before{content:"\266A\266B\266C\266D";position:absolute;right:3rem;top:50%;transform:translateY(-50%);font-size:6rem;opacity:.04;pointer-events:none}
+.header-inner{max-width:1000px;margin:0 auto;position:relative}
+.header-eyebrow{font-family:"DM Mono",monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:1rem}
+.header h1{font-family:"Playfair Display",serif;font-size:clamp(2rem,4.5vw,3.2rem);font-weight:400;line-height:1.2;margin-bottom:.6rem}
+.header h1 em{font-style:italic;color:rgba(255,255,255,0.5)}
+.header-sub{font-size:14px;color:rgba(255,255,255,0.45);font-weight:300;max-width:640px;line-height:1.6;margin-bottom:2rem}
+.header-pills{display:flex;gap:.6rem;flex-wrap:wrap}
+.header-pill{font-family:"DM Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:20px;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.55)}
+.tab-nav{background:#fff;border-bottom:1px solid var(--warm-line);position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,0.06)}
+.tab-nav-inner{max-width:1000px;margin:0 auto;padding:0 2rem;display:flex;overflow-x:auto;scrollbar-width:none}
+.tab-nav-inner::-webkit-scrollbar{display:none}
+.tab-btn{background:none;border:none;border-bottom:3px solid transparent;color:var(--ink-soft);font-family:"Lato",sans-serif;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:1rem .9rem .85rem;cursor:pointer;white-space:nowrap}
+.tab-btn.active{color:var(--teal);border-bottom-color:var(--teal)}
+.main{max-width:1000px;margin:0 auto;padding:2.5rem 2rem 5rem}
+.tab-panel{display:none}.tab-panel.active{display:block}
+.sh{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--warm-line)}
+.sh h2{font-family:"Playfair Display",serif;font-size:1.75rem;font-weight:400;margin-bottom:.3rem}
+.sh .desc{font-size:13.5px;color:var(--ink-soft);font-weight:300}
+.wk{background:#fff;border:1px solid var(--warm-line);border-radius:12px;margin-bottom:1.5rem;overflow:hidden;box-shadow:var(--shadow-sm)}
+.wkh{padding:1rem 1.25rem .75rem;border-bottom:1px solid var(--warm-line);display:flex;align-items:flex-start;gap:1rem;cursor:pointer;user-select:none}
+.wkh:hover{background:var(--cream)}
+.wkn{font-family:"DM Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:2px}
+.wkt{font-family:"Playfair Display",serif;font-size:1.1rem;font-weight:400;flex:1}
+.wkm{font-size:12px;color:var(--ink-soft);margin-top:3px}
+.wktg{font-size:14px;color:var(--ink-soft);transition:transform .2s;padding-top:4px}
+.wktg.open{transform:rotate(180deg)}
+.wkb{padding:1.25rem;display:none}.wkb.open{display:block}
+.sb{margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--warm-line)}
+.sb:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.st{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:.75rem;display:flex;align-items:center;gap:.5rem}
+.sn{font-family:"DM Mono",monospace;font-size:10px;color:var(--ink-soft);background:var(--cream);padding:2px 7px;border-radius:4px}
+.ac{display:flex;gap:.75rem;margin-bottom:.6rem;font-size:13px;color:var(--ink-mid);line-height:1.55}
+.ap{font-family:"DM Mono",monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:4px;white-space:nowrap;flex-shrink:0;margin-top:2px}
+.p-art{background:var(--rose-light);color:var(--rose)}
+.p-rep{background:var(--blue-light);color:var(--blue)}
+.p-ear{background:var(--purple-light);color:var(--purple)}
+.p-adv{background:var(--slate-light);color:var(--slate)}
+.p-leg{background:var(--gold-light);color:var(--gold)}
+.p-comp{background:var(--green-light);color:var(--green)}
+.p-sound{background:#f1efe8;color:var(--ink-mid)}
+.pb{display:inline-block;font-family:"DM Mono",monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:4px;margin-bottom:.5rem}
+.pa{background:var(--teal-light);color:var(--teal)}
+.pb2{background:var(--green-light);color:var(--green)}
+.pc{background:var(--rose-light);color:var(--rose)}
+.pd{background:var(--gold-light);color:var(--gold)}
+.pe{background:var(--purple-light);color:var(--purple)}
+.fb{background:var(--teal-light);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:.8rem 1rem;font-size:12.5px;color:var(--ink-mid);line-height:1.55;margin:.75rem 0}
+.fb strong{color:var(--teal);font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:3px;font-family:"DM Mono",monospace}
+.wb{background:var(--amber-light);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:.8rem 1rem;font-size:12.5px;color:var(--amber);line-height:1.55;margin:.75rem 0}
+.wb strong{color:var(--amber);font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:3px;font-family:"DM Mono",monospace}
+.wb ul{padding-left:1.2rem;margin:0}.wb li{margin-bottom:.3rem}
+.ab{background:var(--rose-light);border-left:3px solid var(--rose);border-radius:0 8px 8px 0;padding:.8rem 1rem;font-size:12.5px;color:var(--rose);line-height:1.55;margin:.75rem 0}
+.ab strong{color:var(--rose);font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:3px;font-family:"DM Mono",monospace}
+.gb{background:var(--green-light);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:.8rem 1rem;font-size:12.5px;color:var(--green);line-height:1.55;margin:.75rem 0}
+.gb strong{color:var(--green);font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:3px;font-family:"DM Mono",monospace}
+.lgb{background:var(--gold-light);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:.8rem 1rem;font-size:12.5px;color:var(--gold);line-height:1.55;margin:.75rem 0}
+.lgb strong{color:var(--gold);font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:3px;font-family:"DM Mono",monospace}
+.pb3{background:var(--blue-light);border-left:3px solid var(--blue);border-radius:0 8px 8px 0;padding:.8rem 1rem;font-size:12.5px;color:var(--blue);line-height:1.55;margin:.75rem 0}
+.pb3 strong{color:var(--blue);font-weight:700;font-size:10px;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:3px;font-family:"DM Mono",monospace}
+.pb3 ul{padding-left:1.2rem;margin:0}.pb3 li{margin-bottom:.3rem}
+.dg{background:var(--purple-light);border-left:3px solid var(--purple);border-radius:0 8px 8px 0;padding:.9rem 1.1rem;margin:1rem 0;font-size:13.5px;color:var(--ink-mid);font-style:italic;line-height:1.6}
+.dg::before{content:open-quote;font-family:"Playfair Display",serif;font-size:2rem;color:var(--purple);line-height:0;vertical-align:-.5rem;margin-right:4px}
+.mg{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+@media(max-width:640px){.mg{grid-template-columns:1fr}}
+.mc{background:#fff;border:1px solid var(--warm-line);border-radius:10px;padding:1rem}
+.ml{font-family:"DM Mono",monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.4rem}
+.mc h4{font-size:13px;font-weight:700;margin-bottom:.4rem}
+.mc p{font-size:12px;color:var(--ink-mid);line-height:1.55}
+.tbl{width:100%;border-collapse:collapse;font-size:13px;margin:.75rem 0}
+.tbl th{background:var(--ink);color:var(--paper);padding:8px 12px;text-align:left;font-family:"DM Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase}
+.tbl td{padding:8px 12px;border-bottom:1px solid var(--warm-line);color:var(--ink-mid)}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:nth-child(even) td{background:var(--cream)}
+.gs{background:var(--ink);color:var(--paper);border-radius:12px;padding:1.75rem;margin-bottom:1.5rem}
+.gs h3{font-family:"Playfair Display",serif;font-size:1.3rem;font-weight:400;margin-bottom:.5rem}
+.gs p{font-size:13.5px;color:rgba(255,255,255,0.6);line-height:1.65}
+.gc{background:#fff;border:1px solid var(--warm-line);border-radius:10px;overflow:hidden;margin-bottom:1rem;box-shadow:var(--shadow-sm)}
+.gch{padding:1rem 1.2rem .75rem;border-bottom:1px solid var(--warm-line);display:flex;gap:.75rem;align-items:flex-start}
+.gcn{font-family:"DM Mono",monospace;font-size:1.1rem;color:var(--ink-soft);min-width:28px}
+.gch h4{font-size:15px;font-weight:700;flex:1}
+.gcb{padding:1rem 1.2rem}
+.gcr{font-size:13px;color:var(--ink-mid);line-height:1.6;margin-bottom:.75rem}
+.pab{background:var(--teal-light);border:1px solid #9addc6;border-radius:7px;padding:.6rem .85rem;font-size:12.5px;color:var(--teal);margin-top:.75rem;line-height:1.5}
+.pab strong{font-weight:700;display:block;margin-bottom:2px;font-family:"DM Mono",monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase}
+.rg{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:640px){.rg{grid-template-columns:1fr}}
+.rc{background:#fff;border:1px solid var(--warm-line);border-radius:10px;padding:1rem;box-shadow:var(--shadow-sm)}
+.rph{font-family:"DM Mono",monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:3px}
+.rt{font-size:14px;font-weight:700;margin-bottom:4px}
+.rex{font-size:12px;color:var(--teal);font-weight:600;margin-bottom:6px}
+.rfc{font-size:12px;color:var(--ink-soft);line-height:1.5}
+.cs{background:#fff;border:1px solid var(--warm-line);border-radius:12px;overflow:hidden;margin-bottom:1.5rem;box-shadow:var(--shadow-sm)}
+.csh{background:var(--ink);color:var(--paper);padding:1rem 1.3rem;display:flex;align-items:center;gap:.75rem}
+.csh h3{font-family:"Playfair Display",serif;font-size:1rem;font-weight:400}
+.csb{padding:1.25rem}
+.cc{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+@media(max-width:600px){.cc{grid-template-columns:1fr}}
+.ccl h4{font-size:11px;font-family:"DM Mono",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.6rem}
+.cl{list-style:none}
+.cl li{font-size:13px;color:var(--ink-mid);padding:.35rem 0;border-bottom:1px solid var(--warm-line);display:flex;align-items:baseline;gap:.5rem;line-height:1.5}
+.cl li:last-child{border-bottom:none}
+.cl li::before{content:"\2192";color:var(--ink-soft);font-size:11px;flex-shrink:0}
+.pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin:1rem 0}
+@media(max-width:700px){.pillars-grid{grid-template-columns:1fr 1fr}}
+.pillar-card{border-radius:8px;padding:1rem}
+.ft{text-align:center;padding:2rem;font-family:"DM Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);border-top:1px solid var(--warm-line);margin-top:3rem}
+@media print{.tab-nav{display:none}.tab-panel{display:block !important}.wkb{display:block !important}}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">LUBENO Consult · Stage 6 of 6</div>
+    <h1>Teacher Content Package<br><em>Artistry and Legacy · 36 Weeks</em></h1>
+    <p class="header-sub">The final stage is not a destination but a disposition. Stage 6 asks what a musician does with six stages of accumulated skill — not for the next performance, but for a lifetime. Five phases, 72 sessions. The decisive question: is this a musician ready to sustain a lifetime of growth, contribution, and artistry independently?</p>
+    <div class="header-pills">
+      <span class="header-pill">Stage 6 of 6 — Final Stage</span>
+      <span class="header-pill">36 Weeks · 72 Sessions</span>
+      <span class="header-pill">5 Phases · 6 Pillars</span>
+      <span class="header-pill">90–120 min daily practice</span>
+      <span class="header-pill">35+ real-audience performances</span>
+      <span class="header-pill">Gateway: Sessions 69–72</span>
+    </div>
+  </div>
+</div>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="switchTab('overview',this)">Overview</button>
+    <button class="tab-btn" onclick="switchTab('phase-a',this)">Phase A — Mastery</button>
+    <button class="tab-btn" onclick="switchTab('phase-b',this)">Phase B — Composition</button>
+    <button class="tab-btn" onclick="switchTab('phase-c',this)">Phase C — Teaching</button>
+    <button class="tab-btn" onclick="switchTab('phase-d',this)">Phase D — Legacy</button>
+    <button class="tab-btn" onclick="switchTab('phase-e',this)">Phase E — Gateway</button>
+    <button class="tab-btn" onclick="switchTab('gateway',this)">Gateway</button>
+    <button class="tab-btn" onclick="switchTab('repertoire',this)">Repertoire</button>
+    <button class="tab-btn" onclick="switchTab('cheatsheets',this)">Cheat Sheets</button>
+  </div>
+</nav>
+<main class="main">
+
+<!-- OVERVIEW -->
+<div class="tab-panel active" id="tab-overview">
+  <div class="sh"><h2>Stage 6 at a Glance</h2><p class="desc">Stage 6 is unlike the previous five stages in one fundamental way: there is no ceiling. The gateway does not mark completion. It marks the beginning of an artistic life that extends indefinitely beyond the curriculum.</p></div>
+
+  <div style="background:#fff;border:1px solid var(--warm-line);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm)">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;margin-bottom:1rem">The Stage 6 Principle</h3>
+    <p style="font-size:13.5px;color:var(--ink-mid);line-height:1.7;margin-bottom:.75rem">The goal of all technical practice is to make itself unnecessary. The pianist who is still thinking about technique while performing has not yet reached artistry. The one who has forgotten technique entirely — because it has become the body — has arrived.</p>
+    <p style="font-size:13.5px;color:var(--ink-mid);line-height:1.7;margin-bottom:.75rem">Three words in Stage 6's title are carefully chosen: <strong>Artistry</strong> — the state in which all previously learned skills operate as an integrated whole in service of musical expression. <strong>And</strong> — the conjunction that insists on both things simultaneously. <strong>Legacy</strong> — the lasting mark left on the musical community.</p>
+    <div class="fb"><strong>The Stage 6 gateway question</strong>"Is this a musician ready to sustain a lifetime of growth, contribution, and artistry independently? Not the best they will ever be — the best they are now, and the evidence that it will keep deepening."</div>
+  </div>
+
+  <div style="background:#fff;border:1px solid var(--warm-line);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm)">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;margin-bottom:1rem">The Six Pillars of Stage 6</h3>
+    <div class="pillars-grid">
+      <div class="pillar-card" style="background:var(--rose-light)"><div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--rose);margin-bottom:6px">Pillar 1</div><div style="font-size:13px;font-weight:700;color:var(--rose);margin-bottom:6px">Mastery Repertoire</div><div style="font-size:12px;color:var(--ink-mid);line-height:1.5">Five major works + two original compositions at the highest technical and musical level — representing the full integration of all six stages simultaneously</div></div>
+      <div class="pillar-card" style="background:var(--green-light)"><div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:6px">Pillar 2</div><div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:6px">Original Voice in Composition</div><div style="font-size:12px;color:var(--ink-mid);line-height:1.5">One major work (5–10 min) + one contrasting work (2–4 min). The student's compositional voice developed to the point of recognisability</div></div>
+      <div class="pillar-card" style="background:var(--gold-light)"><div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px">Pillar 3</div><div style="font-size:13px;font-weight:700;color:var(--gold);margin-bottom:6px">Teaching and Mentoring</div><div style="font-size:12px;color:var(--ink-mid);line-height:1.5">A real student taken from Stage 1 through at least Stage 3 over Stage 6. Weekly lessons, teaching diary, handover document. The deepest form of musical understanding is what can be given to someone else</div></div>
+      <div class="pillar-card" style="background:var(--purple-light)"><div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);margin-bottom:6px">Pillar 4</div><div style="font-size:13px;font-weight:700;color:var(--purple);margin-bottom:6px">Community and Contribution</div><div style="font-size:12px;color:var(--ink-mid);line-height:1.5">Regular performance for real audiences (35+ total). Community performance for non-concert audiences. A sustained legacy project contributing beyond the private lesson</div></div>
+      <div class="pillar-card" style="background:var(--blue-light)"><div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:6px">Pillar 5</div><div style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:6px">Self-Direction</div><div style="font-size:12px;color:var(--ink-mid);line-height:1.5">Designing your own practice, diagnosing your own weaknesses, setting long-term artistic goals, sustaining the discipline to pursue them without external accountability. The student becomes their own teacher</div></div>
+      <div class="pillar-card" style="background:var(--teal-light)"><div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:6px">Pillar 6</div><div style="font-size:13px;font-weight:700;color:var(--teal);margin-bottom:6px">The Lifelong Practice</div><div style="font-size:12px;color:var(--ink-mid);line-height:1.5">Six daily disciplines (technique, repertoire, composition, ear training, teaching, performance) that will sustain musical growth for life. Not the curriculum's end but its foundation</div></div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem">
+    <div style="background:var(--rose-light);border-radius:10px;padding:1.25rem"><div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--rose);margin-bottom:8px">Phase A · Weeks 1–8</div><div style="font-size:14px;font-weight:700;color:var(--rose);margin-bottom:6px">Mastery Repertoire</div><div style="font-size:12px;color:var(--ink-mid);line-height:1.55">Three mastery works · Stage 6 learning standard (technique and interpretation as one act) · Pre/post performance ritual · 2+ real-audience performances/month · Phase A milestone: three works at performance standard</div></div>
+    <div style="background:var(--green-light);border-radius:10px;padding:1.25rem"><div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:8px">Phase B · Weeks 9–16</div><div style="font-size:14px;font-weight:700;color:var(--green);margin-bottom:6px">Major Composition</div><div style="font-size:12px;color:var(--ink-mid);line-height:1.55">5–10 min major original work · Five compositional tools (sequence, fragmentation, augmentation, diminution, inversion) · Fourth mastery work · First 50–75 min programme · 10–15 real-audience performances</div></div>
+    <div style="background:var(--gold-light);border-radius:10px;padding:1.25rem"><div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Phase C · Weeks 17–24</div><div style="font-size:14px;font-weight:700;color:var(--gold);margin-bottom:6px">Teaching and Community</div><div style="font-size:12px;color:var(--ink-mid);line-height:1.55">Formal teaching engagement begins · Second composition (2–4 min) · Community performance · Fifth mastery work · 60–90 min full programme · Teaching diary deepens</div></div>
+    <div style="background:var(--purple-light);border-radius:10px;padding:1.25rem"><div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);margin-bottom:8px">Phase D · Weeks 25–30</div><div style="font-size:14px;font-weight:700;color:var(--purple);margin-bottom:6px">Legacy and Philosophy</div><div style="font-size:12px;color:var(--ink-mid);line-height:1.55">Legacy project in execution · Musical philosophy (800–1500 words) · Musical autobiography · Lifelong practice programme · Final public recital (20–100 people) · 30+ performances total</div></div>
+  </div>
+  <div style="background:var(--teal-light);border:1px solid #9addc6;border-radius:10px;padding:1.25rem;margin-bottom:1.5rem"><div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:8px">Phase E · Weeks 31–36</div><div style="font-size:14px;font-weight:700;color:var(--teal);margin-bottom:6px">Integration and Gateway</div><div style="font-size:12px;color:var(--ink-mid);line-height:1.55">All six pillars held simultaneously · Portfolio assembled · 5 more real-audience performances · Mock gateway Week 32 · Final public recital Week 33 · The final conversation Week 34 · Gateway Sessions 69–72</div></div>
+
+  <div style="background:#fff;border:1px solid var(--warm-line);border-radius:12px;padding:1.5rem;box-shadow:var(--shadow-sm)">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;margin-bottom:.75rem">The Gateway Portfolio — What It Contains</h3>
+    <table class="tbl">
+      <thead><tr><th>#</th><th>Component</th><th>Format</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Complete mastery programme — five works + two original compositions</td><td>Live performance, 60–90 min</td></tr>
+        <tr><td>2</td><td>Original compositions discussed — three questions answered</td><td>Performance + verbal</td></tr>
+        <tr><td>3</td><td>Musical philosophy document</td><td>800–1500 words, read and discussed</td></tr>
+        <tr><td>4</td><td>Musical autobiography</td><td>1000–2000 words, available to panel</td></tr>
+        <tr><td>5</td><td>Teaching diary</td><td>14 weeks, presented and discussed</td></tr>
+        <tr><td>6</td><td>Legacy project</td><td>3 min presentation + evidence of impact</td></tr>
+        <tr><td>7</td><td>Lifelong practice programme</td><td>2 min presentation, already in use 4+ weeks</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- PHASE A -->
+<div class="tab-panel" id="tab-phase-a">
+  <div class="sh"><h2>Phase A — Mastery Repertoire</h2><p class="desc">Weeks 1–8 · Sessions 1–16 · Three mastery works begun, the Stage 6 learning standard established, performance discipline locked in (two real-audience performances per month minimum), and the self-direction plan for Phase B designed. The north star question set in Week 1.</p></div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Week 1 · Sessions 1–2</div><div class="wkt">The Stage 6 Inventory and Mastery Programme Design</div><div class="wkm">North star question · Mastery work selection · What artistry sounds like · Five interpretive commitments · Stage 6 learning standard</div><span class="pb pa">Phase A</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Session 1</span> The Stage 6 inventory</div>
+        <div class="ac"><span class="ap p-art">Art</span><span>The Stage 6 inventory: teacher and student review the Stage 5 gateway programme and personal voice statement together. "In the time since Stage 5, what has deepened? What has emerged that was not present before?" This is not a progress report but an artistic audit — a map of the current terrain. 10 min.</span></div>
+        <div class="ac"><span class="ap p-rep">Repertoire</span><span>Identifying the mastery repertoire: list ten works in order of desire. The top three are the Phase A gateway programme — chosen for personal meaning and genuine artistic ambition, not technical safety. 12 min.</span></div>
+        <div class="ac"><span class="ap p-leg">Legacy</span><span>The north star question: "In ten years, what do you want people to say about your playing? Not technically — musically and humanly. What do you want them to have experienced?" Write this as one sentence. It becomes the standard against which every artistic decision in Stage 6 is measured. 8 min.</span></div>
+        <div class="ac"><span class="ap p-ear">Ear</span><span>Listening session: teacher plays recordings of three pianists at mastery level — one in Baroque repertoire (Andras Schiff), one Classical/Romantic (Argerich, Uchida, or Brendel), one 20th century (Zimerman or Pollini). "What is common to all three that goes beyond correct notes?" Student articulates three qualities. Those qualities become the artistic targets for Stage 6. 15 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>Presence: "Have you ever had the experience at the piano, even for a single phrase, where all attention was inside the music rather than on the performance of the music? That is what Stage 6 works to make consistently available." 15 min.</span></div>
+      </div>
+      <div class="sb">
+        <div class="st"><span class="sn">Session 2</span> The Stage 6 learning standard</div>
+        <div class="ac"><span class="ap p-art">Art</span><span>At Stage 6 the sequence "learn notes → add technique → add interpretation" is collapsed. Every section is learned from bar one with technical accuracy, harmonic understanding, and interpretive intention simultaneously. A passage cannot be "technically correct" while "musically uninflected" — the musical inflection IS the technique. 10 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>Interpretive position before the first note: before playing the mastery work, the student states their interpretive intention in three sentences. "This work is about ___. The journey it takes the listener on is ___. My specific contribution to the existing interpretations of this work is ___." The third sentence is the most important. 10 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>Interpretive courage: "Many technically accomplished performers play safely — within the range of interpretation no critic can fault. This safety is the enemy of memorability. A memorable interpretation commits to a specific, personal position that involves genuine artistic risk." 10 min.</span></div>
+        <div class="ac"><span class="ap p-adv">Advanced</span><span>Five specific interpretive commitments: for each mastery work, identify five interpretive decisions that are distinctly your own. Each is: (1) named; (2) justified in musical terms; (3) consistently present in every performance. These five commitments are your artistic signature on the work. 10 min.</span></div>
+      </div>
+      <div class="pb3"><strong>Home practice — Week 1 (90 min/day)</strong><ul>
+        <li>10 min — Advanced technique warm-up: scales and arpeggios in two difficult keys, one octave exercise, one trill. All from Stage 4 — now pre-performance maintenance, not learning</li>
+        <li>20 min — Mastery work 1: structural analysis at home. First section learned HS with inner singing and interpretive intention from bar one</li>
+        <li>15 min — Sight-reading: one Grade 7–8 piece daily. Never repeated</li>
+        <li>10 min — Improvisation: one 5-minute improvisation using the Stage 5 personal voice fingerprints. Record</li>
+        <li>15 min — Stage 5 gateway programme maintained: one complete performance simulation. Keep what was built</li>
+        <li>10 min — Ear training: listening with score of a major work not in the current repertoire</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Week 2 · Sessions 3–4</div><div class="wkt">Advanced Memorisation — Inhabiting a Work</div><div class="wkm">Random start Stage 6 version · Transposition memorisation · Aural memory: singing all voices · The performance without preparation · Second mastery work introduced</div><span class="pb pa">Phase A</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 3–4</span> Memory at Stage 6 depth</div>
+        <div class="ac"><span class="ap p-adv">Advanced</span><span>Random start test — Stage 6 version: teacher names any bar. Student begins playing immediately in tempo. Teacher then interrupts with a harmonic question — "What chord is in bar 40?" — while the student continues playing. All questions answered without stopping. Passed when analytical memory operates simultaneously with performance without either interfering with the other. 15 min.</span></div>
+        <div class="ac"><span class="ap p-adv">Advanced</span><span>Transposition memorisation: play a fully memorised section transposed down a semitone. This eliminates muscle memory entirely — leaving only aural and analytical memory. If these two systems are fully active, transposition is possible within two to three weeks on any given section. If impossible, the analytical memory is not yet fully active. 12 min.</span></div>
+        <div class="ac"><span class="ap p-ear">Ear</span><span>Aural memory: student leaves the piano, faces away, and sings the mastery work — all voices, not just the melody. Inner voices, bass line, and harmonic changes all represented. Where the singing becomes uncertain is precisely where the performance is most vulnerable. 13 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>The performance without preparation: teacher asks the student to perform a section immediately upon sitting at the piano, without any warm-up. "In a real performance, the first note is the first note. This reveals whether the piece is inhabitable at a moment's notice — or whether it requires a preparatory ritual." 10 min.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Weeks 3–4 · Sessions 5–8</div><div class="wkt">Performance Mindset — Playing for Real Audiences Consistently</div><div class="wkm">Pre-performance ritual · Post-performance review · Two real-audience performances per month minimum · Breath as anchor · First Stage 6 performance arranged</div><span class="pb pa">Phase A</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 5–6</span> Performance ritual and review</div>
+        <div class="ac"><span class="ap p-art">Art</span><span>The pre-performance ritual — four stages: (1) Physical warm-up: 10 minutes of scales and technical exercises at the performance venue. (2) Score review without playing: 5 minutes reading through the score mentally, confirming analytical memory for the opening of each piece. (3) The silence: 2 minutes — sit with the piano, settle the body, find physical stillness, hear the programme's opening in the inner ear. (4) The intention: one sentence stated before sitting at the instrument: "Today this programme is about ___." 12 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>The post-performance review: written within 24 hours of every performance. Three questions: (1) Where was the intention fully present in the music? (2) Where did the intention retreat — and what caused the retreat? (3) What would I do differently in the next performance of this programme? The review is diagnostic, not self-critical. 10 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>Breath as anchor: a deliberate complete out-breath before the first note resets the nervous system's baseline. "Play the breath, not the notes. The notes happen inside the breath." Practice this explicitly: in-breath before the phrase begins, out-breath through the phrase's arc, natural pause at the phrase end before the next breath begins. 8 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>First Stage 6 performance: arrange a small-audience performance within the first four weeks. The pre-performance ritual and post-performance review are used exactly as in a formal concert. "The first performance of Stage 6 begins your performance log. At the end of Stage 6, this log will contain 35–72 entries." 5 min.</span></div>
+      </div>
+      <div class="fb"><strong>Why regular performance is a technical discipline</strong>The physiological changes during performance — elevated heart rate, increased adrenaline, heightened sensory awareness — are not problems to be overcome. They are the natural preparation for a high-stakes activity. A performer who has performed regularly for years learns to work with these changes: using the additional energy for greater physical commitment, the heightened awareness for more intense musical listening. Stage 6 requires a minimum of two real-audience performances per month throughout its entire duration.</div>
+    </div>
+  </div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Weeks 5–8 · Sessions 9–16</div><div class="wkt">Chamber Music, Programme Design, and Phase A Milestone</div><div class="wkm">Ensemble disciplines · Dynamic recalibration · Programme as a unified artistic statement · First full programme performance · Phase A milestone</div><span class="pb pa">Phase A</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 9–12</span> Ensemble and programme design</div>
+        <div class="ac"><span class="ap p-art">Art</span><span>Accompaniment at Stage 6: at this level, accompaniment is a full artistic engagement — the accompanist makes interpretive decisions as significant as the soloist's, simply in service of the soloist's musical line. "The great accompanist is the soloist's musical shadow — always present, always ready to catch." 15 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>Dynamic recalibration: in ensemble, the piano is almost always too loud. The pianist should use the dynamic that feels uncomfortably soft. When that level feels natural, the balance is probably correct. This recalibration transfers permanently to solo playing. 10 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>What ensemble gives back: after a chamber music session, the solo playing changes for one to three days. Inner voices become more audible, harmonic rhythm more alive. Stage 6 schedules ensemble sessions deliberately the day before important solo performance work to exploit this effect. 10 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>Programme design: "A recital programme is a composition in three movements. The relationship between the pieces — in key, character, era, duration, and emotional content — is as intentional as the relationship between movements of a symphony. You do not choose pieces and then arrange them. You compose a programme." 5 min.</span></div>
+      </div>
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 11–12</span> First full programme performance</div>
+        <div class="ac"><span class="ap p-rep">Repertoire</span><span>First full programme performance: all three mastery works in programme order for an audience of at least three people (teacher plus two others). Teacher does not correct during the performance — receives it as audience. Post-performance review written by student within 24 hours. Debrief in session 12 focuses on three most significant gaps between stated intention and audience's reported experience. 45 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>Transitions between works: the silence between the last note of one work and the first note of the next is part of the programme. At Stage 6, transitions are actively designed — their duration, the quality of physical presence within them, the mental shift from one work's world to the next. Practice each transition explicitly: it is part of the performance. 12 min.</span></div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--warm-line);border-radius:10px;padding:1rem;margin:1rem 0">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.75rem">Phase A Milestone — Mastery Repertoire</div>
+        <div class="mg">
+          <div class="mc"><div class="ml">M1 — Three mastery works at performance standard</div><h4>Programme performed with full ritual</h4><p>All three works performed in programme order. Technique invisible. Interpretive commitments audible. All four memory systems active under performance conditions. Random start test passed on all three works.</p></div>
+          <div class="mc"><div class="ml">M2 — Interpretive courage</div><h4>Five commitments, one distinctly personal</h4><p>Five specific interpretive commitments identified and consistently present in each mastery work. At least one commitment in each work is distinctly personal — identifiable as this performer's contribution and no one else's.</p></div>
+          <div class="mc"><div class="ml">M3 — Performance frequency and log</div><h4>2+ real-audience performances in wks 1–8</h4><p>Performance log maintained. Post-performance reviews written within 24 hours — showing increasing diagnostic precision over time.</p></div>
+          <div class="mc"><div class="ml">M4 — Phase B self-direction plan</div><h4>Written composition brief</h4><p>Form, harmonic language, emotional content, connection to mastery repertoire. Teaching engagement identified and first lesson planned. The plan is the student's own design.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE B -->
+<div class="tab-panel" id="tab-phase-b">
+  <div class="sh"><h2>Phase B — Extended Composition</h2><p class="desc">Weeks 9–16 · Sessions 17–32 · The major original work (5–10 min) as an artistic statement equivalent in ambition to the mastery repertoire. Compositional seed, form map, harmonic planning, five development tools, revision by external ear. Plus the fourth mastery work and the first 50–75 minute complete programme.</p></div>
+
+  <div class="fb"><strong>Teacher's framing for Phase B</strong>The major compositional work is not a demonstration of compositional technique. It is the most direct statement of the student's musical identity available — more direct than any interpretation of someone else's music, because it involves no inherited constraints. The work must be genuine. The teacher's role is not to evaluate or improve the composition — it is to ask questions that help the student articulate and realise their own intention. "Is this what you meant to say?" is the only relevant question.</div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Weeks 9–10 · Sessions 17–20</div><div class="wkt">Compositional Process at Scale — Seed, Form, Harmonic Planning</div><div class="wkm">Compositional seed from improvisation recordings · Four landmarks (beginning, turning point, climax, resolution) · Harmonic planning · First 16 bars composed</div><span class="pb pb2">Phase B</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 17–18</span> Seed and form</div>
+        <div class="ac"><span class="ap p-comp">Compose</span><span>The compositional seed: from improvisation recordings made in weeks 1–8, identify the single most compelling musical idea — carrying the three Stage 5 fingerprints, feeling inevitable, as if it could not have been any other way. This is the seed of the major work. Short (4–8 bars). 10 min.</span></div>
+        <div class="ac"><span class="ap p-comp">Compose</span><span>Form design before composing: four landmarks are the structural skeleton. (1) Beginning: character, key, texture, dynamic level. (2) Turning point: the moment the music commits to its journey. (3) Climax: highest tension — dynamically, harmonically, emotionally. (4) Resolution: the arrival that makes the whole journey feel inevitable. Everything else is flesh. 12 min.</span></div>
+        <div class="ac"><span class="ap p-comp">Compose</span><span>Harmonic planning: before writing bar 5, decide the harmonic world of the entire work. What is the home key? Most distant key visited — and why? Which chromatic chord (dim7, augmented sixth, Neapolitan) appears at or near the climax? What is the final harmonic gesture — resolution, irresolution, or open ending? 10 min.</span></div>
+        <div class="ac"><span class="ap p-comp">Compose</span><span>The first 16 bars: compose, notate, and play. Then: "Is this what you meant? Is the character what you intended? Does the first phrase have a shape — a question that demands an answer?" Every bar at Stage 6 composition is intentional. Nothing is written because it "sounds all right" — everything because it is the next necessary thing in the music's argument. 18 min.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Week 10 · Sessions 19–20</div><div class="wkt">Development — Five Tools for Thematic Argument</div><div class="wkm">Sequence · Fragmentation · Augmentation · Diminution · Inversion · Planning the climax backward</div><span class="pb pb2">Phase B</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 19–20</span> Thematic development</div>
+        <div class="ac"><span class="ap p-comp">Compose</span><span>The five development tools: (1) Sequence — idea repeated one step higher or lower (creates momentum); (2) Fragmentation — only part of the idea repeated (creates urgency); (3) Augmentation — idea in longer note values (creates weight); (4) Diminution — idea in shorter note values (creates excitement); (5) Inversion — idea upside down (creates surprise). Apply all five to the compositional seed. Evaluate: which transformation most advances the emotional argument at this point? 15 min.</span></div>
+        <div class="ac"><span class="ap p-comp">Compose</span><span>Planning the climax backward: plan it specifically — which bar? Which key? Which chromatic chord? What dynamic? What texture? Then compose backward from the climax to the current development section — "What must happen before bar 67 for bar 67 to feel inevitable?" This backward planning is one of the most powerful compositional techniques available. 12 min.</span></div>
+        <div class="ac"><span class="ap p-rep">Repertoire</span><span>Analyse the development section of one mastery work: "How does Beethoven/Chopin/Schubert develop the main themes? Which of the five tools appear, and in which order? What is the harmonic trajectory? Where is the climax, and how has it been prepared?" This analysis feeds directly into the student's own compositional development. 13 min.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Weeks 11–12 · Sessions 21–24</div><div class="wkt">Resolution, First Draft, and Revision</div><div class="wkm">The recapitulation as transformation · The ending as completion · First draft played through · Another pianist reads from score · Final revised score</div><span class="pb pb2">Phase B</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 21–22</span> Resolution and the complete first draft</div>
+        <div class="ac"><span class="ap p-comp">Compose</span><span>The recapitulation: "The theme is the same — but the listener who has been through the development is different. Play to that changed listener." The recapitulation is composed with this emotional transformation in mind: the same theme, in the same key, but carrying the weight of everything that has happened since it was first heard. 15 min.</span></div>
+        <div class="ac"><span class="ap p-comp">Compose</span><span>The ending — three options: (1) Clear, settled cadence — the answer to the question posed in bar 1; (2) Sustained final note that dissolves into silence — the argument is made, the silence completes it; (3) Open ending — the work ends, but the listener continues thinking about it. The student chooses deliberately, having considered all three, and defends the choice. 12 min.</span></div>
+        <div class="ac"><span class="ap p-comp">Compose</span><span>Complete first draft: by end of session 22, the complete first draft exists. Play through from beginning to end without stopping. First impression: does it feel like a complete work? Does the emotional journey arrive where designed? Write three assessments immediately — they guide the revision. 20 min.</span></div>
+      </div>
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 23–24</span> Revision and the external ear</div>
+        <div class="ac"><span class="ap p-comp">Compose</span><span>Teacher hears the first draft for the first time as a listener — not as someone who has discussed the process. Teacher provides one response — an experiential report: "What did I experience? Where did the emotional journey arrive as designed? Where did it lose me? What was the single most powerful moment?" 12 min.</span></div>
+        <div class="ac"><span class="ap p-comp">Compose</span><span>Another pianist reads the composition from score: teacher or a second pianist reads through the complete work. Every unclear notation produces a different result from the one intended. Student observes without intervening — the reading is the diagnostic. Revision targets identified from the discrepancies. 15 min.</span></div>
+        <div class="ac"><span class="ap p-comp">Compose</span><span>The final score: all notation ambiguities resolved. Dynamics fully specified. Pedalling marked where intention is specific. Tempo indication: not only a metronome marking but a character indication ("with urgency and clarity," "as if from a great distance"). Fingering added for three most technically demanding passages. 10 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>"The compositional decisions you have made in Phase B will permanently change how you perform other composers' music — because you now understand what those decisions feel like from the inside. When you decided where the climax of your work should be, you made the same decision as a Beethoven sonata performer who shapes the development section." 8 min.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Weeks 13–16 · Sessions 25–32</div><div class="wkt">Fourth Mastery Work, Complete Programme, and Phase B Milestone</div><div class="wkm">Fourth mastery work · First 50–75 min programme · Performance accumulation · Archive recording · Teaching engagement ready for Week 17</div><span class="pb pb2">Phase B</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 25–26</span> The complete programme</div>
+        <div class="ac"><span class="ap p-rep">Repertoire</span><span>First full recital run-through: all five pieces (four mastery works + original composition) in programme order for a small audience. 50–75 minutes total. Post-performance review focuses on programme arc: "Did the programme feel like a single artistic statement? Or five separate pieces played in sequence? What is the difference — and what caused it?" 60 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>Programme design: "A recital programme is a composition in three movements — beginning (establishes the world), centrepiece (most demanding), closing work (leaves the final impression). Where does the original composition fit most naturally? What does that reveal about how the student understands their own voice in relation to the tradition?" 15 min.</span></div>
+      </div>
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 27–30</span> Performance accumulation and deepening</div>
+        <div class="ac"><span class="ap p-art">Art</span><span>"The performance that is exactly the same each time is a recording. The performance that is completely different each time is chaos. Artistry is the living space between these two." After 10–15 real-audience performances, the interpretation deepens — if the performer is listening. Each audience and hall is different. A performer genuinely present responds to these differences. 10 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>Performance log analysis: three patterns identified. (1) What consistently improved? (Area of greatest current mastery.) (2) What consistently remained problematic? (Next technical or analytical target.) (3) What varied — sometimes better, sometimes worse? (Still consciously managed rather than automatic.) 15 min.</span></div>
+        <div class="ac"><span class="ap p-leg">Legacy</span><span>Archive recording session — Week 15: the complete programme recorded in one sitting, pre-performance ritual used. No editing. "In ten years, this recording will be more interesting than any you will make in the next twelve months. It is the most honest document of exactly who you are as a musician at this moment." 15 min.</span></div>
+      </div>
+      <div style="background:#fff;border:1px solid var(--warm-line);border-radius:10px;padding:1rem;margin:1rem 0">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.75rem">Phase B Milestone — Composition and Extended Programme</div>
+        <div class="mg">
+          <div class="mc"><div class="ml">M1 — Major original work performed</div><h4>5–10 min, in the programme</h4><p>The composition performed alongside the mastery programme. Notation clear enough for another pianist. Three fingerprints audible. Composer can answer the three composition questions honestly.</p></div>
+          <div class="mc"><div class="ml">M2 — Complete programme (50–75 min)</div><h4>Four mastery works + composition</h4><p>Programme arc intentional and audible. Original composition belongs in the programme without apology.</p></div>
+          <div class="mc"><div class="ml">M3 — Performance frequency and archive</div><h4>4+ real-audience performances, wks 9–16</h4><p>Performance log maintained with increasing diagnostic precision. Archive recording made in week 15.</p></div>
+          <div class="mc"><div class="ml">M4 — Teaching engagement ready</div><h4>First lesson designed, student identified</h4><p>Stage 1 curriculum reviewed. Diagnostic first lesson plan written. Teaching diary begun. First entry: one-paragraph teaching philosophy statement.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE C -->
+<div class="tab-panel" id="tab-phase-c">
+  <div class="sh"><h2>Phase C — Teaching and Community</h2><p class="desc">Weeks 17–24 · Sessions 33–48 · Teaching a real student from Stage 1 through at least Stage 3 over Stage 6. The second original composition. Community performance for non-concert audiences. Fifth mastery work. The full 60–90 minute programme takes shape.</p></div>
+
+  <div class="lgb"><strong>Teacher's framing for Phase C</strong>Teaching a student through three stages of the curriculum is not an add-on — it is a primary component of Stage 6. The reason: teaching reveals the depth of understanding in the teacher in a way that nothing else can. Every concept the Stage 6 student struggles to explain to their student is a concept they do not yet fully understand themselves. Every moment when their student's playing suddenly improves is a moment when the teacher has found the right words, the right demonstration, or the right physical adjustment.</div>
+
+  <div style="background:#fff;border:1px solid var(--warm-line);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm)">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:400;margin-bottom:1rem">Phase C Overview — Weeks 17–24</h3>
+    <table class="tbl">
+      <thead><tr><th>Week</th><th>Focus</th><th>Sessions</th></tr></thead>
+      <tbody>
+        <tr><td><strong>17</strong></td><td>Teaching engagement begins · Diagnostic first lesson · Teaching diary begins · The mirror effect: "when your student collapses their knuckle, you will remember collapsing yours"</td><td>33–34</td></tr>
+        <tr><td><strong>18</strong></td><td>Student's musical personality identified · Curriculum adaptation to the specific student · Mastery programme maintenance discipline established</td><td>35–36</td></tr>
+        <tr><td><strong>19</strong></td><td>Community performance arranged and executed (school, hospital, community centre, or place of worship) · 20–30 min programme · Spoken framing for each piece (max 60 words)</td><td>37–38</td></tr>
+        <tr><td><strong>20</strong></td><td>Second original composition (2–4 min, meaningfully contrasting the first) · Compositional range · Another pianist reads from score · Both compositions performed as a pair</td><td>39–40</td></tr>
+        <tr><td><strong>21</strong></td><td>Recording as professional and diagnostic tool · Three uses: self-study, archive, distribution · Archive recording session · "When you are fully in the music, the microphone becomes irrelevant"</td><td>41–42</td></tr>
+        <tr><td><strong>22</strong></td><td>Teaching through Stage 2 · Teaching inner singing and thumb crossings · Teaching diary at its most revealing</td><td>43–44</td></tr>
+        <tr><td><strong>23</strong></td><td>Fifth mastery work · Complete 60–90 min programme · First full recital run-through</td><td>45–46</td></tr>
+        <tr><td><strong>24</strong></td><td>Phase C milestone assessment · Legacy project designed in detail · Phase D preview</td><td>47–48</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Week 17 · Sessions 33–34</div><div class="wkt">The Teaching Relationship in Depth</div><div class="wkm">The teaching diary · Diagnostic first lesson · The mirror effect · Teaching vs. mentoring</div><span class="pb pc">Phase C</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 33–34</span> Beginning to teach</div>
+        <div class="ac"><span class="ap p-leg">Legacy</span><span>The teaching diary: from the first lesson through the end of Stage 6, a weekly record of: what was taught; what the student understood easily and what required more explanation; what the teacher could not explain clearly; what changed in the student's playing; what the act of teaching revealed about the teacher's own understanding. Reviewed every four weeks. Submitted as part of the gateway portfolio. 10 min.</span></div>
+        <div class="ac"><span class="ap p-leg">Legacy</span><span>The diagnostic first lesson — four things revealed: (1) Physical habits — tension, posture, existing touch; (2) Musical instincts — ear, rhythmic sense, response to dynamics; (3) Reading level; (4) Motivational profile — why do they want to play? The first lesson is a diagnostic, not a teaching session. 15 min.</span></div>
+        <div class="ac"><span class="ap p-leg">Legacy</span><span>The mirror effect: "The student you teach will reveal your own history as a student — the moments where you struggled, the concepts that came easily, the habits formed before you understood them. When your student collapses their knuckle on the fourth finger, you will remember collapsing yours — and understand the correction from the inside rather than the outside." 12 min.</span></div>
+        <div class="ac"><span class="ap p-leg">Legacy</span><span>Teaching vs. mentoring: teaching addresses skill deficits ("Your thumb crossing is late — begin the slide under on beat 3"). Mentoring addresses artistic orientation ("You are playing this passage as if you are trying to impress me. What if you played it as if you were telling me something true?"). The Stage 6 student provides both — and never confuses which is being offered at any moment. 13 min.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Week 19 · Sessions 37–38</div><div class="wkt">Community Performance — Music Beyond the Concert Hall</div><div class="wkm">School, hospital, community centre, or place of worship · 20–30 min programme · Spoken framing · What reaches community audiences</div><span class="pb pc">Phase C</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 37–38</span> Community performance</div>
+        <div class="ac"><span class="ap p-leg">Legacy</span><span>Community programme design: 20–30 minutes from the full repertoire across all six stages. Requirements: shorter pieces (3–8 minutes each), greater variety, at least one piece the audience will recognise or can engage with immediately. Spoken framing before each piece: max 60 words, warm, specific, human. Example: "This next piece was written by a composer who was completely deaf when he wrote it. What I want you to listen for is how it still sounds like someone who loves sound deeply." 15 min.</span></div>
+        <div class="ac"><span class="ap p-leg">Legacy</span><span>Post-performance review: "What reached this audience that would not have reached a concert audience? What did not reach them? What does this reveal about the essential qualities of music that communicates across all contexts?" The insights are reported in the teaching diary. 12 min.</span></div>
+        <div class="ac"><span class="ap p-leg">Legacy</span><span>"In a community setting, your credentials are invisible. The only thing that communicates is the music itself and the quality of your presence in it. This is, paradoxically, the most honest performance context available. What works here works for the right reasons." 10 min.</span></div>
+      </div>
+      <div class="lgb"><strong>Why community performance matters at Stage 6</strong>A performing musician who only plays in concert halls reaches audiences who have already decided classical piano music is for them. A musician who plays in schools, hospitals, and community centres reaches people who have never made that decision. These audiences respond only to what genuinely moves them — there is no social contract requiring polite listening. Playing for these audiences is the most revealing performance context available.</div>
+    </div>
+  </div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Week 20 · Sessions 39–40</div><div class="wkt">Second Original Composition — Contrasting, Shorter, Equally Personal</div><div class="wkm">2–4 min · Meaningfully contrasts the first · Compositional range · Both pieces performed as a pair · Shared compositional fingerprints</div><span class="pb pc">Phase C</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 39–40</span> Second composition and compositional range</div>
+        <div class="ac"><span class="ap p-comp">Compose</span><span>The second composition must be meaningfully different from the first in at least two dimensions: duration, harmonic language, texture, emotional character, or formal structure. "The shortest pieces are often the hardest to compose. Every bar must contribute to the whole. Nothing can be filler." 10 min.</span></div>
+        <div class="ac"><span class="ap p-comp">Compose</span><span>Compositional range and identity: "The most compelling compositional identities are those whose range is wide but whose voice is consistent — Schubert can write a tragedy, a comedy, and an intimate confession — and all three are unmistakably Schubert. Can you write something completely different from your first composition — and still sound like yourself?" 10 min.</span></div>
+        <div class="ac"><span class="ap p-comp">Compose</span><span>Both compositions performed as a pair: play composition 1, then (after the transition silence) composition 2. "What do they have in common that was not consciously planned? Those shared qualities are the compositional fingerprints — the sonic signature present in everything the student writes." 15 min.</span></div>
+        <div class="ac"><span class="ap p-comp">Compose</span><span>Another pianist reads the second composition from score. Notation revised. "Your two compositions are now the most personal documents in this entire portfolio — the only things here that did not exist before you wrote them." 15 min.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#fff;border:1px solid var(--warm-line);border-radius:10px;padding:1rem;margin-bottom:1.5rem">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.75rem">Phase C Milestone — Teaching, Community, and Compositional Range</div>
+    <div class="mg">
+      <div class="mc"><div class="ml">M1 — Teaching engagement (8 weeks)</div><h4>Real student, weekly lessons, teaching diary</h4><p>Teaching diary maintained and submitted. Three highlights presented. Teaching student's progress measurable and documented.</p></div>
+      <div class="mc"><div class="ml">M2 — Community performance completed</div><h4>With spoken framing</h4><p>Post-performance review written. The question of what reaches community audiences answered from personal experience.</p></div>
+      <div class="mc"><div class="ml">M3 — Second original composition</div><h4>Contrasts first, same composer</h4><p>Meaningfully contrasts first in at least two dimensions. Both sound like the same composer. Together they demonstrate compositional range.</p></div>
+      <div class="mc"><div class="ml">M4 — Full recital programme</div><h4>Five mastery works + two compositions</h4><p>First full 60–90 min run-through completed. Programme arc intentional. Legacy project designed in detail.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE D -->
+<div class="tab-panel" id="tab-phase-d">
+  <div class="sh"><h2>Phase D — Legacy and Philosophy</h2><p class="desc">Weeks 25–30 · Sessions 49–60 · The outward dimensions of a musical life: the legacy project in execution, the musical philosophy document, the musical autobiography, the lifelong practice programme, and the final public recital. Legacy is not what happens after you stop playing — it is what you build while you are still playing.</p></div>
+
+  <div style="background:#fff;border:1px solid var(--warm-line);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:var(--shadow-sm)">
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:400;margin-bottom:1rem">Phase D Overview — Weeks 25–30</h3>
+    <table class="tbl">
+      <thead><tr><th>Week</th><th>Focus</th><th>Sessions</th></tr></thead>
+      <tbody>
+        <tr><td><strong>25</strong></td><td>Legacy project first implementation · Musical philosophy document (800–1500 words, five specific statements) — first draft · "Artistic excellence and community service are complementary, not opposites"</td><td>49–50</td></tr>
+        <tr><td><strong>26</strong></td><td>Musical autobiography (1000–2000 words): what pieces were decisive? What mistakes most instructive? Ending section: five-year and ten-year artistic targets with specific first-year steps</td><td>51–52</td></tr>
+        <tr><td><strong>27</strong></td><td>The final public recital (20–100 people, formal venue) · Complete 60–90 min programme · Recorded · Student speaks briefly to audience after · Post-recital debrief using recording</td><td>53–54</td></tr>
+        <tr><td><strong>28</strong></td><td>The lifelong practice programme: six disciplines, sustainability over ambition, the self-accountability system · "Design for 60 minutes on a difficult day and 90 minutes on a good one"</td><td>55–56</td></tr>
+        <tr><td><strong>29</strong></td><td>Closing the teaching engagement with care · Student's progress assessed · The final lesson as a musical celebration · The handover document · Teaching diary final synthesis</td><td>57–58</td></tr>
+        <tr><td><strong>30</strong></td><td>Phase D milestone assessment · Phase E design: gateway and the portfolio</td><td>59–60</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Week 25 · Sessions 49–50</div><div class="wkt">The Legacy Project and the Musical Philosophy Document</div><div class="wkm">Legacy project: first concrete step taken · Musical philosophy: five specific statements · 800–1500 words · "Is this what you believe?"</div><span class="pb pd">Phase D</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 49–50</span> Legacy project and philosophy</div>
+        <div class="ac"><span class="ap p-leg">Legacy</span><span>Legacy project first implementation: whatever the project — recital series, teaching programme, composition collection — the first concrete step has been taken. "A legacy is not a single event — it is a sustained practice. The annual recital that happens every year for twenty years has more lasting impact than the once-in-a-lifetime festival." 15 min.</span></div>
+        <div class="ac"><span class="ap p-leg">Legacy</span><span>The musical philosophy document — five specific statements: (1) What music is for — why it exists and why it matters; (2) What performance demands — of preparation, commitment, presence, and integrity; (3) The relationship between technical mastery and artistic freedom; (4) What the musician owes to students, audiences, composers, and the tradition they inhabit; (5) Their specific artistic identity — a declaration of artistic values that will guide all future decisions. 20 min.</span></div>
+        <div class="ac"><span class="ap p-leg">Legacy</span><span>Teacher reads the first draft (minimum 800 words) and asks three deepening questions: "Which statement is most surprising? Most personal? Most conventional — echoing received wisdom rather than personal experience?" The final document must contain convictions, not aspirations. 5 min.</span></div>
+      </div>
+      <div class="lgb"><strong>The legacy project — examples and criteria</strong>A free annual recital series. A music education programme for students who cannot afford private lessons. A collection of original compositions published for other pianists. A teaching method document adapted for a specific cultural context (e.g., a Stage 1 guide adapted for Nigerian musical traditions and the LUBENO framework). The key criterion: sustainability. Will it continue beyond Stage 6? A project that requires the student's continuous direct involvement indefinitely is not sustainable. One that creates systems, capacities, or materials that persist is.</div>
+    </div>
+  </div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Week 27 · Sessions 53–54</div><div class="wkt">The Final Public Recital — Thirty Performances Distilled</div><div class="wkm">20–100 people · Formal venue · Complete programme · Recorded · Student speaks to audience · Post-recital debrief using recording</div><span class="pb pd">Phase D</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 53–54</span> Final public recital</div>
+        <div class="ac"><span class="ap p-rep">Repertoire</span><span>The formal public recital: 20–100 people in a formal venue if possible, or a community hall or large private space. Complete programme with programme notes distributed. Pre-performance ritual in the venue. Performance recorded (audio and if possible video). Post-performance: the student speaks briefly to the audience — not a performance, but a human acknowledgement: "Thank you for listening. This programme has been a year in preparation. Your attention tonight completed it." 90 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>Post-recital debrief in session 54: teacher and student review the recital recording together. "What was present in this performance that has not been fully present before? What did the audience's real presence in that specific room give the performance that no studio simulation can give? What does the recording reveal that the experience of performing did not?" 30 min.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Week 28 · Sessions 55–56</div><div class="wkt">The Lifelong Practice Programme — the Most Important Document of Stage 6</div><div class="wkm">Six disciplines · Sustainability over ambition · Self-accountability system · First year's artistic target</div><span class="pb pd">Phase D</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 55–56</span> The lifelong practice programme</div>
+        <div class="ac"><span class="ap p-leg">Legacy</span><span>Six disciplines for the lifelong programme: (1) Daily technique: scales, arpeggios, technical exercises, sight-reading — 20–30 min per day; (2) Repertoire development: 2–4 new mastery-level works per year; (3) Composition and improvisation: weekly composition sessions and daily improvisation; (4) Ear training: regular listening with scores, attending live performances; (5) Teaching: a sustainable commitment that continues deepening the teacher's understanding; (6) Performance: minimum frequency to keep the performance discipline alive. Total daily practice: 60–90 min on most days. 15 min.</span></div>
+        <div class="ac"><span class="ap p-leg">Legacy</span><span>Sustainability over ambition: "A practice programme requiring 4 hours a day is not a lifelong programme — it is an aspiration that will collapse within six months. Design for 60 minutes on a difficult day and 90 minutes on a good one. That consistency, maintained for decades, produces more musical development than any number of short-term intensive periods followed by long gaps." 12 min.</span></div>
+        <div class="ac"><span class="ap p-leg">Legacy</span><span>The self-accountability system: (1) Monthly recording sessions — current repertoire recorded and listened to critically; (2) Regular performance commitments creating external accountability; (3) A peer practice group — other musicians at a comparable level; (4) Annual goals — specific, written, reviewed at year end. "The system must be simple enough to sustain and honest enough to reveal genuine progress or regression." 13 min.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Week 29 · Sessions 57–58</div><div class="wkt">Closing the Teaching Engagement with Care</div><div class="wkm">Student's progress assessed · The final lesson as a musical celebration · The handover document · Teaching diary final synthesis</div><span class="pb pd">Phase D</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 57–58</span> Closing the teaching relationship</div>
+        <div class="ac"><span class="ap p-leg">Legacy</span><span>The final lesson: designed to be memorable — not a normal lesson but a musical celebration. The Stage 6 teacher performs something for the student: a piece representing the destination toward which the student is travelling. "This is where you are going. I have been where you are. The journey is worth it." The student plays something for the teacher: the piece they are most proud of, played as well as they currently can. 15 min.</span></div>
+        <div class="ac"><span class="ap p-leg">Legacy</span><span>The handover document: 200–300 words profiling the student's strengths, areas for development, musical personality, and specific pedagogical recommendations for the next teacher. "The relationship between a student and their successive teachers is a chain. Your link in that chain is this document." 10 min.</span></div>
+        <div class="ac"><span class="ap p-leg">Legacy</span><span>Teaching diary final synthesis: "Name three specific pedagogical principles that this experience has confirmed or created for you. These three principles — tested in practice with a real student — are more reliable than anything this curriculum has told you about teaching. They are yours. They will be present in every student you ever teach." 13 min.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#fff;border:1px solid var(--warm-line);border-radius:10px;padding:1rem;margin-bottom:1.5rem">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.75rem">Phase D Milestone — Legacy, Philosophy, and Self-Direction</div>
+    <div class="mg">
+      <div class="mc"><div class="ml">M1 — Legacy project in execution</div><h4>Six weeks active, evidence of impact</h4><p>A specific, sustainable contribution to the musical community is underway. Designed for continuation beyond Stage 6.</p></div>
+      <div class="mc"><div class="ml">M2 — Musical philosophy document</div><h4>800–1500 words, five statements, honest</h4><p>Contains convictions, not aspirations. Survives the question: "Is this what you believe?"</p></div>
+      <div class="mc"><div class="ml">M3 — Musical autobiography and trajectory</div><h4>1000–2000 words, five-year targets</h4><p>Tracing the musical journey from first piano contact through Stage 6. Ending section: five-year and ten-year targets with specific first-year steps.</p></div>
+      <div class="mc"><div class="ml">M4 — Lifelong practice programme</div><h4>Complete, realistic, already in use</h4><p>All six disciplines represented. Self-accountability system specified. Student has been following it for at least four weeks.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE E -->
+<div class="tab-panel" id="tab-phase-e">
+  <div class="sh"><h2>Phase E — Integration and Gateway</h2><p class="desc">Weeks 31–36 · Sessions 61–72 · Phase E does not add any new content — it holds all six pillars together and asks: "Does this constitute a musical life?" Five more real-audience performances. Portfolio assembled. Mock gateway Week 32. The final conversation Week 34. Gateway Sessions 69–72.</p></div>
+
+  <div class="fb"><strong>Teacher's framing for Phase E</strong>The student is simultaneously a performing artist preparing a complete recital programme, a composer with two original works in their repertoire, a teacher who has completed a sustained pedagogical engagement, a community contributor with an active legacy project, and a self-directed musician with a written philosophy and a lifelong practice programme. Phase E simply holds all of these together.</div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Weeks 31–32 · Sessions 61–64</div><div class="wkt">Integration and Mock Gateway</div><div class="wkm">Portfolio assembled · Programme performed 3+ more times · Mock gateway: full portfolio presented · Precision repair from mock · Legacy question revisited</div><span class="pb pe">Phase E</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Sessions 61–62</span> Gateway portfolio assembled</div>
+        <div class="ac"><span class="ap p-leg">Legacy</span><span>The gateway portfolio contains six components: (1) The complete mastery programme — performed; (2) The teaching diary — presented and discussed; (3) The musical philosophy document — read and discussed; (4) The musical autobiography — available to the gateway panel; (5) The lifelong practice programme — presented and evaluated; (6) The legacy project — documented with evidence of impact. Assembling the portfolio is an act of artistic self-knowledge. 15 min.</span></div>
+        <div class="ac"><span class="ap p-art">Art</span><span>Portfolio coherence: the decisive gateway criterion is not the quality of any individual component but the coherence of all of them. "Do the written documents and the performance sound like they come from the same person? Is the musician who plays the Beethoven Sonata the same person who wrote 'what music is for'?" Portfolio coherence is the primary gateway evidence of artistic maturity. 10 min.</span></div>
+        <div class="ac"><span class="ap p-leg">Legacy</span><span>Teaching diary final chapter: written in week 35. "Looking back across fourteen weeks of teaching, what do I now understand about piano pedagogy that I did not understand when Stage 6 began? What would I do differently with my student if I began again? What has my student revealed about my own playing?" Not a summary but a distillation. 10 min.</span></div>
+      </div>
+      <div class="sb">
+        <div class="st"><span class="sn">Session 63</span> Mock gateway</div>
+        <div class="ac"><span class="ap p-rep">Repertoire</span><span>Complete programme performance: all five mastery works + two original compositions in programme order. 60–90 minutes. Teacher listens as audience. Post-performance: teacher provides one observation about the programme as a whole: "What does this programme say about the musician who assembled and performed it?" 80 min.</span></div>
+        <div class="ac"><span class="ap p-leg">Legacy</span><span>Portfolio discussion: teacher reads excerpts from the musical philosophy document and asks three questions: (1) Which statement most surprised you when you wrote it? (2) Which will you still believe in ten years? (3) Which have you already begun to act on? These confirm whether the philosophy document is a genuine articulation of beliefs or a performative document written for the gateway. 15 min.</span></div>
+      </div>
+      <div class="sb">
+        <div class="st"><span class="sn">Session 64</span> Precision refinement</div>
+        <div class="ac"><span class="ap p-art">Art</span><span>From the mock gateway: identify the single most significant gap — not technically but artistically. "At Stage 6, the most significant gap is almost never technical. It is more likely a moment in the programme where the technique is present but the music is not — where the performance is happening rather than being given." Address with 30 minutes of concentrated, specific work. 30 min.</span></div>
+        <div class="ac"><span class="ap p-leg">Legacy</span><span>The legacy question at week 32: "In week 1 you wrote one sentence about what you want people to say about your playing in ten years. Read that sentence now. Does it still hold? Has Stage 6 changed what you want your legacy to be? If yes — rewrite the sentence. The rewritten sentence is the truest measure of Stage 6's effect on your artistic identity." 15 min.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wk">
+    <div class="wkh" onclick="toggleWeek(this)">
+      <div style="flex:1"><div class="wkn">Week 34 · Sessions 67–68</div><div class="wkt">The Final Conversation — Teacher to Student, Student to Teacher</div><div class="wkm">Not a lesson but a conversation · The teacher names the gift they see · Final performance simulation</div><span class="pb pe">Phase E</span></div>
+      <span class="wktg">▾</span>
+    </div>
+    <div class="wkb">
+      <div class="sb">
+        <div class="st"><span class="sn">Session 67</span> The final conversation</div>
+        <div class="ac"><span class="ap p-leg">Legacy</span><span>The final lesson is not a lesson: no technical corrections, no interpretive suggestions, no repertoire adjustments. Teacher and student sit together and talk about the musical life. "What does music mean to you now — after Stage 6 — that it did not mean before? What has surprised you most about your own artistic development? What are you most looking forward to in the years ahead?" 30 min.</span></div>
+        <div class="ac"><span class="ap p-leg">Legacy</span><span>The teacher answers the same questions about the student: what they have seen develop, what they believe will continue to grow, and what gift the student brings to the musical world that no other musician brings in quite the same way. "Every teacher who has accompanied a student through a complete curriculum has one thing they see in the student that the student may not yet see in themselves — a quality fully present in the music but not yet consciously claimed. I am naming that quality now. Do not let it be trained out of you. It is your gift." 20 min.</span></div>
+      </div>
+      <div class="sb">
+        <div class="st"><span class="sn">Session 68</span> Final preparation</div>
+        <div class="ac"><span class="ap p-rep">Repertoire</span><span>One complete performance simulation: full programme in programme order, pre-performance ritual, score-free, for a small private audience. This is the last practice performance before the gateway. Performance log entry. "Sleep. The gateway tomorrow is a presentation, not an examination. Everything in it is something you have already done. The only new element is that all of it happens together, in one day, for the first time." 80 min.</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GATEWAY -->
+<div class="tab-panel" id="tab-gateway">
+  <div class="sh"><h2>Stage 6 Gateway Assessment — Sessions 69–72</h2><p class="desc">Five components assessed across four sessions. The decisive question: is this a musician ready to sustain a lifetime of growth, contribution, and artistry independently? Portfolio presented in Sessions 69–70; programme performed in Sessions 70–71; gateway assessment in Session 72.</p></div>
+
+  <div class="gs"><h3>The Stage 6 Gateway — What It Certifies</h3><p>The Stage 6 gateway certifies artistic maturity — the integration of performance, composition, teaching, and community service into a coherent musical identity that is genuinely personal, genuinely committed, and genuinely sustainable. The gateway is not an examination. It is a presentation — a sharing of a year's musical work.</p></div>
+
+  <div class="gc"><div class="gch"><span class="gcn">01</span><h4>The Complete Programme — Artistry in Performance</h4></div>
+  <div class="gcb"><p class="gcr">All five mastery works and two original compositions performed across Sessions 70 and 71. Pre-performance ritual. No stopping. Teacher and invited guest receive these works as a complete artistic event.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.75rem 0">
+    <div style="border:1px solid var(--warm-line);border-radius:6px;padding:.75rem;font-size:12.5px;color:var(--ink-mid)"><div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">Four evaluation criteria</div><div>&#9633; Is there a recognisable artistic presence in this performance?</div><div style="margin-top:3px">&#9633; Technique invisible — all attention freed for the music</div><div style="margin-top:3px">&#9633; Interpretive commitments fully present — not decisions being executed, but music being lived</div><div style="margin-top:3px">&#9633; Programme feels like a unified artistic statement, not five works played in sequence</div></div>
+    <div style="border:1px solid var(--warm-line);border-radius:6px;padding:.75rem;font-size:12.5px;color:var(--ink-mid)"><div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">The standard</div><div style="font-style:italic;color:var(--rose);line-height:1.6">"A listener who attended this performance should be able to describe the performer's musical personality in two or three consistent terms."</div></div>
+  </div>
+  <div class="pab"><strong>Pass criterion</strong>A recognisable artistic presence. Technique invisible. Interpretive commitments lived, not executed. Programme felt as a single artistic statement.</div></div></div>
+
+  <div class="gc"><div class="gch"><span class="gcn">02</span><h4>Original Compositions — Compositional Identity Confirmed</h4></div>
+  <div class="gcb"><p class="gcr">Both original compositions performed and discussed in Session 69. Three questions asked after both are performed.</p>
+  <div style="background:var(--green-light);border-radius:8px;padding:1rem;margin:.75rem 0;font-size:13px;color:var(--green)"><div style="font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;font-weight:700">Three composition questions</div><div style="margin-bottom:4px">1. "What does this work say that your mastery repertoire cannot say for you?"</div><div style="margin-bottom:4px">2. "Where in the composition are you most recognisably yourself?"</div><div>3. "What would you compose next — and why?"</div></div>
+  <div class="pab"><strong>Pass criterion</strong>Both compositions are genuine artistic statements, not exercises. The two together demonstrate compositional range. The three Stage 5 personal fingerprints are audible in at least one composition. The composer's relationship to their own work is that of an artist, not a student completing an assignment.</div></div></div>
+
+  <div class="gc"><div class="gch"><span class="gcn">03</span><h4>Portfolio — the Documented Musical Life</h4></div>
+  <div class="gcb"><p class="gcr">Musical philosophy document, musical autobiography, teaching diary, legacy project documentation, and lifelong practice programme — all presented in Session 69 and available throughout.</p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.75rem 0">
+    <div style="border:1px solid var(--warm-line);border-radius:6px;padding:.75rem;font-size:12.5px;color:var(--ink-mid)"><div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">Portfolio components</div><div>&#9633; Musical philosophy: 800–1500 words, five statements, honest</div><div style="margin-top:3px">&#9633; Musical autobiography: 1000–2000 words, five-year targets included</div><div style="margin-top:3px">&#9633; Teaching diary: 14 weeks, three highlights presented</div><div style="margin-top:3px">&#9633; Legacy project: 3 min presentation, evidence of impact, sustainability confirmed</div><div style="margin-top:3px">&#9633; Lifelong practice programme: already in use 4+ weeks</div></div>
+    <div style="border:1px solid var(--warm-line);border-radius:6px;padding:.75rem;font-size:12.5px;color:var(--ink-mid)"><div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">The decisive test</div><div style="font-style:italic;color:var(--gold);line-height:1.6">"Do the written documents and the performance sound like they come from the same person? Portfolio coherence is the primary gateway evidence of artistic maturity."</div><div style="margin-top:8px;font-style:italic;color:var(--rose)">Any document written for the gateway rather than from genuine conviction is a pass failure for that component.</div></div>
+  </div>
+  <div class="pab"><strong>Pass criterion</strong>Portfolio coherence — the written documents and the performance sound like they come from the same person. Every document genuinely the student's own work, not written for the gateway.</div></div></div>
+
+  <div class="gc"><div class="gch"><span class="gcn">04</span><h4>Self-Direction — the Ability to Continue Without the Curriculum</h4></div>
+  <div class="gcb"><p class="gcr">The lifelong practice programme is realistic, complete, and has been followed for at least four weeks. The student can describe exactly what they will practice tomorrow, next week, and next month — without being told.</p>
+  <div style="border:1px solid var(--warm-line);border-radius:6px;padding:.75rem;font-size:12.5px;color:var(--ink-mid);margin:.75rem 0"><div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">Self-direction assessment</div><div>&#9633; All six disciplines in the programme: technique, repertoire, composition, ear training, teaching, performance</div><div style="margin-top:3px">&#9633; Self-accountability system is specific (not "I will try to record myself sometimes")</div><div style="margin-top:3px">&#9633; First year's artistic target stated and achievable</div><div style="margin-top:3px">&#9633; Student has been following it for at least four weeks — can describe the experience of following it</div></div>
+  <div class="pab"><strong>Pass criterion</strong>The teacher is confident that this student's musical development will continue and deepen after Stage 6 ends. Not because the student no longer needs teachers — but because they are now the primary driver of their own musical growth.</div></div></div>
+
+  <div class="gc"><div class="gch"><span class="gcn">05</span><h4>The Legacy Question — the Final Gateway</h4></div>
+  <div class="gcb"><p class="gcr">After the complete performance has been heard and all portfolio components have been discussed, the teacher asks the question that began Stage 6 in Week 1.</p>
+  <div style="background:var(--gold-light);border-radius:8px;padding:1.25rem;margin:.75rem 0;font-size:13px;color:var(--gold);line-height:1.7"><p style="margin-bottom:.75rem">"You started Stage 6 with one sentence about what you want people to say about your playing in ten years. You have now given more than 35 real-audience performances. You have composed two original works. You have taught a student for fourteen weeks. You have performed for community audiences and built a legacy project. You have written your musical philosophy and your musical autobiography.</p><p style="margin-bottom:.75rem">"Knowing all of this — what do you want to contribute to the musical world? Not in the next performance or the next lesson. In the next decade. In the arc of a musical life.</p><p style="font-weight:700">"There is no correct answer. There is only your answer. Speak it with the same conviction you played with. And then go and make it true."</p></div>
+  <div class="pab"><strong>Pass criterion</strong>The student can name a specific contribution they want to make to the musical world. The answer is spoken with the same conviction and presence as the best moments of the programme. There is no correct answer — only the student's answer.</div></div></div>
+
+  <div style="background:var(--cream);border:2px solid var(--warm-line);border-radius:12px;padding:1.5rem;margin-top:1.5rem">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;margin-bottom:1rem">
+      <div style="border:1.5px solid var(--warm-line);border-radius:8px;padding:.75rem;text-align:center;background:#fff"><span style="font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:4px">Components Passed</span><span style="font-family:'Playfair Display',serif;font-size:1.5rem">__ / 5</span></div>
+      <div style="border:1.5px solid var(--teal);border-radius:8px;padding:.75rem;text-align:center;background:var(--teal-light)"><span style="font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:4px">Decision</span><span style="font-size:.9rem;color:var(--teal)">&#9633; Curriculum complete<br>&#9633; Targeted hold on one component</span></div>
+      <div style="border:1.5px solid var(--warm-line);border-radius:8px;padding:.75rem;text-align:center;background:#fff"><span style="font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:4px">Legacy Statement</span><span style="font-size:.85rem;color:var(--ink-soft);font-style:italic;font-family:'Lato',sans-serif">________________</span></div>
+    </div>
+    <div style="background:var(--ink);color:rgba(255,255,255,0.75);border-radius:8px;padding:1.25rem;font-size:13px;line-height:1.7;font-style:italic;text-align:center">"The curriculum ends here. The music does not. Six stages. 148 weeks of detailed content. 288 sessions. Six gateways. One curriculum. Keep playing. Keep listening. Keep composing. Keep teaching. Keep performing for anyone who will hear you. The music needs you to do these things — not because you are extraordinary, but because you have done the work to be genuinely useful to it."</div>
+  </div>
+</div>
+
+<!-- REPERTOIRE -->
+<div class="tab-panel" id="tab-repertoire">
+  <div class="sh"><h2>Recommended Stage 6 Repertoire</h2><p class="desc">Stage 6 mastery works are chosen by the student for personal meaning and genuine artistic ambition. These are examples — not prescriptions. The five chosen mastery works + two original compositions = the complete gateway programme (60–90 min).</p></div>
+  <div class="rg" style="margin-bottom:1.5rem">
+    <div class="rc"><div class="rph">Phase A · Beethoven</div><div class="rt">Beethoven late and middle sonatas</div><div class="rex">Op. 57 (Appassionata) · Op. 109, 110, or 111 · Op. 31 No. 2 (Tempest)</div><div class="rfc">Technique invisible. Interpretive commitments consistently present. All four memory systems active under performance conditions. The Appassionata for students needing maximum technical challenge; the late sonatas for maximum interpretive depth.</div></div>
+    <div class="rc"><div class="rph">Phase A · Chopin</div><div class="rt">Chopin major works</div><div class="rex">Ballade No. 1 in G minor · Ballade No. 3 · Scherzo No. 2 · Fantaisie Op. 49 · Barcarolle Op. 60</div><div class="rfc">The Ballades demand the complete integration of narrative structure, Chopin's rubato, and technical mastery. The Barcarolle is the most intimate and harmonically rich. The Fantaisie the most free in form.</div></div>
+    <div class="rc"><div class="rph">Phase A · Schubert</div><div class="rt">Schubert major works</div><div class="rex">Sonata D. 960 · Wanderer Fantasy D. 760 · Impromptus Op. 90 complete set</div><div class="rfc">Schubert D. 960 is one of the longest and most demanding works in the repertoire — 40 minutes alone. Its flat-VI modulations, the famous trill in the first movement, and the ambiguity of the finale make it the definitive Schubert gateway work.</div></div>
+    <div class="rc"><div class="rph">Phase A · Brahms / Debussy / Ravel</div><div class="rt">Late Romantic and early modern</div><div class="rex">Brahms Rhapsodies Op. 79, Intermezzo cycle Op. 118, Sonata No. 3 Op. 5 · Debussy Préludes Book I or II, Images · Ravel Gaspard de la Nuit, Sonatine</div><div class="rfc">Ravel's Gaspard de la Nuit is among the technically most demanding pieces in the repertoire. Debussy's Images require mastery of overtone pedalling. Brahms Op. 5 is the most ambitious of his early works.</div></div>
+    <div class="rc"><div class="rph">Phase A–B · 20th century</div><div class="rt">Major 20th-century works</div><div class="rex">Prokofiev Sonata No. 7 · Bartók Out of Doors · Shostakovich Preludes and Fugues</div><div class="rfc">Prokofiev's Seventh Sonata is the most immediately powerful of the war sonatas. Bartók's Out of Doors contains the full range of percussive and lyrical approaches. Shostakovich's Preludes and Fugues (a complete cycle of 24) are the 20th century's answer to Bach's WTC.</div></div>
+    <div class="rc"><div class="rph">Phase A · Chamber and ensemble</div><div class="rt">Ensemble engagement works</div><div class="rex">Schubert Lieder accompaniment · Violin sonata reductions · Piano duet: Schubert Fantasia D. 940, Brahms Hungarian Dances</div><div class="rfc">The dynamic recalibration that ensemble work demands transfers permanently to solo playing. At least one chamber music session per week throughout Stage 6 is recommended. The day before an important solo performance session is the ideal timing for ensemble work.</div></div>
+    <div class="rc" style="grid-column:1/-1"><div class="rph">Phase B–C · Original compositions</div><div class="rt">The student's own works — two compositions</div><div class="rex">Composition 1: 5–10 minutes, major work, one movement, harmonic and structural ambition comparable to the mastery repertoire · Composition 2: 2–4 minutes, meaningfully contrasting the first in at least two dimensions</div><div class="rfc">The two compositions together must demonstrate compositional range while maintaining a consistent compositional identity. They are placed within the mastery programme — not as demonstrations of compositional technique, but as genuine artistic statements with equal standing alongside the major works. The student's fingerprints must be audible in at least one of the compositions.</div></div>
+  </div>
+</div>
+
+<!-- CHEAT SHEETS -->
+<div class="tab-panel" id="tab-cheatsheets">
+  <div class="sh"><h2>Teacher Quick Reference — Stage 6</h2><p class="desc">The most important phrases, principles, and structures for Stage 6. The teacher's role has become collegial — accompanying rather than directing.</p></div>
+
+  <div class="cs">
+    <div class="csh"><span style="font-size:1.3rem">🎯</span><h3>Session Structure — Every Session, Stage 6</h3></div>
+    <div class="csb">
+      <div class="cc">
+        <div class="ccl"><h4>Every session includes</h4>
+          <ul class="cl">
+            <li>15 min sight-reading: Grade 7–8, never repeated, reading log maintained</li>
+            <li>10 min improvisation: using personal voice fingerprints, recorded monthly</li>
+            <li>10 min technique warm-up: two Stage 4 techniques — these are now automatic tools</li>
+            <li>20 min mastery programme: either full simulation or targeted repair — never neglected in any phase</li>
+            <li>Pre/post performance ritual before and after any complete run-through</li>
+          </ul>
+        </div>
+        <div class="ccl"><h4>The teacher's role in Stage 6</h4>
+          <ul class="cl">
+            <li>Collegial — no longer instructing, but accompanying and witnessing</li>
+            <li>Ask "Is this what you meant?" not "Here is what it should be"</li>
+            <li>The most important questions: "What does this moment mean to you? Is that audible in the music?"</li>
+            <li>The final stage of teaching is learning to trust the student completely</li>
+            <li>The teacher's most important task in Phase E: name the gift they see in the student that the student cannot yet see in themselves</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs">
+    <div class="csh"><span style="font-size:1.3rem">⚠️</span><h3>Common Stage 6 Challenges — What to Say</h3></div>
+    <div class="csb">
+      <div class="cc">
+        <div class="ccl"><h4>Performance and interpretation</h4>
+          <ul class="cl">
+            <li><strong>Safe interpretation:</strong> "You are playing within the range of interpretation that no critic can fault. That is the enemy of memorability. What would you do if you were the only person who had ever understood this piece? Play that."</li>
+            <li><strong>Technique still audible:</strong> "I can hear you thinking about the octave passage. The passage is there to serve the music — not to be executed. Play through it as if it isn't there."</li>
+            <li><strong>Performance log not improving:</strong> "The reviews are not becoming more specific. A vague review means vague attention during the performance. In the next performance, choose one specific question and listen for its answer throughout."</li>
+            <li><strong>Composition feels generic:</strong> "Play bars 8–12 of your composition. Now play the parallel passage in your gateway piece. Where are you in both of these? I should hear the same person."</li>
+          </ul>
+        </div>
+        <div class="ccl"><h4>Legacy and teaching</h4>
+          <ul class="cl">
+            <li><strong>Philosophy document aspirational:</strong> "You wrote 'I believe technique should always serve music.' Does your practice reflect this belief? Or is there still practice time devoted to technique for its own sake? Describe what you actually do — not what you believe you should do."</li>
+            <li><strong>Legacy project not sustainable:</strong> "Who will do this when you are not here? If the answer is no one, the project depends entirely on your continued presence. Design it so that it would continue even if you left."</li>
+            <li><strong>Teaching diary too surface:</strong> "The entry for this week describes what happened. I want to know what it revealed. What did your student's difficulty with thumb crossings remind you of from your own learning? What does that remind you of in your current playing?"</li>
+            <li><strong>Student not making progress:</strong> "What is the one thing your student most needs this week — not technically, but musically? If you could give them one gift at this lesson, what would it be? Design the whole lesson around giving that one thing."</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs">
+    <div class="csh"><span style="font-size:1.3rem">🎭</span><h3>Musical Language — Phrases That Define Stage 6</h3></div>
+    <div class="csb">
+      <div class="cc">
+        <div class="ccl"><h4>For artistry and presence</h4>
+          <ul class="cl">
+            <li>"A correct performance disappears from memory within 24 hours. A performance in which something was genuinely at stake is remembered for years."</li>
+            <li>"Play as if you are the only person who has ever understood this piece — and as if it is urgent that the audience understand it too."</li>
+            <li>"Play the breath, not the notes. The notes happen inside the breath."</li>
+            <li>"The pre-performance ritual is not ceremony — it is the transition from being a person who knows how to play, to being the music."</li>
+            <li>"At performance number 35, the programme is no longer something you are learning. It is something you are inhabiting."</li>
+          </ul>
+        </div>
+        <div class="ccl"><h4>For legacy and the musical life</h4>
+          <ul class="cl">
+            <li>"Legacy is not what happens after you stop playing. It is what you build while you are still playing."</li>
+            <li>"A musician who gives only to the community without developing their artistry eventually has nothing to give. A musician who develops only their artistry without giving it to a community eventually plays for themselves alone — which is practice, not performance."</li>
+            <li>"The curriculum ends here. The music does not."</li>
+            <li>"There is no correct answer. There is only your answer. Speak it with the same conviction you played with. And then go and make it true."</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs">
+    <div class="csh"><span style="font-size:1.3rem">📋</span><h3>The Complete Stage 6 Timeline at a Glance</h3></div>
+    <div class="csb">
+      <table class="tbl">
+        <thead><tr><th>Phase</th><th>Weeks</th><th>Key deliverables by phase end</th></tr></thead>
+        <tbody>
+          <tr><td><strong>A</strong></td><td>1–8</td><td>Three mastery works at performance standard · 2+ real-audience performances/month begun · Pre/post performance ritual established · Phase B composition brief designed</td></tr>
+          <tr><td><strong>B</strong></td><td>9–16</td><td>Major original composition (5–10 min) completed, revised, in programme · Fourth mastery work · 50–75 min programme · Archive recording · Teaching engagement identified</td></tr>
+          <tr><td><strong>C</strong></td><td>17–24</td><td>Teaching engagement active (weekly lessons, diary) · Second composition (2–4 min) completed · Community performance done · Fifth mastery work · Full 60–90 min programme</td></tr>
+          <tr><td><strong>D</strong></td><td>25–30</td><td>Legacy project in execution · Musical philosophy document complete · Musical autobiography complete · Lifelong practice programme complete and in use · Final public recital (20–100 people)</td></tr>
+          <tr><td><strong>E</strong></td><td>31–36</td><td>Portfolio assembled · Mock gateway (Week 32) · 5+ more real-audience performances · The final conversation (Week 34) · Gateway (Sessions 69–72)</td></tr>
+        </tbody>
+      </table>
+      <div class="fb" style="margin-top:.75rem"><strong>The 35+ performances across Stage 6</strong>The gateway portfolio requires a performance log showing at least 35 real-audience performances across all 36 weeks. At the rate of 2 per month (the minimum), this yields 72 performances. Even at 1 per month for some periods, the total should exceed 35. If the log shows fewer than 25 by Week 30, the performance discipline needs specific attention in Phase E.</div>
+    </div>
+  </div>
+</div>
+
+</main>
+<footer class="ft">Stage 6 Teacher Content Package · LUBENO Consult Piano Curriculum · Artistry and Legacy · 36 Weeks · 5 Phases · 72 Sessions · The final stage</footer>
+
+<script>
+function switchTab(id,btn){
+  document.querySelectorAll(".tab-panel").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
+  document.getElementById("tab-"+id).classList.add("active");
+  btn.classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function toggleWeek(header){
+  var body=header.nextElementSibling;
+  var toggle=header.querySelector(".wktg");
+  var isOpen=body.classList.contains("open");
+  body.classList.toggle("open",!isOpen);
+  toggle.classList.toggle("open",!isOpen);
+}
+</script>
+</body>
+</html>

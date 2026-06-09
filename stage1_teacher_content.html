@@ -1,0 +1,2414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stage 1 Teacher Content — LUBENO Piano Curriculum</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@400;500&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #1c1917;
+  --ink-mid: #44403c;
+  --ink-soft: #78716c;
+  --paper: #fdfaf5;
+  --cream: #f5f0e8;
+  --warm-line: #e8e0d0;
+  --staff-line: #c8bfb0;
+
+  --teal: #0d6e56;
+  --teal-light: #e0f4ee;
+  --teal-mid: #1a8a6a;
+  --purple: #4f46a0;
+  --purple-light: #eeecfc;
+  --coral: #9b3a1a;
+  --coral-light: #faeae5;
+  --amber: #7c4a0a;
+  --amber-light: #faebd4;
+  --blue: #1d4e8a;
+  --blue-light: #e5eef8;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.05);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.06);
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.65;
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 3.5rem 2rem 3rem;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '♩♪♫♬';
+  position: absolute;
+  right: 3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 7rem;
+  opacity: 0.04;
+  letter-spacing: 0.5rem;
+  pointer-events: none;
+}
+.header-inner { max-width: 1000px; margin: 0 auto; position: relative; }
+.header-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 1rem;
+}
+.header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 0.6rem;
+}
+.header h1 em { font-style: italic; color: rgba(255,255,255,0.5); }
+.header-sub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.45);
+  font-weight: 300;
+  max-width: 540px;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+.header-pills { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.header-pill {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.55);
+}
+
+/* ── NAV TABS ── */
+.tab-nav {
+  background: #fff;
+  border-bottom: 1px solid var(--warm-line);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.tab-nav-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tab-nav-inner::-webkit-scrollbar { display: none; }
+.tab-btn {
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--ink-soft);
+  font-family: 'Lato', sans-serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 1rem 1.1rem 0.85rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s, border-color 0.2s;
+}
+.tab-btn:hover { color: var(--ink); }
+.tab-btn.active { color: var(--teal); border-bottom-color: var(--teal); }
+
+/* ── LAYOUT ── */
+.main { max-width: 1000px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* ── SECTION HEADERS ── */
+.section-head {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--warm-line);
+}
+.section-head h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.75rem;
+  font-weight: 400;
+  margin-bottom: 0.3rem;
+}
+.section-head .desc {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  font-weight: 300;
+}
+
+/* ── WEEK BADGE ── */
+.week-tag {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-bottom: 0.4rem;
+}
+.wk-1-2 { background: var(--teal-light); color: var(--teal); }
+.wk-3-4 { background: var(--purple-light); color: var(--purple); }
+.wk-5-6 { background: var(--amber-light); color: var(--amber); }
+.wk-7-8 { background: var(--coral-light); color: var(--coral); }
+.wk-all  { background: var(--blue-light); color: var(--blue); }
+
+/* ── PIECE CARDS ── */
+.pieces-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+@media (max-width: 680px) { .pieces-grid { grid-template-columns: 1fr; } }
+
+.piece-card {
+  background: #fff;
+  border: 1px solid var(--warm-line);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s;
+}
+.piece-card:hover { box-shadow: var(--shadow-md); }
+.piece-header {
+  padding: 1rem 1.2rem 0.75rem;
+  border-bottom: 1px solid var(--warm-line);
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.piece-number {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.piece-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+}
+.piece-meta {
+  font-size: 12px;
+  color: var(--ink-soft);
+  font-weight: 300;
+  margin-top: 2px;
+}
+.piece-body { padding: 1rem 1.2rem; }
+
+/* ── STAFF NOTATION (SVG-based) ── */
+.staff-wrap {
+  background: var(--cream);
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin: 0.75rem 0;
+  overflow-x: auto;
+}
+.staff-wrap svg { display: block; min-width: 280px; }
+
+/* ── PIECE DETAILS ── */
+.detail-row {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  font-size: 12.5px;
+  color: var(--ink-mid);
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+.detail-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  padding-top: 1px;
+  min-width: 70px;
+}
+.detail-val { color: var(--ink-mid); font-size: 12.5px; }
+
+/* ── TEACHING FOCUS BOX ── */
+.focus-box {
+  background: var(--teal-light);
+  border-left: 3px solid var(--teal);
+  border-radius: 0 8px 8px 0;
+  padding: 0.8rem 1rem;
+  font-size: 12.5px;
+  color: var(--ink-mid);
+  line-height: 1.55;
+  margin-top: 0.75rem;
+}
+.focus-box strong { color: var(--teal); font-weight: 700; font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; display: block; margin-bottom: 3px; font-family: 'DM Mono', monospace; }
+
+/* ── EXERCISES ── */
+.exercise-group { margin-bottom: 2.5rem; }
+.exercise-group-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.exercise-group-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--warm-line);
+}
+
+.exercise-card {
+  background: #fff;
+  border: 1px solid var(--warm-line);
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.ex-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 1.1rem;
+  border-bottom: 1px solid var(--warm-line);
+  cursor: pointer;
+  user-select: none;
+}
+.ex-header:hover { background: var(--cream); }
+.ex-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--ink-soft);
+  min-width: 28px;
+}
+.ex-name {
+  font-size: 14px;
+  font-weight: 700;
+  flex: 1;
+}
+.ex-tags { display: flex; gap: 0.4rem; }
+.ex-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+.tag-body { background: var(--teal-light); color: var(--teal); }
+.tag-ear  { background: var(--purple-light); color: var(--purple); }
+.tag-keys { background: var(--coral-light); color: var(--coral); }
+.tag-sound { background: #f1efe8; color: var(--ink-mid); }
+.tag-rhythm { background: var(--amber-light); color: var(--amber); }
+
+.ex-toggle {
+  font-size: 14px;
+  color: var(--ink-soft);
+  transition: transform 0.2s;
+}
+.ex-toggle.open { transform: rotate(180deg); }
+
+.ex-body {
+  padding: 1rem 1.1rem;
+  display: none;
+}
+.ex-body.open { display: block; }
+
+.ex-step {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  font-size: 13px;
+  color: var(--ink-mid);
+  line-height: 1.55;
+}
+.ex-step-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: #fff;
+  background: var(--ink);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.ex-tip {
+  background: var(--amber-light);
+  border-radius: 6px;
+  padding: 0.6rem 0.85rem;
+  font-size: 12.5px;
+  color: var(--amber);
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+.ex-tip::before { content: '💡 '; }
+
+/* ── RHYTHM NUMBERS ── */
+.rhythm-section { margin-bottom: 2.5rem; }
+.rhythm-card {
+  background: #fff;
+  border: 1px solid var(--warm-line);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.1rem;
+  box-shadow: var(--shadow-sm);
+}
+.rhythm-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  gap: 1rem;
+}
+.rhythm-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.rhythm-subtitle { font-size: 12px; color: var(--ink-soft); }
+
+.rhythm-display {
+  background: var(--ink);
+  color: #fff;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 1.15rem;
+  letter-spacing: 0.12em;
+  margin: 0.75rem 0;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.r-beat { color: rgba(255,255,255,0.35); font-size: 0.7em; vertical-align: super; margin-right: 2px; }
+.r-note { color: #fff; }
+.r-rest { color: rgba(255,255,255,0.4); }
+.r-bar { color: rgba(255,255,255,0.2); margin: 0 0.5rem; }
+.r-accent { color: #f0b45a; font-weight: 700; }
+.r-ta { color: #6ec8a4; }
+.r-ti { color: #a58be8; }
+.r-sh { color: #e87878; }
+
+.clap-notation {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin: 0.5rem 0;
+}
+.clap-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  border: 1px solid var(--warm-line);
+  flex-shrink: 0;
+}
+.clap-q { background: var(--ink); color: #fff; }
+.clap-h { background: var(--teal); color: #fff; width: 76px; }
+.clap-e { background: var(--purple-light); color: var(--purple); width: 18px; font-size: 9px; }
+.clap-r { background: var(--cream); color: var(--ink-soft); border-style: dashed; }
+.clap-bar { background: none; border: none; color: var(--warm-line); font-size: 20px; width: 16px; }
+
+.count-row {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.count-cell {
+  width: 36px;
+  text-align: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-soft);
+}
+.count-cell.main { color: var(--ink); font-weight: 700; font-size: 12px; }
+
+/* ── EVALUATION ── */
+.eval-intro {
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 12px;
+  padding: 1.75rem;
+  margin-bottom: 2rem;
+}
+.eval-intro h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+.eval-intro p { font-size: 13.5px; color: rgba(255,255,255,0.6); line-height: 1.65; }
+
+.eval-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+@media (max-width: 640px) { .eval-grid { grid-template-columns: 1fr; } }
+
+.eval-card {
+  background: #fff;
+  border: 1px solid var(--warm-line);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.eval-card-head {
+  padding: 1rem 1.2rem 0.75rem;
+  border-bottom: 1px solid var(--warm-line);
+}
+.eval-pillar-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.3rem;
+}
+.eval-card-head h4 {
+  font-size: 15px;
+  font-weight: 700;
+}
+.eval-card-body { padding: 1rem 1.2rem; }
+
+.rubric-row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+.rubric-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  padding-top: 1px;
+}
+.rubric-desc { color: var(--ink-mid); }
+
+.pass-box {
+  background: var(--teal-light);
+  border: 1px solid #9addc6;
+  border-radius: 7px;
+  padding: 0.6rem 0.85rem;
+  font-size: 12.5px;
+  color: var(--teal);
+  margin-top: 0.75rem;
+  line-height: 1.5;
+}
+.pass-box strong { font-weight: 700; display: block; margin-bottom: 2px; font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+.fail-box {
+  background: var(--coral-light);
+  border: 1px solid #f0b0a0;
+  border-radius: 7px;
+  padding: 0.6rem 0.85rem;
+  font-size: 12.5px;
+  color: var(--coral);
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+.fail-box strong { font-weight: 700; display: block; margin-bottom: 2px; font-family: 'DM Mono', monospace; font-size: 9.5px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+/* ── WEEKLY MINI EVAL ── */
+.mini-eval-section { margin-bottom: 2.5rem; }
+.mini-eval-week {
+  background: #fff;
+  border: 1px solid var(--warm-line);
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+.mini-eval-head {
+  padding: 0.85rem 1.1rem;
+  border-bottom: 1px solid var(--warm-line);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--cream);
+}
+.mini-eval-head h4 { font-size: 13.5px; font-weight: 700; }
+.mini-eval-body { padding: 1rem 1.1rem; }
+
+.check-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 13px;
+  color: var(--ink-mid);
+  line-height: 1.5;
+}
+.check-item::before {
+  content: '□';
+  font-size: 16px;
+  color: var(--staff-line);
+  flex-shrink: 0;
+  line-height: 1.2;
+}
+
+/* ── GATEWAY SCORESHEET ── */
+.scoresheet {
+  background: var(--cream);
+  border: 2px solid var(--warm-line);
+  border-radius: 16px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+.scoresheet h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 0.3rem;
+}
+.scoresheet .ss-sub {
+  text-align: center;
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-bottom: 1.5rem;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.06em;
+}
+.ss-header-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.ss-field {
+  border-bottom: 1.5px solid var(--staff-line);
+  padding-bottom: 4px;
+  font-size: 13px;
+  color: var(--ink-mid);
+}
+.ss-field-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+.ss-pillar {
+  background: #fff;
+  border: 1px solid var(--warm-line);
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+.ss-pillar-head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.1rem;
+  border-bottom: 1px solid var(--warm-line);
+}
+.ss-pillar-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+  min-width: 28px;
+}
+.ss-pillar-head h4 { font-size: 14px; font-weight: 700; flex: 1; }
+.ss-score-boxes { display: flex; gap: 0.4rem; }
+.score-box {
+  width: 28px;
+  height: 28px;
+  border: 1.5px solid var(--warm-line);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-soft);
+}
+.ss-pillar-body { padding: 0.85rem 1.1rem; }
+.ss-criteria { font-size: 12.5px; color: var(--ink-mid); line-height: 1.6; margin-bottom: 0.6rem; }
+.ss-notes-field {
+  border-bottom: 1px solid var(--staff-line);
+  margin-top: 0.6rem;
+  padding-bottom: 20px;
+  font-size: 11px;
+  color: var(--ink-soft);
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.05em;
+}
+.ss-final {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+.ss-final-box {
+  border: 1.5px solid var(--warm-line);
+  border-radius: 8px;
+  padding: 0.75rem;
+  text-align: center;
+  background: #fff;
+}
+.ss-final-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+.ss-final-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--ink);
+}
+
+/* ── CHEAT SHEETS ── */
+.cheat-sheet {
+  background: #fff;
+  border: 1px solid var(--warm-line);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+.cs-head {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 1rem 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.cs-head h3 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 400; }
+.cs-head .cs-icon { font-size: 1.3rem; }
+.cs-body { padding: 1.25rem; }
+.cs-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+@media (max-width: 600px) { .cs-cols { grid-template-columns: 1fr; } }
+.cs-col h4 { font-size: 11px; font-family: 'DM Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 0.6rem; }
+.cs-list { list-style: none; }
+.cs-list li {
+  font-size: 13px;
+  color: var(--ink-mid);
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--warm-line);
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  line-height: 1.5;
+}
+.cs-list li:last-child { border-bottom: none; }
+.cs-list li::before { content: '→'; color: var(--ink-soft); font-size: 11px; flex-shrink: 0; }
+
+/* ── DIALOGUE BOX ── */
+.dialogue {
+  background: var(--purple-light);
+  border-left: 3px solid var(--purple);
+  border-radius: 0 8px 8px 0;
+  padding: 0.9rem 1.1rem;
+  margin: 1rem 0;
+  font-size: 13.5px;
+  color: var(--ink-mid);
+  font-style: italic;
+  line-height: 1.6;
+}
+.dialogue::before { content: '"'; font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--purple); line-height: 0; vertical-align: -0.5rem; margin-right: 4px; }
+
+/* ── FOOTER ── */
+.footer {
+  text-align: center;
+  padding: 2rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border-top: 1px solid var(--warm-line);
+  margin-top: 3rem;
+}
+
+/* ── PRINT ── */
+@media print {
+  .tab-nav { display: none; }
+  .tab-panel { display: block !important; }
+  .piece-card, .exercise-card { break-inside: avoid; }
+  .ex-body { display: block !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">LUBENO Consult · Stage 1 of 6</div>
+    <h1>Teacher Content Package<br><em>Foundation — 8 Weeks</em></h1>
+    <p class="header-sub">Musical pieces, technical exercises, rhythm number exercises, and full evaluation materials for Stage 1: Foundation. Aligned to the 8-week session plan and four-pillar framework.</p>
+    <div class="header-pills">
+      <span class="header-pill">Piano · Beginner</span>
+      <span class="header-pill">8 Weeks · 16 Sessions</span>
+      <span class="header-pill">4 Pillars</span>
+      <span class="header-pill">Gateway Assessment</span>
+    </div>
+  </div>
+</div>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="switchTab('repertoire', this)">Repertoire</button>
+    <button class="tab-btn" onclick="switchTab('exercises', this)">Exercises</button>
+    <button class="tab-btn" onclick="switchTab('rhythm', this)">Rhythm Numbers</button>
+    <button class="tab-btn" onclick="switchTab('evaluation', this)">Evaluation</button>
+    <button class="tab-btn" onclick="switchTab('gateway', this)">Gateway Scoresheet</button>
+    <button class="tab-btn" onclick="switchTab('cheatsheets', this)">Teacher Cheat Sheets</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- ════════════════════════════════════
+     TAB 1 — REPERTOIRE
+════════════════════════════════════ -->
+<div class="tab-panel active" id="tab-repertoire">
+  <div class="section-head">
+    <h2>Stage 1 Repertoire</h2>
+    <p class="desc">10 pieces sequenced by difficulty. Each piece targets specific skills from the curriculum pillars. Pieces 1–5 are used for learning; pieces 6–10 are performance-quality gateway candidates. All pieces use only white keys in C position unless marked ★.</p>
+  </div>
+
+  <!-- PHASE A PIECES -->
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:400;color:var(--ink-soft);margin-bottom:1rem;letter-spacing:0.02em;">Phase A — Weeks 1–4 · Single hand, five-finger position</h3>
+
+  <div class="pieces-grid">
+
+    <!-- PIECE 1 -->
+    <div class="piece-card">
+      <div class="piece-header">
+        <span class="piece-number">Piece 01</span>
+        <div class="piece-title">The Quiet Drop</div>
+        <div class="piece-meta">Right hand only · C position · Quarter notes · Week 1</div>
+        <span class="week-tag wk-1-2">Week 1</span>
+      </div>
+      <div class="piece-body">
+        <div class="staff-wrap">
+          <svg viewBox="0 0 520 90" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:90px;">
+            <!-- Staff lines -->
+            <g stroke="#c8bfb0" stroke-width="1">
+              <line x1="30" y1="20" x2="510" y2="20"/>
+              <line x1="30" y1="30" x2="510" y2="30"/>
+              <line x1="30" y1="40" x2="510" y2="40"/>
+              <line x1="30" y1="50" x2="510" y2="50"/>
+              <line x1="30" y1="60" x2="510" y2="60"/>
+            </g>
+            <!-- Treble clef simplified -->
+            <text x="32" y="58" font-size="52" font-family="serif" fill="#78716c">𝄞</text>
+            <!-- Time sig 4/4 -->
+            <text x="68" y="38" font-size="18" font-family="'DM Mono',monospace" fill="#44403c" font-weight="700">4</text>
+            <text x="68" y="58" font-size="18" font-family="'DM Mono',monospace" fill="#44403c" font-weight="700">4</text>
+            <!-- Bar line 1 -->
+            <line x1="88" y1="20" x2="88" y2="60" stroke="#c8bfb0" stroke-width="1"/>
+            <!-- Notes: C D E D (beat 1-4) = ledger C, then D on space below staff line 1, E on first line -->
+            <!-- Middle C = ledger line below, sits at y=70 -->
+            <!-- D = between ledger and first line, y=65 -->
+            <!-- E = on first line, y=60 -->
+            <!-- F = first space, y=55 -->
+            <!-- G = second line, y=50 -->
+            <!-- Quarter note heads + stems -->
+            <!-- Beat 1: C (ledger) -->
+            <line x1="104" y1="70" x2="118" y2="70" stroke="#c8bfb0" stroke-width="1"/>
+            <ellipse cx="111" cy="70" rx="7" ry="5" fill="#1c1917" transform="rotate(-15,111,70)"/>
+            <line x1="118" y1="70" x2="118" y2="40" stroke="#1c1917" stroke-width="1.5"/>
+            <!-- Beat 2: E -->
+            <ellipse cx="161" cy="60" rx="7" ry="5" fill="#1c1917" transform="rotate(-15,161,60)"/>
+            <line x1="168" y1="60" x2="168" y2="35" stroke="#1c1917" stroke-width="1.5"/>
+            <!-- Beat 3: G -->
+            <ellipse cx="211" cy="50" rx="7" ry="5" fill="#1c1917" transform="rotate(-15,211,50)"/>
+            <line x1="218" y1="50" x2="218" y2="25" stroke="#1c1917" stroke-width="1.5"/>
+            <!-- Beat 4: E -->
+            <ellipse cx="261" cy="60" rx="7" ry="5" fill="#1c1917" transform="rotate(-15,261,60)"/>
+            <line x1="268" y1="60" x2="268" y2="35" stroke="#1c1917" stroke-width="1.5"/>
+            <!-- Bar 2 -->
+            <line x1="295" y1="20" x2="295" y2="60" stroke="#c8bfb0" stroke-width="1"/>
+            <!-- Beat 1: D -->
+            <ellipse cx="311" cy="65" rx="7" ry="5" fill="#1c1917" transform="rotate(-15,311,65)"/>
+            <line x1="318" y1="65" x2="318" y2="38" stroke="#1c1917" stroke-width="1.5"/>
+            <!-- Beat 2: C ledger -->
+            <line x1="347" y1="70" x2="361" y2="70" stroke="#c8bfb0" stroke-width="1"/>
+            <ellipse cx="354" cy="70" rx="7" ry="5" fill="#1c1917" transform="rotate(-15,354,70)"/>
+            <line x1="361" y1="70" x2="361" y2="40" stroke="#1c1917" stroke-width="1.5"/>
+            <!-- Beat 3: E -->
+            <ellipse cx="404" cy="60" rx="7" ry="5" fill="#1c1917" transform="rotate(-15,404,60)"/>
+            <line x1="411" y1="60" x2="411" y2="35" stroke="#1c1917" stroke-width="1.5"/>
+            <!-- Beat 4: C half note -->
+            <line x1="447" y1="70" x2="461" y2="70" stroke="#c8bfb0" stroke-width="1"/>
+            <ellipse cx="454" cy="70" rx="7" ry="5" fill="none" stroke="#1c1917" stroke-width="1.5" transform="rotate(-15,454,70)"/>
+            <line x1="461" y1="70" x2="461" y2="40" stroke="#1c1917" stroke-width="1.5"/>
+            <!-- Final bar -->
+            <line x1="500" y1="20" x2="500" y2="60" stroke="#1c1917" stroke-width="1.5"/>
+            <line x1="503" y1="20" x2="503" y2="60" stroke="#1c1917" stroke-width="3"/>
+            <!-- Beat labels -->
+            <text x="107" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">C</text>
+            <text x="157" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">E</text>
+            <text x="207" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">G</text>
+            <text x="257" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">E</text>
+            <text x="307" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">D</text>
+            <text x="350" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">C</text>
+            <text x="400" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">E</text>
+            <text x="450" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">C</text>
+          </svg>
+        </div>
+        <div class="detail-row"><span class="detail-label">Notes used</span><span class="detail-val">C D E G · Right hand only</span></div>
+        <div class="detail-row"><span class="detail-label">Rhythm</span><span class="detail-val">All quarter notes with one closing half note</span></div>
+        <div class="detail-row"><span class="detail-label">Technique</span><span class="detail-val">Arm-weight drop on each note; no rushing</span></div>
+        <div class="detail-row"><span class="detail-label">Character</span><span class="detail-val">Slow, considered. "Each note is a stone dropped into water."</span></div>
+        <div class="focus-box"><strong>Teaching focus</strong>The student should sing each note name before playing it. Tone quality is the only goal — no dynamic variation yet. Teacher listens for: resonance on each note, arm relaxation after each drop.</div>
+      </div>
+    </div>
+
+    <!-- PIECE 2 -->
+    <div class="piece-card">
+      <div class="piece-header">
+        <span class="piece-number">Piece 02</span>
+        <div class="piece-title">Mary Had a Little Lamb</div>
+        <div class="piece-meta">Right hand only · C position · By ear first · Week 2</div>
+        <span class="week-tag wk-1-2">Week 2</span>
+      </div>
+      <div class="piece-body">
+        <div class="staff-wrap">
+          <svg viewBox="0 0 520 90" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:90px;">
+            <g stroke="#c8bfb0" stroke-width="1">
+              <line x1="30" y1="20" x2="510" y2="20"/>
+              <line x1="30" y1="30" x2="510" y2="30"/>
+              <line x1="30" y1="40" x2="510" y2="40"/>
+              <line x1="30" y1="50" x2="510" y2="50"/>
+              <line x1="30" y1="60" x2="510" y2="60"/>
+            </g>
+            <text x="32" y="58" font-size="52" font-family="serif" fill="#78716c">𝄞</text>
+            <text x="68" y="38" font-size="18" font-family="'DM Mono',monospace" fill="#44403c" font-weight="700">4</text>
+            <text x="68" y="58" font-size="18" font-family="'DM Mono',monospace" fill="#44403c" font-weight="700">4</text>
+            <line x1="88" y1="20" x2="88" y2="60" stroke="#c8bfb0" stroke-width="1"/>
+            <!-- Bar 1: E D C D -->
+            <ellipse cx="104" cy="60" rx="6" ry="4.5" fill="#1c1917" transform="rotate(-15,104,60)"/>
+            <line x1="110" y1="60" x2="110" y2="35" stroke="#1c1917" stroke-width="1.5"/>
+            <ellipse cx="140" cy="65" rx="6" ry="4.5" fill="#1c1917" transform="rotate(-15,140,65)"/>
+            <line x1="146" y1="65" x2="146" y2="38" stroke="#1c1917" stroke-width="1.5"/>
+            <line x1="166" y1="70" x2="180" y2="70" stroke="#c8bfb0" stroke-width="1"/>
+            <ellipse cx="173" cy="70" rx="6" ry="4.5" fill="#1c1917" transform="rotate(-15,173,70)"/>
+            <line x1="179" y1="70" x2="179" y2="40" stroke="#1c1917" stroke-width="1.5"/>
+            <ellipse cx="209" cy="65" rx="6" ry="4.5" fill="#1c1917" transform="rotate(-15,209,65)"/>
+            <line x1="215" y1="65" x2="215" y2="38" stroke="#1c1917" stroke-width="1.5"/>
+            <line x1="237" y1="20" x2="237" y2="60" stroke="#c8bfb0" stroke-width="1"/>
+            <!-- Bar 2: E E E half -->
+            <ellipse cx="256" cy="60" rx="6" ry="4.5" fill="#1c1917" transform="rotate(-15,256,60)"/>
+            <line x1="262" y1="60" x2="262" y2="35" stroke="#1c1917" stroke-width="1.5"/>
+            <ellipse cx="291" cy="60" rx="6" ry="4.5" fill="#1c1917" transform="rotate(-15,291,60)"/>
+            <line x1="297" y1="60" x2="297" y2="35" stroke="#1c1917" stroke-width="1.5"/>
+            <!-- E half note -->
+            <ellipse cx="330" cy="60" rx="6" ry="4.5" fill="none" stroke="#1c1917" stroke-width="1.5" transform="rotate(-15,330,60)"/>
+            <line x1="336" y1="60" x2="336" y2="35" stroke="#1c1917" stroke-width="1.5"/>
+            <!-- rest -->
+            <text x="370" y="43" font-size="22" fill="#c8bfb0" font-family="serif">𝄽</text>
+            <line x1="400" y1="20" x2="400" y2="60" stroke="#c8bfb0" stroke-width="1"/>
+            <!-- Bar 3: D D D half -->
+            <ellipse cx="419" cy="65" rx="6" ry="4.5" fill="#1c1917" transform="rotate(-15,419,65)"/>
+            <line x1="425" y1="65" x2="425" y2="38" stroke="#1c1917" stroke-width="1.5"/>
+            <ellipse cx="449" cy="65" rx="6" ry="4.5" fill="#1c1917" transform="rotate(-15,449,65)"/>
+            <line x1="455" y1="65" x2="455" y2="38" stroke="#1c1917" stroke-width="1.5"/>
+            <ellipse cx="479" cy="65" rx="6" ry="4.5" fill="none" stroke="#1c1917" stroke-width="1.5" transform="rotate(-15,479,65)"/>
+            <line x1="485" y1="65" x2="485" y2="38" stroke="#1c1917" stroke-width="1.5"/>
+            <line x1="506" y1="20" x2="506" y2="60" stroke="#1c1917" stroke-width="1.5"/>
+            <line x1="509" y1="20" x2="509" y2="60" stroke="#1c1917" stroke-width="3"/>
+            <!-- Note names -->
+            <text x="100" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">E</text>
+            <text x="136" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">D</text>
+            <text x="169" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">C</text>
+            <text x="205" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">D</text>
+            <text x="252" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">E</text>
+            <text x="287" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">E</text>
+            <text x="326" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">E–</text>
+            <text x="415" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">D</text>
+            <text x="445" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">D</text>
+            <text x="475" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">D–</text>
+          </svg>
+        </div>
+        <div class="detail-row"><span class="detail-label">Notes used</span><span class="detail-val">C D E · Right hand only (start on E)</span></div>
+        <div class="detail-row"><span class="detail-label">Rhythm</span><span class="detail-val">Quarter and half notes with quarter rest</span></div>
+        <div class="detail-row"><span class="detail-label">Approach</span><span class="detail-val">Discover by ear first; notation shown only after found</span></div>
+        <div class="focus-box"><strong>Teaching focus</strong>Student finds this piece entirely by ear before notation appears. Teacher says only "It starts on E." Weight transfer between notes — no lifting, no jabbing. Dynamic experiment: play once soft (lullaby), once strong (fanfare).</div>
+      </div>
+    </div>
+
+    <!-- PIECE 3 -->
+    <div class="piece-card">
+      <div class="piece-header">
+        <span class="piece-number">Piece 03</span>
+        <div class="piece-title">Stepping Stone</div>
+        <div class="piece-meta">Right hand · C position · Legato required · Week 3</div>
+        <span class="week-tag wk-3-4">Week 3</span>
+      </div>
+      <div class="piece-body">
+        <div class="staff-wrap">
+          <svg viewBox="0 0 520 90" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:90px;">
+            <g stroke="#c8bfb0" stroke-width="1">
+              <line x1="30" y1="20" x2="510" y2="20"/>
+              <line x1="30" y1="30" x2="510" y2="30"/>
+              <line x1="30" y1="40" x2="510" y2="40"/>
+              <line x1="30" y1="50" x2="510" y2="50"/>
+              <line x1="30" y1="60" x2="510" y2="60"/>
+            </g>
+            <text x="32" y="58" font-size="52" font-family="serif" fill="#78716c">𝄞</text>
+            <text x="68" y="38" font-size="18" font-family="'DM Mono',monospace" fill="#44403c" font-weight="700">3</text>
+            <text x="68" y="58" font-size="18" font-family="'DM Mono',monospace" fill="#44403c" font-weight="700">4</text>
+            <line x1="88" y1="20" x2="88" y2="60" stroke="#c8bfb0" stroke-width="1"/>
+            <!-- 3/4 piece: bar 1 C D E -->
+            <line x1="100" y1="70" x2="114" y2="70" stroke="#c8bfb0" stroke-width="1"/>
+            <ellipse cx="107" cy="70" rx="6" ry="4.5" fill="#1c1917" transform="rotate(-15,107,70)"/>
+            <line x1="113" y1="70" x2="113" y2="40" stroke="#1c1917" stroke-width="1.5"/>
+            <ellipse cx="147" cy="65" rx="6" ry="4.5" fill="#1c1917" transform="rotate(-15,147,65)"/>
+            <line x1="153" y1="65" x2="153" y2="38" stroke="#1c1917" stroke-width="1.5"/>
+            <ellipse cx="187" cy="60" rx="6" ry="4.5" fill="#1c1917" transform="rotate(-15,187,60)"/>
+            <line x1="193" y1="60" x2="193" y2="35" stroke="#1c1917" stroke-width="1.5"/>
+            <!-- slur -->
+            <path d="M 107 74 Q 150 82 187 74" fill="none" stroke="#1c1917" stroke-width="1.2"/>
+            <line x1="220" y1="20" x2="220" y2="60" stroke="#c8bfb0" stroke-width="1"/>
+            <!-- bar 2: F G half -->
+            <ellipse cx="240" cy="55" rx="6" ry="4.5" fill="#1c1917" transform="rotate(-15,240,55)"/>
+            <line x1="246" y1="55" x2="246" y2="30" stroke="#1c1917" stroke-width="1.5"/>
+            <ellipse cx="277" cy="50" rx="6" ry="4.5" fill="none" stroke="#1c1917" stroke-width="1.5" transform="rotate(-15,277,50)"/>
+            <line x1="283" y1="50" x2="283" y2="25" stroke="#1c1917" stroke-width="1.5"/>
+            <!-- slur -->
+            <path d="M 240 59 Q 258 65 277 59" fill="none" stroke="#1c1917" stroke-width="1.2"/>
+            <line x1="318" y1="20" x2="318" y2="60" stroke="#c8bfb0" stroke-width="1"/>
+            <!-- bar 3: G F E -->
+            <ellipse cx="337" cy="50" rx="6" ry="4.5" fill="#1c1917" transform="rotate(-15,337,50)"/>
+            <line x1="343" y1="50" x2="343" y2="25" stroke="#1c1917" stroke-width="1.5"/>
+            <ellipse cx="373" cy="55" rx="6" ry="4.5" fill="#1c1917" transform="rotate(-15,373,55)"/>
+            <line x1="379" y1="55" x2="379" y2="30" stroke="#1c1917" stroke-width="1.5"/>
+            <ellipse cx="409" cy="60" rx="6" ry="4.5" fill="#1c1917" transform="rotate(-15,409,60)"/>
+            <line x1="415" y1="60" x2="415" y2="35" stroke="#1c1917" stroke-width="1.5"/>
+            <path d="M 337 54 Q 373 62 409 54" fill="none" stroke="#1c1917" stroke-width="1.2"/>
+            <line x1="438" y1="20" x2="438" y2="60" stroke="#c8bfb0" stroke-width="1"/>
+            <!-- bar 4: C dotted half -->
+            <line x1="452" y1="70" x2="466" y2="70" stroke="#c8bfb0" stroke-width="1"/>
+            <ellipse cx="459" cy="70" rx="6" ry="4.5" fill="none" stroke="#1c1917" stroke-width="1.5" transform="rotate(-15,459,70)"/>
+            <line x1="465" y1="70" x2="465" y2="40" stroke="#1c1917" stroke-width="1.5"/>
+            <circle cx="473" cy="69" r="2.5" fill="#1c1917"/>
+            <line x1="498" y1="20" x2="498" y2="60" stroke="#1c1917" stroke-width="1.5"/>
+            <line x1="501" y1="20" x2="501" y2="60" stroke="#1c1917" stroke-width="3"/>
+            <!-- note names -->
+            <text x="103" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">C</text>
+            <text x="143" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">D</text>
+            <text x="183" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">E</text>
+            <text x="236" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">F</text>
+            <text x="273" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">G–</text>
+            <text x="333" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">G</text>
+            <text x="369" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">F</text>
+            <text x="405" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">E</text>
+            <text x="455" y="82" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">C.</text>
+          </svg>
+        </div>
+        <div class="detail-row"><span class="detail-label">Notes used</span><span class="detail-val">C D E F G · All five fingers, ascending and descending</span></div>
+        <div class="detail-row"><span class="detail-label">Rhythm</span><span class="detail-val">3/4 time · quarter and dotted half notes</span></div>
+        <div class="detail-row"><span class="detail-label">Key skill</span><span class="detail-val">True legato (slur marks across all groups)</span></div>
+        <div class="focus-box"><strong>Teaching focus</strong>The slur marks are the lesson, not the notes. Outgoing finger releases exactly when incoming finger makes contact — no gap, no blur. Student closes eyes after learning and judges by ear alone.</div>
+      </div>
+    </div>
+
+    <!-- PIECE 4 -->
+    <div class="piece-card">
+      <div class="piece-header">
+        <span class="piece-number">Piece 04</span>
+        <div class="piece-title">Rain and Sun</div>
+        <div class="piece-meta">Right hand · Dynamics contrast · p and f markings · Week 3</div>
+        <span class="week-tag wk-3-4">Week 3</span>
+      </div>
+      <div class="piece-body">
+        <div class="staff-wrap" style="text-align:center;">
+          <svg viewBox="0 0 520 95" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:95px;">
+            <g stroke="#c8bfb0" stroke-width="1">
+              <line x1="30" y1="20" x2="510" y2="20"/>
+              <line x1="30" y1="30" x2="510" y2="30"/>
+              <line x1="30" y1="40" x2="510" y2="40"/>
+              <line x1="30" y1="50" x2="510" y2="50"/>
+              <line x1="30" y1="60" x2="510" y2="60"/>
+            </g>
+            <text x="32" y="58" font-size="52" font-family="serif" fill="#78716c">𝄞</text>
+            <text x="68" y="38" font-size="18" font-family="'DM Mono',monospace" fill="#44403c" font-weight="700">4</text>
+            <text x="68" y="58" font-size="18" font-family="'DM Mono',monospace" fill="#44403c" font-weight="700">4</text>
+            <line x1="88" y1="20" x2="88" y2="60" stroke="#c8bfb0" stroke-width="1"/>
+            <!-- Bar 1 piano: C C C C -->
+            <text x="92" y="75" font-family="'Playfair Display',serif" font-style="italic" font-size="13" fill="#1d4e8a">p</text>
+            <line x1="103" y1="70" x2="117" y2="70" stroke="#c8bfb0" stroke-width="1"/>
+            <ellipse cx="110" cy="70" rx="6" ry="4.5" fill="#1c1917" transform="rotate(-15,110,70)"/>
+            <line x1="116" y1="70" x2="116" y2="40" stroke="#1c1917" stroke-width="1.5"/>
+            <line x1="136" y1="70" x2="150" y2="70" stroke="#c8bfb0" stroke-width="1"/>
+            <ellipse cx="143" cy="70" rx="6" ry="4.5" fill="#1c1917" transform="rotate(-15,143,70)"/>
+            <line x1="149" y1="70" x2="149" y2="40" stroke="#1c1917" stroke-width="1.5"/>
+            <line x1="169" y1="70" x2="183" y2="70" stroke="#c8bfb0" stroke-width="1"/>
+            <ellipse cx="176" cy="70" rx="6" ry="4.5" fill="#1c1917" transform="rotate(-15,176,70)"/>
+            <line x1="182" y1="70" x2="182" y2="40" stroke="#1c1917" stroke-width="1.5"/>
+            <line x1="202" y1="70" x2="216" y2="70" stroke="#c8bfb0" stroke-width="1"/>
+            <ellipse cx="209" cy="70" rx="6" ry="4.5" fill="none" stroke="#1c1917" stroke-width="1.5" transform="rotate(-15,209,70)"/>
+            <line x1="215" y1="70" x2="215" y2="40" stroke="#1c1917" stroke-width="1.5"/>
+            <line x1="240" y1="20" x2="240" y2="60" stroke="#c8bfb0" stroke-width="1"/>
+            <!-- Bar 2 forte: G G G G -->
+            <text x="244" y="75" font-family="'Playfair Display',serif" font-style="italic" font-size="13" fill="#9b3a1a">f</text>
+            <ellipse cx="263" cy="50" rx="6" ry="4.5" fill="#1c1917" transform="rotate(-15,263,50)"/>
+            <line x1="269" y1="50" x2="269" y2="25" stroke="#1c1917" stroke-width="1.5"/>
+            <ellipse cx="296" cy="50" rx="6" ry="4.5" fill="#1c1917" transform="rotate(-15,296,50)"/>
+            <line x1="302" y1="50" x2="302" y2="25" stroke="#1c1917" stroke-width="1.5"/>
+            <ellipse cx="329" cy="50" rx="6" ry="4.5" fill="#1c1917" transform="rotate(-15,329,50)"/>
+            <line x1="335" y1="50" x2="335" y2="25" stroke="#1c1917" stroke-width="1.5"/>
+            <ellipse cx="362" cy="50" rx="6" ry="4.5" fill="none" stroke="#1c1917" stroke-width="1.5" transform="rotate(-15,362,50)"/>
+            <line x1="368" y1="50" x2="368" y2="25" stroke="#1c1917" stroke-width="1.5"/>
+            <line x1="392" y1="20" x2="392" y2="60" stroke="#c8bfb0" stroke-width="1"/>
+            <!-- Bar 3: crescendo C-G -->
+            <line x1="402" y1="70" x2="416" y2="70" stroke="#c8bfb0" stroke-width="1"/>
+            <ellipse cx="409" cy="70" rx="6" ry="4.5" fill="#1c1917" transform="rotate(-15,409,70)"/>
+            <line x1="415" y1="70" x2="415" y2="40" stroke="#1c1917" stroke-width="1.5"/>
+            <ellipse cx="442" cy="60" rx="6" ry="4.5" fill="#1c1917" transform="rotate(-15,442,60)"/>
+            <line x1="448" y1="60" x2="448" y2="35" stroke="#1c1917" stroke-width="1.5"/>
+            <ellipse cx="475" cy="50" rx="6" ry="4.5" fill="none" stroke="#1c1917" stroke-width="1.5" transform="rotate(-15,475,50)"/>
+            <line x1="481" y1="50" x2="481" y2="25" stroke="#1c1917" stroke-width="1.5"/>
+            <!-- crescendo hairpin -->
+            <line x1="403" y1="78" x2="481" y2="74" stroke="#1c1917" stroke-width="1.2"/>
+            <line x1="403" y1="78" x2="481" y2="82" stroke="#1c1917" stroke-width="1.2"/>
+            <line x1="498" y1="20" x2="498" y2="60" stroke="#1c1917" stroke-width="1.5"/>
+            <line x1="501" y1="20" x2="501" y2="60" stroke="#1c1917" stroke-width="3"/>
+            <text x="106" y="88" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">C</text>
+            <text x="259" y="66" font-family="'DM Mono',monospace" font-size="8" fill="#78716c" text-anchor="middle">G</text>
+          </svg>
+        </div>
+        <div class="detail-row"><span class="detail-label">Notes used</span><span class="detail-val">C and G · Extreme register contrast</span></div>
+        <div class="detail-row"><span class="detail-label">Dynamics</span><span class="detail-val">p (Rain bars) — f (Sun bars) — crescendo (transition)</span></div>
+        <div class="focus-box"><strong>Teaching focus</strong>Dynamic contrast is produced by arm-weight speed only — no pressing, no tension. Student chooses which section "feels like rain" and which "feels like sun" before playing. The crescendo is the transition between worlds.</div>
+      </div>
+    </div>
+
+  </div><!-- /pieces-grid Phase A -->
+
+  <!-- PHASE B PIECES -->
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:400;color:var(--ink-soft);margin:2rem 0 1rem;letter-spacing:0.02em;">Phase B — Weeks 5–8 · Both hands, gateway-quality pieces</h3>
+
+  <div class="pieces-grid">
+
+    <!-- PIECE 5 -->
+    <div class="piece-card">
+      <div class="piece-header">
+        <span class="piece-number">Piece 05</span>
+        <div class="piece-title">Question and Answer</div>
+        <div class="piece-meta">Right hand · Staccato + legato mixed · Phrase shaping · Week 5</div>
+        <span class="week-tag wk-5-6">Week 5</span>
+      </div>
+      <div class="piece-body">
+        <div class="detail-row"><span class="detail-label">Notes used</span><span class="detail-val">C D E F G with skips (C→E, D→G)</span></div>
+        <div class="detail-row"><span class="detail-label">Rhythm</span><span class="detail-val">4/4 · quarters, half, dotted half</span></div>
+        <div class="detail-row"><span class="detail-label">Articulation</span><span class="detail-val">Bars 1–2 staccato (the "question") · Bars 3–4 legato (the "answer")</span></div>
+        <div class="detail-row"><span class="detail-label">Character</span><span class="detail-val">Bars 1–2 end on G (open, questioning). Bars 3–4 resolve to C (settled, answered).</span></div>
+        <div class="focus-box"><strong>Teaching focus</strong>Student labels the question and answer phrases before playing. Staccato is produced by "drop and bounce" — arm initiates, never the finger. The question phrase leans slightly forward in tempo; the answer settles and slows at the final C.</div>
+      </div>
+    </div>
+
+    <!-- PIECE 6 -->
+    <div class="piece-card">
+      <div class="piece-header">
+        <span class="piece-number">Piece 06</span>
+        <div class="piece-title">Lullaby for Left Hand</div>
+        <div class="piece-meta">Left hand melody · Bass clef · Legato · Week 5</div>
+        <span class="week-tag wk-5-6">Week 5</span>
+      </div>
+      <div class="piece-body">
+        <div class="detail-row"><span class="detail-label">Notes used</span><span class="detail-val">C D E (bass clef position) · Left hand only</span></div>
+        <div class="detail-row"><span class="detail-label">Rhythm</span><span class="detail-val">3/4 · Slow waltz feel, dotted half and quarter</span></div>
+        <div class="detail-row"><span class="detail-label">Purpose</span><span class="detail-val">Equalise left-hand independence before hands-together work</span></div>
+        <div class="focus-box"><strong>Teaching focus</strong>The left hand is not the "weaker" hand — it is a different hand. Sing every note before playing. Watch for 4th and 5th finger tone quality; these will be the weakest and need extra arm-weight attention.</div>
+      </div>
+    </div>
+
+    <!-- PIECE 7 -->
+    <div class="piece-card">
+      <div class="piece-header">
+        <span class="piece-number">Piece 07</span>
+        <div class="piece-title">The Bell Tower</div>
+        <div class="piece-meta">Hands together · LH holds C, RH melody · Week 6 · Gateway candidate</div>
+        <span class="week-tag wk-5-6">Week 6</span>
+      </div>
+      <div class="piece-body">
+        <div class="detail-row"><span class="detail-label">Notes used</span><span class="detail-val">RH: C D E F G · LH: single repeated C (drone)</span></div>
+        <div class="detail-row"><span class="detail-label">Texture</span><span class="detail-val">Melody over pedal tone — minimum coordination demand for first HT piece</span></div>
+        <div class="detail-row"><span class="detail-label">Pedal</span><span class="detail-val">Sustain pedal held throughout on LH C — released at final bar</span></div>
+        <div class="detail-row"><span class="detail-label">Character</span><span class="detail-val">"A bell rings across a still lake" — slow, resonant, each note an event</span></div>
+        <div class="focus-box"><strong>Teaching focus</strong>The LH drone is a fixed task that frees the RH to express. Student plays LH while singing RH, then plays both. The pedal experiment here: press before first note, hold — hear the accumulation of resonance. Release only at final bar.</div>
+      </div>
+    </div>
+
+    <!-- PIECE 8 -->
+    <div class="piece-card">
+      <div class="piece-header">
+        <span class="piece-number">Piece 08</span>
+        <div class="piece-title">Morning Walk</div>
+        <div class="piece-meta">Hands together · Alternating · 4/4 · Week 6 · Gateway candidate</div>
+        <span class="week-tag wk-5-6">Week 6</span>
+      </div>
+      <div class="piece-body">
+        <div class="detail-row"><span class="detail-label">Structure</span><span class="detail-val">RH plays beats 1–2 · LH plays beats 3–4 · Alternating pattern throughout</span></div>
+        <div class="detail-row"><span class="detail-val">8 bars · 4/4 · moderate walking pace</span></div>
+        <div class="detail-row"><span class="detail-label">Dynamic</span><span class="detail-val">Starts mp, builds to mf in bar 5, returns mp for final 2 bars</span></div>
+        <div class="focus-box"><strong>Teaching focus</strong>The pulse must remain perfectly steady even as hands alternate. Teacher taps the pulse; student must not allow hand-switching to create hesitation. Frame it as: "left and right are different colours of the same line."</div>
+      </div>
+    </div>
+
+    <!-- PIECE 9 -->
+    <div class="piece-card">
+      <div class="piece-header">
+        <span class="piece-number">Piece 09</span>
+        <div class="piece-title">Reflections</div>
+        <div class="piece-meta">Hands together · Pedal marking · Full expression · Week 7 · Gateway candidate ★</div>
+        <span class="week-tag wk-7-8">Week 7</span>
+      </div>
+      <div class="piece-body">
+        <div class="detail-row"><span class="detail-label">Structure</span><span class="detail-val">A section (8 bars) — B section (8 bars) — A return (8 bars)</span></div>
+        <div class="detail-row"><span class="detail-label">LH</span><span class="detail-val">Broken chord pattern: C–G alternating quarter notes</span></div>
+        <div class="detail-row"><span class="detail-label">RH</span><span class="detail-val">Singing melody using C D E F G with steps and skips</span></div>
+        <div class="detail-row"><span class="detail-label">Pedal</span><span class="detail-val">Syncopated pedal: down on beat 1, up-down on beat 3 at harmony changes</span></div>
+        <div class="detail-row"><span class="detail-label">Character</span><span class="detail-val">Student gives it a personal title. Teacher never prescribes the story.</span></div>
+        <div class="focus-box"><strong>Teaching focus</strong>This is the gateway candidate for students who need interpretive depth. The B section contrast (student chooses: dynamic, tempo, articulation) is the musical test. "Play A like morning. Play B like noon. Return A like evening." The programme becomes a journey.</div>
+      </div>
+    </div>
+
+    <!-- PIECE 10 -->
+    <div class="piece-card">
+      <div class="piece-header">
+        <span class="piece-number">Piece 10</span>
+        <div class="piece-title">The Long Road Home</div>
+        <div class="piece-meta">Hands together · Full dynamic range · Week 7–8 · Gateway candidate ★</div>
+        <span class="week-tag wk-7-8">Week 7–8</span>
+      </div>
+      <div class="piece-body">
+        <div class="detail-row"><span class="detail-label">Structure</span><span class="detail-val">12 bars · ABA · begins and ends on a quiet C</span></div>
+        <div class="detail-row"><span class="detail-label">Arc</span><span class="detail-val">p opening → crescendo to f at bar 7 → decrescendo → pp closing</span></div>
+        <div class="detail-row"><span class="detail-label">LH</span><span class="detail-val">Half-note bass notes (C, G, F, G, C) supporting RH melody</span></div>
+        <div class="detail-row"><span class="detail-label">Pedal</span><span class="detail-val">Optional — student decides by ear whether it improves the sound</span></div>
+        <div class="focus-box"><strong>Teaching focus</strong>This piece is chosen when a student has strong emotional engagement but needs the largest musical arc. The pp closing is the hardest moment — arm weight almost nothing, tone still resonant. "Quiet does not mean small." Perform twice: once for technique, once for story. The second is the performance.</div>
+      </div>
+    </div>
+
+  </div><!-- /Phase B pieces -->
+
+</div><!-- /tab-repertoire -->
+
+
+<!-- ════════════════════════════════════
+     TAB 2 — EXERCISES
+════════════════════════════════════ -->
+<div class="tab-panel" id="tab-exercises">
+  <div class="section-head">
+    <h2>Technical Exercises</h2>
+    <p class="desc">20 core exercises covering all four pillars: Body, Ear, Keys, and Sound. Sequenced from Week 1 through Week 8. Click any exercise to expand full instructions.</p>
+  </div>
+
+  <!-- BODY EXERCISES -->
+  <div class="exercise-group">
+    <div class="exercise-group-title"><span class="week-tag tag-body" style="background:var(--teal-light);color:var(--teal);padding:3px 10px;border-radius:20px;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;font-family:'DM Mono',monospace;">Body</span> Posture, Tone & Arm Weight</div>
+
+    <div class="exercise-card">
+      <div class="ex-header" onclick="toggleEx(this)">
+        <span class="ex-num">B-01</span>
+        <span class="ex-name">The Arm-Weight Drop</span>
+        <div class="ex-tags"><span class="ex-tag tag-body">Body</span><span class="ex-tag tag-sound">Sound</span></div>
+        <span class="week-tag wk-1-2" style="font-size:9px;padding:2px 7px;">Week 1</span>
+        <span class="ex-toggle">▾</span>
+      </div>
+      <div class="ex-body">
+        <div class="ex-step"><span class="ex-step-num">1</span><span>Lift the forearm to 45°. Let it fall freely — no muscle assistance — onto a single key (Middle C). Observe: the key goes down, the sound rings, the arm rests.</span></div>
+        <div class="ex-step"><span class="ex-step-num">2</span><span>Repeat 8 times on the same key. Listen for consistency. If any note sounds different, ask: "Was my arm actually free, or did I help it?"</span></div>
+        <div class="ex-step"><span class="ex-step-num">3</span><span>Move to D, E, F, G — one drop per key. Each must sound equally resonant. The tone changes with the key, not the technique.</span></div>
+        <div class="ex-step"><span class="ex-step-num">4</span><span>Three dynamic levels: arm drops from low height (pp), medium height (mp), high height (f). Same relaxed arm — only launch height changes.</span></div>
+        <div class="ex-tip">The arm should feel "heavy" going down, completely relaxed after landing. If the student tenses up after the note, the exercise needs resetting.</div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header" onclick="toggleEx(this)">
+        <span class="ex-num">B-02</span>
+        <span class="ex-name">Weight Transfer — Rolling Between Notes</span>
+        <div class="ex-tags"><span class="ex-tag tag-body">Body</span><span class="ex-tag tag-sound">Sound</span></div>
+        <span class="week-tag wk-1-2" style="font-size:9px;padding:2px 7px;">Week 2</span>
+        <span class="ex-toggle">▾</span>
+      </div>
+      <div class="ex-body">
+        <div class="ex-step"><span class="ex-step-num">1</span><span>Place RH in five-finger position (C–G). Play C with arm weight. While C is ringing, slowly roll the weight across to D. C releases exactly when D sounds.</span></div>
+        <div class="ex-step"><span class="ex-step-num">2</span><span>Continue rolling: D→E→F→G. The hand should feel like water poured from one vessel to another — continuous, no gaps, no blur.</span></div>
+        <div class="ex-step"><span class="ex-step-num">3</span><span>Roll back down: G→F→E→D→C. The hand weight must travel "uphill" — slightly more active, but still relaxed.</span></div>
+        <div class="ex-step"><span class="ex-step-num">4</span><span>Sing each note as the weight arrives. Voice must reach the note a fraction before the finger does.</span></div>
+        <div class="ex-tip">Watch the wrist: it should remain level or slightly elevated throughout. If it dips below the hand on each note, the student is "poking" rather than rolling.</div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header" onclick="toggleEx(this)">
+        <span class="ex-num">B-03</span>
+        <span class="ex-name">Staccato Bounce</span>
+        <div class="ex-tags"><span class="ex-tag tag-body">Body</span><span class="ex-tag tag-sound">Sound</span></div>
+        <span class="week-tag wk-5-6" style="font-size:9px;padding:2px 7px;">Week 5</span>
+        <span class="ex-toggle">▾</span>
+      </div>
+      <div class="ex-body">
+        <div class="ex-step"><span class="ex-step-num">1</span><span>Begin with the arm-weight drop (B-01) on Middle C. After the note sounds, allow the arm to "rebound" upward — like a ball bouncing, not a controlled lift.</span></div>
+        <div class="ex-step"><span class="ex-step-num">2</span><span>The rebound creates the staccato: the note is short not because you "cut" it, but because the arm naturally rises. The motion is initiated from the forearm, not the finger.</span></div>
+        <div class="ex-step"><span class="ex-step-num">3</span><span>Practice C–D–E–D–C with staccato. Listen: each note should sound like a crisp raindrop — clean attack, immediate release, no buzzing.</span></div>
+        <div class="ex-step"><span class="ex-step-num">4</span><span>Compare: play C legato, then C staccato. The tone colour changes; the relaxation in the arm does not.</span></div>
+        <div class="ex-tip">"Drop and bounce, not poke." If the student jabs with the fingertip, the sound will be sharp and thin. The arm's natural weight always produces a rounder staccato tone.</div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header" onclick="toggleEx(this)">
+        <span class="ex-num">B-04</span>
+        <span class="ex-name">Posture Reset — The Benchmark Check</span>
+        <div class="ex-tags"><span class="ex-tag tag-body">Body</span></div>
+        <span class="week-tag wk-all" style="background:var(--blue-light);color:var(--blue);font-size:9px;padding:2px 7px;">All weeks</span>
+        <span class="ex-toggle">▾</span>
+      </div>
+      <div class="ex-body">
+        <div class="ex-step"><span class="ex-step-num">1</span><span><strong>Bench height:</strong> Student sits — thighs parallel to floor, elbows slightly above key level. Adjust before every session.</span></div>
+        <div class="ex-step"><span class="ex-step-num">2</span><span><strong>Hand shape:</strong> "Hold a small orange." Fingers gently curved. Knuckle arch does not collapse when pressing. Thumb plays on its outer edge — never flat.</span></div>
+        <div class="ex-step"><span class="ex-step-num">3</span><span><strong>Shoulder test:</strong> Ask student to shrug shoulders to ears, hold 2 seconds, release. Whatever position the shoulders fall to is where they should stay during playing.</span></div>
+        <div class="ex-step"><span class="ex-step-num">4</span><span><strong>Wrist level:</strong> Not higher than the knuckles, not lower than the keys. Level is neutral. "Wrist is a bridge — not a peak, not a valley."</span></div>
+        <div class="ex-tip">Use this check at the start of every session and whenever you hear tone quality deteriorate mid-lesson. Tension is almost always the cause of poor tone.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EAR EXERCISES -->
+  <div class="exercise-group">
+    <div class="exercise-group-title"><span class="week-tag" style="background:var(--purple-light);color:var(--purple);padding:3px 10px;border-radius:20px;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;font-family:'DM Mono',monospace;">Ear</span> Singing, Intervals & Pitch</div>
+
+    <div class="exercise-card">
+      <div class="ex-header" onclick="toggleEx(this)">
+        <span class="ex-num">E-01</span>
+        <span class="ex-name">Voice Leads Hand — Inner Singing Protocol</span>
+        <div class="ex-tags"><span class="ex-tag tag-ear">Ear</span></div>
+        <span class="week-tag wk-1-2" style="font-size:9px;padding:2px 7px;">Week 1+</span>
+        <span class="ex-toggle">▾</span>
+      </div>
+      <div class="ex-body">
+        <div class="ex-step"><span class="ex-step-num">1</span><span>Teacher plays C. Student sings it. Then sings D before finding it on the keyboard. The sequence is always: hear → sing → play.</span></div>
+        <div class="ex-step"><span class="ex-step-num">2</span><span>If the student cannot sing the next note before playing, they are not ready to play it. Slow down or return to listening only.</span></div>
+        <div class="ex-step"><span class="ex-step-num">3</span><span>Apply to every scale, every piece, every exercise: voice arrives at each note a fraction before the finger. No exceptions.</span></div>
+        <div class="dialogue">If the singing stops, the hands stop. The voice is the real musician — the hands are only servants.</div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header" onclick="toggleEx(this)">
+        <span class="ex-num">E-02</span>
+        <span class="ex-name">Pitch Matching — Call and Echo</span>
+        <div class="ex-tags"><span class="ex-tag tag-ear">Ear</span></div>
+        <span class="week-tag wk-1-2" style="font-size:9px;padding:2px 7px;">Weeks 1–4</span>
+        <span class="ex-toggle">▾</span>
+      </div>
+      <div class="ex-body">
+        <div class="ex-step"><span class="ex-step-num">1</span><span>Teacher plays a single note (C–G range only). Student sings it back — without first looking at or touching the keyboard.</span></div>
+        <div class="ex-step"><span class="ex-step-num">2</span><span>Once sung accurately, student finds the note on the keyboard — then plays it, checking whether the pitch matches their voice.</span></div>
+        <div class="ex-step"><span class="ex-step-num">3</span><span>Run 5 notes per session. Progress criteria: 5/5 correct pitches, found without hesitation, within 5 seconds each.</span></div>
+        <div class="ex-step"><span class="ex-step-num">4</span><span><strong>Harder version (Week 4+):</strong> Teacher plays the note, student sings it back, then sings the note one step above. Only then plays both on the keyboard.</span></div>
+        <div class="ex-tip">Students who struggle to match pitch at all may need the teacher to sing unison with them until the habit forms. Never embarrass — frame it as "our voices finding the note together."</div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header" onclick="toggleEx(this)">
+        <span class="ex-num">E-03</span>
+        <span class="ex-name">Step or Skip — Blind Interval Identification</span>
+        <div class="ex-tags"><span class="ex-tag tag-ear">Ear</span><span class="ex-tag tag-keys">Keys</span></div>
+        <span class="week-tag wk-5-6" style="font-size:9px;padding:2px 7px;">Weeks 5–8</span>
+        <span class="ex-toggle">▾</span>
+      </div>
+      <div class="ex-body">
+        <div class="ex-step"><span class="ex-step-num">1</span><span>Teacher sits beside student. Teacher plays two notes sequentially, shielding the keyboard. Student answers: "step" or "skip."</span></div>
+        <div class="ex-step"><span class="ex-step-num">2</span><span>Round 1: direction only — "up" or "down." Round 2: both — "skip up," "step down." Round 3 (Week 6+): add quantity — "small skip (3rd)" or "big skip (5th)."</span></div>
+        <div class="ex-step"><span class="ex-step-num">3</span><span>Run 10 pairs per session. Scoring: 8/10 is pass for gateway readiness.</span></div>
+        <div class="ex-step"><span class="ex-step-num">4</span><span><strong>Melody version:</strong> Teacher plays a 4-note melody. Student transcribes as a sequence of step/skip directions: e.g. "step up, skip down, step up."</span></div>
+        <div class="ex-tip">Start with widely contrasting intervals (2nd vs 5th) before narrowing. A student who confuses steps and small skips is not ready for gateway ear assessment.</div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header" onclick="toggleEx(this)">
+        <span class="ex-num">E-04</span>
+        <span class="ex-name">Melody Echo — 3-Note Singing</span>
+        <div class="ex-tags"><span class="ex-tag tag-ear">Ear</span></div>
+        <span class="week-tag wk-5-6" style="font-size:9px;padding:2px 7px;">Weeks 5–8</span>
+        <span class="ex-toggle">▾</span>
+      </div>
+      <div class="ex-body">
+        <div class="ex-step"><span class="ex-step-num">1</span><span>Teacher sings (not plays) a 3-note melody using solfège or neutral syllable "la." Student listens, then sings it back exactly.</span></div>
+        <div class="ex-step"><span class="ex-step-num">2</span><span>Student then finds the starting note on the keyboard without help. Plays the full melody from memory.</span></div>
+        <div class="ex-step"><span class="ex-step-num">3</span><span>Advance to 4-note melody in Week 7. Gateway check uses 3-note melody.</span></div>
+        <div class="dialogue">The student who can sing it back has already understood the music. The keyboard is just the translation.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEYS EXERCISES -->
+  <div class="exercise-group">
+    <div class="exercise-group-title"><span class="week-tag" style="background:var(--coral-light);color:var(--coral);padding:3px 10px;border-radius:20px;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;font-family:'DM Mono',monospace;">Keys</span> Keyboard Geography & Staff Reading</div>
+
+    <div class="exercise-card">
+      <div class="ex-header" onclick="toggleEx(this)">
+        <span class="ex-num">K-01</span>
+        <span class="ex-name">Black Key Anchors — C and F</span>
+        <div class="ex-tags"><span class="ex-tag tag-keys">Keys</span></div>
+        <span class="week-tag wk-1-2" style="font-size:9px;padding:2px 7px;">Week 1</span>
+        <span class="ex-toggle">▾</span>
+      </div>
+      <div class="ex-body">
+        <div class="ex-step"><span class="ex-step-num">1</span><span>Eyes closed. Student places their right thumb anywhere they think is a C. Open eyes — check. Repeat 5 times without rhythm pressure.</span></div>
+        <div class="ex-step"><span class="ex-step-num">2</span><span>Teach the rule: C is the white key immediately to the left of any group of TWO black keys. F is the white key immediately to the left of any group of THREE black keys.</span></div>
+        <div class="ex-step"><span class="ex-step-num">3</span><span>Speed drill: teacher calls "C!" — student touches the nearest C within 2 seconds. Rotate through all C's on the keyboard. Then F. Then both mixed.</span></div>
+        <div class="ex-step"><span class="ex-step-num">4</span><span>Advance: teacher calls note names at random — C G D A E B F — student plays each in any octave within 3 seconds. No looking at the hand.</span></div>
+        <div class="ex-tip">The goal is instantaneous visual pattern recognition, not counting from C. A student who still counts from C in Week 4 needs additional daily drill at home — 2 minutes of "name and find" with note flashcards.</div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header" onclick="toggleEx(this)">
+        <span class="ex-num">K-02</span>
+        <span class="ex-name">Staff Reading — Line and Space Drill</span>
+        <div class="ex-tags"><span class="ex-tag tag-keys">Keys</span></div>
+        <span class="week-tag wk-3-4" style="font-size:9px;padding:2px 7px;">Weeks 3–8</span>
+        <span class="ex-toggle">▾</span>
+      </div>
+      <div class="ex-body">
+        <div class="ex-step"><span class="ex-step-num">1</span><span>Teacher draws (or prints) a grand staff with 5 notes marked — 3 treble, 2 bass. Student names each note aloud, then plays it on the keyboard.</span></div>
+        <div class="ex-step"><span class="ex-step-num">2</span><span>Use landmark notes first: Middle C (ledger below treble), E (first line treble), G (second line treble), B (middle line bass), G (second line from bottom bass).</span></div>
+        <div class="ex-step"><span class="ex-step-num">3</span><span>Advance from landmarks to all 5-position notes by Week 5. Gateway check requires 4/5 notes correct across both clefs.</span></div>
+        <div class="ex-step"><span class="ex-step-num">4</span><span><strong>Step-skip reading drill:</strong> Show a note on staff. Ask "one step up — what note is that?" then "a skip up?" The student answers before you point.</span></div>
+        <div class="ex-tip">Home practice tool: Teacher writes 5 random notes on manuscript paper at end of each lesson. Student names and plays them at home. Takes 3 minutes and dramatically accelerates note-reading fluency.</div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header" onclick="toggleEx(this)">
+        <span class="ex-num">K-03</span>
+        <span class="ex-name">The Rapid Name Drill (Gateway Prep)</span>
+        <div class="ex-tags"><span class="ex-tag tag-keys">Keys</span></div>
+        <span class="week-tag wk-7-8" style="font-size:9px;padding:2px 7px;">Weeks 7–8</span>
+        <span class="ex-toggle">▾</span>
+      </div>
+      <div class="ex-body">
+        <div class="ex-step"><span class="ex-step-num">1</span><span>Teacher calls 5 note names in rapid succession (one every 2 seconds). Student finds each anywhere on the keyboard without hesitation.</span></div>
+        <div class="ex-step"><span class="ex-step-num">2</span><span>Second round: Teacher points to 5 notes on the grand staff. Student names each and immediately plays it. No "thinking time" — the name should arrive with the recognition.</span></div>
+        <div class="ex-step"><span class="ex-step-num">3</span><span>Gateway standard: 5/5 keyboard locations correct; 4/5 staff notes correctly named and played.</span></div>
+        <div class="ex-tip">If the student is still slow at Week 7, add flashcard practice daily. The 2-second rule is non-negotiable for gateway — it signals genuine fluency vs. counting.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SOUND / EXPRESSION EXERCISES -->
+  <div class="exercise-group">
+    <div class="exercise-group-title"><span class="week-tag tag-sound" style="background:#f1efe8;color:var(--ink-mid);padding:3px 10px;border-radius:20px;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;font-family:'DM Mono',monospace;">Sound</span> Expression & Musical Intention</div>
+
+    <div class="exercise-card">
+      <div class="ex-header" onclick="toggleEx(this)">
+        <span class="ex-num">S-01</span>
+        <span class="ex-name">Character Game — Same Notes, Different Story</span>
+        <div class="ex-tags"><span class="ex-tag tag-sound">Sound</span><span class="ex-tag tag-ear">Ear</span></div>
+        <span class="week-tag wk-3-4" style="font-size:9px;padding:2px 7px;">Week 3+</span>
+        <span class="ex-toggle">▾</span>
+      </div>
+      <div class="ex-body">
+        <div class="ex-step"><span class="ex-step-num">1</span><span>Student plays C–D–E–D–C. Teacher asks: "Play it as a lullaby." Student plays. Teacher: "Now play it as a fanfare." Student plays. The notes don't change — only the intention does.</span></div>
+        <div class="ex-step"><span class="ex-step-num">2</span><span>Compare the two versions out loud: what changed? Dynamic? Tempo? Articulation? The student names the musical tools they instinctively used.</span></div>
+        <div class="ex-step"><span class="ex-step-num">3</span><span>Extend: "Play it as if you're saying goodbye." "Play it as if you're arriving home." Musical intention must precede physical action.</span></div>
+        <div class="ex-tip">This exercise is not about correctness. There is no wrong answer. The goal is for the student to discover that they already have musical instincts — they just need permission to use them.</div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header" onclick="toggleEx(this)">
+        <span class="ex-num">S-02</span>
+        <span class="ex-name">The One Beautiful Note</span>
+        <div class="ex-tags"><span class="ex-tag tag-sound">Sound</span><span class="ex-tag tag-body">Body</span></div>
+        <span class="week-tag wk-all" style="background:var(--blue-light);color:var(--blue);font-size:9px;padding:2px 7px;">All weeks</span>
+        <span class="ex-toggle">▾</span>
+      </div>
+      <div class="ex-body">
+        <div class="ex-step"><span class="ex-step-num">1</span><span>Student plays a single note (teacher chooses, mid-register). Student listens to the full decay until silence.</span></div>
+        <div class="ex-step"><span class="ex-step-num">2</span><span>Teacher asks: "What did you hear? Was it a sound you'd want to hear more of?" Student answers before teacher comments.</span></div>
+        <div class="ex-step"><span class="ex-step-num">3</span><span>Play it again, aiming for a "better" version of that same note. The student is the judge. Teacher only asks: "Was that better or the same?"</span></div>
+        <div class="ex-tip">Use this as the opening of every session — before scales, before repertoire. It calibrates the ear and reminds both teacher and student that tone quality is the foundation of all musical expression.</div>
+      </div>
+    </div>
+
+    <div class="exercise-card">
+      <div class="ex-header" onclick="toggleEx(this)">
+        <span class="ex-num">S-03</span>
+        <span class="ex-name">Pedal by Ear — Clean vs. Muddy</span>
+        <div class="ex-tags"><span class="ex-tag tag-sound">Sound</span><span class="ex-tag tag-ear">Ear</span></div>
+        <span class="week-tag wk-5-6" style="font-size:9px;padding:2px 7px;">Week 6</span>
+        <span class="ex-toggle">▾</span>
+      </div>
+      <div class="ex-body">
+        <div class="ex-step"><span class="ex-step-num">1</span><span>Teacher demonstrates: play a C major chord slowly (C–E–G) without pedal. Then with pedal. Student describes the difference: "room" vs. "outdoors" or "wet" vs. "dry."</span></div>
+        <div class="ex-step"><span class="ex-step-num">2</span><span>Student tries: holds pedal, plays C, then D. "Does that sound clean or blurred?" The student's own ear gives the rule.</span></div>
+        <div class="ex-step"><span class="ex-step-num">3</span><span>Rule derived by the student (not taught): "Change the pedal when the sound blurs." This is the only pedal rule needed in Stage 1.</span></div>
+        <div class="ex-step"><span class="ex-step-num">4</span><span>Apply to Piece 07 (Bell Tower): hold pedal on LH C throughout. Student decides — does it improve the piece?</span></div>
+        <div class="ex-tip">Never give pedal rules before this exercise. The student who discovers the rule through their ears owns it permanently. The student who is told the rule will forget it.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-exercises -->
+
+
+<!-- ════════════════════════════════════
+     TAB 3 — RHYTHM NUMBERS
+════════════════════════════════════ -->
+<div class="tab-panel" id="tab-rhythm">
+  <div class="section-head">
+    <h2>Rhythm Number Exercises</h2>
+    <p class="desc">12 progressive rhythm exercises using the counting-number system. Each rhythm pattern is shown in three ways: counting numbers, clap notation, and body description. Rhythm is always felt before it is named.</p>
+  </div>
+
+  <div class="teacher-note" style="background:var(--cream);border-left:3px solid var(--teal);border-radius:0 8px 8px 0;padding:1rem 1.25rem;margin-bottom:2rem;">
+    <p style="font-size:13.5px;color:var(--ink-mid);line-height:1.65;"><strong style="color:var(--teal);display:block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;">How to use these exercises</strong>
+    All rhythm exercises begin with body — walk, clap, or tap. The counting system used here is: beat numbers (1, 2, 3, 4) with subdivisions marked as "and" (+). Speak rhythms aloud before playing. Never introduce a rhythm at the keyboard without first clapping it away from the instrument.</p>
+  </div>
+
+  <!-- R-01 -->
+  <div class="rhythm-card">
+    <div class="rhythm-card-header">
+      <div>
+        <div class="rhythm-title">R-01 · Four Quarter Notes in 4/4</div>
+        <div class="rhythm-subtitle">The basic pulse — Week 1 · Body exercise before keyboard</div>
+      </div>
+      <span class="week-tag wk-1-2">Week 1</span>
+    </div>
+    <div class="rhythm-display">
+      <span class="r-beat">1</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">2</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">3</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">4</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-bar">|</span>&nbsp;
+      <span class="r-beat">1</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">2</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">3</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">4</span><span class="r-note r-ta">TA</span>
+    </div>
+    <div class="clap-notation">
+      <div class="clap-box clap-q">♩</div>
+      <div class="clap-box clap-q">♩</div>
+      <div class="clap-box clap-q">♩</div>
+      <div class="clap-box clap-q">♩</div>
+      <div class="clap-box clap-bar">|</div>
+      <div class="clap-box clap-q">♩</div>
+      <div class="clap-box clap-q">♩</div>
+      <div class="clap-box clap-q">♩</div>
+      <div class="clap-box clap-q">♩</div>
+    </div>
+    <div class="count-row">
+      <div class="count-cell main">1</div>
+      <div class="count-cell main">2</div>
+      <div class="count-cell main">3</div>
+      <div class="count-cell main">4</div>
+      <div class="count-cell"></div>
+      <div class="count-cell main">1</div>
+      <div class="count-cell main">2</div>
+      <div class="count-cell main">3</div>
+      <div class="count-cell main">4</div>
+    </div>
+    <div class="detail-row" style="margin-top:0.75rem;"><span class="detail-label">Solfège</span><span class="detail-val">TA = quarter note. Walk the room: one step per TA. Teacher claps; student walks. Then swap.</span></div>
+    <div class="detail-row"><span class="detail-label">At keyboard</span><span class="detail-val">Play single note C on each TA. No looking — listen for evenness of spacing and tone.</span></div>
+  </div>
+
+  <!-- R-02 -->
+  <div class="rhythm-card">
+    <div class="rhythm-card-header">
+      <div>
+        <div class="rhythm-title">R-02 · Quarter and Half Notes in 4/4</div>
+        <div class="rhythm-subtitle">First duration contrast — Week 1–2</div>
+      </div>
+      <span class="week-tag wk-1-2">Week 1–2</span>
+    </div>
+    <div class="rhythm-display">
+      <span class="r-beat">1</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">2</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">3–4</span><span class="r-note" style="color:#f0b45a;">TAA</span>&nbsp;&nbsp;
+      <span class="r-bar">|</span>&nbsp;
+      <span class="r-beat">1–2</span><span class="r-note" style="color:#f0b45a;">TAA</span>&nbsp;&nbsp;
+      <span class="r-beat">3</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">4</span><span class="r-note r-ta">TA</span>
+    </div>
+    <div class="clap-notation">
+      <div class="clap-box clap-q">♩</div>
+      <div class="clap-box clap-q">♩</div>
+      <div class="clap-box clap-h">𝅗𝅥 (hold 2)</div>
+      <div class="clap-box clap-bar">|</div>
+      <div class="clap-box clap-h">𝅗𝅥 (hold 2)</div>
+      <div class="clap-box clap-q">♩</div>
+      <div class="clap-box clap-q">♩</div>
+    </div>
+    <div class="count-row">
+      <div class="count-cell main">1</div>
+      <div class="count-cell main">2</div>
+      <div class="count-cell main">3</div>
+      <div class="count-cell" style="color:#c8bfb0;font-size:9px;">(4)</div>
+      <div class="count-cell"></div>
+      <div class="count-cell main">1</div>
+      <div class="count-cell" style="color:#c8bfb0;font-size:9px;">(2)</div>
+      <div class="count-cell main">3</div>
+      <div class="count-cell main">4</div>
+    </div>
+    <div class="detail-row" style="margin-top:0.75rem;"><span class="detail-label">Body</span><span class="detail-val">Clap quarter notes, open arms wide for half notes (hold position for 2 beats).</span></div>
+    <div class="detail-row"><span class="detail-label">Voice</span><span class="detail-val">Say "TA" for quarters, "TAA" for halfs — the vowel sustains for the duration of the note.</span></div>
+    <div class="detail-row"><span class="detail-label">At keyboard</span><span class="detail-val">Apply to Piece 01: C quarter, E quarter, G half. Sing "TA–TA–TAA" while playing. Quarter notes feel "present"; half notes feel "patient."</span></div>
+  </div>
+
+  <!-- R-03 -->
+  <div class="rhythm-card">
+    <div class="rhythm-card-header">
+      <div>
+        <div class="rhythm-title">R-03 · Half Note + Quarter Rest in 4/4</div>
+        <div class="rhythm-subtitle">First encounter with silence — Week 2</div>
+      </div>
+      <span class="week-tag wk-1-2">Week 2</span>
+    </div>
+    <div class="rhythm-display">
+      <span class="r-beat">1</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">2</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">3–4</span><span class="r-note" style="color:#f0b45a;">TAA</span>&nbsp;&nbsp;
+      <span class="r-bar">|</span>&nbsp;
+      <span class="r-beat">1–2</span><span class="r-note" style="color:#f0b45a;">TAA</span>&nbsp;&nbsp;
+      <span class="r-beat">3</span><span class="r-rest">REST</span>&nbsp;&nbsp;
+      <span class="r-beat">4</span><span class="r-note r-ta">TA</span>
+    </div>
+    <div class="clap-notation">
+      <div class="clap-box clap-q">♩</div>
+      <div class="clap-box clap-q">♩</div>
+      <div class="clap-box clap-h">𝅗𝅥</div>
+      <div class="clap-box clap-bar">|</div>
+      <div class="clap-box clap-h">𝅗𝅥</div>
+      <div class="clap-box clap-r">𝄽</div>
+      <div class="clap-box clap-q">♩</div>
+    </div>
+    <div class="count-row">
+      <div class="count-cell main">1</div>
+      <div class="count-cell main">2</div>
+      <div class="count-cell main">3</div>
+      <div class="count-cell" style="color:#c8bfb0;font-size:9px;">(4)</div>
+      <div class="count-cell"></div>
+      <div class="count-cell main">1</div>
+      <div class="count-cell" style="color:#c8bfb0;font-size:9px;">(2)</div>
+      <div class="count-cell main">3</div>
+      <div class="count-cell main">4</div>
+    </div>
+    <div class="detail-row" style="margin-top:0.75rem;"><span class="detail-label">Key idea</span><span class="detail-val">"The pulse never stops, even in silence." The rest gets the same inner beat as a sounded note.</span></div>
+    <div class="detail-row"><span class="detail-label">Body</span><span class="detail-val">Clap on beats 1, 2, and 4. On beat 3 (rest): place finger on lips — silence is active, not empty.</span></div>
+  </div>
+
+  <!-- R-04 -->
+  <div class="rhythm-card">
+    <div class="rhythm-card-header">
+      <div>
+        <div class="rhythm-title">R-04 · Three Quarter Notes in 3/4 (Waltz)</div>
+        <div class="rhythm-subtitle">First triple meter — Week 3</div>
+      </div>
+      <span class="week-tag wk-3-4">Week 3</span>
+    </div>
+    <div class="rhythm-display">
+      <span class="r-beat">1</span><span class="r-note r-accent">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">2</span><span class="r-note r-ta">ta</span>&nbsp;&nbsp;
+      <span class="r-beat">3</span><span class="r-note r-ta">ta</span>&nbsp;&nbsp;
+      <span class="r-bar">|</span>&nbsp;
+      <span class="r-beat">1</span><span class="r-note r-accent">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">2</span><span class="r-note r-ta">ta</span>&nbsp;&nbsp;
+      <span class="r-beat">3</span><span class="r-note r-ta">ta</span>
+    </div>
+    <div class="clap-notation">
+      <div class="clap-box clap-q" style="background:#7c4a0a;">1</div>
+      <div class="clap-box clap-q" style="opacity:0.5;">2</div>
+      <div class="clap-box clap-q" style="opacity:0.5;">3</div>
+      <div class="clap-box clap-bar">|</div>
+      <div class="clap-box clap-q" style="background:#7c4a0a;">1</div>
+      <div class="clap-box clap-q" style="opacity:0.5;">2</div>
+      <div class="clap-box clap-q" style="opacity:0.5;">3</div>
+    </div>
+    <div class="detail-row" style="margin-top:0.75rem;"><span class="detail-label">Body</span><span class="detail-val">Sway left (beat 1) — right (beat 2) — right (beat 3). Or: tap thigh (1), clap (2), tap shoulder (3).</span></div>
+    <div class="detail-row"><span class="detail-label">Key idea</span><span class="detail-val">Beat 1 is heavier than 2 and 3. "TA–ta–ta." Capital TA = strong; lowercase ta = light. This is the waltz feel.</span></div>
+    <div class="detail-row"><span class="detail-label">At keyboard</span><span class="detail-val">Apply to Piece 03 (Stepping Stone). Bar 1 C is heavier than D and E. The shape is built into the pulse.</span></div>
+  </div>
+
+  <!-- R-05 -->
+  <div class="rhythm-card">
+    <div class="rhythm-card-header">
+      <div>
+        <div class="rhythm-title">R-05 · Dotted Half Note in 3/4</div>
+        <div class="rhythm-subtitle">One note for a whole bar — Week 3–4</div>
+      </div>
+      <span class="week-tag wk-3-4">Week 3–4</span>
+    </div>
+    <div class="rhythm-display">
+      <span class="r-beat">1–2–3</span><span class="r-note" style="color:#f0b45a;">TAAA</span>&nbsp;&nbsp;
+      <span class="r-bar">|</span>&nbsp;
+      <span class="r-beat">1</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">2</span><span class="r-note r-ta">ta</span>&nbsp;&nbsp;
+      <span class="r-beat">3</span><span class="r-note r-ta">ta</span>&nbsp;&nbsp;
+      <span class="r-bar">|</span>&nbsp;
+      <span class="r-beat">1–2–3</span><span class="r-note" style="color:#f0b45a;">TAAA</span>
+    </div>
+    <div class="detail-row" style="margin-top:0.75rem;"><span class="detail-label">Body</span><span class="detail-val">Arms open wide on TAAA — hold for 3 beats while continuing to count inside. "The sound lasts; the pulse doesn't stop."</span></div>
+    <div class="detail-row"><span class="detail-label">At keyboard</span><span class="detail-val">Play the dotted half note with arm-weight drop. Arm stays resting on key for all 3 counts. No re-pressing, no adding weight.</span></div>
+  </div>
+
+  <!-- R-06 -->
+  <div class="rhythm-card">
+    <div class="rhythm-card-header">
+      <div>
+        <div class="rhythm-title">R-06 · Mixed Quarter, Half, Whole in 4/4</div>
+        <div class="rhythm-subtitle">All basic values combined — Week 4</div>
+      </div>
+      <span class="week-tag wk-3-4">Week 4</span>
+    </div>
+    <div class="rhythm-display">
+      <span class="r-beat">1</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">2</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">3–4</span><span class="r-note" style="color:#f0b45a;">TAA</span>&nbsp;&nbsp;
+      <span class="r-bar">|</span>&nbsp;
+      <span class="r-beat">1</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">2–3–4</span><span class="r-note" style="color:#f0b45a;">TAAA</span>&nbsp;&nbsp;
+      <span class="r-bar">|</span>&nbsp;
+      <span class="r-beat">1–2–3–4</span><span class="r-note" style="color:#6ec8a4;">TAAAA</span>
+    </div>
+    <div class="detail-row" style="margin-top:0.75rem;"><span class="detail-label">Counting</span><span class="detail-val">Quarter = "1"; Half = "1–2" or "1 (hold)"; Dotted half = "1–2–3"; Whole = "1–2–3–4"</span></div>
+    <div class="detail-row"><span class="detail-label">Body</span><span class="detail-val">Clap on the number, then open arms for held notes — arms stay open for the number of beats remaining.</span></div>
+    <div class="detail-row"><span class="detail-label">Error check</span><span class="detail-val">Students often release half notes too early. Use a metronome at 60bpm. Whole note: arm stays open until beat 4 is fully counted.</span></div>
+  </div>
+
+  <!-- R-07 -->
+  <div class="rhythm-card">
+    <div class="rhythm-card-header">
+      <div>
+        <div class="rhythm-title">R-07 · Two Eighth Notes = One Beat</div>
+        <div class="rhythm-subtitle">First subdivision — Week 4–5</div>
+      </div>
+      <span class="week-tag wk-3-4">Week 4–5</span>
+    </div>
+    <div class="rhythm-display">
+      <span class="r-beat">1</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">2+</span><span class="r-note r-ti">ti-ti</span>&nbsp;&nbsp;
+      <span class="r-beat">3</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">4+</span><span class="r-note r-ti">ti-ti</span>&nbsp;&nbsp;
+      <span class="r-bar">|</span>&nbsp;
+      <span class="r-beat">1+</span><span class="r-note r-ti">ti-ti</span>&nbsp;&nbsp;
+      <span class="r-beat">2</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">3+</span><span class="r-note r-ti">ti-ti</span>&nbsp;&nbsp;
+      <span class="r-beat">4</span><span class="r-note r-ta">TA</span>
+    </div>
+    <div class="clap-notation">
+      <div class="clap-box clap-q">♩</div>
+      <div class="clap-box clap-e">♪</div><div class="clap-box clap-e">♪</div>
+      <div class="clap-box clap-q">♩</div>
+      <div class="clap-box clap-e">♪</div><div class="clap-box clap-e">♪</div>
+      <div class="clap-box clap-bar">|</div>
+      <div class="clap-box clap-e">♪</div><div class="clap-box clap-e">♪</div>
+      <div class="clap-box clap-q">♩</div>
+      <div class="clap-box clap-e">♪</div><div class="clap-box clap-e">♪</div>
+      <div class="clap-box clap-q">♩</div>
+    </div>
+    <div class="detail-row" style="margin-top:0.75rem;"><span class="detail-label">Solfège</span><span class="detail-val">TA = quarter. TI-TI = two eighth notes. Each TI is exactly half a TA. Speak before clapping; clap before playing.</span></div>
+    <div class="detail-row"><span class="detail-label">Body</span><span class="detail-val">Walking: on "TI-TI" beats, take two quick steps in the space of one. Pulse must not speed up.</span></div>
+    <div class="detail-row"><span class="detail-label">At keyboard</span><span class="detail-val">Practice on single note C: TA — ti-ti — TA — ti-ti. The eighth notes must not rush the following TA.</span></div>
+  </div>
+
+  <!-- R-08 -->
+  <div class="rhythm-card">
+    <div class="rhythm-card-header">
+      <div>
+        <div class="rhythm-title">R-08 · Phrase Rhythm — Question Bar, Answer Bar</div>
+        <div class="rhythm-subtitle">Rhythm with musical meaning — Week 5</div>
+      </div>
+      <span class="week-tag wk-5-6">Week 5</span>
+    </div>
+    <div class="rhythm-display">
+      <span style="color:rgba(255,255,255,0.4);font-size:0.7em;">Q: </span>
+      <span class="r-beat">1</span><span class="r-note r-ti">ti-ti</span>&nbsp;
+      <span class="r-beat">2</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">3</span><span class="r-note r-ti">ti-ti</span>&nbsp;
+      <span class="r-beat">4</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-bar">|</span>&nbsp;
+      <span style="color:rgba(255,255,255,0.4);font-size:0.7em;">A: </span>
+      <span class="r-beat">1</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">2</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">3–4</span><span class="r-note" style="color:#f0b45a;">TAA</span>
+    </div>
+    <div class="detail-row" style="margin-top:0.75rem;"><span class="detail-label">Purpose</span><span class="detail-val">The "question" bar has more rhythmic activity (eighth notes) — it pushes forward. The "answer" bar settles into longer notes — it arrives.</span></div>
+    <div class="detail-row"><span class="detail-label">Teaching</span><span class="detail-val">Student claps question bar energetically. On the answer bar, they slow slightly and settle. This is the physical shape of a musical phrase.</span></div>
+    <div class="detail-row"><span class="detail-label">At keyboard</span><span class="detail-val">Apply to Piece 05 (Question and Answer). Question bars are staccato (active), answer bars are legato (settled).</span></div>
+  </div>
+
+  <!-- R-09 -->
+  <div class="rhythm-card">
+    <div class="rhythm-card-header">
+      <div>
+        <div class="rhythm-title">R-09 · Two-Hand Rhythm — Alternating Hands</div>
+        <div class="rhythm-subtitle">Coordination exercise — Week 4</div>
+      </div>
+      <span class="week-tag wk-3-4">Week 4</span>
+    </div>
+    <div class="rhythm-display">
+      <span style="color:#6ec8a4;font-size:0.75em;">RH: </span>
+      <span class="r-beat">1</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">2</span><span class="r-rest">—</span>&nbsp;&nbsp;
+      <span class="r-beat">3</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">4</span><span class="r-rest">—</span>&nbsp;&nbsp;
+      <span class="r-bar">|</span>&nbsp;&nbsp;
+      <span style="color:#a58be8;font-size:0.75em;">LH: </span>
+      <span class="r-beat">1</span><span class="r-rest">—</span>&nbsp;&nbsp;
+      <span class="r-beat">2</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">3</span><span class="r-rest">—</span>&nbsp;&nbsp;
+      <span class="r-beat">4</span><span class="r-note r-ta">TA</span>
+    </div>
+    <div class="detail-row" style="margin-top:0.75rem;"><span class="detail-label">Body first</span><span class="detail-val">Tap right knee (beats 1, 3) and left knee (beats 2, 4). Then: right hand claps beats 1+3, left claps 2+4. Continuous alternation.</span></div>
+    <div class="detail-row"><span class="detail-label">At keyboard</span><span class="detail-val">RH plays single C on beats 1+3. LH plays single G on beats 2+4. Together they create a steady pulse with no gap between hands.</span></div>
+    <div class="detail-row"><span class="detail-label">Gateway bridge</span><span class="detail-val">This is the rhythmic preparation for Piece 08 (Morning Walk) and all two-hand alternating pieces in Phase B.</span></div>
+  </div>
+
+  <!-- R-10 -->
+  <div class="rhythm-card">
+    <div class="rhythm-card-header">
+      <div>
+        <div class="rhythm-title">R-10 · Hands Together — Unison Rhythm</div>
+        <div class="rhythm-subtitle">First simultaneous coordination — Week 6</div>
+      </div>
+      <span class="week-tag wk-5-6">Week 6</span>
+    </div>
+    <div class="rhythm-display">
+      <span style="color:rgba(255,255,255,0.5);font-size:0.7em;">BOTH: </span>
+      <span class="r-beat">1</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">2</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">3–4</span><span class="r-note" style="color:#f0b45a;">TAA</span>&nbsp;&nbsp;
+      <span class="r-bar">|</span>&nbsp;
+      <span class="r-beat">1</span><span class="r-note r-ti">ti-ti</span>&nbsp;
+      <span class="r-beat">2</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">3</span><span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-beat">4</span><span class="r-rest">—</span>
+    </div>
+    <div class="detail-row" style="margin-top:0.75rem;"><span class="detail-label">Setup</span><span class="detail-val">Clap this rhythm with both palms on thighs simultaneously. No keyboard. Both hands must feel as one unit — no "leading" hand.</span></div>
+    <div class="detail-row"><span class="detail-label">At keyboard</span><span class="detail-val">RH on G (treble), LH on C (bass). Play the same rhythm in both hands simultaneously on those notes. At half tempo.</span></div>
+    <div class="detail-row"><span class="detail-label">Error</span><span class="detail-val">If one hand consistently falls behind, it is not a rhythm problem — it is a confidence problem. Return to body exercise before keyboard.</span></div>
+  </div>
+
+  <!-- R-11 -->
+  <div class="rhythm-card">
+    <div class="rhythm-card-header">
+      <div>
+        <div class="rhythm-title">R-11 · Gateway Rhythm Dictation Exercise</div>
+        <div class="rhythm-subtitle">Assessment preparation — Week 7–8</div>
+      </div>
+      <span class="week-tag wk-7-8">Week 7–8</span>
+    </div>
+    <div class="rhythm-display">
+      <span style="color:rgba(255,255,255,0.4);font-size:0.7em;">Teacher plays →</span>&nbsp;
+      <span class="r-note r-ta">TA</span>&nbsp;
+      <span class="r-note r-ti">ti-ti</span>&nbsp;
+      <span class="r-note" style="color:#f0b45a;">TAA</span>&nbsp;
+      <span class="r-rest">—</span>&nbsp;
+      <span class="r-bar">|</span>&nbsp;
+      <span style="color:rgba(255,255,255,0.4);font-size:0.7em;">Student echoes →</span>
+    </div>
+    <div class="detail-row" style="margin-top:0.75rem;"><span class="detail-label">Format</span><span class="detail-val">Teacher claps a 4-beat pattern. Student echoes by clapping immediately after. 5 patterns total. Pass: 4/5 echoed correctly with steady pulse.</span></div>
+    <div class="detail-row"><span class="detail-label">Patterns</span><span class="detail-val">Use any combination of TA, ti-ti, TAA, rest. Vary starting note values. Avoid syncopation — not a Stage 1 requirement.</span></div>
+    <div class="detail-row"><span class="detail-label">Note</span><span class="detail-val">Rhythm dictation is not a formal gateway check in Stage 1. It is used as evidence for the teacher when evaluating overall musical readiness.</span></div>
+  </div>
+
+  <!-- R-12 -->
+  <div class="rhythm-card">
+    <div class="rhythm-card-header">
+      <div>
+        <div class="rhythm-title">R-12 · Pulse Stability Under Pressure</div>
+        <div class="rhythm-subtitle">The most important rhythm habit — All weeks</div>
+      </div>
+      <span class="week-tag wk-all" style="background:var(--blue-light);color:var(--blue);">All Weeks</span>
+    </div>
+    <div class="rhythm-display">
+      <span style="color:rgba(255,255,255,0.5);font-size:0.7em;">Play → </span>
+      <span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-rest" style="font-size:0.9em;">[PAUSE — keep counting!]</span>&nbsp;&nbsp;
+      <span class="r-note r-ta">TA</span>&nbsp;&nbsp;
+      <span class="r-note r-ta">TA</span>
+    </div>
+    <div class="detail-row" style="margin-top:0.75rem;"><span class="detail-label">Exercise</span><span class="detail-val">Teacher plays 2 bars, then stops. Student taps pulse internally for 1 bar, then continues playing. The pulse must be in the same place it would have been had the music never stopped.</span></div>
+    <div class="detail-row"><span class="detail-label">Key teaching</span><span class="detail-val">"The pulse never stops. Even in silence, even between pieces, the pulse continues inside you." This is the foundation of all ensemble playing and performance stability.</span></div>
+  </div>
+
+</div><!-- /tab-rhythm -->
+
+
+<!-- ════════════════════════════════════
+     TAB 4 — EVALUATION
+════════════════════════════════════ -->
+<div class="tab-panel" id="tab-evaluation">
+  <div class="section-head">
+    <h2>Weekly & Mid-Stage Evaluation</h2>
+    <p class="desc">Evaluation is embedded in every session — not reserved for Week 8. These tools help the teacher track progress weekly and identify which pillar needs attention before the gateway.</p>
+  </div>
+
+  <div class="eval-intro">
+    <h3>The Four Pillars — Stage 1 Evaluation Framework</h3>
+    <p>Every evaluation in Stage 1 tests one or more of four pillars: <strong>Body</strong> (physical mechanics), <strong>Ear</strong> (aural perception and pitch), <strong>Keys</strong> (keyboard geography and staff reading), and <strong>Sound</strong> (musical expression and intention). A student may pass one pillar before others. Progress is always reported by pillar, never as a single score.</p>
+  </div>
+
+  <div class="eval-grid">
+    <!-- Pillar 1: Body -->
+    <div class="eval-card">
+      <div class="eval-card-head">
+        <div class="eval-pillar-label" style="color:var(--teal);">Pillar 01 — Body</div>
+        <h4>Posture, Arm Weight & Tone</h4>
+      </div>
+      <div class="eval-card-body">
+        <div class="rubric-row"><span class="rubric-label">Observed</span><span class="rubric-desc">Bench height correct; shoulders released; wrist level; curved finger shape; no collapsed knuckles.</span></div>
+        <div class="rubric-row"><span class="rubric-label">Tone test</span><span class="rubric-desc">Student plays a single note with arm weight. Tone is resonant, not brittle. Arm relaxes after contact.</span></div>
+        <div class="rubric-row"><span class="rubric-label">Dynamic test</span><span class="rubric-desc">Student plays p, mp, and f on same note. Dynamic changes are produced by arm speed — no added tension visible.</span></div>
+        <div class="pass-box"><strong>Pass criterion</strong>One tone the teacher would "want to hear more of," produced with visible physical relaxation at all three dynamic levels.</div>
+        <div class="fail-box"><strong>If not passing</strong>Return to Exercise B-01 (Arm Drop) and B-04 (Posture Reset) daily. Check bench height first — most tension originates from poor seating position.</div>
+      </div>
+    </div>
+
+    <!-- Pillar 2: Ear -->
+    <div class="eval-card">
+      <div class="eval-card-head">
+        <div class="eval-pillar-label" style="color:var(--purple);">Pillar 02 — Ear</div>
+        <h4>Pitch, Intervals & Singing</h4>
+      </div>
+      <div class="eval-card-body">
+        <div class="rubric-row"><span class="rubric-label">Pitch test</span><span class="rubric-desc">Teacher plays 5 notes (C–G range). Student sings each back accurately. Pass: 5/5.</span></div>
+        <div class="rubric-row"><span class="rubric-label">Interval test</span><span class="rubric-desc">Teacher plays 5 two-note intervals. Student identifies each as "step up/down" or "skip up/down." Pass: 4/5.</span></div>
+        <div class="rubric-row"><span class="rubric-label">Melody echo</span><span class="rubric-desc">Teacher sings a 3-note melody. Student sings it back, then finds it on keyboard. Pass: accurate sing-back and location.</span></div>
+        <div class="pass-box"><strong>Pass criterion</strong>4/5 intervals correct; melody sung back accurately and located on keyboard without hesitation.</div>
+        <div class="fail-box"><strong>If not passing</strong>Add E-02 (Pitch Matching) and E-04 (Melody Echo) to every session. Check whether student sings along during playing — if the voice has stopped, the ear has stopped. Restore singing-first protocol before anything else.</div>
+      </div>
+    </div>
+
+    <!-- Pillar 3: Keys -->
+    <div class="eval-card">
+      <div class="eval-card-head">
+        <div class="eval-pillar-label" style="color:var(--coral);">Pillar 03 — Keys</div>
+        <h4>Keyboard Geography & Staff Reading</h4>
+      </div>
+      <div class="eval-card-body">
+        <div class="rubric-row"><span class="rubric-label">Geography test</span><span class="rubric-desc">Teacher calls 5 note names rapidly. Student finds each anywhere on keyboard within 2 seconds. Pass: 5/5.</span></div>
+        <div class="rubric-row"><span class="rubric-label">Staff reading</span><span class="rubric-desc">Teacher points to 5 notes on grand staff (3 treble, 2 bass). Student names each and plays it. Pass: 4/5.</span></div>
+        <div class="rubric-row"><span class="rubric-label">Step-skip</span><span class="rubric-desc">On staff: teacher points to a note, asks "one step up?" — student names the next note without counting. Pass: 4/5 without counting.</span></div>
+        <div class="pass-box"><strong>Pass criterion</strong>5/5 keyboard locations; 4/5 staff notes named and played correctly without counting from a landmark.</div>
+        <div class="fail-box"><strong>If not passing</strong>Assign K-02 home worksheet — 5 notes written on manuscript, named and played daily. Add K-01 speed drill (call and find) to every session opening. Students who still count from C in Week 5 need daily home flashcard practice — 2 minutes per day closes the gap by Week 7.</div>
+      </div>
+    </div>
+
+    <!-- Pillar 4: Sound -->
+    <div class="eval-card">
+      <div class="eval-card-head">
+        <div class="eval-pillar-label" style="color:var(--amber);">Pillar 04 — Sound</div>
+        <h4>Musical Intention & Expression</h4>
+      </div>
+      <div class="eval-card-body">
+        <div class="rubric-row"><span class="rubric-label">Performance</span><span class="rubric-desc">Student performs their chosen piece, one complete run-through without stopping. Teacher listens for legato connection, pulse stability, and dynamic shape.</span></div>
+        <div class="rubric-row"><span class="rubric-label">Intention test</span><span class="rubric-desc">Teacher asks: "What is this piece about?" Student answers before playing. Does the playing match the stated intention?</span></div>
+        <div class="rubric-row"><span class="rubric-label">The key question</span><span class="rubric-desc">Does this performance make the teacher want to hear the next piece?</span></div>
+        <div class="pass-box"><strong>Pass criterion</strong>At least one moment of genuine musical intention — a dynamic choice, a phrasing decision, a moment of listening — that could not have been accidental.</div>
+        <div class="fail-box"><strong>If not passing</strong>This is rarely about technique — it is usually about permission. Use S-01 (Character Game) and S-02 (One Beautiful Note) to restore musical ownership. Ask: "What do you want me to feel when you play this?" Then: "Play it so I feel that."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEKLY CHECKLIST -->
+  <h3 style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:400;margin-bottom:1rem;">Weekly Progress Checklists</h3>
+  <p style="font-size:13px;color:var(--ink-soft);margin-bottom:1.25rem;">Use these at the end of each week's second session to confirm readiness to progress.</p>
+
+  <div class="mini-eval-section">
+    <div class="mini-eval-week">
+      <div class="mini-eval-head"><span class="week-tag wk-1-2">Week 1</span><h4>Body foundation and first tone</h4></div>
+      <div class="mini-eval-body">
+        <ul class="check-list">
+          <li class="check-item">Student can find Middle C without counting from any starting point</li>
+          <li class="check-item">Arm-weight drop produces a resonant tone (no jabbing, no tension visible after contact)</li>
+          <li class="check-item">Student can name all 7 white note names when called by teacher</li>
+          <li class="check-item">Posture check: bench height, shoulder release, curved hand shape</li>
+          <li class="check-item">Student can play a single note and describe what they heard (self-assessment begun)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mini-eval-week">
+      <div class="mini-eval-head"><span class="week-tag wk-1-2">Week 2</span><h4>Five-finger position and singing protocol</h4></div>
+      <div class="mini-eval-body">
+        <ul class="check-list">
+          <li class="check-item">RH five-finger position correct; LH five-finger position correct (both hands tested separately)</li>
+          <li class="check-item">Weight transfer C–D–E produces even legato — no audible gap between notes</li>
+          <li class="check-item">Student can find "Mary Had a Little Lamb" by ear with only "It starts on E" as a hint</li>
+          <li class="check-item">Singing leads playing — voice arrives before each note on C–D–E exercises</li>
+          <li class="check-item">All 7 notes found on keyboard within 3 seconds when called (no hesitation on F, B, or A)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mini-eval-week">
+      <div class="mini-eval-head"><span class="week-tag wk-3-4">Week 3</span><h4>Legato, dynamics, and first notation</h4></div>
+      <div class="mini-eval-body">
+        <ul class="check-list">
+          <li class="check-item">True legato demonstrated: C–G ascending/descending with no audible gap or blur</li>
+          <li class="check-item">Student can identify p and f by ear (teacher plays, student names dynamic level)</li>
+          <li class="check-item">Grand staff introduced: student names treble landmarks (Middle C, E, G) and bass landmarks (B, G)</li>
+          <li class="check-item">First written piece: student reads note names aloud before playing each note</li>
+          <li class="check-item">Dynamic shape applied to Mary Had a Little Lamb — student commits to one interpretation</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mini-eval-week">
+      <div class="mini-eval-head"><span class="week-tag wk-3-4">Week 4</span><h4>Rhythm, pulse, and alternating hands</h4></div>
+      <div class="mini-eval-body">
+        <ul class="check-list">
+          <li class="check-item">Student can maintain pulse while teacher plays a different rhythm (pulse independence)</li>
+          <li class="check-item">Quarter and half note distinction demonstrated by clapping and playing</li>
+          <li class="check-item">Quarter rest: student continues internal pulse through silence — "the pulse never stops"</li>
+          <li class="check-item">Alternating RH/LH on keyboard — no hesitation at hand-switch point</li>
+          <li class="check-item">Two-bar piece with alternating hands performed with steady pulse and legato touch</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mini-eval-week">
+      <div class="mini-eval-head"><span class="week-tag wk-5-6">Week 5</span><h4>Staccato, phrase shaping, and interval ear</h4></div>
+      <div class="mini-eval-body">
+        <ul class="check-list">
+          <li class="check-item">Staccato produced by "drop and bounce" — no finger-jabbing audible</li>
+          <li class="check-item">Mixed articulation (legato steps, staccato skips) demonstrated on a short exercise</li>
+          <li class="check-item">Student identifies question vs. answer phrase by ear before playing any piece</li>
+          <li class="check-item">Step-skip identification: 8/10 correct on blind interval test (E-03)</li>
+          <li class="check-item">Staff reading: student can navigate from any given note one step or skip up/down on the page</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mini-eval-week">
+      <div class="mini-eval-head"><span class="week-tag wk-5-6">Week 6</span><h4>Hands together and sustain pedal</h4></div>
+      <div class="mini-eval-body">
+        <ul class="check-list">
+          <li class="check-item">First HT piece performed at slow tempo with steady pulse — no correction on the fly</li>
+          <li class="check-item">Student can play RH while singing LH notes (cross-hand inner singing drill)</li>
+          <li class="check-item">Pedal experiment: student knows the "change pedal when it blurs" rule — derived from their own ear</li>
+          <li class="check-item">Posture maintained during HT playing — shoulder alignment has not collapsed under coordination demand</li>
+          <li class="check-item">First full performance with both hands: student plays without stopping; teacher does not correct mid-performance</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mini-eval-week">
+      <div class="mini-eval-head"><span class="week-tag wk-7-8">Week 7</span><h4>Interpretation and mock gateway</h4></div>
+      <div class="mini-eval-body">
+        <ul class="check-list">
+          <li class="check-item">Three pieces chosen for programme — each has a stated character, title, or story</li>
+          <li class="check-item">All three pieces performed in sequence; each sounds distinctively different from the others</li>
+          <li class="check-item">Mock gateway attempted: all four pillar checks completed (see Gateway Scoresheet tab)</li>
+          <li class="check-item">Interval dictation: 4/5 correct (E-03 full assessment)</li>
+          <li class="check-item">Posture check: single most important physical correction identified and given as home target</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-evaluation -->
+
+
+<!-- ════════════════════════════════════
+     TAB 5 — GATEWAY SCORESHEET
+════════════════════════════════════ -->
+<div class="tab-panel" id="tab-gateway">
+  <div class="section-head">
+    <h2>Stage 1 Gateway Scoresheet</h2>
+    <p class="desc">Printable assessment form for Session 16. Complete during the gateway conversation — not before. This is a diagnostic record, not an exam paper. File for student portfolio.</p>
+  </div>
+
+  <div class="scoresheet">
+    <h3>Stage 1 Gateway Assessment</h3>
+    <p class="ss-sub">LUBENO Consult Piano Curriculum · Foundation Stage · Session 16</p>
+    <div class="ss-header-bar">
+      <div class="ss-field"><span class="ss-field-label">Student Name</span>&nbsp;</div>
+      <div class="ss-field"><span class="ss-field-label">Date</span>&nbsp;</div>
+      <div class="ss-field"><span class="ss-field-label">Teacher</span>&nbsp;</div>
+      <div class="ss-field"><span class="ss-field-label">Session Count</span>16 sessions completed</div>
+    </div>
+
+    <!-- Pillar 1 -->
+    <div class="ss-pillar">
+      <div class="ss-pillar-head">
+        <span class="ss-pillar-num">01</span>
+        <h4>Tone Quality</h4>
+        <div class="ss-score-boxes">
+          <div class="score-box">P</div>
+          <div class="score-box">H</div>
+        </div>
+      </div>
+      <div class="ss-pillar-body">
+        <p class="ss-criteria">Student plays a single note in the middle octave, as beautifully as possible. Teacher listens for: arm-weight initiation, resonance, absence of tension. Student is then asked: <em>"What did you hear in that tone?"</em> Self-awareness is part of the pass criterion.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem;margin-top:0.75rem;font-size:12px;color:var(--ink-mid);">
+          <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.6rem;">
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Arm weight</div>
+            <div>□ Visible free drop<br>□ No jabbing<br>□ Arm rests after</div>
+          </div>
+          <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.6rem;">
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Tone quality</div>
+            <div>□ Resonant<br>□ Not brittle/thin<br>□ Would hear more</div>
+          </div>
+          <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.6rem;">
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Self-awareness</div>
+            <div>□ Named something heard<br>□ Not "I don't know"<br>□ Specific description</div>
+          </div>
+        </div>
+        <div class="ss-notes-field">Observations: _______________________________________________________________</div>
+        <div class="pass-box" style="margin-top:0.75rem;"><strong>Pass</strong> A tone you would want to hear more of, produced with visible physical relaxation. Student can describe what they heard.</div>
+      </div>
+    </div>
+
+    <!-- Pillar 2 -->
+    <div class="ss-pillar">
+      <div class="ss-pillar-head">
+        <span class="ss-pillar-num">02</span>
+        <h4>Ear — Interval and Pitch</h4>
+        <div class="ss-score-boxes">
+          <div class="score-box">P</div>
+          <div class="score-box">H</div>
+        </div>
+      </div>
+      <div class="ss-pillar-body">
+        <p class="ss-criteria">Teacher plays 5 two-note intervals; student names each as step or skip with direction (e.g. "skip up"). Teacher sings a 3-note melody; student sings it back, then finds it on the keyboard.</p>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:0.75rem 0;">
+          <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.5rem;text-align:center;font-size:11px;color:var(--ink-mid);">Interval 1<div style="border-top:1px solid var(--warm-line);margin-top:6px;padding-top:6px;font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-soft);">□ Pass</div></div>
+          <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.5rem;text-align:center;font-size:11px;color:var(--ink-mid);">Interval 2<div style="border-top:1px solid var(--warm-line);margin-top:6px;padding-top:6px;font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-soft);">□ Pass</div></div>
+          <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.5rem;text-align:center;font-size:11px;color:var(--ink-mid);">Interval 3<div style="border-top:1px solid var(--warm-line);margin-top:6px;padding-top:6px;font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-soft);">□ Pass</div></div>
+          <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.5rem;text-align:center;font-size:11px;color:var(--ink-mid);">Interval 4<div style="border-top:1px solid var(--warm-line);margin-top:6px;padding-top:6px;font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-soft);">□ Pass</div></div>
+          <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.5rem;text-align:center;font-size:11px;color:var(--ink-mid);">Interval 5<div style="border-top:1px solid var(--warm-line);margin-top:6px;padding-top:6px;font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-soft);">□ Pass</div></div>
+        </div>
+        <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.75rem;font-size:12.5px;color:var(--ink-mid);margin-bottom:0.5rem;">
+          <strong style="display:block;font-size:10px;font-family:'DM Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:4px;">Melody Echo Test</strong>
+          □ Melody sung back accurately &nbsp;&nbsp;□ Starting note found on keyboard &nbsp;&nbsp;□ Full melody played without hesitation
+        </div>
+        <div class="ss-notes-field">Melody played: _________________________________ Observations: ________________________</div>
+        <div class="pass-box" style="margin-top:0.75rem;"><strong>Pass</strong> 4/5 intervals correctly identified with direction. Melody sung back accurately and located on keyboard.</div>
+      </div>
+    </div>
+
+    <!-- Pillar 3 -->
+    <div class="ss-pillar">
+      <div class="ss-pillar-head">
+        <span class="ss-pillar-num">03</span>
+        <h4>Keyboard Geography and Staff Reading</h4>
+        <div class="ss-score-boxes">
+          <div class="score-box">P</div>
+          <div class="score-box">H</div>
+        </div>
+      </div>
+      <div class="ss-pillar-body">
+        <p class="ss-criteria">Teacher calls 5 note names; student finds each anywhere on the keyboard within 2 seconds. Teacher points to 5 notes on the grand staff (3 treble, 2 bass); student names each and plays it.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin:0.75rem 0;">
+          <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.75rem;">
+            <div style="font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px;">Keyboard Geography (5 notes)</div>
+            <div style="font-size:12.5px;color:var(--ink-mid);display:flex;flex-direction:column;gap:4px;">
+              <label>□ Note 1: ______ Found within 2 sec</label>
+              <label>□ Note 2: ______ Found within 2 sec</label>
+              <label>□ Note 3: ______ Found within 2 sec</label>
+              <label>□ Note 4: ______ Found within 2 sec</label>
+              <label>□ Note 5: ______ Found within 2 sec</label>
+            </div>
+          </div>
+          <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.75rem;">
+            <div style="font-family:'DM Mono',monospace;font-size:9.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px;">Staff Reading (5 notes)</div>
+            <div style="font-size:12.5px;color:var(--ink-mid);display:flex;flex-direction:column;gap:4px;">
+              <label>□ Note 1: ______ Named + played</label>
+              <label>□ Note 2: ______ Named + played</label>
+              <label>□ Note 3: ______ Named + played</label>
+              <label>□ Note 4: ______ Named + played</label>
+              <label>□ Note 5: ______ Named + played</label>
+            </div>
+          </div>
+        </div>
+        <div class="pass-box"><strong>Pass</strong> 5/5 keyboard locations found correctly. 4/5 staff notes named and played correctly.</div>
+      </div>
+    </div>
+
+    <!-- Pillar 4 -->
+    <div class="ss-pillar">
+      <div class="ss-pillar-head">
+        <span class="ss-pillar-num">04</span>
+        <h4>Repertoire — Musical Intention</h4>
+        <div class="ss-score-boxes">
+          <div class="score-box">P</div>
+          <div class="score-box">H</div>
+        </div>
+      </div>
+      <div class="ss-pillar-body">
+        <p class="ss-criteria">Student performs their chosen piece from Stage 1 repertoire. One complete performance, no stopping. Teacher listens for: legato connection, pulse stability, at least one clear dynamic shape, and — most critically — musical intention.</p>
+        <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.75rem;margin:0.75rem 0;font-size:12.5px;color:var(--ink-mid);">
+          <strong style="display:block;font-size:10px;font-family:'DM Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px;">Piece performed</strong>
+          _________________________________________________
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:0.75rem;">
+          <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.75rem;font-size:12.5px;color:var(--ink-mid);">
+            <strong style="display:block;font-size:10px;font-family:'DM Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px;">Technical</strong>
+            □ Legato connection maintained<br>□ Pulse stable throughout<br>□ Dynamic shape present<br>□ No stopping mid-performance
+          </div>
+          <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.75rem;font-size:12.5px;color:var(--ink-mid);">
+            <strong style="display:block;font-size:10px;font-family:'DM Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px;">Musical Intention</strong>
+            □ One moment of clear intention<br>□ Student stated what piece means<br>□ Playing reflects the stated character<br>□ Makes teacher want to hear more
+          </div>
+        </div>
+        <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.75rem;margin-bottom:0.5rem;font-size:12.5px;color:var(--ink-mid);">
+          <strong style="display:block;font-size:10px;font-family:'DM Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:4px;">One musical strength</strong>
+          _______________________________________________________________
+        </div>
+        <div style="border:1px solid var(--warm-line);border-radius:6px;padding:0.75rem;margin-bottom:0.5rem;font-size:12.5px;color:var(--ink-mid);">
+          <strong style="display:block;font-size:10px;font-family:'DM Mono',monospace;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:4px;">One technical target for Stage 2</strong>
+          _______________________________________________________________
+        </div>
+        <div class="pass-box"><strong>Pass</strong> The performance makes the teacher want to hear the next piece. At least one moment of genuine, non-accidental musical intention.</div>
+      </div>
+    </div>
+
+    <!-- Final decision -->
+    <div class="ss-final">
+      <div class="ss-final-box">
+        <span class="ss-final-label">Pillars Passed</span>
+        <span class="ss-final-val">__ / 4</span>
+      </div>
+      <div class="ss-final-box" style="border-color:var(--teal);background:var(--teal-light);">
+        <span class="ss-final-label" style="color:var(--teal);">Decision</span>
+        <span class="ss-final-val" style="font-size:1.1rem;color:var(--teal);">□ Pass to Stage 2<br>□ Targeted hold</span>
+      </div>
+      <div class="ss-final-box">
+        <span class="ss-final-label">Next session focus</span>
+        <span class="ss-final-val" style="font-size:0.85rem;color:var(--ink-soft);font-family:'Lato',sans-serif;font-weight:400;">________________</span>
+      </div>
+    </div>
+
+    <div style="margin-top:1.25rem;font-size:12px;color:var(--ink-soft);font-style:italic;line-height:1.65;text-align:center;">
+      A student who does not pass one pillar may begin Stage 2 work in the passing pillars while continuing Stage 1 targeted work in the weak pillar. Progress is pillar-by-pillar — always moving forward where the foundation is solid.
+    </div>
+  </div>
+
+</div><!-- /tab-gateway -->
+
+
+<!-- ════════════════════════════════════
+     TAB 6 — TEACHER CHEAT SHEETS
+════════════════════════════════════ -->
+<div class="tab-panel" id="tab-cheatsheets">
+  <div class="section-head">
+    <h2>Teacher Quick Reference</h2>
+    <p class="desc">Printable one-page cheat sheets for common teaching moments, error patterns, and the exact words to use.</p>
+  </div>
+
+  <div class="cheat-sheet">
+    <div class="cs-head">
+      <span class="cs-icon">🎯</span>
+      <h3>Session Opening — Every Session, Every Week</h3>
+    </div>
+    <div class="cs-body">
+      <div class="cs-cols">
+        <div class="cs-col">
+          <h4>Always begin with</h4>
+          <ul class="cs-list">
+            <li>One Beautiful Note (Exercise S-02) — 90 seconds, calibrates the ear</li>
+            <li>Posture Reset (B-04) — bench, shoulders, wrist, hand shape</li>
+            <li>Ask: "What do you want to work on today?" — student ownership</li>
+          </ul>
+        </div>
+        <div class="cs-col">
+          <h4>Never begin with</h4>
+          <ul class="cs-list">
+            <li>Running through last week's piece from bar 1 without intention</li>
+            <li>Scales mechanically as a "warm-up" — no purpose stated</li>
+            <li>Correcting something before the student has played anything</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cheat-sheet">
+    <div class="cs-head">
+      <span class="cs-icon">⚠️</span>
+      <h3>Common Error Patterns — What to Say and Do</h3>
+    </div>
+    <div class="cs-body">
+      <div class="cs-cols">
+        <div class="cs-col">
+          <h4>Error → Response</h4>
+          <ul class="cs-list">
+            <li><strong>Playing before singing:</strong> "Stop. Sing it first. Now play." Every time without exception.</li>
+            <li><strong>Tension after note:</strong> "Drop the arm, let it rest there. Play the next note only when the arm is asleep."</li>
+            <li><strong>Collapsed knuckles:</strong> "Hold a small orange. Now press. Does the orange drop? No. Keep the shape."</li>
+            <li><strong>Rushing:</strong> "The pulse belongs to everyone. Walk it — don't chase it."</li>
+            <li><strong>Stopping mid-piece:</strong> "In a performance, the only mistake is stopping. Keep going. Always."</li>
+          </ul>
+        </div>
+        <div class="cs-col">
+          <h4>Error → Response</h4>
+          <ul class="cs-list">
+            <li><strong>Loud = tension:</strong> "Louder means faster arm, not harder pressing. Same drop, higher launch point."</li>
+            <li><strong>Staccato = jabbing:</strong> "Drop and bounce. Like a rubber ball — the floor does the work."</li>
+            <li><strong>Flat thumb:</strong> "Thumb plays on its outer side — the edge, not the nail. Try now."</li>
+            <li><strong>4th/5th finger legato gap:</strong> "Did you hear a space? Close your eyes. Listen again. Your ear knows."</li>
+            <li><strong>Reading without hearing:</strong> "Before you play this bar, sing it. If you can't sing it, you can't play it."</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cheat-sheet">
+    <div class="cs-head">
+      <span class="cs-icon">🗓️</span>
+      <h3>Phase Gate — What Must Be True Before Phase B Begins (Week 5)</h3>
+    </div>
+    <div class="cs-body">
+      <ul class="cs-list" style="columns:2;gap:1.5rem;">
+        <li>All 7 note names found on keyboard within 2 seconds (no counting from C or F)</li>
+        <li>C–G five-finger scale played with audible legato in both hands separately</li>
+        <li>Quarter and half note distinction demonstrated by clapping and keyboard</li>
+        <li>Student sings before playing — consistently, not occasionally</li>
+        <li>Grand staff landmarks: Middle C, E, G treble; B and G bass — all named without prompting</li>
+        <li>One piece performed from memory with a stated musical intention</li>
+        <li>Arm-weight drop produces resonant tone at p and f — no tension visible</li>
+        <li>Pitch matching: 4/5 notes echoed accurately after teacher plays</li>
+      </ul>
+      <div class="focus-box" style="margin-top:1rem;"><strong>If not all are met by end of Week 4</strong>Extend Phase A by one session — target the weakest pillar specifically. Do not begin Phase B until the student can demonstrate tone quality and five-finger legato. Everything in Phase B builds on these two foundations.</div>
+    </div>
+  </div>
+
+  <div class="cheat-sheet">
+    <div class="cs-head">
+      <span class="cs-icon">🎭</span>
+      <h3>Musical Language — Phrases That Work in Stage 1</h3>
+    </div>
+    <div class="cs-body">
+      <div class="cs-cols">
+        <div class="cs-col">
+          <h4>For tone and body</h4>
+          <ul class="cs-list">
+            <li>"Each note is a stone dropped into still water."</li>
+            <li>"Your arm is heavy. Let it fall."</li>
+            <li>"Would you want to hear that note if it were the only one in the room?"</li>
+            <li>"Play it so I want to hear the next note."</li>
+            <li>"The key goes down; the arm goes to sleep."</li>
+          </ul>
+        </div>
+        <div class="cs-col">
+          <h4>For expression and pulse</h4>
+          <ul class="cs-list">
+            <li>"What is this piece about? Tell me before you play."</li>
+            <li>"The pulse never stops — even in silence, even between pieces."</li>
+            <li>"If the singing stops, the hands stop."</li>
+            <li>"The voice is the real musician. The hands are only servants."</li>
+            <li>"Quiet does not mean small. The softest note can fill a room."</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cheat-sheet">
+    <div class="cs-head">
+      <span class="cs-icon">📋</span>
+      <h3>Home Practice — What to Assign and How to Say It</h3>
+    </div>
+    <div class="cs-body">
+      <div class="cs-cols">
+        <div class="cs-col">
+          <h4>Effective assignments</h4>
+          <ul class="cs-list">
+            <li>5 minutes arm-weight drop on each note C–G, singing along (not "practice scales")</li>
+            <li>5 notes written on manuscript paper at end of lesson — named and played at home daily</li>
+            <li>Play today's piece twice: once for accuracy, once for feeling. Which was better?</li>
+            <li>Listen to one piece of music and describe it in 3 words. Play something that sounds like those words.</li>
+          </ul>
+        </div>
+        <div class="cs-col">
+          <h4>Ineffective assignments</h4>
+          <ul class="cs-list">
+            <li>"Practice more" — no duration, no target</li>
+            <li>"Go over everything" — student will skip the hard parts</li>
+            <li>Assigning a passage before the student can sing it — they will practice errors</li>
+            <li>More than 3 separate tasks — compliance drops sharply after 3 items</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /tab-cheatsheets -->
+
+</main>
+
+<footer class="footer">
+  Stage 1 Teacher Content Package · LUBENO Consult Piano Curriculum · Foundation Stage · 8 Weeks · 4 Pillars
+</footer>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleEx(header) {
+  const body = header.nextElementSibling;
+  const toggle = header.querySelector('.ex-toggle');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  toggle.classList.toggle('open', !isOpen);
+}
+</script>
+
+</body>
+</html>
